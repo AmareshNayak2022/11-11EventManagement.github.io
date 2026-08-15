@@ -1497,6 +1497,40 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 }
 .site-footer__list a:hover { color: var(--paper); background-size: 100% 1px; }
 
+/* --- Social links with brand marks ---------------------------------------
+   Two classes beat the one-class-one-type `.site-footer__list a` above, which
+   is what lets the underline move off the anchor and onto the word. Running
+   that growing underline beneath the icon as well would read as a
+   strikethrough through the glyph. */
+.site-footer__list .social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-image: none;
+}
+.social-link__icon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  fill: currentColor;
+  /* Held slightly back so the word leads and the marks read as quiet
+     companions rather than badges. */
+  opacity: 0.7;
+  transition: opacity var(--dur) var(--ease);
+}
+.social-link:hover .social-link__icon,
+.social-link:focus-visible .social-link__icon { opacity: 1; }
+
+.social-link__label {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size var(--dur) var(--ease);
+}
+.social-link:hover .social-link__label,
+.social-link:focus-visible .social-link__label { background-size: 100% 1px; }
+
 .site-footer__note {
   max-width: 30ch;
   margin-bottom: 1.35rem;
