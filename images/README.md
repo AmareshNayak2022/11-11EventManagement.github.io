@@ -3,7 +3,7 @@
 This folder holds the site's brand assets and photography.
 
 - **`logo.png`** — the brand badge. Installed and in use.
-- Photography — ten Pexels placeholders of Indian and Odia celebrations, loaded
+- Photography — twelve Pexels placeholders of Indian and Odia celebrations, loaded
   over the network, so the site looks finished the moment you open
   `index.html`.
 
@@ -78,14 +78,15 @@ most platforms crop a square awkwardly at that ratio.
 
 Pexels serves images over a fast CDN and resizes on the fly via URL parameters
 (`w=`, `auto=compress`), which keeps the repository small while the design is
-reviewed. Every one of the ten was **opened and looked at** before being used —
+reviewed. Every one of the twelve was **opened and looked at** before being used —
 none were chosen from a search result label alone.
 
 The original build used Unsplash, but every one of those photographs showed a
 Western wedding: white gown, dark suit, Western florals, banquet tables. For a
 Bhubaneswar event company that was culturally wrong, so all ten were replaced
 with Indian and Odia celebration photography — haldi, puja, marigold, brass,
-shankha-pola bangles, dhol players.
+shankha-pola bangles, dhol players — plus two that are specifically Odia: an
+Odissi dancer and the Konark Sun Temple wheel.
 
 ⚠️ These are still **other people's events**, free under the
 [Pexels License](https://pexels.com/license) — commercial use is allowed and no
@@ -95,8 +96,8 @@ cannot back up.
 
 ### Where the images are referenced
 
-All ten are in `index.html`, each marked with a numbered comment
-(`<!-- IMAGE 4 of 10 -->`). There are no image URLs in the CSS, so
+All twelve are in `index.html`, each marked with a numbered comment
+(`<!-- IMAGE 4 of 12 -->`). There are no image URLs in the CSS, so
 `index.html` is the only file you need to edit.
 
 | #  | Section   | Subject                              | Suggested filename          |
@@ -111,6 +112,8 @@ All ten are in `index.html`, each marked with a numbered comment
 | 8  | Portfolio | Couple dancing at evening reception  | `portfolio-reception.jpg`   |
 | 9  | Portfolio | Stacked red and white bangles        | `portfolio-details.jpg`     |
 | 10 | CTA band  | Dhol players in procession           | `cta.jpg`                   |
+| 11 | Portfolio | Odissi dancer in full costume        | `portfolio-performance.jpg` |
+| 12 | Portfolio | Konark Sun Temple chariot wheel      | `portfolio-setting.jpg`     |
 
 ⚠️ **If you change the hero or CTA photograph, re-measure the text contrast.**
 The overlay in `css/style.css` was tuned specifically for the current hero,
@@ -126,7 +129,7 @@ the single `src`.
 ### How to swap one in
 
 1. Save your image into this folder, e.g. `images/hero.jpg`.
-2. Find the matching `<!-- IMAGE n of 10 -->` comment in `index.html`.
+2. Find the matching `<!-- IMAGE n of 12 -->` comment in `index.html`.
 3. Change the `src`. The path is **relative to `index.html`**, so it starts
    with `images/`, not `/images/`:
 

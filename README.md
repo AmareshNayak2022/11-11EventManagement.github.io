@@ -35,7 +35,7 @@ not a harmless stand-in. Four things need your attention:
    real, permissioned quotes from actual couples, or delete the whole
    `#testimonials` section. A visible disclaimer sits under them until you do.
 
-3. **Photography.** All ten images are Pexels placeholders showing Indian and
+3. **Photography.** All twelve images are Pexels placeholders showing Indian and
    Odia celebrations — other people's events, not yours. Replace with your own
    work — see `images/README.md`.
 
@@ -57,7 +57,7 @@ the exact lines are commented in the `<head>` of `index.html`.
 | About          | Two-image editorial composition with an overlapping inset.                   |
 | Services       | Three hairline-divided columns with a rule that draws in on hover.           |
 | Process        | Deep navy band, four steps numbered in the brand gold.       |
-| Portfolio      | Six photographs on an asymmetric 12-column grid, staggered vertically.       |
+| Portfolio      | Eight photographs on an asymmetric 12-column grid, staggered vertically.     |
 | Testimonials   | Three placeholder quotes — see the warning above.                            |
 | Call to action | Full-bleed image band, led by the *It Is Time* tagline.                      |
 | Contact        | Eight-field inquiry form, validated client-side, delivered via WhatsApp.                   |
@@ -119,7 +119,7 @@ there are no fetch calls, modules, or cross-origin requests to trip over.
 
 ### If images don't appear
 
-You need an internet connection on first load — the ten placeholder photographs
+You need an internet connection on first load — the twelve placeholder photographs
 are served from Pexels. See `images/README.md` to switch to local files.
 
 ---

@@ -1076,7 +1076,12 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   .shot--b .shot__frame,
   .shot--c .shot__frame,
   .shot--e .shot__frame,
-  .shot--f .shot__frame { aspect-ratio: 3 / 4; }
+  .shot--f .shot__frame,
+  .shot--g .shot__frame { aspect-ratio: 3 / 4; }
+  /* The Konark wheel is a wide stone relief — cropping it to portrait would
+     cut the wheel off at both hubs, so it keeps a landscape frame at every
+     width. */
+  .shot--h .shot__frame { aspect-ratio: 3 / 2; }
 }
 
 /* Desktop: an asymmetric editorial layout on a 12-column grid */
@@ -1091,6 +1096,10 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   .shot--d { grid-column: 6 / span 7; margin-top: clamp(2rem, 5vw, 4rem); }
   .shot--e { grid-column: 1 / span 6; }
   .shot--f { grid-column: 7 / span 6; margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+  /* Fourth row mirrors the second: narrow portrait left, wide landscape right,
+     with the right-hand tile dropped so the row does not sit on one baseline. */
+  .shot--g { grid-column: 1 / span 5; }
+  .shot--h { grid-column: 6 / span 7; margin-top: clamp(2rem, 5vw, 4rem); }
 
   .shot--a .shot__frame { aspect-ratio: 3 / 2; }
   .shot--b .shot__frame { aspect-ratio: 3 / 4; }
@@ -1098,6 +1107,8 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   .shot--d .shot__frame { aspect-ratio: 3 / 2; }
   .shot--e .shot__frame { aspect-ratio: 4 / 3; }
   .shot--f .shot__frame { aspect-ratio: 4 / 3; }
+  .shot--g .shot__frame { aspect-ratio: 3 / 4; }
+  .shot--h .shot__frame { aspect-ratio: 3 / 2; }
 }
 
 
