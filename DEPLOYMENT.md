@@ -297,7 +297,7 @@ Content and credibility:
 
 - [ ] Real email and phone in the contact block; delete the `is-placeholder` spans
 - [ ] Invented testimonials replaced with permissioned real quotes, or removed
-- [ ] Unsplash photography replaced with your own work
+- [ ] Pexels photography replaced with your own work
 - [ ] Every `alt` attribute rewritten to describe your actual images
 - [ ] Portfolio labels changed to real events
 - [ ] Marketing / Core Brand logo files added
@@ -357,7 +357,7 @@ auto-renew. Cards expire; auto-renew silently fails.
 - **CSS or JS not loading** — check the browser console. Paths are relative
   (`css/style.css`, not `/css/style.css`) and are case-sensitive on Linux
   servers even though they worked on Windows.
-- **Images missing** — they still load from Unsplash until you replace them.
+- **Images missing** — they still load from Pexels until you replace them.
   A blocked network or ad-blocker will hide them.
 - **Domain not resolving** — DNS can take up to 24 hours. Check at
   [dnschecker.org](https://dnschecker.org).

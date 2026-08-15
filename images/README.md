@@ -3,8 +3,9 @@
 This folder holds the site's brand assets and photography.
 
 - **`logo.png`** — the brand badge. Installed and in use.
-- Photography — still ten Unsplash placeholders loaded over the network, so the
-  site looks finished the moment you open `index.html`.
+- Photography — ten Pexels placeholders of Indian and Odia celebrations, loaded
+  over the network, so the site looks finished the moment you open
+  `index.html`.
 
 One job left here: **replace the placeholder photography**. And one asset to
 upgrade: see the resolution warning below.
@@ -57,7 +58,7 @@ so even a non-square replacement will sit correctly rather than distort.
 
 ### Still to do: the social share image
 
-`og:image` and `twitter:image` in `<head>` still point at an Unsplash wedding
+`og:image` and `twitter:image` in `<head>` now point at the Pexels hero
 photograph. They need an **absolute** URL on your own domain to work when the
 link is shared, so they cannot be pointed at `images/logo.png` as a relative
 path:
@@ -73,17 +74,24 @@ most platforms crop a square awkwardly at that ratio.
 
 ## 2. Replacing the photography
 
-### Why placeholders live on Unsplash for now
+### Why placeholders live on Pexels for now
 
-Unsplash serves images over a fast CDN and resizes on the fly via URL
-parameters (`w=`, `q=`, `fit=crop`), which keeps the repository small while the
-design is reviewed. Every one of the ten was visually checked — they are all
-genuine wedding photography.
+Pexels serves images over a fast CDN and resizes on the fly via URL parameters
+(`w=`, `auto=compress`), which keeps the repository small while the design is
+reviewed. Every one of the ten was **opened and looked at** before being used —
+none were chosen from a search result label alone.
 
-⚠️ These are **other people's weddings**, free under the
-[Unsplash License](https://unsplash.com/license). Replace them with your own
-work before using this site commercially, and make sure you have permission
-from the couples pictured.
+The original build used Unsplash, but every one of those photographs showed a
+Western wedding: white gown, dark suit, Western florals, banquet tables. For a
+Bhubaneswar event company that was culturally wrong, so all ten were replaced
+with Indian and Odia celebration photography — haldi, puja, marigold, brass,
+shankha-pola bangles, dhol players.
+
+⚠️ These are still **other people's events**, free under the
+[Pexels License](https://pexels.com/license) — commercial use is allowed and no
+attribution is required, which is more permissive than Unsplash. Replace them
+with your own work anyway: a portfolio of strangers' events is a claim you
+cannot back up.
 
 ### Where the images are referenced
 
@@ -91,18 +99,24 @@ All ten are in `index.html`, each marked with a numbered comment
 (`<!-- IMAGE 4 of 10 -->`). There are no image URLs in the CSS, so
 `index.html` is the only file you need to edit.
 
-| #  | Section   | Subject                          | Suggested filename          |
-|----|-----------|----------------------------------|-----------------------------|
-| 1  | Hero      | Couple at golden hour w/ bouquet | `hero.jpg`                  |
-| 2  | About     | Couple walking, portrait crop    | `about-main.jpg`            |
-| 3  | About     | Held hands, small inset image    | `about-inset.jpg`           |
-| 4  | Portfolio | Ceremony aisle and florals       | `portfolio-ceremony.jpg`    |
-| 5  | Portfolio | Bridal bouquet                   | `portfolio-florals.jpg`     |
-| 6  | Portfolio | Couple portrait                  | `portfolio-couple.jpg`      |
-| 7  | Portfolio | Banquet tablescape               | `portfolio-tablescape.jpg`  |
-| 8  | Portfolio | Reception string lights          | `portfolio-reception.jpg`   |
-| 9  | Portfolio | Wedding shoes detail             | `portfolio-details.jpg`     |
-| 10 | CTA band  | Black-and-white veil portrait    | `cta.jpg`                   |
+| #  | Section   | Subject                              | Suggested filename          |
+|----|-----------|--------------------------------------|-----------------------------|
+| 1  | Hero      | Haldi ceremony, guests in yellow     | `hero.jpg`                  |
+| 2  | About     | Guest in red before a draped stage   | `about-main.jpg`            |
+| 3  | About     | Mehndi hands over a brass vessel     | `about-inset.jpg`           |
+| 4  | Portfolio | Puja with marigolds and brass pots   | `portfolio-ceremony.jpg`    |
+| 5  | Portfolio | Marigold garland                     | `portfolio-florals.jpg`     |
+| 6  | Portfolio | Couple, groom in sherwani and safa   | `portfolio-couple.jpg`      |
+| 7  | Portfolio | Brass bowl of marigold and petals    | `portfolio-rituals.jpg`     |
+| 8  | Portfolio | Couple dancing at evening reception  | `portfolio-reception.jpg`   |
+| 9  | Portfolio | Stacked red and white bangles        | `portfolio-details.jpg`     |
+| 10 | CTA band  | Dhol players in procession           | `cta.jpg`                   |
+
+⚠️ **If you change the hero or CTA photograph, re-measure the text contrast.**
+The overlay in `css/style.css` was tuned specifically for the current hero,
+which is a bright, high-key haldi scene. A darker photograph would let the
+overlay come back down; a brighter one would need more. The measured
+worst-pixel figures are recorded in the comment on `.hero__media::after`.
 
 The hero, one portfolio image, and the CTA image also use `srcset` for
 responsive loading. If you switch to local files you can either provide `-800`
@@ -118,7 +132,7 @@ the single `src`.
 
    ```html
    <!-- before -->
-   <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80" ...>
+   <img src="https://images.pexels.com/photos/19346381/pexels-photo-19346381.jpeg?auto=compress&cs=tinysrgb&w=1800" ...>
 
    <!-- after -->
    <img src="images/hero.jpg" ...>

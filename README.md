@@ -35,8 +35,9 @@ not a harmless stand-in. Four things need your attention:
    real, permissioned quotes from actual couples, or delete the whole
    `#testimonials` section. A visible disclaimer sits under them until you do.
 
-3. **Photography.** All ten images are Unsplash placeholders of other people's
-   weddings. Replace with your own work — see `images/README.md`.
+3. **Photography.** All ten images are Pexels placeholders showing Indian and
+   Odia celebrations — other people's events, not yours. Replace with your own
+   work — see `images/README.md`.
 
 4. **Portfolio labels.** "Bhubaneswar / Winter", "Puri / Spring" and the rest
    are illustrative, not real events.
@@ -119,7 +120,7 @@ there are no fetch calls, modules, or cross-origin requests to trip over.
 ### If images don't appear
 
 You need an internet connection on first load — the ten placeholder photographs
-are served from Unsplash. See `images/README.md` to switch to local files.
+are served from Pexels. See `images/README.md` to switch to local files.
 
 ---
 
@@ -309,7 +310,7 @@ Fully static, so any host works. Nothing to build, nothing to configure.
 - [ ] Decide whether to stay on WhatsApp or add an email endpoint as well
 - [ ] Send a test enquiry from a phone and confirm it arrives
 - [ ] Replace or delete the invented testimonials
-- [ ] Replace the Unsplash photography with your own (`images/README.md`)
+- [ ] Replace the Pexels photography with your own (`images/README.md`)
 - [ ] Rewrite every `alt` attribute to describe your actual images
 - [x] Add the logo — installed as `images/logo.png`
 - [ ] Swap `images/logo.png` for the full-resolution original artwork
@@ -345,9 +346,9 @@ width, and text over both photographs clears WCAG AA by worst-pixel measurement.
 ## Licence and credits
 
 Site code belongs to Elevenn Elevenn Archive Pvt Ltd. Placeholder photography
-from [Unsplash](https://unsplash.com) under the
-[Unsplash License](https://unsplash.com/license) — replace before commercial
-use. Fonts are
+from [Pexels](https://pexels.com) under the
+[Pexels License](https://pexels.com/license) — free for commercial use, no
+attribution required, but replace them with real work before launch. Fonts are
 [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) and
 [Montserrat](https://fonts.google.com/specimen/Montserrat), both SIL Open Font
 License.
