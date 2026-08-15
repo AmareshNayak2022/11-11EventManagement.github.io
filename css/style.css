@@ -1552,6 +1552,13 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 }
 .site-footer__fineprint { font-style: italic; }
 
+/* At the very bottom of the page the floating WhatsApp button lands on top of
+   this bar. Reserve room for it so the copyright line is never sitting under
+   a green circle. 50px button + its 1rem offset, plus a little air. */
+@media (max-width: 767px) {
+  .site-footer__bar { padding-bottom: calc(50px + 1rem + 1.25rem); }
+}
+
 
 /* ==========================================================================
    16b. WHATSAPP CONTACT
@@ -1594,6 +1601,21 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 .wa-float__label { display: none; }
 @media (min-width: 768px) {
   .wa-float__label { display: inline; }
+}
+
+/* On a phone this is a circle, not a pill, and a smaller one. A floating
+   button always sits on top of whatever is beneath it, so on a 360px screen
+   the difference between 59px and 50px is the difference between crowding the
+   hero's second call to action and clearing it. */
+@media (max-width: 767px) {
+  .wa-float {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+  }
+  .wa-float__icon { width: 24px; height: 24px; }
 }
 /* Hidden while the mobile menu is open — it would float over the panel. */
 body.is-locked .wa-float { opacity: 0; pointer-events: none; }
