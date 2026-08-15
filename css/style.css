@@ -13,9 +13,10 @@
    08. Hero
    09. About
    10. Services
+   10b. Event types
    11. Process
    12. Portfolio
-   13. Testimonials
+   13. Testimonials (section removed from the page; styles kept)
    14. Call to action
    15. Contact & form
    16. Footer
@@ -697,20 +698,21 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   content: "";
   position: absolute;
   inset: 0;
-  /* Tuned against the current hero photograph, which is a bright, high-key
-     haldi scene — far lighter than a typical dusk portrait. The 38% stop is
-     where the headline sits, so that is the one carrying the legibility.
-     Measured worst-pixel behind every text element after this change:
-     eyebrow 5.9:1, headline 5.0:1, lede 6.1:1, button 6.8:1, link 6.4:1 —
-     all clear of their AA floors (4.5:1, or 3:1 for the large display type).
-     If you swap the hero image, re-measure — a darker photo would let these
-     values come back down. */
+  /* Tuned against the current hero photograph — a dark stage-and-crowd shot.
+     Because the image is already low-key, the overlay is deliberately lighter
+     than it would be over a bright scene: darkening further would flatten the
+     stage lights, which are the whole reason for the picture. The 38% stop
+     sits behind the headline and carries the legibility.
+     Measured worst-pixel behind each text element: eyebrow 12.0:1,
+     headline 4.1:1, lede 5.0:1, button 6.1:1, link 6.2:1 — all clear of their
+     AA floors (4.5:1, or 3:1 for the large display type). Swap the photograph
+     and every one of these must be re-measured. */
   background:
     linear-gradient(to bottom,
-      rgba(12, 21, 36, 0.62) 0%,
-      rgba(12, 21, 36, 0.55) 38%,
-      rgba(12, 21, 36, 0.70) 100%),
-    linear-gradient(to right, rgba(22, 37, 60, 0.34) , rgba(22, 37, 60, 0.12));
+      rgba(12, 21, 36, 0.50) 0%,
+      rgba(12, 21, 36, 0.38) 38%,
+      rgba(12, 21, 36, 0.62) 100%),
+    linear-gradient(to right, rgba(22, 37, 60, 0.28), rgba(22, 37, 60, 0.06));
 }
 
 .hero__inner {
@@ -950,6 +952,43 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 }
 .service:hover .service__rule,
 .service:focus-within .service__rule { transform: scaleX(1); }
+
+
+/* ==========================================================================
+   10b. EVENT TYPES
+   A plain three-across grid of what the company runs. Deliberately quieter
+   than the Services cards above it: those are the offer, this is the range,
+   and two competing card treatments in a row would fight each other.
+   ========================================================================== */
+/* --bg, not --bg-alt: Services directly above already uses the alt band, and
+   two alt bands in a row would read as one very long section. */
+.event-types { background: var(--bg); }
+
+.event-grid {
+  display: grid;
+  gap: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+@media (min-width: 620px)  { .event-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .event-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.event-type {
+  padding-top: clamp(1.1rem, 2vw, 1.5rem);
+  border-top: 1px solid var(--hairline);
+}
+.event-type__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--heading);
+}
+.event-type__text {
+  margin-top: 0.75rem;
+  max-width: 34ch;
+  font-size: var(--fs-small);
+  line-height: 1.75;
+  color: var(--muted);
+}
 
 
 /* ==========================================================================

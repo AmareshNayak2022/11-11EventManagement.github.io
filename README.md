@@ -1,8 +1,9 @@
-# 11:11 — Wedding Coordination &amp; Planning
+# 11:11 — Event Management
 
 The marketing website for **Elevenn Elevenn Archive Pvt Ltd**, trading as **11:11**,
-a wedding coordination, planning, and event design studio based in Bhubaneswar,
-Odisha.
+an event management company based in Bhubaneswar, Odisha. Weddings, celebrity
+nights, inaugurations, corporate conferences, college festivals and sports
+events.
 
 Built as a static site: three files, no build step, no dependencies, no server.
 
@@ -29,11 +30,12 @@ not a harmless stand-in. Four things need your attention:
    the `is-placeholder` spans. If the WhatsApp number is also the number to
    call, point the Phone row at it with a `tel:` link.
 
-2. **Testimonials.** All three are invented. Publishing fabricated reviews under
-   a real company name is a genuine legal and reputational risk under both
-   consumer-protection rules and platform policies. Either replace them with
-   real, permissioned quotes from actual couples, or delete the whole
-   `#testimonials` section. A visible disclaimer sits under them until you do.
+2. **Testimonials — section removed.** It held three invented client quotes.
+   Publishing fabricated reviews under a real registered company is a genuine
+   legal and reputational risk, so the section was deleted rather than left
+   behind a disclaimer. To restore it, recover the markup from git history and
+   fill it with real, permissioned quotes; the CSS is still in place. See the
+   comment where the section used to sit in `index.html`.
 
 3. **Photography.** All twelve images are Pexels placeholders showing Indian and
    Odia celebrations — other people's events, not yours. Replace with your own
@@ -57,10 +59,10 @@ the exact lines are commented in the `<head>` of `index.html`.
 | About          | Two-image editorial composition with an overlapping inset.                   |
 | Services       | Three hairline-divided columns with a rule that draws in on hover.           |
 | Process        | Deep navy band, four steps numbered in the brand gold.       |
-| Portfolio      | Eight photographs on an asymmetric 12-column grid, staggered vertically.     |
-| Testimonials   | Three placeholder quotes — see the warning above.                            |
+| Portfolio      | Eight photographs spanning every event type, on an asymmetric 12-col grid.   |
+| Events         | Six event categories — the range of work, stated plainly.                   |
 | Call to action | Full-bleed image band, led by the *It Is Time* tagline.                      |
-| Contact        | Eight-field inquiry form, validated client-side, delivered via WhatsApp.                   |
+| Contact        | Eight-field inquiry form, validated client-side, delivered via WhatsApp.     |
 | Footer         | Four-column layout on the deepest navy, legal entity in the copyright bar.  |
 
 Plus: hamburger menu with a focus trap, scroll-reveal via `IntersectionObserver`,

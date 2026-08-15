@@ -7,17 +7,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A single-page marketing site for **11:11** (Elevenn Elevenn Archive Pvt Ltd,
 Bhubaneswar). Static: `index.html`, `css/style.css`, `js/script.js`.
 
-**The copy on the site is wrong and is being replaced.** It describes a wedding
-coordination studio; the client has confirmed that is not the business. The real
-one is not yet known — their Instagram (`@elevenn11_11elevenn`) is login-gated.
-So do not extend, polish, or build on the wedding copy, and do not treat
-"Wedding Coordination / Full-Service Planning / Event Design", the portfolio
-captions, or the form's wedding-date and guest-count fields as settled. The
-60 questions in `CLIENT-BRIEF.md` are what unblocks the rewrite; Part A is the
-blocking part.
+**What the business is (confirmed by the client):** an event management company
+running weddings and social celebrations, celebrity nights and live shows,
+inaugurations and launches for hotels/restaurants/institutions, corporate
+conferences, college and campus festivals, and sports events. It is *not* a
+wedding specialist — weddings are one category among six.
 
-The **logo, palette, WhatsApp delivery, layout, and JS are current and correct.**
-Only the words and photography are stale.
+The site has been rewritten around that. Copy, imagery, services, event
+categories, portfolio captions and form fields all reflect it.
+
+**Still unconfirmed**, and still needing the client's answers in
+`CLIENT-BRIEF.md`: real service names and inclusions, real pricing, the actual
+process steps, real past events, testimonials, and contact details beyond
+WhatsApp. Everything currently in those places is plausible placeholder written
+to show the shape — do not treat it as fact or quote it back to the client as
+if confirmed.
 
 ## This is client work — never invent business facts
 
@@ -29,9 +33,9 @@ company are a genuine legal risk.
 
 Existing placeholders are deliberate and obvious on purpose
 (`hello@yourdomain.in`, `+91 XXXXX XXXXX`, carrying the `.is-placeholder`
-class). Leave them visible until the client supplies the real value. The three
-testimonials are invented and carry a disclaimer — they must be replaced with
-permissioned quotes or deleted, never quietly kept.
+class). Leave them visible until the client supplies the real value. The testimonials
+section was deleted for exactly this reason and must not be reinstated with
+invented quotes; only real, permissioned ones.
 
 Real and confirmed: the legal name, the Bomikhal address, and the WhatsApp
 number `+91 95915 09910`.
@@ -41,8 +45,9 @@ number `+91 95915 09910`.
 No build step, no `package.json`, nothing to install. Open `index.html`
 directly — `file://` works, there are no modules or fetch calls at load.
 
-**This folder is not a git repository.** There is no history and no undo, so
-read before overwriting and prefer edits over rewrites.
+**Git is set up**, pushed to `origin/main` and deployed by GitHub Pages at
+https://amareshnayak2022.github.io/11-11EventManagement.github.io/ — a push to
+`main` goes live in under a minute. Verify against that URL, not just locally.
 
 To actually see a change, render with headless Chrome:
 

@@ -300,7 +300,7 @@
       if (digits.length < 7) return 'Please enter a complete phone number, or leave this blank.';
       return '';
     },
-    'wedding-date': function (value) {
+    'event-date': function (value) {
       if (!value) return ''; // optional
       var chosen = new Date(value + 'T00:00:00');
       if (isNaN(chosen.getTime())) return 'Please choose a valid date.';
@@ -436,7 +436,7 @@
 
   /* Builds the WhatsApp message from the form's own labels, so it stays
      correct if fields are renamed, added, or removed later — nothing here
-     hard-codes the current wedding-specific field names. */
+     hard-codes the current field names. */
   function buildMessage() {
     var lines = ['New enquiry from the 11:11 website', ''];
 
