@@ -1,0 +1,31 @@
+# IntelliJ / JetBrains
+.idea/
+*.iml
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and scratch files
+*.log
+ig.html
+
+# Claude Code local settings (machine-specific permissions)
+.claude/settings.local.json
+
+# ---------------------------------------------------------------------------
+# Client-facing working documents.
+#
+# The repo has to be PUBLIC for GitHub Pages on a free account, which means
+# every file here is readable by anyone who finds it. These three contain
+# internal notes — including the fact that the testimonials currently on the
+# site are invented placeholders. That is not something to publish under the
+# client's own name.
+#
+# Delete these three lines if you would rather keep them versioned and accept
+# that they are public.
+# ---------------------------------------------------------------------------
+CLIENT-BRIEF.md
+11-11-Website-Brief.pdf
+11-11-Website-Brief-fillable.docx

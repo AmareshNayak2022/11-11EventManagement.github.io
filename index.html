@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en-IN" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Flags that JS is available, so scroll-reveal never hides content from
+       visitors whose JavaScript fails to load. Must run before first paint. -->
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+
+  <title>11:11 | Wedding Coordination &amp; Planning in Bhubaneswar</title>
+  <meta name="description" content="11:11 provides thoughtful wedding coordination, planning, and event design for couples celebrating across Bhubaneswar and Odisha.">
+  <meta name="author" content="Elevenn Elevenn Archive Pvt Ltd">
+  <meta name="theme-color" content="#F7F5F0">
+
+  <!-- Favicon / home-screen icon — the brand badge, square-cropped already.
+       100×100 covers every favicon slot a browser asks for; supply a larger
+       source if you want a crisp 180px apple-touch-icon. -->
+  <link rel="icon" href="images/logo.png" type="image/png" sizes="100x100">
+  <link rel="apple-touch-icon" href="images/logo.png">
+
+  <!-- Open Graph / social sharing.
+       TODO before launch: og:image must be an ABSOLUTE url on your own domain. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="11:11">
+  <meta property="og:title" content="11:11 | Wedding Coordination &amp; Planning in Bhubaneswar">
+  <meta property="og:description" content="It Is Time. Wedding coordination and planning for couples who want a celebration that feels effortless, intentional, and entirely their own.">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:image:alt" content="A bride and groom standing close together, holding a wedding bouquet in warm evening light.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="11:11 | Wedding Coordination &amp; Planning in Bhubaneswar">
+  <meta name="twitter:description" content="Wedding coordination, planning, and event design for couples celebrating across Odisha.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Typography: editorial serif + clean geometric sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Preload the hero photograph so the first paint feels instant -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!--
+    Structured data for Elevenn Elevenn Archive Pvt Ltd, trading as 11:11.
+    NOTE: `telephone` and `email` are deliberately OMITTED rather than filled
+    with invented values — publishing a wrong number here would send it to
+    Google. Add both once the real details are confirmed, e.g.
+      "telephone": "+91-XXXXXXXXXX",
+      "email": "hello@yourdomain.in",
+      "url": "https://yourdomain.in",
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["ProfessionalService", "LocalBusiness"],
+    "name": "11:11",
+    "legalName": "Elevenn Elevenn Archive Pvt Ltd",
+    "alternateName": "Elevenn Elevenn Archive",
+    "slogan": "It Is Time",
+    "description": "11:11 provides thoughtful wedding coordination, planning, and event design for couples celebrating across Bhubaneswar and Odisha.",
+    "image": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
+    "priceRange": "$$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Plot No. 30 & 30/982, Odyssa Business Centre, Bomikhal, Rasulgarh Square",
+      "addressLocality": "Bhubaneswar",
+      "addressRegion": "Odisha",
+      "postalCode": "751010",
+      "addressCountry": "IN"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Bhubaneswar" },
+      { "@type": "State", "name": "Odisha" }
+    ],
+    "knowsAbout": ["Wedding Coordination", "Full-Service Wedding Planning", "Event Design"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Wedding Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wedding Coordination" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Full-Service Planning" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Event Design" } }
+      ]
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ============================================================
+       HEADER / NAVIGATION
+       ============================================================ -->
+  <header class="site-header" id="site-header" data-header>
+    <div class="container site-header__inner">
+
+      <!--
+        BRAND LOCKUP = badge + wordmark.
+
+        The badge (images/logo.png) is a self-contained dark panel with a gold
+        frame, so unlike a flat single-colour mark it reads correctly against
+        BOTH header states — transparent over the hero photograph, and ivory
+        once scrolled. That is why only one file is needed here rather than the
+        light/dark pair the old comment described.
+
+        The badge is aria-hidden because the wordmark beside it already carries
+        the name, and the link itself has an aria-label — three announcements of
+        "11:11" would be noise for a screen reader.
+
+        ⚠ images/logo.png is a 100×100 export and will look soft on high-density
+        screens. Replace it with the original artwork (SVG, or PNG ≥ 400px) when
+        you have it — no markup change needed, just overwrite the file.
+      -->
+      <a class="logo" href="#hero" aria-label="11:11 — home">
+        <img class="logo__badge" src="images/logo.png" alt="" aria-hidden="true"
+             width="100" height="100" decoding="async">
+        <span class="logo__text">
+          <span class="logo__mark">11<span class="logo__colon">:</span>11</span>
+          <span class="logo__sub">It Is Time</span>
+        </span>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Primary">
+        <ul class="nav-desktop__list">
+          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#services">Services</a></li>
+          <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li><a class="nav-link" href="#process">Process</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <a class="btn btn--outline btn--sm site-header__cta" href="#contact">Inquire</a>
+
+        <button
+          class="nav-toggle"
+          id="nav-toggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-nav">
+          <span class="nav-toggle__bars" aria-hidden="true">
+            <span></span><span></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile navigation panel (built with vanilla JS, no libraries) -->
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    <div class="mobile-nav__backdrop" data-nav-close></div>
+
+    <nav class="mobile-nav__panel" aria-label="Mobile">
+      <div class="mobile-nav__head">
+        <span class="logo logo--inline">
+          <img class="logo__badge logo__badge--sm" src="images/logo.png" alt="" aria-hidden="true"
+               width="100" height="100" decoding="async">
+          <span class="logo__mark logo__mark--sm">11<span class="logo__colon">:</span>11</span>
+        </span>
+        <button class="mobile-nav__close" type="button" aria-label="Close navigation menu" data-nav-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <ul class="mobile-nav__list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="mobile-nav__foot">
+        <a class="btn btn--solid btn--block" href="#contact">Inquire About Your Date</a>
+        <p class="mobile-nav__meta">Bhubaneswar &middot; Odisha</p>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <!-- ============================================================
+         1. HERO
+         ============================================================ -->
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <div class="hero__media">
+        <!-- IMAGE 1 of 10 — hero background. Replace with images/hero.jpg later. -->
+        <img
+          class="hero__img"
+          src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80"
+          srcset="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=75 900w,
+                  https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=78 1400w,
+                  https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80 2000w"
+          sizes="100vw"
+          alt="A bride and groom standing close together at golden hour, the bride holding a full white and burgundy bouquet."
+          fetchpriority="high"
+          decoding="async">
+      </div>
+
+      <div class="container hero__inner">
+        <p class="eyebrow eyebrow--light hero__eyebrow">Odisha Wedding Coordination</p>
+
+        <h1 class="hero__title" id="hero-title">
+          Thoughtfully planned.<br>
+          <em>Beautifully celebrated.</em>
+        </h1>
+
+        <p class="hero__lede">
+          Wedding coordination and planning for couples who want a celebration that feels
+          effortless, intentional, and entirely their own.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--light" href="#contact">Inquire About Your Date</a>
+          <a class="link-arrow link-arrow--light" href="#portfolio">
+            Explore Our Work <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <a class="scroll-cue" href="#about" aria-label="Scroll to the about section">
+        <span class="scroll-cue__label">Scroll</span>
+        <span class="scroll-cue__line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ============================================================
+         2. ABOUT / INTRODUCTION
+         ============================================================ -->
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="container about__grid">
+
+        <div class="about__content" data-reveal>
+          <p class="eyebrow">The 11:11 Approach</p>
+          <h2 class="display display--lg" id="about-title">
+            Your day should feel as beautiful as the moments you&rsquo;re celebrating.
+          </h2>
+          <p class="lede">
+            From the first conversation to the final farewell, we thoughtfully coordinate every
+            detail so you can be fully present for the people and moments that matter most.
+          </p>
+          <p class="about__body">
+            We are a Bhubaneswar-based team of planners and coordinators who believe a wedding day
+            should feel unhurried. That comes from months of quiet preparation &mdash; considered
+            timelines, generous buffers, vendors who know exactly where to be, and a team that
+            handles the unexpected before it ever reaches you.
+          </p>
+
+          <a class="link-arrow" href="#services">
+            Learn More <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+        <figure class="about__media" data-reveal>
+          <!-- IMAGE 2 of 10 — primary about photograph -->
+          <img
+            class="about__img about__img--main"
+            src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=900&q=80"
+            alt="A newlywed couple walking hand in hand across a lawn at dusk, laughing together beneath a tall palm."
+            loading="lazy"
+            decoding="async">
+
+          <!-- IMAGE 3 of 10 — small overlapping detail photograph -->
+          <img
+            class="about__img about__img--inset"
+            src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=700&q=80"
+            alt="Close view of a bride in a lace sleeve and a groom in a navy suit gently holding hands."
+            loading="lazy"
+            decoding="async">
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. SERVICES
+         ============================================================ -->
+    <section class="section services" id="services" aria-labelledby="services-title">
+      <div class="container">
+
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Services</p>
+          <h2 class="display display--lg" id="services-title">How We Can Help</h2>
+          <p class="section-head__lede">
+            Three ways to work together, shaped around how much support your celebration asks for.
+          </p>
+        </header>
+
+        <div class="services__grid stagger" data-reveal>
+
+          <article class="service">
+            <p class="service__index">Service 01</p>
+            <h3 class="service__title">Wedding Coordination</h3>
+            <p class="service__text">
+              From timelines and vendor communication to the final details, we make sure your
+              wedding day unfolds seamlessly.
+            </p>
+            <ul class="service__list">
+              <li>Six-week planning handover</li>
+              <li>Vendor confirmation &amp; scheduling</li>
+              <li>Rehearsal &amp; wedding-day management</li>
+            </ul>
+            <span class="service__rule" aria-hidden="true"></span>
+          </article>
+
+          <article class="service">
+            <p class="service__index">Service 02</p>
+            <h3 class="service__title">Full-Service Planning</h3>
+            <p class="service__text">
+              For couples looking for thoughtful guidance from the first idea to the final
+              celebration.
+            </p>
+            <ul class="service__list">
+              <li>Venue search &amp; vendor curation</li>
+              <li>Budget structure &amp; guest logistics</li>
+              <li>Unlimited planning correspondence</li>
+            </ul>
+            <span class="service__rule" aria-hidden="true"></span>
+          </article>
+
+          <article class="service">
+            <p class="service__index">Service 03</p>
+            <h3 class="service__title">Event Design</h3>
+            <p class="service__text">
+              Refined styling, intentional details, and a cohesive visual experience created around
+              your story.
+            </p>
+            <ul class="service__list">
+              <li>Concept direction &amp; palette</li>
+              <li>Floral, mandap &amp; tabletop design</li>
+              <li>On-site styling &amp; installation</li>
+            </ul>
+            <span class="service__rule" aria-hidden="true"></span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. PROCESS  (dark section for tonal contrast)
+         ============================================================ -->
+    <section class="section process" id="process" aria-labelledby="process-title">
+      <div class="container">
+
+        <header class="section-head section-head--light" data-reveal>
+          <p class="eyebrow eyebrow--light">Our Process</p>
+          <h2 class="display display--lg" id="process-title">A Thoughtful Process</h2>
+        </header>
+
+        <ol class="process__list stagger" data-reveal>
+
+          <li class="step">
+            <span class="step__num">01</span>
+            <h3 class="step__title">Connect</h3>
+            <p class="step__text">
+              Tell us about your celebration, your vision, and what matters most to you.
+            </p>
+          </li>
+
+          <li class="step">
+            <span class="step__num">02</span>
+            <h3 class="step__title">Plan</h3>
+            <p class="step__text">
+              We build the timeline, coordinate your vendors, and thoughtfully manage every detail.
+            </p>
+          </li>
+
+          <li class="step">
+            <span class="step__num">03</span>
+            <h3 class="step__title">Celebrate</h3>
+            <p class="step__text">
+              Your wedding day arrives, and you can be fully present with the people you love.
+            </p>
+          </li>
+
+          <li class="step">
+            <span class="step__num">04</span>
+            <h3 class="step__title">Remember</h3>
+            <p class="step__text">
+              The details fade into memories. The moments stay.
+            </p>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. PORTFOLIO
+         ============================================================ -->
+    <section class="section portfolio" id="portfolio" aria-labelledby="portfolio-title">
+      <div class="container">
+
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Portfolio</p>
+          <h2 class="display display--lg" id="portfolio-title">Celebrations We&rsquo;ve Loved</h2>
+          <p class="section-head__lede">
+            A selection of weddings across Odisha&rsquo;s coastline, temple towns, and city venues.
+            Sample portfolio created for this website.
+          </p>
+        </header>
+
+        <div class="gallery">
+
+          <!-- IMAGE 4 of 10 -->
+          <figure class="shot shot--a" data-reveal>
+            <div class="shot__frame">
+              <img
+                src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=1200&q=80"
+                srcset="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=700&q=75 700w,
+                        https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=1200&q=80 1200w"
+                sizes="(min-width: 900px) 55vw, 92vw"
+                alt="An outdoor ceremony aisle lined with tall blush and ivory rose arrangements leading to a draped arch."
+                loading="lazy" decoding="async">
+            </div>
+            <figcaption class="shot__caption">
+              <span class="shot__label">Bhubaneswar / Winter</span>
+              <span class="shot__title">The Ceremony</span>
+            </figcaption>
+          </figure>
+
+          <!-- IMAGE 5 of 10 -->
+          <figure class="shot shot--b" data-reveal>
+            <div class="shot__frame">
+              <img
+                src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=900&q=80"
+                alt="A hand-tied bridal bouquet of garden roses, astrantia, and eucalyptus in dusty rose and plum tones."
+                loading="lazy" decoding="async">
+            </div>
+            <figcaption class="shot__caption">
+              <span class="shot__label">Puri / Spring</span>
+              <span class="shot__title">Florals</span>
+            </figcaption>
+          </figure>
+
+          <!-- IMAGE 6 of 10 -->
+          <figure class="shot shot--c" data-reveal>
+            <div class="shot__frame">
+              <img
+                src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=900&q=80"
+                alt="A bride and groom standing beside a still lake, framed by golden autumn foliage."
+                loading="lazy" decoding="async">
+            </div>
+            <figcaption class="shot__caption">
+              <span class="shot__label">Konark / Winter</span>
+              <span class="shot__title">The Couple</span>
+            </figcaption>
+          </figure>
+
+          <!-- IMAGE 7 of 10 -->
+          <figure class="shot shot--d" data-reveal>
+            <div class="shot__frame">
+              <img
+                src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80"
+                srcset="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=700&q=75 700w,
+                        https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80 1200w"
+                sizes="(min-width: 900px) 55vw, 92vw"
+                alt="A long banquet table set with linen napkins, cut glassware, and small vases of wildflowers."
+                loading="lazy" decoding="async">
+            </div>
+            <figcaption class="shot__caption">
+              <span class="shot__label">Cuttack / Autumn</span>
+              <span class="shot__title">The Tablescape</span>
+            </figcaption>
+          </figure>
+
+          <!-- IMAGE 8 of 10 -->
+          <figure class="shot shot--e" data-reveal>
+            <div class="shot__frame">
+              <img
+                src="https://images.unsplash.com/photo-1464047736614-af63643285bf?auto=format&fit=crop&w=900&q=80"
+                alt="Strands of warm string lights glowing beneath a timber ceiling at an evening reception."
+                loading="lazy" decoding="async">
+            </div>
+            <figcaption class="shot__caption">
+              <span class="shot__label">Gopalpur / Summer</span>
+              <span class="shot__title">The Reception</span>
+            </figcaption>
+          </figure>
+
+          <!-- IMAGE 9 of 10 -->
+          <figure class="shot shot--f" data-reveal>
+            <div class="shot__frame">
+              <img
+                src="https://images.unsplash.com/photo-1509927083803-4bd519298ac4?auto=format&fit=crop&w=900&q=80"
+                alt="The bride's blush heels and the groom's brown brogues side by side on a wooden floor."
+                loading="lazy" decoding="async">
+            </div>
+            <figcaption class="shot__caption">
+              <span class="shot__label">Chilika / Winter</span>
+              <span class="shot__title">The Details</span>
+            </figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. TESTIMONIALS
+         ============================================================ -->
+    <section class="section testimonials" id="testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Kind Words</p>
+          <h2 class="display display--lg" id="testimonials-title">From Our Couples</h2>
+        </header>
+
+        <div class="testimonials__grid stagger" data-reveal>
+
+          <figure class="quote">
+            <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+            <blockquote class="quote__text">
+              <p>
+                11:11 gave us the freedom to actually enjoy our wedding day. Every detail was
+                handled before we even knew there was something to worry about.
+              </p>
+            </blockquote>
+            <figcaption class="quote__author">Ananya &amp; Rohit <span class="quote__meta">Bhubaneswar</span></figcaption>
+          </figure>
+
+          <figure class="quote">
+            <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+            <blockquote class="quote__text">
+              <p>
+                We came in with a folder of half-formed ideas and left with a day that felt
+                completely ours. The timeline was so calm that our families kept asking who was
+                running things.
+              </p>
+            </blockquote>
+            <figcaption class="quote__author">Sneha &amp; Arjun <span class="quote__meta">Puri</span></figcaption>
+          </figure>
+
+          <figure class="quote">
+            <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+            <blockquote class="quote__text">
+              <p>
+                Rain moved our ceremony indoors an hour before the mandap. We found out afterwards.
+                That is the whole review.
+              </p>
+            </blockquote>
+            <figcaption class="quote__author">Ishita &amp; Kabir <span class="quote__meta">Cuttack</span></figcaption>
+          </figure>
+
+        </div>
+
+        <!--
+          IMPORTANT: these are placeholder testimonials written for the build.
+          They must be replaced with real, permissioned client quotes (or the
+          section removed) before this site goes live — publishing invented
+          reviews under a real company name is a genuine legal risk.
+          The disclaimer below stays until that swap happens.
+        -->
+        <p class="disclaimer">
+          The testimonials above are placeholder content written for this website build. They do
+          not describe real clients or real events, and will be replaced with genuine couple
+          feedback.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. CALL TO ACTION
+         ============================================================ -->
+    <section class="cta" id="cta" aria-labelledby="cta-title">
+      <div class="cta__media">
+        <!-- IMAGE 10 of 10 — call-to-action background -->
+        <img
+          src="https://images.unsplash.com/photo-1460978812857-470ed1c77af0?auto=format&fit=crop&w=1800&q=80"
+          srcset="https://images.unsplash.com/photo-1460978812857-470ed1c77af0?auto=format&fit=crop&w=900&q=75 900w,
+                  https://images.unsplash.com/photo-1460978812857-470ed1c77af0?auto=format&fit=crop&w=1800&q=80 1800w"
+          sizes="100vw"
+          alt="A black and white photograph of a bride and groom sharing a quiet moment beneath a windswept veil."
+          loading="lazy" decoding="async">
+      </div>
+
+      <div class="container cta__inner" data-reveal>
+        <p class="eyebrow eyebrow--light cta__eyebrow">It Is Time</p>
+        <h2 class="display display--xl" id="cta-title">Let&rsquo;s create something unforgettable.</h2>
+        <p class="cta__text">Tell us a little about your celebration and we&rsquo;ll be in touch.</p>
+        <a class="btn btn--light" href="#contact">Start a Conversation</a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         8. CONTACT / INQUIRY FORM
+         ============================================================ -->
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="container contact__grid">
+
+        <div class="contact__intro" data-reveal>
+          <p class="eyebrow">Inquire</p>
+          <h2 class="display display--lg" id="contact-title">Tell us about your day</h2>
+          <p class="lede">
+            Share a few details and we&rsquo;ll reply within two business days with availability,
+            pricing, and next steps.
+          </p>
+
+          <!--
+            PLACEHOLDER CONTACT DETAILS — replace all three before launch.
+            The email and phone below are deliberately written as obvious
+            placeholders so that no real enquiry is ever misdirected to a
+            stranger's inbox or number.
+          -->
+          <dl class="contact__details">
+            <div class="contact__row">
+              <dt>Email</dt>
+              <dd><span class="is-placeholder">hello@yourdomain.in</span></dd>
+            </div>
+            <div class="contact__row">
+              <dt>WhatsApp</dt>
+              <dd>
+                <a class="contact__wa"
+                   href="https://wa.me/919591509910?text=Hi%2011%3A11%2C%20I%27d%20like%20to%20enquire%20about%20your%20services."
+                   target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"/>
+                  </svg>
+                  +91 95915 09910
+                </a>
+              </dd>
+            </div>
+            <!-- Still a placeholder: the number above was given as the WhatsApp
+                 contact. If it is also the number to call, replace this row's
+                 span with a tel: link to it and delete the is-placeholder class. -->
+            <div class="contact__row">
+              <dt>Phone</dt>
+              <dd><span class="is-placeholder">+91 XXXXX XXXXX</span></dd>
+            </div>
+            <div class="contact__row">
+              <dt>Studio</dt>
+              <dd>
+                <address>
+                  Plot No. 30 &amp; 30/982, Odyssa Business Centre,<br>
+                  Bomikhal, Rasulgarh Square,<br>
+                  Bhubaneswar, Odisha 751010
+                </address>
+              </dd>
+            </div>
+            <div class="contact__row">
+              <dt>Hours</dt>
+              <dd>Monday &ndash; Saturday, 10am &ndash; 7pm IST</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="contact__form-wrap" data-reveal>
+
+          <!--
+            FRONT-END ONLY FORM.
+            This form does not send email and is not connected to any backend.
+            See js/script.js for the exact place to connect Formspree, Netlify
+            Forms, or your own API endpoint.
+          -->
+          <form class="form" id="inquiry-form" novalidate>
+
+            <div class="form__grid">
+
+              <div class="field">
+                <label class="field__label" for="name">Name <span class="req" aria-hidden="true">*</span></label>
+                <input class="field__input" type="text" id="name" name="name"
+                       autocomplete="name" placeholder="Your full name"
+                       aria-describedby="name-error" required>
+                <p class="field__error" id="name-error" data-error-for="name"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="email">Email <span class="req" aria-hidden="true">*</span></label>
+                <input class="field__input" type="email" id="email" name="email"
+                       autocomplete="email" placeholder="you@example.com"
+                       aria-describedby="email-error" required>
+                <p class="field__error" id="email-error" data-error-for="email"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="phone">Phone</label>
+                <input class="field__input" type="tel" id="phone" name="phone"
+                       autocomplete="tel" placeholder="+91 00000 00000"
+                       aria-describedby="phone-error">
+                <p class="field__error" id="phone-error" data-error-for="phone"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="wedding-date">Wedding Date</label>
+                <input class="field__input" type="date" id="wedding-date" name="wedding-date"
+                       aria-describedby="wedding-date-hint wedding-date-error">
+                <p class="field__hint" id="wedding-date-hint">Approximate is perfectly fine.</p>
+                <p class="field__error" id="wedding-date-error" data-error-for="wedding-date"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="location">Wedding Location</label>
+                <input class="field__input" type="text" id="location" name="location"
+                       placeholder="Venue, city, or region"
+                       aria-describedby="location-error">
+                <p class="field__error" id="location-error" data-error-for="location"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="guests">Estimated Guest Count</label>
+                <input class="field__input" type="number" id="guests" name="guests"
+                       min="1" max="2000" step="1" inputmode="numeric" placeholder="250"
+                       aria-describedby="guests-error">
+                <p class="field__error" id="guests-error" data-error-for="guests"></p>
+              </div>
+
+              <div class="field field--full">
+                <label class="field__label" for="service">Services Interested In <span class="req" aria-hidden="true">*</span></label>
+                <div class="field__select-wrap">
+                  <select class="field__input field__select" id="service" name="service"
+                          aria-describedby="service-error" required>
+                    <option value="" selected disabled>Please select&hellip;</option>
+                    <option value="Wedding Coordination">Wedding Coordination</option>
+                    <option value="Full-Service Planning">Full-Service Planning</option>
+                    <option value="Event Design">Event Design</option>
+                    <option value="Not Sure Yet">Not Sure Yet</option>
+                  </select>
+                </div>
+                <p class="field__error" id="service-error" data-error-for="service"></p>
+              </div>
+
+              <div class="field field--full">
+                <label class="field__label" for="message">Message <span class="req" aria-hidden="true">*</span></label>
+                <textarea class="field__input field__textarea" id="message" name="message" rows="5"
+                          placeholder="Tell us about your celebration — the feeling you're after, where you are in planning, and anything that matters to you."
+                          aria-describedby="message-error" required></textarea>
+                <p class="field__error" id="message-error" data-error-for="message"></p>
+              </div>
+
+            </div>
+
+            <p class="form__note"><span class="req" aria-hidden="true">*</span> Required fields</p>
+
+            <button class="btn btn--solid btn--block-sm" type="submit">Send Inquiry</button>
+
+            <!-- Live region for validation summaries, announced to screen readers -->
+            <p class="form__summary" id="form-summary" role="alert" hidden></p>
+          </form>
+
+          <!--
+            Success panel — revealed by JS once validation passes. Which of the
+            three blocks below appears depends on how the enquiry was delivered;
+            see the DELIVERY notes at the top of section 07 in js/script.js.
+          -->
+          <div class="form-success" id="form-success" role="status" aria-live="polite" hidden>
+            <span class="form-success__mark" aria-hidden="true"></span>
+
+            <div data-success="whatsapp" hidden>
+              <h3 class="form-success__title">Your message is ready in WhatsApp.</h3>
+              <p class="form-success__text">
+                We&rsquo;ve opened WhatsApp in a new tab with your details already written out.
+                <strong>Press send there</strong> and it reaches us straight away &mdash; nothing
+                is sent until you do.
+              </p>
+            </div>
+
+            <div data-success="whatsapp-blocked" hidden>
+              <h3 class="form-success__title">Almost there &mdash; one more tap.</h3>
+              <p class="form-success__text">
+                Your browser blocked the WhatsApp window from opening. Use the button below
+                instead; your answers are still filled in.
+              </p>
+              <p><a class="btn btn--solid btn--sm" id="form-wa-link" href="#" target="_blank" rel="noopener">Open WhatsApp</a></p>
+            </div>
+
+            <div data-success="email" hidden>
+              <h3 class="form-success__title">Thank you &mdash; your inquiry has been sent.</h3>
+              <p class="form-success__text">
+                We&rsquo;ve received your details and will reply within two business days.
+              </p>
+            </div>
+
+            <button class="btn btn--outline btn--sm" type="button" id="form-reset">Send another inquiry</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       9. FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+
+      <div class="site-footer__brand">
+        <img class="logo__badge logo__badge--footer" src="images/logo.png" alt="" aria-hidden="true"
+             width="100" height="100" loading="lazy" decoding="async">
+        <p class="logo__mark logo__mark--footer">11<span class="logo__colon">:</span>11</p>
+        <p class="site-footer__tagline">It Is Time</p>
+        <p class="site-footer__place">Wedding Coordination &amp; Planning</p>
+        <p class="site-footer__place">Bhubaneswar, Odisha</p>
+      </div>
+
+      <nav class="site-footer__col" aria-label="Footer">
+        <h2 class="site-footer__heading">Explore</h2>
+        <ul class="site-footer__list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Follow</h2>
+        <ul class="site-footer__list">
+          <li><a href="#" rel="noopener">Instagram</a></li>
+          <li><a href="#" rel="noopener">Pinterest</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Inquiries</h2>
+        <p class="site-footer__note">
+          Now booking celebrations for 2026 and 2027.
+        </p>
+        <a class="link-arrow link-arrow--light" href="#contact">
+          Start a Conversation <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="container site-footer__bar">
+      <p>&copy; 2026 Elevenn Elevenn Archive Pvt Ltd</p>
+      <p class="site-footer__fineprint">
+        Placeholder photography via Unsplash.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       WHATSAPP
+       wa.me needs the number in full international form with no plus sign,
+       spaces, or dashes: +91 95915 09910 becomes 919591509910.
+       The ?text= parameter pre-fills the first message so the visitor does not
+       have to think of an opening line — change the wording freely, it is
+       URL-encoded.
+       ============================================================ -->
+  <a class="wa-float"
+     href="https://wa.me/919591509910?text=Hi%2011%3A11%2C%20I%27d%20like%20to%20enquire%20about%20your%20services."
+     target="_blank" rel="noopener"
+     aria-label="Chat with 11:11 on WhatsApp">
+    <svg class="wa-float__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"/>
+    </svg>
+    <span class="wa-float__label">WhatsApp</span>
+  </a>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
