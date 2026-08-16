@@ -81,17 +81,28 @@ Pexels serves images over a fast CDN and resizes on the fly via URL parameters
 reviewed. Every one of the twelve was **opened and looked at** before being used —
 none were chosen from a search result label alone.
 
-The original build used Unsplash, but every one of those photographs showed a
-Western wedding: white gown, dark suit, Western florals, banquet tables. For a
-Bhubaneswar event company that was culturally wrong, so all ten were replaced
-with Indian and Odia celebration photography — haldi, puja, marigold, brass,
-shankha-pola bangles, dhol players — plus two that are specifically Odia: an
-Odissi dancer and the Konark Sun Temple wheel.
+The photography has been re-chosen twice, following the business. The first
+build used Unsplash pictures of Western weddings; those were replaced with
+Indian and Odia celebration photography — haldi, puja, marigold, dhol players.
+When the client confirmed the business is a **premium experiential agency**, not
+a general event company, that set became wrong too: marigolds, mehndi, students
+and trophies all read as exactly the mass-market work the company turns down.
+
+The current twelve are chosen for the register the brief describes — rare and
+off-market venues, hand-picked artists, intimate audiences: a chamber concert
+under stone arches, a candlelit performance in a historic church, heritage
+courtyards in sandstone and marble, a lone artist under a spotlight, a sitar on
+a velvet chair, a ballroom in candelabra light. Two are specifically Odia and
+survive from the previous set: the Odissi dancer and the Konark Sun Temple
+wheel. Every one was **opened and looked at** before being used, and every URL
+was checked for a `200` — none were chosen from a search-result label alone.
 
 ⚠️ These are still **other people's events**, free under the
 [Pexels License](https://pexels.com/license) — commercial use is allowed and no
 attribution is required, which is more permissive than Unsplash. Replace them
-with your own work anyway: a portfolio of strangers' events is a claim you
+with your own work anyway. That matters more than usual here: the client is
+pre-launch, so the section holding most of them is labelled a reference board
+rather than a portfolio. Strangers' events presented as your work is a claim you
 cannot back up.
 
 ### Where the images are referenced
@@ -100,31 +111,32 @@ All twelve are in `index.html`, each marked with a numbered comment
 (`<!-- IMAGE 4 of 12 -->`). There are no image URLs in the CSS, so
 `index.html` is the only file you need to edit.
 
-| #  | Section   | Subject                              | Suggested filename          |
-|----|-----------|--------------------------------------|-----------------------------|
-| 1  | Hero      | Haldi ceremony, guests in yellow     | `hero.jpg`                  |
-| 2  | About     | Guest in red before a draped stage   | `about-main.jpg`            |
-| 3  | About     | Mehndi hands over a brass vessel     | `about-inset.jpg`           |
-| 4  | Portfolio | Puja with marigolds and brass pots   | `portfolio-ceremony.jpg`    |
-| 5  | Portfolio | Marigold garland                     | `portfolio-florals.jpg`     |
-| 6  | Portfolio | Couple, groom in sherwani and safa   | `portfolio-couple.jpg`      |
-| 7  | Portfolio | Brass bowl of marigold and petals    | `portfolio-rituals.jpg`     |
-| 8  | Portfolio | Couple dancing at evening reception  | `portfolio-reception.jpg`   |
-| 9  | Portfolio | Stacked red and white bangles        | `portfolio-details.jpg`     |
-| 10 | CTA band  | Dhol players in procession           | `cta.jpg`                   |
-| 11 | Portfolio | Odissi dancer in full costume        | `portfolio-performance.jpg` |
-| 12 | Portfolio | Konark Sun Temple chariot wheel      | `portfolio-setting.jpg`     |
+| #  | Section    | Subject                                        | Pexels ID  | Suggested filename        |
+|----|------------|------------------------------------------------|------------|---------------------------|
+| 1  | Hero       | Chamber concert under historic stone arches    | `15949379` | `hero.jpg`                |
+| 2  | About      | Candlelit performance in a historic church     | `37443989` | `about-main.jpg`          |
+| 3  | About      | Sitar resting on a blue velvet chair           | `31168773` | `about-inset.jpg`         |
+| 4  | Atmosphere | Sandstone heritage courtyard                   | `33726143` | `atmos-venue-courtyard.jpg` |
+| 5  | Atmosphere | Lone classical musician under a spotlight      | `33753145` | `atmos-artist.jpg`        |
+| 6  | Atmosphere | Marble courtyard ringed with carved arches     | `6651933`  | `atmos-venue-marble.jpg`  |
+| 7  | Atmosphere | Ballroom with crystal candelabras              | `12689009` | `atmos-gala.jpg`          |
+| 8  | Atmosphere | Band on a small stage in a low-lit bar         | `9419405`  | `atmos-concert.jpg`       |
+| 9  | Atmosphere | Long tables set with candles after dark        | `38446275` | `atmos-table.jpg`         |
+| 10 | Atmosphere | Odissi dancer in full costume                  | `14090681` | `atmos-cultural.jpg`      |
+| 11 | Atmosphere | Konark Sun Temple chariot wheel                | `1721747`  | `atmos-heritage.jpg`      |
+| 12 | CTA band   | Saxophonist and singer in a dim room           | `9419371`  | `cta.jpg`                 |
 
 ⚠️ **If you change the hero or CTA photograph, re-measure the text contrast.**
-The overlay in `css/style.css` was tuned specifically for the current hero,
-which is a bright, high-key haldi scene. A darker photograph would let the
-overlay come back down; a brighter one would need more. The measured
-worst-pixel figures are recorded in the comment on `.hero__media::after`.
+The overlay in `css/style.css` was originally tuned against a bright, high-key
+scene; the current hero is a much darker interior, so there is headroom to bring
+the overlay down if you want more of the photograph to show. A brighter
+replacement would need more overlay, not less. The measured worst-pixel figures
+are recorded in the comment on `.hero__media::after`.
 
-The hero, one portfolio image, and the CTA image also use `srcset` for
-responsive loading. If you switch to local files you can either provide `-800`
-and `-1600` variants, or delete the `srcset` and `sizes` attributes and keep
-the single `src`.
+The hero, three of the Atmosphere images, and the CTA image also use `srcset`
+for responsive loading. If you switch to local files you can either provide
+`-800` and `-1600` variants, or delete the `srcset` and `sizes` attributes and
+keep the single `src`.
 
 ### How to swap one in
 

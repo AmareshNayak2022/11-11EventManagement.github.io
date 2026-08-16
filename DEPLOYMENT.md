@@ -54,8 +54,8 @@ this site, you are being sold capacity you will never use.
 - **Best edge presence in India.** Cloudflare has points of presence in Mumbai,
   Delhi, Chennai, Bengaluru, Hyderabad, Kolkata and more. Your visitors are in
   Odisha and the surrounding states — pages will be served from within India
-  rather than from Singapore or the US. On an image-heavy wedding site that is
-  a very noticeable difference.
+  rather than from Singapore or the US. On an image-heavy site like this one —
+  twelve full-bleed photographs — that is a very noticeable difference.
 - **Free SSL, free DDoS protection, free analytics.**
 - You will probably want Cloudflare for DNS anyway, so it keeps everything in
   one dashboard.
@@ -90,14 +90,20 @@ not wire up a separate form service, that alone justifies choosing Netlify.
 | `.co.in`            | Same, if the `.in` is taken                     |
 | `.com`              | Most familiar and trusted; good if you may expand |
 
-For a Bhubaneswar wedding business, **`.in` or `.com`** are both sound. If both
-are available and affordable, buy both and redirect one to the other — it stops
-a competitor taking the near-identical name.
+For a Bhubaneswar business working nationally, **`.in` or `.com`** are both
+sound; `.com` has the edge if the work really is pan-India and destination.
+If both are available and affordable, buy both and redirect one to the other —
+it stops a competitor taking the near-identical name.
+
+⚠️ **This may already be settled.** The published email is
+`connect@elevennelevenn.com`, which implies `elevennelevenn.com` is registered
+and in use. Confirm that before buying anything — and if it is, the site's
+canonical URL and share image should point at it.
 
 Given the brand is `11:11`, be aware that domains starting with digits are fine
-technically, but spell-ability matters when someone reads it aloud at a wedding.
-Something like `elevennelevenn.in` or `1111weddings.in` may travel better by
-word of mouth than a pure numeral string. Test it by saying it down a phone.
+technically, but spell-ability matters when a CXO reads it aloud down a phone.
+`elevennelevenn.com` travels better by word of mouth than a pure numeral
+string. Test it by saying it out loud.
 
 ### Where to buy
 
@@ -203,8 +209,9 @@ never need to buy or install a certificate.
 
 ## Step 4 — Set up business email
 
-You need `hello@yourdomain.in` to work. Domain registration does **not** include
-email.
+You need `connect@elevennelevenn.com` to actually receive mail. Domain
+registration does **not** include email — this is a separate thing to set up,
+and the address is already published on the site.
 
 | Option                       | Cost                     | Notes |
 |------------------------------|--------------------------|-------|
@@ -218,8 +225,9 @@ later if the team grows or you need desktop mail clients.
 
 Setup is the same in all cases: add the MX (and SPF/DKIM) records the provider
 gives you into Cloudflare DNS. Configure **SPF, DKIM and DMARC** — without
-them your enquiry replies will land in couples' spam folders, which for a
-wedding business is a direct loss of revenue.
+them your enquiry replies will land in spam folders. For a business whose
+enquiries come from corporate and institutional inboxes — the strictest filters
+there are — that is a direct loss of revenue.
 
 ---
 
@@ -319,8 +327,9 @@ Technical:
 Post-launch:
 
 - [ ] Submit to [Google Search Console](https://search.google.com/search-console)
-- [ ] Create a **Google Business Profile** with the Bomikhal address — for a
-      local wedding business this drives more enquiries than the website itself
+- [ ] Create a **Google Business Profile** with the Bomikhal address. Its hours
+      and address must match the site exactly (Mon–Sat 10:00–19:00, visits by
+      prior appointment) or local search rankings suffer
 - [ ] Add the site link to your Instagram bio
 
 ---

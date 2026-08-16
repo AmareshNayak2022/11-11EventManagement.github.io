@@ -1,5 +1,5 @@
 /* ==========================================================================
-   EVERLY & CO. WEDDINGS — site behaviour
+   11:11 — Elevenn Elevenn Archive Pvt Ltd — site behaviour
    Vanilla JavaScript only. No libraries, no build step.
 
    CONTENTS
@@ -270,8 +270,12 @@
      ==================================================================== */
   var DELIVERY = {
     // Paste a Formspree/Netlify/your-own URL here to switch to email delivery.
+    // The client's enquiry inbox is connect@elevennelevenn.com.
     endpoint: '',
     // International format, digits only — no plus sign, spaces, or dashes.
+    // This is the number confirmed as being on WhatsApp. The concierge line
+    // published on the page is +91 99381 20356; if that one is also on
+    // WhatsApp, change it here AND in the two wa.me links in index.html.
     whatsapp: '919591509910'
   };
 
@@ -282,10 +286,18 @@
 
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 
-  // Field name -> validator. Returning a string marks the field invalid.
+  /* Field name -> validator. Returning a string marks the field invalid; a
+     field with no entry here always passes, which is how the optional ones
+     (`intent`, `vision`) get through without a rule of their own.
+
+     Which fields are required is the client's decision, not a UX guess: the
+     brief (Q41) marks name, client type, target date, budget, location and
+     guest count as essential, and artist/venue vision as optional. `email` is
+     required on top of that list because a brief with no reply address cannot
+     be answered. */
   var rules = {
     name: function (value) {
-      if (!value) return 'Please tell us your name.';
+      if (!value) return 'Please tell us your name and organisation.';
       if (value.length < 2) return 'Please enter at least 2 characters.';
       return '';
     },
@@ -300,8 +312,12 @@
       if (digits.length < 7) return 'Please enter a complete phone number, or leave this blank.';
       return '';
     },
+    'client-type': function (value) {
+      if (!value) return 'Please tell us which of these describes you.';
+      return '';
+    },
     'event-date': function (value) {
-      if (!value) return ''; // optional
+      if (!value) return 'Please give us a target date — the first of the month is fine.';
       var chosen = new Date(value + 'T00:00:00');
       if (isNaN(chosen.getTime())) return 'Please choose a valid date.';
       var today = new Date();
@@ -309,22 +325,22 @@
       if (chosen < today) return 'Please choose a date in the future.';
       return '';
     },
-    location: function () { return ''; }, // optional, free text
+    budget: function (value) {
+      if (!value) return 'Please choose a budget range, or "Not yet decided".';
+      return '';
+    },
+    location: function (value) {
+      if (!value) return 'Please tell us where — a city or region is enough.';
+      return '';
+    },
     guests: function (value) {
-      if (!value) return ''; // optional
+      if (!value) return 'Please give us a rough guest count.';
       var count = Number(value);
       if (!isFinite(count) || Math.floor(count) !== count) return 'Please enter a whole number.';
       if (count < 1) return 'Please enter at least 1 guest.';
-      if (count > 2000) return 'Please enter a number under 2000, or tell us in the message.';
-      return '';
-    },
-    service: function (value) {
-      if (!value) return 'Please choose the service you are interested in.';
-      return '';
-    },
-    message: function (value) {
-      if (!value) return 'Please tell us a little about your celebration.';
-      if (value.length < 10) return 'A sentence or two helps us reply properly.';
+      // The ceiling covers the largest format the company runs (full-scale
+      // concert production); anything beyond it is likelier to be a typo.
+      if (count > 50000) return 'Please enter a number under 50,000, or tell us below.';
       return '';
     }
   };
@@ -437,25 +453,53 @@
   /* Builds the WhatsApp message from the form's own labels, so it stays
      correct if fields are renamed, added, or removed later — nothing here
      hard-codes the current field names. */
+  // Collapses the whitespace and the required-marker out of a <label> or
+  // <legend> so it reads as a plain heading inside a WhatsApp message.
+  function tidy(text) {
+    return String(text || '').replace('*', '').replace(/\s+/g, ' ').trim();
+  }
+
   function buildMessage() {
-    var lines = ['New enquiry from the 11:11 website', ''];
+    var lines  = ['New enquiry from the 11:11 website', ''];
+    var groups = {};  // legend text -> the labels of the boxes ticked under it
+    var order  = [];  // keeps those groups in the order they appear in the form
 
     inputs.forEach(function (input) {
+      /* A checkbox group arrives as one <input> per option, so the boxes are
+         collected here and emitted as a single line below rather than one line
+         each. Note the filter is `checked`, not emptiness: an unticked box
+         still carries its `value`, so the ordinary blank test would let every
+         option through. */
+      if (input.type === 'checkbox') {
+        if (!input.checked) return;
+
+        var group  = input.closest ? input.closest('fieldset') : null;
+        var legend = group ? group.querySelector('legend') : null;
+        var key    = legend ? tidy(legend.textContent) : input.name;
+
+        if (!groups[key]) { groups[key] = []; order.push(key); }
+        groups[key].push(input.value);
+        return;
+      }
+
       var value = (input.value || '').trim();
       if (!value) return; // skip anything left blank
 
-      var label = form.querySelector('label[for="' + input.id + '"]');
-      var text  = label ? label.textContent.replace('*', '') : input.name;
-      text = text.replace(/\s+/g, ' ').trim();
-
-      // The message body is long-form, so give it its own block at the end.
+      // The long-form answer is held back for its own block at the end.
       if (input.tagName === 'TEXTAREA') return;
-      lines.push(text + ': ' + value);
+
+      var label = form.querySelector('label[for="' + input.id + '"]');
+      lines.push(tidy(label ? label.textContent : input.name) + ': ' + value);
     });
 
-    var message = form.querySelector('textarea');
-    if (message && message.value.trim()) {
-      lines.push('', message.value.trim());
+    order.forEach(function (key) {
+      lines.push(key + ': ' + groups[key].join(', '));
+    });
+
+    var vision = form.querySelector('textarea');
+    if (vision && vision.value.trim()) {
+      var visionLabel = form.querySelector('label[for="' + vision.id + '"]');
+      lines.push('', tidy(visionLabel ? visionLabel.textContent : 'Notes') + ':', vision.value.trim());
     }
 
     return lines.join('\n');

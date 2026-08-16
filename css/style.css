@@ -14,8 +14,9 @@
    09. About
    10. Services
    10b. Event types
+   10c. Tiers & boundaries
    11. Process
-   12. Portfolio
+   12. Portfolio (now the atmosphere / visual-direction grid)
    13. Testimonials (section removed from the page; styles kept)
    14. Call to action
    15. Contact & form
@@ -32,36 +33,51 @@
    ========================================================================== */
 :root {
   /* --- Color -------------------------------------------------------------
-     Sampled from the brand badge in images/logo.png, which is a gold-on-navy
-     mark: the deep blues and the antique gold below are its own colours, not
-     an invented palette placed next to it. The gold is warm and low-chroma
-     (a leafed, aged gold) rather than a bright yellow — matching the mark
-     matters more here than making the accent loud. */
-  --paper:     #F7F5F0;   /* page ground — warm off-white */
-  --paper-alt: #EBE6DB;   /* alternating section band */
-  --gold:      #B08D4B;   /* accent: rules, bullets, quote marks */
-  --gold-deep: #86682C;   /* the one gold dark enough to carry text on paper */
-  --navy:      #16253C;   /* headings, buttons, dark bands */
-  --white:     #FFFFFF;
+     The three brand values below are the client's own, confirmed in the
+     website brief (Q29) — not sampled, not invented:
+       Midnight Navy   #0A1128   primary
+       Champagne Gold  #D4AF37   accent   (Metallic Gold #C5A059 secondary)
+       Warm Cream      #FDFBF7   background
+     Everything else in this block is derived from those three, so the whole
+     page can be re-tinted from here alone. Every ratio quoted below was
+     measured with the WCAG formula — if you change a value, re-measure it and
+     update the table in README.md rather than estimating. */
+  --paper:      #FDFBF7;   /* page ground — warm cream (client) */
+  --paper-alt:  #F2ECE0;   /* derived: alternating section band */
+  --gold:       #D4AF37;   /* accent: rules, bullets, numerals (client) */
+  --gold-metal: #C5A059;   /* secondary metallic gold (client) */
+  --gold-deep:  #7F6220;   /* derived: the one gold dark enough for text on light */
+  --navy:       #0A1128;   /* headings, buttons, dark bands (client) */
+  --white:      #FFFFFF;
 
   /* Derived tones */
-  --navy-deep: #0C1524;
+  --navy-deep: #05080F;    /* the footer, one step deeper than the bands */
   --slate:     #586074;
-  --hairline:      rgba(22, 37, 60, 0.14);
-  --hairline-soft: rgba(22, 37, 60, 0.08);
-  --hairline-light: rgba(247, 245, 240, 0.22);
+
+  /* Channel triplets, so that no rgba() further down this file has to restate
+     a brand colour by hand. Changing --navy above means changing --navy-rgb
+     here too — they are the same colour written two ways. */
+  --navy-rgb:  10 17 40;
+  --paper-rgb: 253 251 247;
+  --gold-rgb:  212 175 55;
+
+  --hairline:       rgb(var(--navy-rgb) / 0.14);
+  --hairline-soft:  rgb(var(--navy-rgb) / 0.08);
+  --hairline-light: rgb(var(--paper-rgb) / 0.22);
 
   /* Semantic roles.
      Three deliberate steps of text contrast, all of which clear WCAG AA
      (4.5:1) on BOTH the paper and the alt background — measured, not guessed:
-       --heading  14.1:1 on paper / 12.4:1 on alt
-       --text      8.1:1 on paper /  7.1:1 on alt
-       --muted     5.8:1 on paper /  5.1:1 on alt
-     --accent is decorative only (rules, bullets, quote marks). Never put text
-     in --accent on a light background: it measures 2.5:1 on the alt band. Use
-     --gold-deep (4.8:1 on paper) if a gold has to carry words there.
-     On the dark bands the plain --accent is fine for text: it measures 5.0:1
-     on --navy and 5.9:1 on --navy-deep. */
+       --heading  18.1:1 on paper / 15.9:1 on alt
+       --text      8.5:1 on paper /  7.5:1 on alt
+       --muted     6.1:1 on paper /  5.3:1 on alt
+     --accent is decorative only on light grounds (rules, bullets, numerals).
+     Never put text in --accent there: the champagne gold measures 2.0:1 on
+     paper and 1.8:1 on the alt band. Use --gold-deep (5.5:1 on paper, 4.9:1
+     on alt) whenever a gold has to carry words on a light background.
+     On the dark bands the plain --accent is not just safe but strong: it
+     measures 8.9:1 on --navy and 9.5:1 on --navy-deep, which is why the
+     process band's eyebrow and numerals are set in it. */
   --bg:            var(--paper);
   --bg-alt:        var(--paper-alt);
   --surface:       var(--white);
@@ -70,7 +86,7 @@
   --muted:         var(--slate);
   --accent:        var(--gold);
   --error:         #9A3B2E;
-  --placeholder:   #7C8494;
+  --placeholder:   #656E82;
 
   /* WhatsApp brand green — used only for the floating contact button. */
   --whatsapp:      #25D366;
@@ -223,7 +239,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   text-transform: uppercase;
   color: var(--muted);
 }
-.eyebrow--light { color: rgba(247, 245, 240, 0.78); }
+.eyebrow--light { color: rgb(var(--paper-rgb) / 0.78); }
 /* On the one band with a known solid dark background, the eyebrow can take the
    brand gold outright — 4.95:1 on --navy. Over the hero and CTA photographs it
    stays light, because the colour behind it there is whatever the photograph
@@ -305,7 +321,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 
 .btn--light {
   --btn-fg: var(--paper);
-  --btn-bd: rgba(247, 245, 240, 0.65);
+  --btn-bd: rgb(var(--paper-rgb) / 0.65);
   --btn-fill: var(--paper);
 }
 .btn--light:hover,
@@ -369,7 +385,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   line-height: 1.8;
 }
 .section-head--light .display { color: var(--paper); }
-.section-head--light .section-head__lede { color: rgba(247, 245, 240, 0.7); }
+.section-head--light .section-head__lede { color: rgb(var(--paper-rgb) / 0.7); }
 
 
 /* ==========================================================================
@@ -399,13 +415,13 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 .site-header .logo,
 .site-header .nav-link,
 .site-header .btn { color: var(--paper); }
-.site-header .btn--outline { --btn-bd: rgba(247, 245, 240, 0.6); --btn-fill: var(--paper); }
+.site-header .btn--outline { --btn-bd: rgb(var(--paper-rgb) / 0.6); --btn-fill: var(--paper); }
 .site-header .btn--outline:hover,
 .site-header .btn--outline:focus-visible { color: var(--navy); border-color: var(--paper); }
-.site-header .logo__sub { color: rgba(247, 245, 240, 0.7); }
+.site-header .logo__sub { color: rgb(var(--paper-rgb) / 0.7); }
 
 .site-header.is-scrolled {
-  background: rgba(247, 245, 240, 0.94);
+  background: rgb(var(--paper-rgb) / 0.94);
   -webkit-backdrop-filter: saturate(140%) blur(10px);
   backdrop-filter: saturate(140%) blur(10px);
   border-bottom-color: var(--hairline-soft);
@@ -449,13 +465,20 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   opacity: 0.55;
   padding-inline: 0.02em;
 }
+/* The badge sub-text, "Bespoke Occasions & Curation". At 28 characters it is
+   far longer than the tagline it replaced, so the tracking is eased off and it
+   is withheld until there is genuinely room for it beside the nav — on a phone
+   it would push the wordmark into the hamburger. */
 .logo__sub {
+  display: none;
   font-size: 0.5625rem;
   font-weight: 400;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--muted);
 }
+@media (min-width: 1140px) { .logo__sub { display: block; } }
 .logo__mark--sm { font-size: 1.375rem; }
 .logo__mark--footer { font-size: clamp(1.625rem, 1.3rem + 1.1vw, 2.125rem); color: var(--paper); }
 
@@ -581,7 +604,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 .mobile-nav__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(12, 21, 36, 0.45);
+  background: rgb(var(--navy-rgb) / 0.45);
   opacity: 0;
   transition: opacity var(--dur) var(--ease);
 }
@@ -698,21 +721,27 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   content: "";
   position: absolute;
   inset: 0;
-  /* Tuned against the current hero photograph — a dark stage-and-crowd shot.
-     Because the image is already low-key, the overlay is deliberately lighter
-     than it would be over a bright scene: darkening further would flatten the
-     stage lights, which are the whole reason for the picture. The 38% stop
-     sits behind the headline and carries the legibility.
-     Measured worst-pixel behind each text element: eyebrow 12.0:1,
-     headline 4.1:1, lede 5.0:1, button 6.1:1, link 6.2:1 — all clear of their
-     AA floors (4.5:1, or 3:1 for the large display type). Swap the photograph
-     and every one of these must be re-measured. */
+  /* Tuned against the current hero photograph — a chamber concert under pale
+     stone arches. That stone is the problem: it is far brighter behind the
+     headline and lede than the dark crowd shot this overlay was first built
+     for, and at the old values the lede measured 3.2:1, well under AA. The
+     alphas below were solved against the raw photograph rather than guessed,
+     then confirmed on a composite render.
+
+     Measured worst-pixel behind each text element: eyebrow 6.1:1,
+     headline 5.1:1, lede 4.8:1, button 12.9:1, link 16.1:1 — every one clear
+     of 4.5:1, including the headline, which as large display type would only
+     have had to clear 3:1.
+
+     ⚠ These figures belong to THIS photograph. Swap it and re-measure all five
+     before shipping: hide .hero__inner, screenshot the bare background, and
+     take the worst pixel inside each text element's bounding box. */
   background:
     linear-gradient(to bottom,
-      rgba(12, 21, 36, 0.50) 0%,
-      rgba(12, 21, 36, 0.38) 38%,
-      rgba(12, 21, 36, 0.62) 100%),
-    linear-gradient(to right, rgba(22, 37, 60, 0.28), rgba(22, 37, 60, 0.06));
+      rgb(var(--navy-rgb) / 0.54) 0%,
+      rgb(var(--navy-rgb) / 0.52) 38%,
+      rgb(var(--navy-rgb) / 0.66) 100%),
+    linear-gradient(to right, rgb(var(--navy-rgb) / 0.32), rgb(var(--navy-rgb) / 0.12));
 }
 
 .hero__inner {
@@ -739,7 +768,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   font-size: var(--fs-lede);
   font-weight: 300;
   line-height: 1.75;
-  color: rgba(247, 245, 240, 0.92);
+  color: rgb(var(--paper-rgb) / 0.92);
 }
 .hero__actions {
   display: flex;
@@ -775,7 +804,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   flex-direction: column;
   align-items: center;
   gap: 0.85rem;
-  color: rgba(247, 245, 240, 0.8);
+  color: rgb(var(--paper-rgb) / 0.8);
   animation: rise-in 1.1s var(--ease) 0.6s both;
 }
 .scroll-cue__label {
@@ -788,7 +817,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   position: relative;
   width: 1px;
   height: 56px;
-  background: rgba(247, 245, 240, 0.3);
+  background: rgb(var(--paper-rgb) / 0.3);
   overflow: hidden;
 }
 .scroll-cue__line::after {
@@ -989,6 +1018,82 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   line-height: 1.75;
   color: var(--muted);
 }
+/* Optional caps line under the name — used by the tiers grid to carry the
+   guest ceiling. --gold-deep, not --accent: this is text on a light ground,
+   where the champagne gold measures 2.0:1. */
+.event-type__meta {
+  margin-top: 0.55rem;
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+
+/* ==========================================================================
+   10c. TIERS & BOUNDARIES
+   The three packages, plus the short list of work the company turns down.
+   The tiers reuse .event-grid / .event-type wholesale rather than inventing a
+   third card treatment — they are the same shape of content (a name and a
+   sentence) and a page with three near-identical bespoke card styles reads as
+   indecision, not variety. Only the band colour separates them.
+   ========================================================================== */
+.tiers { background: var(--bg-alt); }
+
+/* Capped at a readable measure. These paragraphs are the commercial small
+   print — pricing floor, lead times, travel, payment schedule — and at the
+   full 1320px container they ran to well over 150 characters a line. */
+.tiers__note {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  max-width: 62ch;
+  font-size: var(--fs-small);
+  line-height: 1.8;
+  color: var(--muted);
+}
+.tiers__note p + p { margin-top: 1rem; }
+.tiers__note strong { color: var(--heading); font-weight: 500; }
+
+/* The "what we don't do" block. Bordered rather than carded, so it reads as a
+   footnote to the offer above it and never competes with the tiers. */
+.boundaries {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.5rem, 3vw, 2.5rem);
+  border: 1px solid var(--hairline);
+}
+.boundaries__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  font-weight: 400;
+  color: var(--heading);
+}
+.boundaries__list {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+}
+@media (min-width: 860px) {
+  .boundaries__list { grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); }
+}
+.boundaries__list li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: var(--fs-small);
+  line-height: 1.75;
+  color: var(--muted);
+}
+/* A decorative dash, not a character in the text — hence aria-invisible ::before
+   and the accent gold, which is allowed here precisely because it carries no
+   words. */
+.boundaries__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.85em;
+  width: 0.7rem;
+  height: 1px;
+  background: var(--accent);
+}
 
 
 /* ==========================================================================
@@ -996,7 +1101,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
    ========================================================================== */
 .process {
   background: var(--navy);
-  color: rgba(247, 245, 240, 0.72);
+  color: rgb(var(--paper-rgb) / 0.72);
 }
 .process__list {
   display: grid;
@@ -1014,15 +1119,16 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 /* The numerals are where the brand gold earns its place: large display type on
    the one solid dark band, which is the only context where this gold carries
    enough contrast to be used as a colour rather than a hairline. At 85% over
-   --navy it measures 3.95:1, clear of the 3:1 large-text floor, and resolves
-   to the full 4.95:1 on hover. */
+   --navy the champagne gold measures 6.64:1 — comfortably past the 4.5:1 body
+   floor, never mind the 3:1 large-text one — and resolves to the full 8.89:1
+   on hover. */
 .step__num {
   display: block;
   font-family: var(--font-display);
   font-size: clamp(2.25rem, 1.4rem + 3vw, 3.5rem);
   font-weight: 300;
   line-height: 1;
-  color: rgba(176, 141, 75, 0.85);
+  color: rgb(var(--gold-rgb) / 0.85);
   transition: color var(--dur-slow) var(--ease);
 }
 .step:hover .step__num { color: var(--accent); }
@@ -1042,6 +1148,32 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   font-size: var(--fs-body);
   line-height: 1.8;
 }
+
+/* Timeline and the client's own homework for each phase. Set in the accent
+   gold, which on this band measures 8.9:1 — the one place in the site where
+   the brand colour can carry small text outright. */
+.step__meta {
+  margin-top: 1.1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--hairline-light);
+  max-width: 32ch;
+  display: grid;
+  gap: 0.4rem;
+}
+.step__meta dt {
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.step__meta dd {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: rgb(var(--paper-rgb) / 0.72);
+}
+.step__meta dd:last-child { margin-bottom: 0; }
 
 
 /* ==========================================================================
@@ -1074,7 +1206,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(176, 141, 75, 0.16), rgba(22, 37, 60, 0.18));
+  background: linear-gradient(to bottom, rgb(var(--gold-rgb) / 0.16), rgb(var(--navy-rgb) / 0.18));
   opacity: 1;
   transition: opacity var(--dur-slow) var(--ease);
   pointer-events: none;
@@ -1228,11 +1360,16 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   object-fit: cover;
   object-position: center 40%;
 }
+/* Left at the values it has always had: the current CTA photograph is a low-key
+   interior, and re-measuring after the swap showed every text element already
+   comfortable — eyebrow 9.3:1, heading 5.8:1, body 10.3:1, button 15.0:1, all
+   against a 4.5:1 floor (the heading would only have needed 3:1). As with the
+   hero, these belong to THIS photograph; swap it and measure again. */
 .cta__media::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(12, 21, 36, 0.55), rgba(12, 21, 36, 0.68));
+  background: linear-gradient(to bottom, rgb(var(--navy-rgb) / 0.55), rgb(var(--navy-rgb) / 0.68));
 }
 .cta__inner { position: relative; max-width: 48rem; }
 .cta__inner .display { color: var(--paper); }
@@ -1242,7 +1379,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   margin: clamp(1.25rem, 3vw, 1.75rem) auto clamp(2.25rem, 5vw, 3rem);
   max-width: 40ch;
   font-size: var(--fs-lede);
-  color: rgba(247, 245, 240, 0.9);
+  color: rgb(var(--paper-rgb) / 0.9);
 }
 
 
@@ -1322,11 +1459,25 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   line-height: 1.7;
 }
 
+/* Qualifiers under a contact value — "by prior appointment", "concierge active
+   at weekends". Quieter than the value they belong to, but still AA. */
+.contact__fine {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 /* Marks values that are still placeholders. Deliberately visible: a dotted
    underline signals "not final" to anyone reviewing the page, and it costs
    nothing to delete this class once the real details are in. */
+/* Currently unused: every contact value on the page is now the client's real
+   one. Kept because the next unknown value should be marked, not invented —
+   wrap it in this class and the dotted rule says "not final" to anyone
+   reviewing the page. --gold-deep, since --gold measures 2.0:1 here. */
 .is-placeholder {
-  border-bottom: 1px dotted var(--gold);
+  border-bottom: 1px dotted var(--gold-deep);
   padding-bottom: 1px;
 }
 
@@ -1350,14 +1501,19 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   text-transform: uppercase;
   color: var(--heading);
 }
-.req { color: var(--accent); }
+/* --gold-deep, not --accent. The champagne gold measures 2.0:1 on paper, and
+   this asterisk is the only thing marking a field as required. */
+.req { color: var(--gold-deep); }
 
 .field__input {
   width: 100%;
   padding: 0.7rem 0 0.85rem;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid var(--gold);
+  /* Also --gold-deep: an input underline is a UI boundary, which WCAG asks to
+     clear 3:1. The plain gold manages 2.0:1 here; --gold-deep measures 5.5:1
+     on paper and 4.9:1 on the alt band. */
+  border-bottom: 1px solid var(--gold-deep);
   border-radius: 0;
   font-family: var(--font-body);
   font-size: var(--fs-body);
@@ -1426,6 +1582,78 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 /* Errors are marked by text + border colour, never colour alone */
 .field.has-error .field__input { border-bottom-color: var(--error); }
 .field.has-error .field__label { color: var(--error); }
+
+/* --- Checkbox group (Event Intent) ---------------------------------------
+   A <fieldset> rather than a <select multiple>: multi-selects are close to
+   unusable on a phone, and every option here has to be readable at a glance.
+   The fieldset is stripped of its default chrome and its <legend> is styled to
+   match .field__label exactly, so the group sits in the grid as if it were an
+   ordinary field. */
+.field__group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.field__legend {
+  padding: 0;
+  margin-bottom: 0.65rem;
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--heading);
+}
+.checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.check {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--hairline);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.check:hover { border-color: var(--gold-deep); }
+.check__box {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex: none;
+  border: 1px solid var(--gold-deep);
+  transition: background-color var(--dur) var(--ease);
+}
+/* State is carried by the filled box AND the darkened border, never by colour
+   alone — the same rule the error styling follows. */
+.check input:checked ~ .check__box {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.check:has(input:checked) {
+  border-color: var(--navy);
+  background: var(--surface);
+}
+/* The native input stays in the layout for hit-testing and keyboard focus; it
+   is only visually replaced, never display:none, which would remove it from
+   the accessibility tree. */
+.check input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+.check:focus-within {
+  outline: 2px solid var(--navy);
+  outline-offset: 3px;
+}
 
 .form__note {
   margin: clamp(1.75rem, 3vw, 2.25rem) 0 1.5rem;
@@ -1501,7 +1729,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
    foreground and floor rather than the same slab repeated. */
 .site-footer {
   background: var(--navy-deep);
-  color: rgba(247, 245, 240, 0.68);
+  color: rgb(var(--paper-rgb) / 0.68);
   padding-top: clamp(3.5rem, 8vw, 6rem);
 }
 .site-footer__grid {
@@ -1531,7 +1759,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   font-size: var(--fs-eyebrow);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  color: rgba(247, 245, 240, 0.62);
+  color: rgb(var(--paper-rgb) / 0.62);
 }
 .site-footer__place + .site-footer__place { margin-top: 0.3rem; }
 
@@ -1606,7 +1834,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   border-top: 1px solid var(--hairline-light);
   font-size: 0.75rem;
   letter-spacing: 0.05em;
-  color: rgba(247, 245, 240, 0.5);
+  color: rgb(var(--paper-rgb) / 0.5);
 }
 .site-footer__fineprint { font-style: italic; }
 
@@ -1640,13 +1868,13 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   letter-spacing: var(--tracking-mid);
   text-transform: uppercase;
   line-height: 1;
-  box-shadow: 0 6px 20px rgba(12, 21, 36, 0.28);
+  box-shadow: 0 6px 20px rgb(var(--navy-rgb) / 0.28);
   transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .wa-float:hover,
 .wa-float:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(12, 21, 36, 0.34);
+  box-shadow: 0 10px 26px rgb(var(--navy-rgb) / 0.34);
 }
 .wa-float__icon {
   width: 22px;

@@ -1,69 +1,86 @@
-# 11:11 — Event Management
+# 11:11 — Experiential Events
 
-The marketing website for **Elevenn Elevenn Archive Pvt Ltd**, trading as **11:11**,
-an event management company based in Bhubaneswar, Odisha. Weddings, celebrity
-nights, inaugurations, corporate conferences, college festivals and sports
-events.
+The marketing website for **Elevenn Elevenn Archive Pvt Ltd**, trading as
+**11:11**, an experiential event agency based in Bhubaneswar and working across
+India. Bespoke private concerts and showcases, premium corporate and
+institutional gatherings, and curated venue-and-artist matchmaking — pairing
+rare, off-market venues with hand-picked artists.
+
+Premium and high-concept work only. It is not a general event-management
+company and not a wedding planner; the three categories of work the company
+turns down are stated on the page.
 
 Built as a static site: three files, no build step, no dependencies, no server.
 
 | Detail         | Value                                                                                                |
 |----------------|------------------------------------------------------------------------------------------------------|
 | Legal name     | Elevenn Elevenn Archive Pvt Ltd                                                                      |
-| Marketing name | 11:11                                                                                                |
-| Tagline        | It Is Time                                                                                           |
+| Marketing name | 11:11 (styled *11:11 Experiential* or *11:11 Bespoke* in body copy)                                  |
+| Tagline        | Where Rare Venues Meet Exceptional Talent                                                            |
+| Badge sub-text | Bespoke Occasions & Curation                                                                         |
+| Email          | connect@elevennelevenn.com                                                                           |
+| Phone          | +91 99381 20356                                                                                      |
+| WhatsApp       | +91 95915 09910                                                                                      |
 | Address        | Plot No. 30 & 30/982, Odyssa Business Centre, Bomikhal, Rasulgarh Square, Bhubaneswar, Odisha 751010 |
+| Hours          | Monday – Saturday, 10:00 – 19:00 IST                                                                 |
 
 ---
 
-## ⚠️ Placeholders that must be replaced before launch
+## ⚠️ What still has to change before launch
 
-This is a real company, so the demo content left in the build is a liability,
-not a harmless stand-in. Four things need your attention:
+The contact details are now real, which was the biggest of these. Four things
+are still outstanding:
 
-1. **Contact details.** WhatsApp is real (`+91 95915 09910`). The email and the
-   phone are still visible placeholders (`hello@yourdomain.in`,
-   `+91 XXXXX XXXXX`) carrying a dotted underline via the `.is-placeholder`
-   class. They were **not** filled with plausible-looking invented values,
-   because a wrong number on a live site sends real enquiries to a stranger.
-   Replace them in the `.contact__details` block in `index.html`, then delete
-   the `is-placeholder` spans. If the WhatsApp number is also the number to
-   call, point the Phone row at it with a `tel:` link.
+1. **Photography — all twelve images are Pexels stock.** They were chosen to
+   match the register the company works in (heritage courtyards, candlelit
+   chamber concerts, a lone artist under a spotlight), but they are other
+   people's photographs of other people's events. Replace with your own work as
+   it exists — see `images/README.md`.
 
-2. **Testimonials — section removed.** It held three invented client quotes.
+2. **The Atmosphere section is not a portfolio, and must not become one by
+   accident.** 11:11 is pre-launch on this initiative, so the section is
+   explicitly labelled a reference board and its captions name no city, date, or
+   event. Turning it back into a portfolio needs real, permissioned photographs
+   of real events — nothing less.
+
+3. **Testimonials — section removed.** It held three invented client quotes.
    Publishing fabricated reviews under a real registered company is a genuine
    legal and reputational risk, so the section was deleted rather than left
-   behind a disclaimer. To restore it, recover the markup from git history and
-   fill it with real, permissioned quotes; the CSS is still in place. See the
-   comment where the section used to sit in `index.html`.
+   behind a disclaimer. There is also nobody to quote yet. To restore it,
+   recover the markup from git history and fill it with real, permissioned
+   quotes; the CSS is still in place. See the comment where the section used to
+   sit in `index.html`.
 
-3. **Photography.** All twelve images are Pexels placeholders showing Indian and
-   Odia celebrations — other people's events, not yours. Replace with your own
-   work — see `images/README.md`.
+4. **The Pinterest link in the footer still points at `#`.** Give it a real
+   profile URL or delete the whole `<li>`.
 
-4. **Portfolio labels.** "Bhubaneswar / Winter", "Puri / Spring" and the rest
-   are illustrative, not real events.
+Two smaller open items:
 
-Also still open: the structured data omits `telephone`, `email`, and `url`
-rather than publishing invented values to Google. Add them once confirmed —
-the exact lines are commented in the `<head>` of `index.html`.
+- **The site's own domain is unconfirmed**, so `url` is still omitted from the
+  structured data and `og:image` / `twitter:image` still point at Pexels rather
+  than at an absolute URL on your domain. `telephone` and `email` are now filled
+  in with the real values.
+- **Only `+91 95915 09910` is confirmed as being on WhatsApp.** The phone line
+  `+91 99381 20356` is published separately. If they are the same account, say
+  so and it becomes a one-line change in three places.
 
 ---
 
 ## What's in it
 
-| Section        | Notes                                                                        |
-|----------------|------------------------------------------------------------------------------|
-| Header         | Transparent over the hero, paper once you scroll. Sticky at all sizes.       |
-| Hero           | Full-height photograph, layered overlay, animated scroll cue.                |
-| About          | Two-image editorial composition with an overlapping inset.                   |
-| Services       | Three hairline-divided columns with a rule that draws in on hover.           |
-| Process        | Deep navy band, four steps numbered in the brand gold.       |
-| Portfolio      | Eight photographs spanning every event type, on an asymmetric 12-col grid.   |
-| Events         | Six event categories — the range of work, stated plainly.                   |
-| Call to action | Full-bleed image band, led by the *It Is Time* tagline.                      |
-| Contact        | Eight-field inquiry form, validated client-side, delivered via WhatsApp.     |
-| Footer         | Four-column layout on the deepest navy, legal entity in the copyright bar.  |
+| Section        | Notes                                                                          |
+|----------------|--------------------------------------------------------------------------------|
+| Header         | Transparent over the hero, cream once you scroll. Sticky at all sizes.         |
+| Hero           | Full-height photograph, layered overlay, animated scroll cue. Headline is the tagline. |
+| About          | The client's own profile, vision and USP copy, beside a two-image composition. |
+| Services       | The three core services, three inclusions each, entry point and flagship marked. |
+| Experiences    | The five categories of work, stated plainly.                                   |
+| Process        | Deep navy band. Four phases, each with its timeline and what you must supply.  |
+| Formats        | The three production tiers, the pricing floor and booking terms, and an explicit *what we do not do* block. |
+| Atmosphere     | Eight reference photographs on an asymmetric 12-col grid. **Not a portfolio** — see above. |
+| Call to action | Full-bleed image band, led by the badge sub-text and the tagline.              |
+| Contact        | Nine-field enquiry form built to the client's field list, validated client-side, delivered via WhatsApp. |
+| Footer         | Four-column layout on the deepest navy, legal entity in the copyright bar.     |
 
 Plus: hamburger menu with a focus trap, scroll-reveal via `IntersectionObserver`,
 active-link scroll spy, `prefers-reduced-motion` support, skip link, JSON-LD
@@ -121,7 +138,7 @@ there are no fetch calls, modules, or cross-origin requests to trip over.
 
 ### If images don't appear
 
-You need an internet connection on first load — the twelve placeholder photographs
+You need an internet connection on first load — all twelve reference photographs
 are served from Pexels. See `images/README.md` to switch to local files.
 
 ---
@@ -154,51 +171,61 @@ placement updates with no markup or CSS change. Details in `images/README.md`.
 | Page title, meta description, OG/Twitter tags | `<head>` of `index.html`                                               |
 | Structured data (legal name, address, slogan) | the JSON-LD `<script>` in `<head>`                                     |
 | The visible `11:11` wordmark                  | 3 places — header, `.mobile-nav__head`, footer                         |
-| Tagline *It Is Time*                          | header `.logo__sub`, `.cta__eyebrow`, footer `.site-footer__tagline`   |
-| Address and hours                             | `.contact__details` block                                              |
+| Tagline *Where Rare Venues Meet Exceptional Talent* | hero `<h1>`, `#cta-title`, footer `.site-footer__tagline`, and `slogan` in the JSON-LD |
+| Badge sub-text *Bespoke Occasions & Curation* | header `.logo__sub`, `.cta__eyebrow`                                   |
+| Contact details, address and hours            | `.contact__details` block — and `telephone` / `email` in the JSON-LD   |
 | Legal entity in the copyright line            | `.site-footer__bar`                                                    |
 
 ### Change the colours
 
-The palette is **sampled from the brand badge** in `images/logo.png` — a
-gold-on-navy mark — rather than invented alongside it. Every colour is a custom
-property at the top of `css/style.css`, section **01. Design tokens**:
+Three of these are **the client's own brand values**, confirmed in the brief:
+Midnight Navy, Champagne Gold (with Metallic Gold as its secondary), and Warm
+Cream. Everything else is derived from them. All of it lives as custom
+properties at the top of `css/style.css`, section **01. Design tokens**:
 
 ```css
 :root {
-  --paper:     #F7F5F0;   /* page background — warm off-white */
-  --paper-alt: #EBE6DB;   /* alternating section background */
-  --gold:      #B08D4B;   /* accent: rules, bullets, quote marks */
-  --gold-deep: #86682C;   /* the one gold dark enough for text on paper */
-  --navy:      #16253C;   /* headings, buttons, the process band */
-  --navy-deep: #0C1524;   /* the footer, one step deeper */
-  --white:     #FFFFFF;
+  --paper:      #FDFBF7;   /* page background — warm cream        (client) */
+  --paper-alt:  #F2ECE0;   /* alternating section background      (derived) */
+  --gold:       #D4AF37;   /* accent: rules, bullets, numerals    (client) */
+  --gold-metal: #C5A059;   /* secondary metallic gold             (client) */
+  --gold-deep:  #7F6220;   /* the one gold dark enough for light  (derived) */
+  --navy:       #0A1128;   /* headings, buttons, the process band (client) */
+  --navy-deep:  #05080F;   /* the footer, one step deeper         (derived) */
+  --white:      #FFFFFF;
 }
 ```
 
-The gold is warm and low-chroma — a leafed, aged gold rather than a bright
-yellow — because that is what the logo actually uses.
+Alongside them sit three channel triplets — `--navy-rgb`, `--paper-rgb`,
+`--gold-rgb` — so that every translucent overlay and hairline further down the
+file can be written `rgb(var(--navy-rgb) / 0.45)` instead of restating a brand
+colour by hand. **Nothing outside this block hardcodes a colour.** If you change
+a hex, change its triplet too.
 
 Below these sit *semantic* roles. Text uses a deliberate three-step scale, and
-**every step clears WCAG AA (4.5:1) on both light backgrounds** — measured, not
-estimated:
+**every step clears WCAG AA (4.5:1) on both light backgrounds** — measured with
+the WCAG formula, not estimated:
 
 | Role        | On paper | On alt |
 |-------------|----------|--------|
-| `--heading` | 14.1:1   | 12.4:1 |
-| `--text`    | 8.1:1    | 7.1:1  |
-| `--muted`   | 5.8:1    | 5.1:1  |
+| `--heading` | 18.1:1   | 15.9:1 |
+| `--text`    | 8.5:1    | 7.5:1  |
+| `--muted`   | 6.1:1    | 5.3:1  |
 
-⚠️ `--accent` (the gold) is **decorative only on light backgrounds** — rules,
-bullets, quote marks. It measures **2.5:1** on the alt band, which is
-unreadable. Use `--gold-deep` (4.8:1 on paper) if a gold has to carry words
-there.
+⚠️ `--accent` (the champagne gold) is **decorative only on light backgrounds** —
+rules, bullets, the dashes in the boundaries list. It measures **2.0:1** on
+paper and 1.8:1 on the alt band, both unreadable. This is a step *worse* than
+the gold it replaced, so the rule bites more often than it used to. Use
+`--gold-deep` (5.5:1 on paper, 4.9:1 on alt) wherever a gold has to carry words
+**or** form a UI boundary — which is why the required-field asterisk and the
+form input underlines are set in it rather than the brand gold.
 
-On the **dark** bands the plain gold is fine for text: 4.95:1 on `--navy` and
-5.9:1 on `--navy-deep`. That is why the process band's eyebrow and its large
-numerals are gold — it is the one place the brand colour can be used as a
-colour rather than a hairline. If you change the palette, re-check every ratio
-above.
+On the **dark** bands the champagne gold is not just safe but strong: **8.9:1**
+on `--navy` and 9.5:1 on `--navy-deep`; the process numerals, drawn at 85%
+opacity, still measure 6.6:1. That band is the one place the brand colour gets
+to be a colour rather than a hairline, which is why the eyebrow, the numerals
+and the `.step__meta` labels all use it. If you change the palette, re-measure
+every ratio above.
 
 ### Change the typography
 
@@ -246,20 +273,30 @@ var DELIVERY = {
 WhatsApp opens with it already typed, addressed to the number above. The
 visitor presses send and it arrives as an ordinary WhatsApp message.
 
-The message is built from the form's own `<label>` text, so it stays correct
-when the fields are renamed or replaced — nothing hard-codes today's
-wedding-specific field names. A submission looks like this:
+The message is built from the form's own `<label>` and `<legend>` text, so it
+stays correct when the fields are renamed or replaced — nothing hard-codes
+today's field names. A submission looks like this:
 
 ```
 New enquiry from the 11:11 website
 
-Name: Amaresh Nayak
+Full Name & Organisation: Amaresh Nayak, Nayak Trust
 Email: amaresh@example.com
 Phone: +91 90000 11111
-Services Interested In: Event Design
+Client Type: Trust
+Projected Budget: ₹15L+
+Target Date: 2027-02-14
+Preferred Location: Konark, Odisha
+Estimated Guest Count: 80
+Event Intent: Private concert, Cultural showcase
 
-We are planning a launch night and want it to feel premium.
+Artist or Venue Vision:
+A classical set at dusk, ideally somewhere with old stone.
 ```
+
+Note the `Event Intent` line: the checkbox group is gathered into one line keyed
+by its `<legend>`, and boxes are filtered on `checked` rather than on emptiness,
+because an unticked checkbox still carries its `value`.
 
 Two things to know. The visitor **must press send** in WhatsApp — if they stop
 there, you never see the enquiry. And if a popup blocker stops WhatsApp from
@@ -307,20 +344,22 @@ Fully static, so any host works. Nothing to build, nothing to configure.
 
 ### Pre-launch checklist
 
-- [ ] Replace the placeholder email and phone, remove `.is-placeholder` spans
+- [x] Real email and phone published — `.is-placeholder` spans all removed
 - [x] Enquiry delivery connected — WhatsApp mode, `+91 95915 09910`
+- [x] `telephone` and `email` added to the JSON-LD block
+- [x] Add the logo — installed as `images/logo.png`
+- [x] Add a favicon — uses the badge
+- [x] Testimonials removed rather than published invented
+- [x] Portfolio relabelled as a reference board (pre-launch, no real work yet)
+- [ ] Confirm whether `+91 99381 20356` is also the WhatsApp number
 - [ ] Decide whether to stay on WhatsApp or add an email endpoint as well
 - [ ] Send a test enquiry from a phone and confirm it arrives
-- [ ] Replace or delete the invented testimonials
 - [ ] Replace the Pexels photography with your own (`images/README.md`)
 - [ ] Rewrite every `alt` attribute to describe your actual images
-- [x] Add the logo — installed as `images/logo.png`
-- [ ] Swap `images/logo.png` for the full-resolution original artwork
-- [ ] Add `telephone`, `email`, and `url` to the JSON-LD block
-- [ ] Update `og:image` / `twitter:image` to absolute URLs on your domain
-- [ ] Replace the illustrative portfolio labels with real events
-- [ ] Point the Instagram and Pinterest links at real profiles (currently `#`)
-- [x] Add a favicon — uses the badge
+- [ ] Swap `images/logo.png` for the confirmed vector artwork (SVG/EPS)
+- [ ] Confirm the domain, then add `url` to the JSON-LD block
+- [ ] Update `og:image` / `twitter:image` to absolute URLs on that domain
+- [ ] Point the Pinterest link at a real profile, or delete it (currently `#`)
 - [ ] Add a privacy notice before the contact form goes live
 - [ ] Confirm the copyright year in the footer
 
@@ -340,14 +379,32 @@ Graceful degradation is built in:
 - No `100svh` support → falls back to `100vh`.
 - `prefers-reduced-motion: reduce` → animations and smooth scrolling disabled.
 
-Verified at 320, 375, 425, 768, 1024, and 1440px. No horizontal scroll at any
-width, and text over both photographs clears WCAG AA by worst-pixel measurement.
+Verified at 320, 375, 768, 1024, and 1440px — `scrollWidth` equals `clientWidth`
+at every one, so there is no horizontal scroll anywhere.
+
+Text over both photographs clears WCAG AA by **worst-pixel** measurement, taken
+by hiding the text, screenshotting the bare background, and finding the least
+favourable pixel inside each element's box:
+
+| Over the hero | Ratio | | Over the CTA band | Ratio |
+|---------------|-------|-|-------------------|-------|
+| Eyebrow       | 6.1:1 | | Eyebrow           | 9.3:1 |
+| Headline      | 5.1:1 | | Heading           | 5.8:1 |
+| Lede          | 4.8:1 | | Body              | 10.3:1 |
+| Button        | 12.9:1| | Button            | 15.0:1|
+| Link          | 16.1:1| |                   |       |
+
+The hero overlay had to be darkened to get there. The photograph behind it is
+now a chamber concert under pale stone, and at the alphas tuned for the previous
+darker image the lede measured 3.2:1 — a real failure, not a marginal one. If
+you change either photograph, re-measure all of these; the exact method is in
+the comment on `.hero__media::after`.
 
 ---
 
 ## Licence and credits
 
-Site code belongs to Elevenn Elevenn Archive Pvt Ltd. Placeholder photography
+Site code belongs to Elevenn Elevenn Archive Pvt Ltd. Reference photography
 from [Pexels](https://pexels.com) under the
 [Pexels License](https://pexels.com/license) — free for commercial use, no
 attribution required, but replace them with real work before launch. Fonts are
