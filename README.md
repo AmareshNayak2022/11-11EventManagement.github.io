@@ -76,7 +76,7 @@ Two smaller open items:
 | Services       | The three core services, three inclusions each, entry point and flagship marked. |
 | Experiences    | The five categories of work, stated plainly.                                   |
 | Process        | Deep navy band. Four phases, each with its timeline and what you must supply.  |
-| Formats        | The three production tiers, the pricing floor and booking terms, and an explicit *what we do not do* block. |
+| Packages       | The three production tiers, the pricing floor and booking terms, and an explicit *what we do not do* block. |
 | Atmosphere     | Eight reference photographs on an asymmetric 12-col grid. **Not a portfolio** — see above. |
 | Call to action | Full-bleed image band, led by the badge sub-text and the tagline.              |
 | Contact        | Nine-field enquiry form built to the client's field list, validated client-side, delivered via WhatsApp. |
