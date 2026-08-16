@@ -270,7 +270,9 @@
      ==================================================================== */
   var DELIVERY = {
     // Paste a Formspree/Netlify/your-own URL here to switch to email delivery.
-    // The client's enquiry inbox is connect@elevennelevenn.com.
+    // Route submissions to enquiries@1111events.in — the client's stated
+    // enquiry inbox, which is NOT the same as concierge@1111events.in shown on
+    // the page. The Lead Curator and Ops Head are to be copied on every brief.
     endpoint: '',
     // International format, digits only — no plus sign, spaces, or dashes.
     // This is the number confirmed as being on WhatsApp. The concierge line

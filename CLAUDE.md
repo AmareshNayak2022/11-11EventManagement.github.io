@@ -51,7 +51,7 @@ company are a genuine legal risk.
 | Legal name | Elevenn Elevenn Archive Pvt Ltd |
 | Tagline | Where Rare Venues Meet Exceptional Talent |
 | Badge sub-text | Bespoke Occasions & Curation |
-| Email | `connect@elevennelevenn.com` |
+| Email | `concierge@1111events.in` — displayed. Enquiries route to `enquiries@1111events.in` |
 | Phone | `+91 99381 20356` |
 | WhatsApp | `+91 95915 09910` |
 | Address | Plot No. 30 & 30/982, Odyssa Business Centre, Bomikhal, Rasulgarh Square, Bhubaneswar 751010 (publish; visits by appointment only) |
@@ -61,10 +61,15 @@ company are a genuine legal risk.
 
 Two things about that table are worth knowing before you touch them:
 
-- **The email conflicts with the scanned brief**, which answered Q36 with
-  `concierge@1111events.in` and Q40 with `enquiries@1111events.in`. The address
-  above was given later and directly, so it wins — but the site's own domain is
-  still unconfirmed, which is why `url` is omitted from the JSON-LD.
+- **There are two addresses and they are not interchangeable.**
+  `concierge@1111events.in` (brief Q36) is the public one and the only one on
+  the page. `enquiries@1111events.in` (Q40) is the routing inbox — where form
+  submissions should be delivered if the form is ever moved off WhatsApp, with
+  the Lead Curator and Ops Head copied. An earlier `connect@elevennelevenn.com`
+  was sent in conversation and briefly published; the client has since confirmed
+  the `1111events.in` addresses are correct. The site's own *domain* is still
+  unconfirmed — an email domain is not proof of where the site will live — which
+  is why `url` stays omitted from the JSON-LD.
 - **The two numbers are not interchangeable.** Only `95915 09910` is confirmed
   as being on WhatsApp; `99381 20356` is published as the phone line. If they
   turn out to be the same account, change it in three places: both `wa.me`
@@ -149,8 +154,8 @@ and stale ones are worse than none.
 Configured in one place — the `DELIVERY` object at the top of section
 **07. Contact form** in `js/script.js`. Empty `endpoint` means WhatsApp mode
 (active); setting it to a Formspree/Netlify/own URL switches to email and
-bypasses WhatsApp entirely. The client's enquiry inbox is
-`connect@elevennelevenn.com`.
+bypasses WhatsApp entirely. Point it at `enquiries@1111events.in`, not at the
+`concierge@` address shown on the page.
 
 The WhatsApp message is built from the form's own `<label>` and `<legend>` text,
 so it survives field renames. Keep it that way — do not hardcode field names

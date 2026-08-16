@@ -18,7 +18,7 @@ Built as a static site: three files, no build step, no dependencies, no server.
 | Marketing name | 11:11 (styled *11:11 Experiential* or *11:11 Bespoke* in body copy)                                  |
 | Tagline        | Where Rare Venues Meet Exceptional Talent                                                            |
 | Badge sub-text | Bespoke Occasions & Curation                                                                         |
-| Email          | connect@elevennelevenn.com                                                                           |
+| Email          | concierge@1111events.in  (enquiry routing inbox: enquiries@1111events.in)                            |
 | Phone          | +91 99381 20356                                                                                      |
 | WhatsApp       | +91 95915 09910                                                                                      |
 | Address        | Plot No. 30 & 30/982, Odyssa Business Centre, Bomikhal, Rasulgarh Square, Bhubaneswar, Odisha 751010 |

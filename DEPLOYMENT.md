@@ -96,14 +96,18 @@ If both are available and affordable, buy both and redirect one to the other —
 it stops a competitor taking the near-identical name.
 
 ⚠️ **This may already be settled.** The published email is
-`connect@elevennelevenn.com`, which implies `elevennelevenn.com` is registered
-and in use. Confirm that before buying anything — and if it is, the site's
-canonical URL and share image should point at it.
+`concierge@1111events.in`, which implies `1111events.in` is registered and in
+use. Confirm that before buying anything — and if the site is to live there
+too, its canonical URL and share image should point at it. Note that owning the
+domain for email does not automatically mean you want the website on it, so
+this is a decision, not just a lookup.
 
 Given the brand is `11:11`, be aware that domains starting with digits are fine
 technically, but spell-ability matters when a CXO reads it aloud down a phone.
-`elevennelevenn.com` travels better by word of mouth than a pure numeral
-string. Test it by saying it out loud.
+`1111events.in` is already a numeral string, so test it by saying it down a
+phone to someone who has never seen it written — "eleven eleven events dot in"
+is the reading you want, not "one one one one". If that trips people up,
+`elevennelevenn.in` is the obvious alternative to hold alongside it.
 
 ### Where to buy
 
@@ -209,9 +213,10 @@ never need to buy or install a certificate.
 
 ## Step 4 — Set up business email
 
-You need `connect@elevennelevenn.com` to actually receive mail. Domain
+You need `concierge@1111events.in` to actually receive mail, and
+`enquiries@1111events.in` alongside it for form submissions. Domain
 registration does **not** include email — this is a separate thing to set up,
-and the address is already published on the site.
+and the concierge address is already published on the site.
 
 | Option                       | Cost                     | Notes |
 |------------------------------|--------------------------|-------|
