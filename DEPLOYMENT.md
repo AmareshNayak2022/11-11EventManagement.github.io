@@ -241,7 +241,7 @@ there are — that is a direct loss of revenue.
 **Connected — but read this before you rely on it.**
 
 The form now delivers in **WhatsApp mode**: on submit it formats the answers
-into a message and opens WhatsApp addressed to `+91 95915 09910`, pre-typed.
+into a message and opens WhatsApp addressed to `+91 99381 20356`, pre-typed.
 Nothing is silently discarded any more.
 
 The catch is that **the visitor has to press send in WhatsApp**. If they hesitate

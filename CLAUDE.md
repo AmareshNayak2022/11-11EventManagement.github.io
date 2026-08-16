@@ -52,8 +52,7 @@ company are a genuine legal risk.
 | Tagline | Where Rare Venues Meet Exceptional Talent |
 | Badge sub-text | Bespoke Occasions & Curation |
 | Email | `concierge@1111events.in` — displayed. Enquiries route to `enquiries@1111events.in` |
-| Phone | `+91 99381 20356` |
-| WhatsApp | `+91 95915 09910` |
+| Phone & WhatsApp | `+91 99381 20356` — the concierge desk line, one number for both |
 | Address | Plot No. 30 & 30/982, Odyssa Business Centre, Bomikhal, Rasulgarh Square, Bhubaneswar 751010 (publish; visits by appointment only) |
 | Hours | Mon–Sat, 10:00–19:00 IST |
 | Palette | Midnight Navy `#0A1128`, Champagne Gold `#D4AF37`, Metallic Gold `#C5A059`, Warm Cream `#FDFBF7` |
@@ -70,10 +69,14 @@ Two things about that table are worth knowing before you touch them:
   the `1111events.in` addresses are correct. The site's own *domain* is still
   unconfirmed — an email domain is not proof of where the site will live — which
   is why `url` stays omitted from the JSON-LD.
-- **The two numbers are not interchangeable.** Only `95915 09910` is confirmed
-  as being on WhatsApp; `99381 20356` is published as the phone line. If they
-  turn out to be the same account, change it in three places: both `wa.me`
-  links in `index.html` and `DELIVERY.whatsapp` in `js/script.js`.
+- **There is now only one phone number on the site.** The client confirmed the
+  concierge line `99381 20356` is also the WhatsApp account, so the separate
+  Phone and WhatsApp rows were merged into one Concierge row — printing the same
+  digits twice would imply two channels where there is one. An older number,
+  `95915 09910`, was the WhatsApp contact before the concierge line was supplied
+  and is no longer shown anywhere; restore it only if the client says it is
+  still in use. The live number appears in three places and must move together:
+  both `wa.me` links in `index.html` and `DELIVERY.whatsapp` in `js/script.js`.
 
 Still unconfirmed, and still listed in `CLIENT-BRIEF.md`: real past work and
 photography (Q19–26), the domain and hosting (Q44–51), and the legal and

@@ -19,8 +19,7 @@ Built as a static site: three files, no build step, no dependencies, no server.
 | Tagline        | Where Rare Venues Meet Exceptional Talent                                                            |
 | Badge sub-text | Bespoke Occasions & Curation                                                                         |
 | Email          | concierge@1111events.in  (enquiry routing inbox: enquiries@1111events.in)                            |
-| Phone          | +91 99381 20356                                                                                      |
-| WhatsApp       | +91 95915 09910                                                                                      |
+| Phone & WhatsApp | +91 99381 20356 — the concierge desk line, one number for both                                      |
 | Address        | Plot No. 30 & 30/982, Odyssa Business Centre, Bomikhal, Rasulgarh Square, Bhubaneswar, Odisha 751010 |
 | Hours          | Monday – Saturday, 10:00 – 19:00 IST                                                                 |
 
@@ -60,9 +59,10 @@ Two smaller open items:
   structured data and `og:image` / `twitter:image` still point at Pexels rather
   than at an absolute URL on your domain. `telephone` and `email` are now filled
   in with the real values.
-- **Only `+91 95915 09910` is confirmed as being on WhatsApp.** The phone line
-  `+91 99381 20356` is published separately. If they are the same account, say
-  so and it becomes a one-line change in three places.
+- **The concierge line is the only number on the site now.** It is both the
+  phone and the WhatsApp account, so the two contact rows were merged into one.
+  The older `+91 95915 09910` is no longer published — say the word if it is
+  still in use and should come back.
 
 ---
 
@@ -263,7 +263,7 @@ which one runs depends entirely on one line in `js/script.js`, section
 ```js
 var DELIVERY = {
   endpoint: '',                 // empty  → WhatsApp mode
-  whatsapp: '919591509910'      // international format, digits only
+  whatsapp: '919938120356'      // international format, digits only
 };
 ```
 
@@ -345,13 +345,12 @@ Fully static, so any host works. Nothing to build, nothing to configure.
 ### Pre-launch checklist
 
 - [x] Real email and phone published — `.is-placeholder` spans all removed
-- [x] Enquiry delivery connected — WhatsApp mode, `+91 95915 09910`
+- [x] Enquiry delivery connected — WhatsApp mode, `+91 99381 20356`
 - [x] `telephone` and `email` added to the JSON-LD block
 - [x] Add the logo — installed as `images/logo.png`
 - [x] Add a favicon — uses the badge
 - [x] Testimonials removed rather than published invented
 - [x] Portfolio relabelled as a reference board (pre-launch, no real work yet)
-- [ ] Confirm whether `+91 99381 20356` is also the WhatsApp number
 - [ ] Decide whether to stay on WhatsApp or add an email endpoint as well
 - [ ] Send a test enquiry from a phone and confirm it arrives
 - [ ] Replace the Pexels photography with your own (`images/README.md`)

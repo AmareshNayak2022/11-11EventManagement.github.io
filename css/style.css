@@ -1907,12 +1907,20 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 body.is-locked .wa-float { opacity: 0; pointer-events: none; }
 
 /* The same mark, inline in the contact details list */
+/* Sits under the tel: link in the Concierge row rather than beside it — they
+   are the same number reached two ways, and side by side they read as two
+   numbers. `flex` (not inline-flex) puts it on its own line; `width: fit-content`
+   keeps the underline as short as the text. */
 .contact__wa {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
+  margin-top: 0.5rem;
   align-items: center;
   gap: 0.5rem;
   color: var(--heading);
-  border-bottom: 1px solid var(--accent);
+  /* --gold-deep, not --accent: the champagne gold underline measures 2.0:1 on
+     paper, and this rule is the link's only affordance. */
+  border-bottom: 1px solid var(--gold-deep);
   padding-bottom: 1px;
   transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }

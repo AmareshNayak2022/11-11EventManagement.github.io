@@ -275,10 +275,10 @@
     // the page. The Lead Curator and Ops Head are to be copied on every brief.
     endpoint: '',
     // International format, digits only — no plus sign, spaces, or dashes.
-    // This is the number confirmed as being on WhatsApp. The concierge line
-    // published on the page is +91 99381 20356; if that one is also on
-    // WhatsApp, change it here AND in the two wa.me links in index.html.
-    whatsapp: '919591509910'
+    // The concierge desk line +91 99381 20356, which is also the WhatsApp
+    // account. It appears in two more places: the contact block and the
+    // floating button, both in index.html. Change it in all three or none.
+    whatsapp: '919938120356'
   };
 
   var form        = $('#inquiry-form');
