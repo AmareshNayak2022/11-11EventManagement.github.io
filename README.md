@@ -20,7 +20,7 @@ Built as a static site: three files, no build step, no dependencies, no server.
 | Badge sub-text | Bespoke Occasions & Curation                                                                         |
 | Email          | concierge@1111events.in  (enquiry routing inbox: enquiries@1111events.in)                            |
 | Phone & WhatsApp | +91 99381 20356 — the concierge desk line, one number for both                                      |
-| Second line    | +91 95915 09910 — published as a call-only number                                                    |
+| Second line    | +91 95915 09910 — also on WhatsApp                                                                    |
 | Address        | Plot No. 30 & 30/982, Odyssa Business Centre, Bomikhal, Rasulgarh Square, Bhubaneswar, Odisha 751010 |
 | Hours          | Monday – Saturday, 10:00 – 19:00 IST                                                                 |
 
@@ -60,11 +60,9 @@ Two smaller open items:
   structured data and `og:image` / `twitter:image` still point at Pexels rather
   than at an absolute URL on your domain. `telephone` and `email` are now filled
   in with the real values.
-- **Two numbers are published, one WhatsApp route.** The concierge line is
-  both phone and WhatsApp, so its call and chat links share a single row.
-  `+91 95915 09910` sits beneath it as a call-only second line — it is on
-  WhatsApp too, but a second chat button would make it unclear which desk an
-  enquiry reaches, and the concierge line is the one meant to route them.
+- **Both numbers are tappable on WhatsApp**, each paired with its own
+  tap-to-call link. The floating button and the enquiry form still go to the
+  concierge line, since that is the desk meant to handle enquiries.
 
 ---
 
