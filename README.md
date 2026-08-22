@@ -174,8 +174,8 @@ transparency, so the home-screen icon is a separate opaque square,
 | Page title, meta description, OG/Twitter tags | `<head>` of `index.html`                                               |
 | Structured data (legal name, address, slogan) | the JSON-LD `<script>` in `<head>`                                     |
 | The visible `11:11` wordmark                  | 3 places — header, `.mobile-nav__head`, footer                         |
-| Hero copy *Where moments become legend* | hero `<h1>`, with the eyebrow above it and the two `.hero__lede` paragraphs below |
-| Tagline *Where Rare Venues Meet Exceptional Talent* | `#cta-title`, footer `.site-footer__tagline`, `slogan` in the JSON-LD, and the OG/Twitter descriptions — no longer the hero `<h1>` |
+| The line *Where moments become legend* | hero `<h1>`, `#cta-title`, footer `.site-footer__tagline` — plus the hero eyebrow and the two `.hero__lede` paragraphs around it |
+| Tagline *Where Rare Venues Meet Exceptional Talent* | `slogan` in the JSON-LD and the OG/Twitter descriptions only — it no longer appears in the visible page |
 | Badge sub-text *Bespoke Occasions & Curation* | header `.logo__sub`, `.cta__eyebrow`                                   |
 | Contact details, address and hours            | `.contact__details` block — and `telephone` / `email` in the JSON-LD   |
 | Legal entity in the copyright line            | `.site-footer__bar`                                                    |

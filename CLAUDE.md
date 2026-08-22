@@ -60,13 +60,17 @@ company are a genuine legal risk.
 | Palette | Midnight Navy `#0A1128`, Champagne Gold `#D4AF37`, Metallic Gold `#C5A059`, Warm Cream `#FDFBF7` |
 | Pricing floor | From ₹5,00,000 per project engagement |
 
-The hero is the client's own words and was changed once already: on 22 Aug
-2026 the eyebrow became the registered name *Elevenn Elevenn Archive*, the
-`<h1>` became *Where moments become legend.*, and the lede became the
-two-paragraph "architects of the exceptional" statement. The tagline is
-still the tagline — it survives in `#cta-title`, the footer, the JSON-LD
-`slogan` and the OG/Twitter descriptions — but do not move it back into the
-`<h1>`.
+The client's own words replaced the hero on 22 Aug 2026: the eyebrow became
+the registered name *Elevenn Elevenn Archive*, the `<h1>` became *Where
+moments become legend.*, and the lede became the two-paragraph "architects of
+the exceptional" statement. Later the same day the client carried that line
+into the two other places it is set as display type — `#cta-title` and the
+footer's `.site-footer__tagline`.
+
+So *Where Rare Venues Meet Exceptional Talent* is now **nowhere in the visible
+page**. It survives only in the JSON-LD `slogan` and the OG/Twitter
+descriptions, which the client has not asked to change; leave them unless
+they do. Do not move it back into any heading.
 
 Two things about that table are worth knowing before you touch them:
 
