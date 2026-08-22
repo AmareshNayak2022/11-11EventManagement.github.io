@@ -54,7 +54,7 @@
        page updates, the capitals and the gold do not. Bump the date whenever
        css/style.css or js/script.js changes and every browser fetches it fresh;
        the same string is on the <script> tag at the end of <body>. -->
-  <link rel="stylesheet" href="css/style.css?v=2026-08-22d">
+  <link rel="stylesheet" href="css/style.css?v=2026-08-22e">
 
   <!--
     Structured data for Elevenn Elevenn Archive Pvt Ltd, trading as 11:11.
@@ -80,7 +80,6 @@
     "image": "https://images.pexels.com/photos/15949379/pexels-photo-15949379.jpeg?auto=compress&cs=tinysrgb&w=1200",
     "telephone": "+91-9019526532",
     "email": "connect@elevennelevenn.com",
-    "priceRange": "From ₹500000",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Plot No. 30 & 30/982, Odyssa Business Centre, Bomikhal, Rasulgarh Square",
@@ -629,10 +628,11 @@
         <div class="tiers__note" data-reveal>
           <!-- The client's words, 22 Aug 2026, replacing the published price
                floor. "realisation" is the only edit — the page is British
-               throughout ("organise", "programme", "specialises"). Note that
-               this paragraph now says pricing is not fixed while three other
-               places still name &#8377;5,00,000: the form's budget hint, its
-               &#8377;5L bands, and priceRange in the JSON-LD. -->
+               throughout ("organise", "programme", "specialises"). No figure
+               appears anywhere on the page now: the form's budget hint and its
+               &#8377;5L bands went with it, and priceRange is out of the JSON-LD.
+               The floor itself is still a confirmed fact in CLAUDE.md — it is
+               simply not published. -->
           <p>
             <strong>Unbound by fixed pricing structures,</strong> our atelier approaches each
             project as a unique architectural undertaking. The scale of investment is shaped
@@ -1003,16 +1003,16 @@
 
               <div class="field">
                 <label class="field__label" for="budget">Projected Budget <span class="req" aria-hidden="true">*</span></label>
-                <div class="field__select-wrap">
-                  <select class="field__input field__select" id="budget" name="budget"
-                          aria-describedby="budget-hint budget-error" required>
-                    <option value="" selected disabled>Please select&hellip;</option>
-                    <option value="₹5L – ₹15L">&#8377;5L &ndash; &#8377;15L</option>
-                    <option value="₹15L+">&#8377;15L+</option>
-                    <option value="Not yet decided">Not yet decided</option>
-                  </select>
-                </div>
-                <p class="field__hint" id="budget-hint">Engagements start from &#8377;5,00,000.</p>
+                <!-- A free-text box, not a band picker. The bands named &#8377;5L and
+                     &#8377;15L, and the packages copy above now says pricing is not
+                     fixed — a form that quotes figures the page has stopped
+                     quoting sets an expectation nobody wants to defend on a
+                     call. The field stays required, because brief Q41 marks the
+                     budget envelope essential; the placeholder leaves "not yet
+                     decided" open, which the old list carried as an option. -->
+                <input class="field__input" type="text" id="budget" name="budget"
+                       placeholder="A range, or &quot;not yet decided&quot;"
+                       aria-describedby="budget-error" required>
                 <p class="field__error" id="budget-error" data-error-for="budget"></p>
               </div>
 
@@ -1255,6 +1255,6 @@
     <span class="wa-float__label">WhatsApp</span>
   </a>
 
-  <script src="js/script.js?v=2026-08-22d"></script>
+  <script src="js/script.js?v=2026-08-22e"></script>
 </body>
 </html>

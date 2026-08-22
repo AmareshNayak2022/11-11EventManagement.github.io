@@ -58,7 +58,7 @@ company are a genuine legal risk.
 | Address | Plot No. 30 & 30/982, Odyssa Business Centre, Bomikhal, Rasulgarh Square, Bhubaneswar 751010 (publish; visits by appointment only) |
 | Hours | Mon–Sat, 10:00–19:00 IST |
 | Palette | Midnight Navy `#0A1128`, Champagne Gold `#D4AF37`, Metallic Gold `#C5A059`, Warm Cream `#FDFBF7` |
-| Pricing floor | From ₹5,00,000 per project engagement — **no longer stated in the page copy** (see below) |
+| Pricing floor | From ₹5,00,000 per project engagement — confirmed, but **published nowhere on the site** (see below) |
 
 The client's own words replaced the hero on 22 Aug 2026: the eyebrow became
 the registered name *Elevenn Elevenn Archive*, the `<h1>` became *Where
@@ -77,12 +77,13 @@ descriptions, which the client has not asked to change; leave them unless
 they do. Do not move it back into any heading.
 
 On 22 Aug 2026 the client replaced the packages note that published the floor
-with copy that begins *"Unbound by fixed pricing structures"*. The figure is
-still confirmed and still appears in three machine- or form-facing places — the
-enquiry form's budget hint and its ₹5L bands, and `priceRange` in the JSON-LD —
-which now sit alongside a page that says pricing is not fixed. The client has
-not been asked to resolve that; do not quietly delete the figure, and do not
-re-add it to the copy.
+with copy that begins *"Unbound by fixed pricing structures"*, then asked for
+every remaining figure to go with it. So the enquiry form's budget hint and its
+₹5L bands are gone — Projected Budget is now a free-text box, still required per
+brief Q41 — and `priceRange` has been removed from the JSON-LD. **No rupee
+figure appears anywhere on the site.** The floor above is still the confirmed
+fact for quoting; it is simply not published. Do not re-add it to the copy, the
+form or the structured data without the client asking.
 
 Two things about that table are worth knowing before you touch them:
 

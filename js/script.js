@@ -330,7 +330,9 @@
       return '';
     },
     budget: function (value) {
-      if (!value) return 'Please choose a budget range, or "Not yet decided".';
+      // Free text since the price bands came off the page: anything the visitor
+      // is willing to say counts, including "not yet decided".
+      if (!value) return 'Please give us a rough sense of the investment, or write "not yet decided".';
       return '';
     },
     location: function (value) {
