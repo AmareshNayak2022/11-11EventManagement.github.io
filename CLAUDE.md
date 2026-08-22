@@ -162,7 +162,10 @@ alt) wherever a gold must carry words *or* form a UI boundary — that is why th
 required-field asterisk and the input underlines use it.
 
 On the dark bands the plain gold is not merely safe but strong: **8.9:1** on
-`--navy` and 9.5:1 on `--navy-deep`. That is why the process band's eyebrow,
+`--navy` and 9.5:1 on `--navy-deep`. A photograph is not a dark band: over the
+hero and CTA images the plain gold measures only 2.75:1 and 2.83:1 against the
+brightest pixel behind the word LEGEND, so that word uses `--gold-bright`
+(`#E8C86A`, 3.55:1 and 3.66:1 — above the 3:1 floor for large text). That is why the process band's eyebrow,
 its numerals, and the `.step__meta` labels are set in it.
 
 If you change any colour, re-measure every ratio and update the table in

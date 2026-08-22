@@ -194,6 +194,7 @@ properties at the top of `css/style.css`, section **01. Design tokens**:
   --gold:       #D4AF37;   /* accent: rules, bullets, numerals    (client) */
   --gold-metal: #C5A059;   /* secondary metallic gold             (client) */
   --gold-deep:  #7F6220;   /* the one gold dark enough for light  (derived) */
+  --gold-bright:#E8C86A;   /* the one gold light enough for photos (derived) */
   --navy:       #0A1128;   /* headings, buttons, the process band (client) */
   --navy-deep:  #05080F;   /* the footer, one step deeper         (derived) */
   --white:      #FFFFFF;
@@ -230,6 +231,15 @@ opacity, still measure 6.6:1. That band is the one place the brand colour gets
 to be a colour rather than a hairline, which is why the eyebrow, the numerals
 and the `.step__meta` labels all use it. If you change the palette, re-measure
 every ratio above.
+
+A *photograph* is not a dark band, though, and that is what `--gold-bright` is
+for. The word **LEGEND** in the hero and closing headings is gold over the two
+hero/CTA images, where the champagne gold measures only **2.75:1** (hero) and
+2.83:1 (CTA) against the brightest pixel behind the word — under the 3:1 floor
+large text has to clear. Lifted toward paper, `--gold-bright` measures **3.55:1**
+and **3.66:1** in the same two places. Use it for gold *words* over imagery, and
+`--gold-deep` for gold words on cream; the brand gold itself is for dark solids
+and hairlines.
 
 ### Change the typography
 
@@ -393,6 +403,7 @@ favourable pixel inside each element's box:
 |---------------|-------|-|-------------------|-------|
 | Eyebrow       | 6.1:1 | | Eyebrow           | 9.3:1 |
 | Headline      | 5.1:1 | | Heading           | 5.8:1 |
+| "LEGEND", gold| 3.6:1 | | "LEGEND", gold    | 3.7:1 |
 | Lede          | 4.8:1 | | Body              | 10.3:1 |
 | Button        | 12.9:1| | Button            | 15.0:1|
 | Link          | 16.1:1| |                   |       |

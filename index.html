@@ -242,9 +242,16 @@
              now first appear in the about section and the mobile menu. -->
         <p class="eyebrow eyebrow--light hero__eyebrow">Elevenn Elevenn Archive</p>
 
+        <!-- Typed in sentence case and capitalised in CSS, not typed in capitals:
+             screen readers pronounce a real all-caps word letter by letter often
+             enough that WCAG warns against it, and "LEGEND" spelled out as
+             L-E-G-E-N-D would be the last word a visitor hears here. The two
+             exceptions to the capitals — the italic "moments" and the gold
+             "legend" — are marked up as meaning, and section 03 gives them
+             their treatment. -->
         <h1 class="hero__title" id="hero-title">
           Where <em>moments</em><br>
-          become legend.
+          become <span class="word-gold">legend</span>.
         </h1>
 
         <!-- Two paragraphs, not one. The client's statement runs to ~70 words,
@@ -831,7 +838,7 @@
 
       <div class="container cta__inner" data-reveal>
         <p class="eyebrow eyebrow--light cta__eyebrow">Bespoke Occasions &amp; Curation</p>
-        <h2 class="display display--xl" id="cta-title">Where <em>moments</em> become legend.</h2>
+        <h2 class="display display--xl cta__title" id="cta-title">Where <em>moments</em> become <span class="word-gold">legend</span>.</h2>
         <p class="cta__text">Tell us the occasion, the audience and the atmosphere you want. We will bring the venue and the lineup.</p>
         <a class="btn btn--light" href="#contact">Start a Brief</a>
       </div>
