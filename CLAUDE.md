@@ -65,7 +65,11 @@ the registered name *Elevenn Elevenn Archive*, the `<h1>` became *Where
 moments become legend.*, and the lede became the two-paragraph "architects of
 the exceptional" statement. Later the same day the client carried that line
 into the two other places it is set as display type — `#cta-title` and the
-footer's `.site-footer__tagline`.
+footer's `.site-footer__tagline` — and settled its treatment: capitals, with
+*moments* lowercase and italic and LEGEND in gold. All three carry it. The
+capitals are a CSS `text-transform`, never typed capitals, so a screen reader
+does not spell the words out; if you add a fourth setting of the line, copy
+`.hero__title` rather than typing it in caps.
 
 So *Where Rare Venues Meet Exceptional Talent* is now **nowhere in the visible
 page**. It survives only in the JSON-LD `slogan` and the OG/Twitter

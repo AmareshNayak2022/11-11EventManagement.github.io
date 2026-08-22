@@ -237,9 +237,12 @@ for. The word **LEGEND** in the hero and closing headings is gold over the two
 hero/CTA images, where the champagne gold measures only **2.75:1** (hero) and
 2.83:1 (CTA) against the brightest pixel behind the word — under the 3:1 floor
 large text has to clear. Lifted toward paper, `--gold-bright` measures **3.55:1**
-and **3.66:1** in the same two places. Use it for gold *words* over imagery, and
-`--gold-deep` for gold words on cream; the brand gold itself is for dark solids
-and hairlines.
+and **3.66:1** in the same two places. It sets the same word in the footer too,
+where on `--navy-deep` it measures 12.3:1 — the brand gold would also have been
+safe there (9.5:1), but one word should not be two different golds on one page.
+
+So: `--gold-bright` for gold *words* over imagery, `--gold-deep` for gold words
+on cream, and the brand gold itself for dark solids and hairlines.
 
 ### Change the typography
 
