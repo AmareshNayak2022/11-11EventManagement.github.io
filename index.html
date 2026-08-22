@@ -48,7 +48,13 @@
   <!-- Preload the hero photograph so the first paint feels instant -->
   <link rel="preload" as="image" href="https://images.pexels.com/photos/15949379/pexels-photo-15949379.jpeg?auto=compress&cs=tinysrgb&w=1800">
 
-  <link rel="stylesheet" href="css/style.css">
+  <!-- ?v= is a cache-buster, not a build artefact. GitHub Pages serves these
+       files with a ten-minute max-age, but phone browsers hold a stylesheet far
+       longer than that, which shows up as new words in the old styling — the
+       page updates, the capitals and the gold do not. Bump the date whenever
+       css/style.css or js/script.js changes and every browser fetches it fresh;
+       the same string is on the <script> tag at the end of <body>. -->
+  <link rel="stylesheet" href="css/style.css?v=2026-08-22">
 
   <!--
     Structured data for Elevenn Elevenn Archive Pvt Ltd, trading as 11:11.
@@ -1226,6 +1232,6 @@
     <span class="wa-float__label">WhatsApp</span>
   </a>
 
-  <script src="js/script.js"></script>
+  <script src="js/script.js?v=2026-08-22"></script>
 </body>
 </html>

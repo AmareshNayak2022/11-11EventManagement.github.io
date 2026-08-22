@@ -108,6 +108,12 @@ privacy items (Q52–56). The Pinterest link in the footer still points at `#`.
 No build step, no `package.json`, nothing to install. Open `index.html`
 directly — `file://` works, there are no modules or fetch calls at load.
 
+**The stylesheet and script are linked with a `?v=<date>` query.** Bump both
+when you change `css/style.css` or `js/script.js`, in the same commit. Without
+it a phone that has the old stylesheet cached shows the new copy in the old
+styling and the change looks like it never deployed — this has already cost one
+round of "I don't see the changes".
+
 **Git is set up**, pushed to `origin/main` and deployed by GitHub Pages at
 https://amareshnayak2022.github.io/11-11EventManagement.github.io/ — a push to
 `main` goes live in under a minute. Verify against that URL, not just locally.
