@@ -112,7 +112,8 @@ event-management/
 ├── js/
 │   └── script.js       All behaviour, organised into 7 numbered sections
 ├── images/
-│   ├── logo.png        The brand badge — header, menu, footer, favicon
+│   ├── logo.png        The circular brand badge — header, menu, footer, favicon
+│   ├── apple-touch-icon.png  The same mark, opaque and square, for iOS
 │   └── README.md       Logo notes and how to swap in real photography
 ├── CLAUDE.md           Instructions for Claude Code
 ├── CLIENT-BRIEF.md     The 60 open questions — source for the PDF and .docx
@@ -145,20 +146,22 @@ are served from Pexels. See `images/README.md` to switch to local files.
 
 ## The logo
 
-**Installed.** `images/logo.png` — the crowned winged-lion badge — now appears in
-the header, the mobile menu, the footer, and as the favicon, paired with the
-`11:11` wordmark still set in live text.
+**Installed.** `images/logo.png` — the client's crowned `11:11` monogram, gold on
+near-black, cropped to a **circle at 512 × 512** — appears in the header, the
+mobile menu, the footer, and as the favicon, paired with the `11:11` wordmark
+still set in live text.
 
-Because the badge carries its own dark background and gold frame, it needs none
-of the light/dark pairing a flat single-colour mark would have: it reads
-correctly both over the hero photograph and on the paper scrolled header. One
-file covers every placement.
+Because the badge carries its own dark ground, it needs none of the light/dark
+pairing a flat single-colour mark would have: it reads correctly both over the
+hero photograph and on the paper scrolled header. One file covers every
+placement on the page.
 
-⚠️ The current file is **100 × 100**, recovered from the Instagram profile
-picture — soft on high-density screens, and already square-cropped by Instagram
-so the small line of text below `11:11` in the original artwork is cut off.
-Replace it with the original artwork (SVG, or PNG ≥ 400 × 400) and every
-placement updates with no markup or CSS change. Details in `images/README.md`.
+The circle is baked into the PNG and also set in CSS, and the gold hairline ring
+and navy halo around it are CSS rather than artwork — so the ring can be tuned
+per placement (it is stronger in the footer, where the halo has no cream to sit
+against). iOS is the one exception to "one file": it paints black behind PNG
+transparency, so the home-screen icon is a separate opaque square,
+`images/apple-touch-icon.png`. Details in `images/README.md`.
 
 ---
 
@@ -348,7 +351,7 @@ Fully static, so any host works. Nothing to build, nothing to configure.
 - [x] Real email and phone published — `.is-placeholder` spans all removed
 - [x] Enquiry delivery connected — WhatsApp mode, `+91 99381 20356`
 - [x] `telephone` and `email` added to the JSON-LD block
-- [x] Add the logo — installed as `images/logo.png`
+- [x] Add the logo — the client's monogram, circular, as `images/logo.png`
 - [x] Add a favicon — uses the badge
 - [x] Testimonials removed rather than published invented
 - [x] Portfolio relabelled as a reference board (pre-launch, no real work yet)
@@ -356,7 +359,7 @@ Fully static, so any host works. Nothing to build, nothing to configure.
 - [ ] Send a test enquiry from a phone and confirm it arrives
 - [ ] Replace the Pexels photography with your own (`images/README.md`)
 - [ ] Rewrite every `alt` attribute to describe your actual images
-- [ ] Swap `images/logo.png` for the confirmed vector artwork (SVG/EPS)
+- [ ] Swap `images/logo.png` for the vector artwork (SVG/EPS) if it turns up
 - [ ] Confirm the domain, then add `url` to the JSON-LD block
 - [ ] Update `og:image` / `twitter:image` to absolute URLs on that domain
 - [ ] Point the Pinterest link at a real profile, or delete it (currently `#`)

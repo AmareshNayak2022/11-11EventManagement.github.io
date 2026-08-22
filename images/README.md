@@ -2,13 +2,13 @@
 
 This folder holds the site's brand assets and photography.
 
-- **`logo.png`** — the brand badge. Installed and in use.
+- **`logo.png`** — the brand badge, circular. Installed and in use.
+- **`apple-touch-icon.png`** — the same artwork, opaque and square, for iOS.
 - Photography — twelve Pexels placeholders of Indian and Odia celebrations, loaded
   over the network, so the site looks finished the moment you open
   `index.html`.
 
-One job left here: **replace the placeholder photography**. And one asset to
-upgrade: see the resolution warning below.
+One job left here: **replace the placeholder photography**.
 
 ---
 
@@ -16,8 +16,17 @@ upgrade: see the resolution warning below.
 
 ### What is installed
 
-`logo.png` is the crowned winged-lion badge — a square, deep-navy panel with a
-gold art-deco frame and `11:11` set beneath the mark.
+`logo.png` is the client's crowned `11:11` monogram — the gold `M` with a crown
+above it and the colon between the numerals — on near-black, cropped to a
+**circle at 512 × 512** with transparent corners. It was cut from the client's
+`logo.jpeg`, centred on the mark, at a crop that leaves the mark filling about
+73% of the circle: tighter and the crown grazes the edge, looser and the mark
+turns to a speck in a 34px header slot.
+
+The circle is baked into the file *and* set in CSS (`border-radius: 50%` on
+`.logo__badge`), so a square replacement file still comes out round. The gold
+hairline ring and the soft navy halo around it are CSS, not part of the
+artwork — see the `.logo__badge` block in section 05 of `css/style.css`.
 
 Because the badge **carries its own background**, it needs none of the
 light/dark pairing a flat single-colour mark would. The header is transparent
@@ -31,30 +40,33 @@ badge reads correctly on both. One file covers every placement.
 | Header, top-left     | `.logo__badge`, beside the `11:11` wordmark | 34–44px |
 | Mobile menu panel    | `.logo__badge--sm`                          | 32px |
 | Footer               | `.logo__badge--footer`, above the wordmark  | 52–64px |
-| Favicon / touch icon | `<link rel="icon">` in `<head>`             | 100px |
+| Favicon              | `<link rel="icon">` in `<head>`             | 512px source |
+| iOS home screen      | `<link rel="apple-touch-icon">` → `apple-touch-icon.png` | 512px source |
 
 In every placement the badge is `alt=""` and `aria-hidden`, because the `11:11`
 wordmark next to it already carries the name — without that, a screen reader
 would announce the brand two or three times over.
 
-### ⚠ Replace this file when you can
+### Two files, and they are not interchangeable
 
-`logo.png` is **100 × 100** — it was recovered from the Instagram profile
-picture, which is the only size that endpoint serves. Two consequences:
+iOS ignores PNG transparency on a home-screen icon: it applies its own mask and
+paints **black** behind whatever is left, so a circle with transparent corners
+comes out as a circle inside a black square. `apple-touch-icon.png` is therefore
+the same 512 × 512 crop left opaque and square, and `<head>` points the two
+`<link>` tags at different files on purpose. Replace both together or neither.
 
-1. **It will look soft on high-density screens.** A 44px slot on a 3× phone
-   wants roughly 132px of real pixels; a retina desktop favicon wants 180px.
-2. **It is already square-cropped.** Instagram cropped the original artwork to
-   fit a circle, so anything that sat above or below the badge is gone — the
-   line of small text under `11:11` is cut off mid-height.
+### Replacing the artwork
 
-Drop the original artwork in as `images/logo.png` and everything picks it up
-with **no markup or CSS change** — the badge is boxed with `object-fit: cover`,
-so even a non-square replacement will sit correctly rather than distort.
+Both PNGs are raster crops of `logo.jpeg`, at 512 × 512 — comfortably sharp for
+every placement here, the largest of which is 64px. If the original **vector**
+artwork (SVG/EPS) turns up it is still worth installing:
 
-- **SVG** is ideal if the artwork exists as vector. Rename the `<img>` `src` to
-  `logo.svg`; nothing else changes.
-- **PNG** should be at least 400 × 400. Keep it square.
+- Export a square, circular-cropped PNG over `images/logo.png` at 512 × 512 or
+  more, and a square opaque one over `apple-touch-icon.png`. No markup or CSS
+  change is needed — the badge is boxed with `object-fit: cover`, so even a
+  non-square replacement sits correctly rather than distorting.
+- **SVG** works for the badge itself: rename the `<img>` `src` to `logo.svg` in
+  the three places it appears. Keep a PNG for the icon `<link>` tags.
 
 ### Still to do: the social share image
 

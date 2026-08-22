@@ -483,26 +483,47 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 .logo__mark--footer { font-size: clamp(1.625rem, 1.3rem + 1.1vw, 2.125rem); color: var(--paper); }
 
 /* --- Brand badge (images/logo.png) ---------------------------------------
-   A square, dark, gold-framed panel. Because it carries its own background it
-   needs no light/dark pair — it holds up over the hero photograph and on the
-   ivory scrolled header alike.
+   The client's crowned 11:11 monogram, gold on near-black. The file is already
+   a circle with transparent corners, so the radius here is belt and braces —
+   it keeps the crop circular if the file is ever replaced with a square one.
+
+   Because the mark carries its own dark ground it needs no light/dark pair: it
+   holds up over the hero photograph and on the ivory scrolled header alike.
+   The ring and the halo are what make it read as a struck medallion rather
+   than a photo cut out with scissors — the gold hairline picks the edge out
+   against the hero's dark upper third, and the navy halo does the same job on
+   cream, where a black disc otherwise sits flat on the paper.
 
    `object-fit: cover` with a square box guards against a non-square
-   replacement file distorting; the small radius stops the gold frame from
-   reading as a stray rectangle pasted on the page. */
+   replacement file distorting into an oval. */
 .logo__badge {
   display: block;
   flex: none;
   width: clamp(34px, 3vw, 44px);
   height: clamp(34px, 3vw, 44px);
   object-fit: cover;
-  border-radius: 3px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px rgb(var(--gold-rgb) / 0.45),
+    0 2px 10px rgb(var(--navy-rgb) / 0.28);
+  transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+/* Hover belongs to the whole lockup, not the image: the badge and the wordmark
+   are one link, so lighting up only half of it on hover looks like a bug. */
+.logo:hover .logo__badge {
+  transform: scale(1.04);
+  box-shadow:
+    0 0 0 1px rgb(var(--gold-rgb) / 0.85),
+    0 4px 16px rgb(var(--navy-rgb) / 0.34);
 }
 .logo__badge--sm { width: 32px; height: 32px; }
 .logo__badge--footer {
   width: clamp(52px, 5vw, 64px);
   height: clamp(52px, 5vw, 64px);
   margin-bottom: 0.9rem;
+  /* On the navy footer the halo has nothing to sit against, so the ring does
+     the work alone and is set a little stronger. */
+  box-shadow: 0 0 0 1px rgb(var(--gold-rgb) / 0.55);
 }
 
 /* Inline lockup used in the mobile-menu header, where the badge sits beside
