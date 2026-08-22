@@ -37,9 +37,9 @@ badge reads correctly on both. One file covers every placement.
 
 | Placement            | Element                                    | Size |
 |----------------------|--------------------------------------------|------|
-| Header, top-left     | `.logo__badge`, beside the `11:11` wordmark | 34–44px |
-| Mobile menu panel    | `.logo__badge--sm`                          | 32px |
-| Footer               | `.logo__badge--footer`, above the wordmark  | 52–64px |
+| Header, top-left     | `.logo__badge`, beside the `11:11` wordmark | 42–52px |
+| Mobile menu panel    | `.logo__badge--sm`                          | 38px |
+| Footer               | `.logo__badge--footer`, above the wordmark  | 64–80px |
 | Favicon              | `<link rel="icon">` in `<head>`             | 512px source |
 | iOS home screen      | `<link rel="apple-touch-icon">` → `apple-touch-icon.png` | 512px source |
 
@@ -58,7 +58,7 @@ the same 512 × 512 crop left opaque and square, and `<head>` points the two
 ### Replacing the artwork
 
 Both PNGs are raster crops of `logo.jpeg`, at 512 × 512 — comfortably sharp for
-every placement here, the largest of which is 64px. If the original **vector**
+every placement here, the largest of which is 80px. If the original **vector**
 artwork (SVG/EPS) turns up it is still worth installing:
 
 - Export a square, circular-cropped PNG over `images/logo.png` at 512 × 512 or

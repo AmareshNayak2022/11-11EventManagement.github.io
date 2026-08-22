@@ -499,8 +499,12 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 .logo__badge {
   display: block;
   flex: none;
-  width: clamp(34px, 3vw, 44px);
-  height: clamp(34px, 3vw, 44px);
+  /* 52px is the ceiling, not a preference: the header is 88px tall with 1rem of
+     padding above and below, which leaves exactly 56px of usable height. A badge
+     any larger than 52px would set the header's height itself and the gap either
+     side of it would vanish. */
+  width: clamp(42px, 3.6vw, 52px);
+  height: clamp(42px, 3.6vw, 52px);
   object-fit: cover;
   border-radius: 50%;
   box-shadow:
@@ -516,11 +520,14 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
     0 0 0 1px rgb(var(--gold-rgb) / 0.85),
     0 4px 16px rgb(var(--navy-rgb) / 0.34);
 }
-.logo__badge--sm { width: 32px; height: 32px; }
+.logo__badge--sm { width: 38px; height: 38px; }
+/* The footer badge stands alone above the wordmark rather than beside it, so
+   nothing caps it the way the header height caps the one above — it is sized to
+   stay clearly the largest instance of the mark on the page. */
 .logo__badge--footer {
-  width: clamp(52px, 5vw, 64px);
-  height: clamp(52px, 5vw, 64px);
-  margin-bottom: 0.9rem;
+  width: clamp(64px, 6vw, 80px);
+  height: clamp(64px, 6vw, 80px);
+  margin-bottom: 1.1rem;
   /* On the navy footer the halo has nothing to sit against, so the ring does
      the work alone and is set a little stronger. */
   box-shadow: 0 0 0 1px rgb(var(--gold-rgb) / 0.55);
