@@ -31,11 +31,12 @@ Built as a static site: three files, no build step, no dependencies, no server.
 The contact details are now real, which was the biggest of these. Four things
 are still outstanding:
 
-1. **Photography — all twelve images are Pexels stock.** They were chosen to
-   match the register the company works in (heritage courtyards, candlelit
-   chamber concerts, a lone artist under a spotlight), but they are other
-   people's photographs of other people's events. Replace with your own work as
-   it exists — see `images/README.md`.
+1. **Photography — eleven of the twelve images are Pexels stock.** They were
+   chosen to match the register the company works in (heritage courtyards,
+   candlelit chamber concerts, a lone artist under a spotlight), but they are
+   other people's photographs of other people's events. Replace with your own
+   work as it exists — see `images/README.md`. The exception is the hero, which
+   is the client's own crest artwork and stays.
 
 2. **The Atmosphere section is not a portfolio, and must not become one by
    accident.** 11:11 is pre-launch on this initiative, so the section is
@@ -57,9 +58,10 @@ are still outstanding:
 Two smaller open items:
 
 - **The site's own domain is unconfirmed**, so `url` is still omitted from the
-  structured data and `og:image` / `twitter:image` still point at Pexels rather
-  than at an absolute URL on your domain. `telephone` and `email` are now filled
-  in with the real values.
+  structured data, and `og:image` / `twitter:image` point at the hero artwork on
+  the **GitHub Pages** host rather than on your own domain — absolute, so share
+  previews work today, but they must be repointed when the domain lands.
+  `telephone` and `email` are now filled in with the real values.
 - **Both numbers are tappable on WhatsApp**, each paired with its own
   tap-to-call link. The floating button and the enquiry form still go to the
   concierge line, since that is the desk meant to handle enquiries.
@@ -140,7 +142,7 @@ there are no fetch calls, modules, or cross-origin requests to trip over.
 ### If images don't appear
 
 You need an internet connection on first load — all twelve reference photographs
-are served from Pexels. See `images/README.md` to switch to local files.
+are served from Pexels; the hero is a local file. See `images/README.md`.
 
 ---
 
@@ -406,18 +408,22 @@ favourable pixel inside each element's box:
 
 | Over the hero | Ratio | | Over the CTA band | Ratio |
 |---------------|-------|-|-------------------|-------|
-| Eyebrow       | 6.1:1 | | Eyebrow           | 9.3:1 |
-| Headline      | 5.1:1 | | Heading           | 5.8:1 |
-| "LEGEND", gold| 3.6:1 | | "LEGEND", gold    | 3.7:1 |
-| Lede          | 4.8:1 | | Body              | 10.3:1 |
-| Button        | 12.9:1| | Button            | 15.0:1|
-| Link          | 16.1:1| |                   |       |
+| Eyebrow       | 10.3:1| | Eyebrow           | 9.3:1 |
+| Headline      | 6.4:1 | | Heading           | 5.8:1 |
+| "LEGEND", gold| 4.1:1 | | "LEGEND", gold    | 3.7:1 |
+| Lede          | 5.9:1 | | Body              | 10.3:1 |
+| Second lede   | 6.5:1 | |                   |       |
+| Button        | 11.4:1| | Button            | 15.0:1|
+| Link          | 8.8:1 | |                   |       |
 
-The hero overlay had to be darkened to get there. The photograph behind it is
-now a chamber concert under pale stone, and at the alphas tuned for the previous
-darker image the lede measured 3.2:1 — a real failure, not a marginal one. If
-you change either photograph, re-measure all of these; the exact method is in
-the comment on `.hero__media::after`.
+The hero overlay has been re-tuned twice for its image. Against the chamber
+concert it replaced, the lede once measured 3.2:1 at the alphas from the crowd
+shot before it — a real failure, not a marginal one. The client's crest artwork
+that now sits there is brighter still behind the headline, so the alphas went up
+another two points; the gold word LEGEND is the binding constraint, since it is
+gold type on gold feathers. If you change either image, re-measure all of these;
+the exact method, including how to composite translucent text before measuring
+it, is in the comment on `.hero__media::after`.
 
 ---
 

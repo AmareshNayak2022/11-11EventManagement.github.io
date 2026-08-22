@@ -30,7 +30,11 @@ instruction seems to pull it back toward either, check the brief before acting.
 This is the single most important constraint on the copy. There is **no past
 work to show, no client to quote, and no statistic to cite.** The section that
 was a portfolio is now `#atmosphere`, a stated reference board of stock
-photography, with a lede that says so in plain words. Do not:
+photography, with a lede that says so in plain words. (The hero is the one
+image that is not stock: since 22 Aug 2026 it is the client's own crest
+artwork, `images/hero-*.jpg`, cropped above the baked-in "It is Time" and
+event-management service list the original carries. Crop any new export the
+same way.) Do not:
 
 - reinstate portfolio captions naming a city, a date, or an event;
 - add testimonials (see the removed-section comment in `index.html`);

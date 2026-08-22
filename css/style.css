@@ -763,26 +763,29 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   content: "";
   position: absolute;
   inset: 0;
-  /* Tuned against the current hero photograph — a chamber concert under pale
-     stone arches. That stone is the problem: it is far brighter behind the
-     headline and lede than the dark crowd shot this overlay was first built
-     for, and at the old values the lede measured 3.2:1, well under AA. The
-     alphas below were solved against the raw photograph rather than guessed,
-     then confirmed on a composite render.
+  /* Tuned against the current hero image — the client's own crest artwork,
+     gold on midnight navy. It replaced a chamber-concert photograph on
+     22 Aug 2026, and the alphas went up two points with it: the pale wing
+     feathers behind the headline are brighter than that photograph's stone,
+     and the gold word LEGEND sits directly on them. At the photograph's
+     values the gold measured 3.23:1 — over the 3:1 floor for large text, but
+     with nothing to spare on a word that is itself gold on gold.
 
-     Measured worst-pixel behind each text element: eyebrow 6.1:1,
-     headline 5.1:1, lede 4.8:1, button 12.9:1, link 16.1:1 — every one clear
-     of 4.5:1, including the headline, which as large display type would only
-     have had to clear 3:1.
+     Measured worst-pixel behind each text element, on the composite render:
+     eyebrow 10.3:1, headline 6.4:1, the gold LEGEND 4.1:1, lede 5.9:1,
+     second lede 6.5:1, button 11.4:1, link 8.8:1 — every one clear of 4.5:1
+     except the two display words, which only have to clear 3:1.
 
-     ⚠ These figures belong to THIS photograph. Swap it and re-measure all five
+     ⚠ These figures belong to THIS image. Swap it and re-measure all seven
      before shipping: hide .hero__inner, screenshot the bare background, and
-     take the worst pixel inside each text element's bounding box. */
+     take the worst pixel inside each text element's bounding box. Translucent
+     text (the eyebrow at 0.78, the ledes at 0.92) has to be composited against
+     each pixel first, or the number comes out flattering and wrong. */
   background:
     linear-gradient(to bottom,
-      rgb(var(--navy-rgb) / 0.54) 0%,
-      rgb(var(--navy-rgb) / 0.52) 38%,
-      rgb(var(--navy-rgb) / 0.66) 100%),
+      rgb(var(--navy-rgb) / 0.62) 0%,
+      rgb(var(--navy-rgb) / 0.60) 38%,
+      rgb(var(--navy-rgb) / 0.74) 100%),
     linear-gradient(to right, rgb(var(--navy-rgb) / 0.32), rgb(var(--navy-rgb) / 0.12));
 }
 

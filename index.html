@@ -29,12 +29,16 @@
   <meta property="og:title" content="11:11 | Bespoke Private Concerts &amp; Curated Venue Experiences">
   <meta property="og:description" content="Where rare venues meet exceptional talent. Bespoke private concerts, premium corporate gatherings and curated venue and artist matchmaking across India.">
   <meta property="og:locale" content="en_IN">
-  <meta property="og:image" content="https://images.pexels.com/photos/15949379/pexels-photo-15949379.jpeg?auto=compress&cs=tinysrgb&w=1200">
-  <meta property="og:image:alt" content="A small classical ensemble performing to a seated audience beneath the stone arches of a historic hall.">
+  <!-- Absolute, because a share preview is fetched by someone else's server and
+       a relative path means nothing there. This points at the GitHub Pages host
+       the site is being reviewed on; when the real domain is confirmed, change
+       both image URLs and add "url" to the JSON-LD in the same pass. -->
+  <meta property="og:image" content="https://amareshnayak2022.github.io/11-11EventManagement.github.io/images/hero-1600.jpg">
+  <meta property="og:image:alt" content="The 11:11 crest: a crowned lion between outspread golden wings, above the numerals 11:11, on midnight navy.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="11:11 | Bespoke Private Concerts &amp; Curated Venue Experiences">
   <meta name="twitter:description" content="Where rare venues meet exceptional talent. Private concerts and curated gatherings across India.">
-  <meta name="twitter:image" content="https://images.pexels.com/photos/15949379/pexels-photo-15949379.jpeg?auto=compress&cs=tinysrgb&w=1200">
+  <meta name="twitter:image" content="https://amareshnayak2022.github.io/11-11EventManagement.github.io/images/hero-1600.jpg">
 
   <!-- Typography: editorial serif + clean geometric sans.
        Cormorant Garamond and Montserrat are both on the client's approved list
@@ -46,7 +50,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <!-- Preload the hero photograph so the first paint feels instant -->
-  <link rel="preload" as="image" href="https://images.pexels.com/photos/15949379/pexels-photo-15949379.jpeg?auto=compress&cs=tinysrgb&w=1800">
+  <link rel="preload" as="image" href="images/hero-1600.jpg"
+        imagesrcset="images/hero-900.jpg 900w, images/hero-1400.jpg 1400w, images/hero-1600.jpg 1600w"
+        imagesizes="100vw">
 
   <!-- ?v= is a cache-buster, not a build artefact. GitHub Pages serves these
        files with a ten-minute max-age, but phone browsers hold a stylesheet far
@@ -54,7 +60,7 @@
        page updates, the capitals and the gold do not. Bump the date whenever
        css/style.css or js/script.js changes and every browser fetches it fresh;
        the same string is on the <script> tag at the end of <body>. -->
-  <link rel="stylesheet" href="css/style.css?v=2026-08-22e">
+  <link rel="stylesheet" href="css/style.css?v=2026-08-22f">
 
   <!--
     Structured data for Elevenn Elevenn Archive Pvt Ltd, trading as 11:11.
@@ -77,7 +83,7 @@
     "alternateName": "Elevenn Elevenn Archive",
     "slogan": "Where Rare Venues Meet Exceptional Talent",
     "description": "11:11 is an experiential event agency curating high-impact atmospheric experiences — bespoke private concerts, premium corporate and institutional gatherings, and curated venue and artist matchmaking across India.",
-    "image": "https://images.pexels.com/photos/15949379/pexels-photo-15949379.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    "image": "https://amareshnayak2022.github.io/11-11EventManagement.github.io/images/hero-1600.jpg",
     "telephone": "+91-9019526532",
     "email": "connect@elevennelevenn.com",
     "address": {
@@ -227,15 +233,25 @@
          ============================================================ -->
     <section class="hero" id="hero" aria-labelledby="hero-title">
       <div class="hero__media">
-        <!-- IMAGE 1 of 12 — hero background. Replace with images/hero.jpg later. -->
+        <!-- The client's own artwork (background.jpg, supplied 22 Aug 2026),
+             cropped above its baked-in lettering. The original carries "It is
+             Time" and a service list reading EVENT MANAGEMENT / BRANDING /
+             ADVERTISEMENT / PUBLIC RELATIONS across the lower third — the
+             retired tagline and the positioning this site was twice rewritten
+             away from. Cropping at y=770 of the 1600x1084 original keeps the
+             wings, crown, lion and 11:11 and drops all of it. If a new export
+             arrives, crop it the same way before installing it.
+
+             It is the only hero image that is not a Pexels placeholder, so
+             unlike the rest it does not need replacing before launch. -->
         <img
           class="hero__img"
-          src="https://images.pexels.com/photos/15949379/pexels-photo-15949379.jpeg?auto=compress&cs=tinysrgb&w=1800"
-          srcset="https://images.pexels.com/photos/15949379/pexels-photo-15949379.jpeg?auto=compress&cs=tinysrgb&w=900 900w,
-                  https://images.pexels.com/photos/15949379/pexels-photo-15949379.jpeg?auto=compress&cs=tinysrgb&w=1400 1400w,
-                  https://images.pexels.com/photos/15949379/pexels-photo-15949379.jpeg?auto=compress&cs=tinysrgb&w=2000 2000w"
+          src="images/hero-1600.jpg"
+          srcset="images/hero-900.jpg 900w,
+                  images/hero-1400.jpg 1400w,
+                  images/hero-1600.jpg 1600w"
           sizes="100vw"
-          alt="A small classical ensemble performing to a seated audience beneath the stone arches of a historic hall."
+          alt="The 11:11 crest: a crowned lion between outspread golden wings, above the numerals 11:11, on midnight navy."
           fetchpriority="high"
           decoding="async">
       </div>
@@ -1255,6 +1271,6 @@
     <span class="wa-float__label">WhatsApp</span>
   </a>
 
-  <script src="js/script.js?v=2026-08-22e"></script>
+  <script src="js/script.js?v=2026-08-22f"></script>
 </body>
 </html>

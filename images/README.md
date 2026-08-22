@@ -4,9 +4,11 @@ This folder holds the site's brand assets and photography.
 
 - **`logo.png`** — the brand badge, circular. Installed and in use.
 - **`apple-touch-icon.png`** — the same artwork, opaque and square, for iOS.
-- Photography — twelve Pexels placeholders of Indian and Odia celebrations, loaded
-  over the network, so the site looks finished the moment you open
-  `index.html`.
+- **`hero-900.jpg` / `hero-1400.jpg` / `hero-1600.jpg`** — the hero background:
+  the client's own crest artwork, cropped. Installed and in use.
+- Photography — eleven Pexels placeholders of Indian and Odia celebrations,
+  loaded over the network, so the site looks finished the moment you open
+  `index.html`. The hero is the twelfth image slot and is *not* a placeholder.
 
 One job left here: **replace the placeholder photography**.
 
@@ -68,19 +70,24 @@ artwork (SVG/EPS) turns up it is still worth installing:
 - **SVG** works for the badge itself: rename the `<img>` `src` to `logo.svg` in
   the three places it appears. Keep a PNG for the icon `<link>` tags.
 
-### Still to do: the social share image
+### The social share image
 
-`og:image` and `twitter:image` in `<head>` now point at the Pexels hero
-photograph. They need an **absolute** URL on your own domain to work when the
-link is shared, so they cannot be pointed at `images/logo.png` as a relative
-path:
+`og:image` and `twitter:image` in `<head>` point at the hero crest artwork, as
+an **absolute** URL on the GitHub Pages host:
 
 ```html
-<meta property="og:image" content="https://yourdomain.in/images/og-share.jpg">
+<meta property="og:image"
+      content="https://amareshnayak2022.github.io/11-11EventManagement.github.io/images/hero-1600.jpg">
 ```
 
-A 1200 × 630 landscape composition works better here than the square badge —
-most platforms crop a square awkwardly at that ratio.
+Absolute because a share preview is fetched by WhatsApp's or LinkedIn's servers,
+not by the visitor's browser — a relative path means nothing there. **Repoint
+both at your own domain when it is confirmed**, in the same pass as adding `url`
+to the JSON-LD.
+
+Worth doing eventually: a purpose-made 1200 × 630 landscape composition. The
+crest is 1600 × 770, close enough that platforms crop it tidily, but a share
+image can carry the name and the line as well as the mark.
 
 ---
 
@@ -90,7 +97,9 @@ most platforms crop a square awkwardly at that ratio.
 
 Pexels serves images over a fast CDN and resizes on the fly via URL parameters
 (`w=`, `auto=compress`), which keeps the repository small while the design is
-reviewed. Every one of the twelve was **opened and looked at** before being used —
+reviewed. (The hero no longer works this way: it is the client's own artwork,
+committed to this folder in three widths.) Every one of the placeholders was
+**opened and looked at** before being used —
 none were chosen from a search result label alone.
 
 The photography has been re-chosen twice, following the business. The first
@@ -125,7 +134,7 @@ All twelve are in `index.html`, each marked with a numbered comment
 
 | #  | Section    | Subject                                        | Pexels ID  | Suggested filename        |
 |----|------------|------------------------------------------------|------------|---------------------------|
-| 1  | Hero       | Chamber concert under historic stone arches    | `15949379` | `hero.jpg`                |
+| 1  | Hero       | **The client's crest artwork — local, not stock** | —        | `hero-1600.jpg` and its 900/1400 variants |
 | 2  | About      | Candlelit performance in a historic church     | `37443989` | `about-main.jpg`          |
 | 3  | About      | Sitar resting on a blue velvet chair           | `31168773` | `about-inset.jpg`         |
 | 4  | Atmosphere | Sandstone heritage courtyard                   | `33726143` | `atmos-venue-courtyard.jpg` |
@@ -138,12 +147,13 @@ All twelve are in `index.html`, each marked with a numbered comment
 | 11 | Atmosphere | Konark Sun Temple chariot wheel                | `1721747`  | `atmos-heritage.jpg`      |
 | 12 | CTA band   | Saxophonist and singer in a dim room           | `9419371`  | `cta.jpg`                 |
 
-⚠️ **If you change the hero or CTA photograph, re-measure the text contrast.**
-The overlay in `css/style.css` was originally tuned against a bright, high-key
-scene; the current hero is a much darker interior, so there is headroom to bring
-the overlay down if you want more of the photograph to show. A brighter
-replacement would need more overlay, not less. The measured worst-pixel figures
-are recorded in the comment on `.hero__media::after`.
+⚠️ **If you change the hero or CTA image, re-measure the text contrast.** The
+overlay in `css/style.css` has been re-tuned twice already, most recently for
+the crest artwork: its pale wing feathers sit directly behind the headline, and
+the gold word LEGEND is gold type on them, which is the binding constraint at
+4.1:1 against a 3:1 floor. A brighter replacement needs more overlay, not less.
+The measured worst-pixel figures are recorded in the comment on
+`.hero__media::after`, along with the method.
 
 The hero, three of the Atmosphere images, and the CTA image also use `srcset`
 for responsive loading. If you switch to local files you can either provide
@@ -171,10 +181,11 @@ keep the single `src`.
    alt text describes the placeholder and would be wrong — and actively
    misleading to screen reader users — if left in place.
 6. If you replace the hero image, also update the `<link rel="preload">` in
-   `<head>` and the `og:image` / `twitter:image` meta tags, which still point
-   at the old URL. Open Graph images need an **absolute** URL
-   (`https://yourdomain.in/images/hero.jpg`) to work when shared on WhatsApp,
-   Instagram, or Facebook.
+   `<head>` (including its `imagesrcset`) and the `og:image` / `twitter:image`
+   meta tags. Those two are **absolute** URLs, currently on the GitHub Pages
+   host — a share preview is fetched by someone else's server, so a relative
+   path means nothing there. Repoint them at your own domain when it is
+   confirmed.
 
 ### Recommended export settings
 
