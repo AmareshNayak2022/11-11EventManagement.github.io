@@ -205,6 +205,13 @@ properties at the top of `css/style.css`, section **01. Design tokens**:
 }
 ```
 
+Two shadow tokens sit alongside them — `--shadow-soft` and `--shadow-lift` —
+both cast in navy rather than black, because a grey shadow on warm cream reads
+as dirt while a navy one reads as depth. Soft is the resting state for anything
+raised off the page (the service cards, the framed photographs); lift is the
+same shadow opened up, so a hover is one shadow growing rather than a second
+effect arriving.
+
 Alongside them sit three channel triplets — `--navy-rgb`, `--paper-rgb`,
 `--gold-rgb` — so that every translucent overlay and hairline further down the
 file can be written `rgb(var(--navy-rgb) / 0.45)` instead of restating a brand
@@ -235,6 +242,13 @@ opacity, still measure 6.6:1. That band is the one place the brand colour gets
 to be a colour rather than a hairline, which is why the eyebrow, the numerals
 and the `.step__meta` labels all use it. If you change the palette, re-measure
 every ratio above.
+
+**The gold button.** One action on the site is gold: *start a brief*, wherever
+it appears — hero, mobile menu, closing band, and the form's own submit.
+`.btn--gold` fills with a 135° gradient across all three brand golds under navy
+type, which measures 7.6:1 at the darkest stop, 8.9:1 at the brand gold and
+11.5:1 at `--gold-bright`. Everything else stays an outline; a page where every
+button is gold has no primary action at all.
 
 A *photograph* is not a dark band, though, and that is what `--gold-bright` is
 for. The word **LEGEND** in the hero and closing headings is gold over the two

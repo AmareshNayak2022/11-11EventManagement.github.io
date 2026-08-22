@@ -124,6 +124,17 @@
 
   --header-h:       88px;
 
+  /* --- Elevation -----------------------------------------------------------
+     Two shadows, both cast in navy rather than black: a grey shadow on a warm
+     cream page reads as dirt, a navy one reads as depth. Soft is the resting
+     state for anything that sits above the page (cards, framed photographs);
+     lift is the same shadow opened up on hover, so the movement is the shadow
+     growing rather than a second effect appearing. */
+  --shadow-soft: 0 1px 2px rgb(var(--navy-rgb) / 0.04),
+                 0 10px 28px rgb(var(--navy-rgb) / 0.07);
+  --shadow-lift: 0 2px 6px rgb(var(--navy-rgb) / 0.07),
+                 0 22px 52px rgb(var(--navy-rgb) / 0.14);
+
   /* --- Motion ------------------------------------------------------------ */
   --ease:        cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-soft:   cubic-bezier(0.4, 0, 0.2, 1);
@@ -341,6 +352,41 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 .btn--light:hover,
 .btn--light:focus-visible { color: var(--navy); border-color: var(--paper); }
 
+/* The one loud button on the site: solid champagne gold under navy type. It
+   marks the start-a-brief action wherever it appears — hero, mobile menu,
+   closing band, and the form's own submit — and nothing else. Enquire in the
+   header stays an outline, because a page where every button is gold has no
+   primary action at all.
+
+   Safe by measurement, not by eye: navy on the gradient's darkest stop
+   (--gold-metal) is 7.6:1, on the brand gold 8.9:1 and on --gold-bright
+   11.5:1, so every pixel of the fill clears AA for body-sized type. The inset
+   highlight along the top edge is what makes it read as metal rather than
+   mustard; the shadow beneath it is navy, like every other shadow here. */
+.btn--gold {
+  --btn-fg: var(--navy);
+  --btn-bd: transparent;
+  background-image: linear-gradient(135deg,
+    var(--gold-bright) 0%, var(--gold) 48%, var(--gold-metal) 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--paper-rgb) / 0.5),
+    var(--shadow-soft);
+  font-weight: 600;
+}
+/* The sweep-up fill the base .btn provides, in a brighter gold — the button
+   polishes rather than changes colour. */
+.btn--gold::before {
+  background-image: linear-gradient(135deg,
+    var(--gold) 0%, var(--gold-bright) 52%, var(--gold) 100%);
+}
+.btn--gold:hover,
+.btn--gold:focus-visible {
+  color: var(--navy);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--paper-rgb) / 0.6),
+    var(--shadow-lift);
+}
+
 .btn--sm { min-height: 42px; padding: 0.7rem 1.4rem; }
 .btn--block { width: 100%; }
 
@@ -433,6 +479,28 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 .site-header .btn--outline:hover,
 .site-header .btn--outline:focus-visible { color: var(--navy); border-color: var(--paper); }
 .site-header .logo__sub { color: rgb(var(--paper-rgb) / 0.7); }
+
+/* Reading progress, drawn along the header's own bottom edge. It only appears
+   once the header has taken its cream background — over the hero there is no
+   edge for it to sit on, and a gold line across a photograph would read as a
+   loading bar. --scroll-progress is published by js/script.js on the same
+   scroll pass that toggles .is-scrolled, so this costs no extra listener. */
+.site-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  transform: scaleX(var(--scroll-progress, 0));
+  transform-origin: left center;
+  background: linear-gradient(90deg,
+    var(--gold-metal), var(--gold) 55%, var(--gold-bright));
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+  pointer-events: none;
+}
+.site-header.is-scrolled::after { opacity: 1; }
 
 .site-header.is-scrolled {
   background: rgb(var(--paper-rgb) / 0.94);
@@ -978,26 +1046,46 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
    ========================================================================== */
 .services { background: var(--bg-alt); }
 
+/* These were hairline-divided columns — one grid, 1px gaps, the hairline colour
+   showing through as the dividers. They are cards now, with real gutters,
+   because a card needs somewhere to cast its shadow: at a 1px gap each card's
+   shadow fell on its neighbour and the row read as a smudge rather than three
+   liftable things. The quieter hairline treatment survives one section down, on
+   the experiences and tiers grids, which is what keeps the two apart. */
 .services__grid {
   display: grid;
-  gap: clamp(1px, 0.2vw, 1px);
-  background: var(--hairline);
-  border-block: 1px solid var(--hairline);
+  gap: clamp(1.25rem, 2.2vw, 2rem);
 }
 @media (min-width: 760px) {
   .services__grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* Editorial columns divided by hairlines — deliberately not boxed cards */
+/* Given a card's own material — a hairline, a top-to-bottom lightening and a
+   navy shadow — rather than being a tinted rectangle. On a page this flat the
+   three service cards are the first thing that should feel liftable, and the
+   hover then only has to open the shadow and raise the card 4px. */
 .service {
   position: relative;
   display: flex;
   flex-direction: column;
   padding: clamp(2rem, 4vw, 3.25rem) clamp(1.5rem, 3vw, 2.75rem) clamp(2.5rem, 5vw, 3.75rem);
-  background: var(--bg-alt);
-  transition: background-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  border: 1px solid var(--hairline-soft);
+  background-color: var(--bg-alt);
+  background-image: linear-gradient(180deg,
+    rgb(var(--paper-rgb) / 0.9) 0%, rgb(var(--paper-rgb) / 0) 62%);
+  box-shadow: var(--shadow-soft);
+  transition: background-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              transform var(--dur) var(--ease);
 }
-.service:hover { background: var(--paper); }
+.service:hover,
+.service:focus-within {
+  background-color: var(--paper);
+  border-color: rgb(var(--gold-rgb) / 0.35);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-4px);
+}
 
 .service__index {
   font-size: var(--fs-eyebrow);
@@ -1076,10 +1164,24 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 @media (min-width: 620px)  { .event-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1000px) { .event-grid { grid-template-columns: repeat(3, 1fr); } }
 
+/* The rule above each name is the hairline plus a short gold segment laid over
+   its left end, which runs out to the full width on hover. Decorative only —
+   the champagne gold measures 2.0:1 here and may never carry a word. */
 .event-type {
+  position: relative;
   padding-top: clamp(1.1rem, 2vw, 1.5rem);
   border-top: 1px solid var(--hairline);
 }
+.event-type::before {
+  content: "";
+  position: absolute;
+  inset: -1px auto auto 0;
+  width: 2.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), rgb(var(--gold-rgb) / 0.15));
+  transition: width var(--dur-slow) var(--ease);
+}
+.event-type:hover::before { width: 100%; }
 .event-type__name {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
@@ -1176,9 +1278,25 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
    11. PROCESS  (dark band)
    ========================================================================== */
 .process {
+  position: relative;
+  overflow: hidden;
   background: var(--navy);
   color: rgb(var(--paper-rgb) / 0.72);
 }
+/* A single soft gold light thrown from above the band. It is the only place on
+   the page where the brand colour behaves like light rather than ink, and it
+   is what stops 900px of flat navy reading as a black hole between two cream
+   sections. Kept under 10% so it never becomes a background of its own. */
+.process::before {
+  content: "";
+  position: absolute;
+  inset: -35% -10% auto;
+  height: 90%;
+  background: radial-gradient(52% 60% at 50% 0%,
+    rgb(var(--gold-rgb) / 0.09), rgb(var(--gold-rgb) / 0) 70%);
+  pointer-events: none;
+}
+.process > * { position: relative; }
 .process__list {
   display: grid;
   gap: clamp(2.25rem, 5vw, 3rem);
@@ -1206,8 +1324,26 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   line-height: 1;
   color: rgb(var(--gold-rgb) / 0.85);
   transition: color var(--dur-slow) var(--ease);
+  /* see the @supports block below for the poured-metal version */
 }
 .step:hover .step__num { color: var(--accent); }
+/* Poured metal: the numerals take the gold as a vertical gradient rather than a
+   flat fill. Behind @supports because background-clip: text with transparent
+   type is invisible where it is unsupported — the flat gold above stays the
+   truth for those browsers. Every stop of the gradient is one of the three
+   brand golds, measuring 7.6:1 (metal), 8.9:1 (gold) and 11.5:1 (bright) on
+   --navy, so no part of a numeral is weaker than the flat colour it replaces. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .step__num {
+    background-image: linear-gradient(175deg,
+      var(--gold-bright) 0%, var(--gold) 52%, var(--gold-metal) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: filter var(--dur-slow) var(--ease);
+  }
+  .step:hover .step__num { color: transparent; filter: brightness(1.15); }
+}
 
 .step__title {
   margin-top: clamp(1rem, 2vw, 1.5rem);
@@ -1267,6 +1403,19 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   position: relative;
   overflow: hidden;
   background: var(--paper-alt);
+  /* A gold hairline drawn inside the frame, and the page's resting shadow
+     under it, so the photographs sit on the cream rather than being holes cut
+     in it. Both are inset/box shadows on the frame itself, which is already
+     the overflow clip — no extra element. */
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--gold-rgb) / 0.16),
+    var(--shadow-soft);
+  transition: box-shadow var(--dur-slow) var(--ease);
+}
+.shot:hover .shot__frame {
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--gold-rgb) / 0.4),
+    var(--shadow-lift);
 }
 .shot__frame img {
   width: 100%;

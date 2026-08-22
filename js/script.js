@@ -42,6 +42,18 @@
   function syncHeaderState() {
     if (!header) return;
     header.classList.toggle('is-scrolled', window.scrollY > 24);
+
+    /* How far down the page we are, 0 to 1, published for the gold progress
+       line on the header's bottom edge (see .site-header::after). It rides the
+       existing scroll pass rather than adding a listener of its own. A page
+       shorter than the viewport has nothing to scroll, so it reports 0 rather
+       than dividing by zero. */
+    var doc = document.documentElement;
+    var scrollable = doc.scrollHeight - window.innerHeight;
+    var progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+    if (progress < 0) progress = 0;
+    if (progress > 1) progress = 1;
+    doc.style.setProperty('--scroll-progress', progress.toFixed(4));
   }
 
   /* ========================================================================
