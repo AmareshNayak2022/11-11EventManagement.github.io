@@ -1847,9 +1847,10 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   font-style: italic;
   text-transform: lowercase;
 }
-/* The registered name under the wordmark. It borrows the place lines' setting
-   below but sits a step brighter and a step wider, so the reading order runs
-   name, then line, then location rather than three identical grey rows. */
+/* The registered name under the wordmark — the eyebrow setting used across the
+   page, but brighter than the footer's body colour and tracked wider, so the
+   column reads name, then brand line, then paragraph, each clearly a different
+   voice rather than three rows of the same grey. */
 .site-footer__name {
   margin-top: 0.8rem;
   font-size: var(--fs-eyebrow);
@@ -1858,14 +1859,6 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   text-transform: uppercase;
   color: rgb(var(--paper-rgb) / 0.86);
 }
-.site-footer__place {
-  margin-top: 0.55rem;
-  font-size: var(--fs-eyebrow);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: rgb(var(--paper-rgb) / 0.62);
-}
-.site-footer__place + .site-footer__place { margin-top: 0.3rem; }
 
 .site-footer__heading {
   margin-bottom: 1.35rem;
@@ -1935,9 +1928,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   margin-top: 1.15rem;
   margin-bottom: 0;
 }
-/* The location lines are their own cluster; at the place lines' own 0.55rem
-   they crowd against the paragraph above and read as a fourth line of it. */
-.site-footer__note--brand + .site-footer__place { margin-top: 1.15rem; }
+
 
 .site-footer__bar {
   display: flex;
