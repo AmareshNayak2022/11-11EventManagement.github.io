@@ -1847,6 +1847,17 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   font-style: italic;
   text-transform: lowercase;
 }
+/* The registered name under the wordmark. It borrows the place lines' setting
+   below but sits a step brighter and a step wider, so the reading order runs
+   name, then line, then location rather than three identical grey rows. */
+.site-footer__name {
+  margin-top: 0.8rem;
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgb(var(--paper-rgb) / 0.86);
+}
 .site-footer__place {
   margin-top: 0.55rem;
   font-size: var(--fs-eyebrow);
@@ -1916,6 +1927,17 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   font-size: var(--fs-small);
   line-height: 1.75;
 }
+/* Same paragraph, reused in the brand column, where it follows the brand line
+   instead of leading a column — so the margins swap ends and it is allowed a
+   few more characters per line, the brand column being the widest of the four. */
+.site-footer__note--brand {
+  max-width: 36ch;
+  margin-top: 1.15rem;
+  margin-bottom: 0;
+}
+/* The location lines are their own cluster; at the place lines' own 0.55rem
+   they crowd against the paragraph above and read as a fourth line of it. */
+.site-footer__note--brand + .site-footer__place { margin-top: 1.15rem; }
 
 .site-footer__bar {
   display: flex;

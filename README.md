@@ -177,6 +177,8 @@ transparency, so the home-screen icon is a separate opaque square,
 | The line *Where moments become legend* | hero `<h1>`, `#cta-title`, footer `.site-footer__tagline` — plus the hero eyebrow and the two `.hero__lede` paragraphs around it |
 | Tagline *Where Rare Venues Meet Exceptional Talent* | `slogan` in the JSON-LD and the OG/Twitter descriptions only — it no longer appears in the visible page |
 | Badge sub-text *Bespoke Occasions & Curation* | header `.logo__sub`, `.cta__eyebrow`                                   |
+| Registered name under the footer wordmark     | `.site-footer__name`                                                   |
+| The footer's "OMG! moments" paragraph         | `.site-footer__note--brand`                                            |
 | Contact details, address and hours            | `.contact__details` block — and `telephone` / `email` in the JSON-LD   |
 | Legal entity in the copyright line            | `.site-footer__bar`                                                    |
 
