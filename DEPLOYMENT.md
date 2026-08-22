@@ -95,12 +95,14 @@ sound; `.com` has the edge if the work really is pan-India and destination.
 If both are available and affordable, buy both and redirect one to the other —
 it stops a competitor taking the near-identical name.
 
-⚠️ **This may already be settled.** The published email is
-`concierge@1111events.in`, which implies `1111events.in` is registered and in
-use. Confirm that before buying anything — and if the site is to live there
-too, its canonical URL and share image should point at it. Note that owning the
-domain for email does not automatically mean you want the website on it, so
-this is a decision, not just a lookup.
+⚠️ **This may already be settled — but it has moved once.** The published email
+is `connect@elevennelevenn.com` (changed 22 Aug 2026, from an address on
+`1111events.in`), which implies `elevennelevenn.com` is registered and in use.
+Confirm that before buying anything — and if the site is to live there too, its
+canonical URL and share image should point at it. Note that owning the domain
+for email does not automatically mean you want the website on it, so this is a
+decision, not just a lookup. If both domains are held, decide which one the
+brand leads with; the site should not show one and route mail to the other.
 
 Given the brand is `11:11`, be aware that domains starting with digits are fine
 technically, but spell-ability matters when a CXO reads it aloud down a phone.
@@ -213,10 +215,12 @@ never need to buy or install a certificate.
 
 ## Step 4 — Set up business email
 
-You need `concierge@1111events.in` to actually receive mail, and
-`enquiries@1111events.in` alongside it for form submissions. Domain
-registration does **not** include email — this is a separate thing to set up,
-and the concierge address is already published on the site.
+You need `connect@elevennelevenn.com` to actually receive mail — it is already
+published on the site — and a routing address alongside it for form
+submissions. The one recorded in the brief, `enquiries@1111events.in`, is on the
+other domain, so confirm which inbox forms should reach before wiring anything.
+Domain registration does **not** include email; this is a separate thing to set
+up.
 
 | Option                       | Cost                     | Notes |
 |------------------------------|--------------------------|-------|
@@ -241,7 +245,7 @@ there are — that is a direct loss of revenue.
 **Connected — but read this before you rely on it.**
 
 The form now delivers in **WhatsApp mode**: on submit it formats the answers
-into a message and opens WhatsApp addressed to `+91 99381 20356`, pre-typed.
+into a message and opens WhatsApp addressed to `+91 90195 26532`, pre-typed.
 Nothing is silently discarded any more.
 
 The catch is that **the visitor has to press send in WhatsApp**. If they hesitate

@@ -18,8 +18,8 @@ Built as a static site: three files, no build step, no dependencies, no server.
 | Marketing name | 11:11 (styled *11:11 Experiential* or *11:11 Bespoke* in body copy)                                  |
 | Tagline        | Where Rare Venues Meet Exceptional Talent                                                            |
 | Badge sub-text | Bespoke Occasions & Curation                                                                         |
-| Email          | concierge@1111events.in  (enquiry routing inbox: enquiries@1111events.in)                            |
-| Phone & WhatsApp | +91 99381 20356 — the concierge desk line, one number for both                                      |
+| Email          | connect@elevennelevenn.com  (routing inbox for forms: unconfirmed)                                   |
+| Phone & WhatsApp | +91 90195 26532 — the concierge desk line, one number for both                                      |
 | Second line    | +91 95915 09910 — also on WhatsApp                                                                    |
 | Address        | Plot No. 30 & 30/982, Odyssa Business Centre, Bomikhal, Rasulgarh Square, Bhubaneswar, Odisha 751010 |
 | Hours          | Monday – Saturday, 10:00 – 19:00 IST                                                                 |
@@ -282,7 +282,7 @@ which one runs depends entirely on one line in `js/script.js`, section
 ```js
 var DELIVERY = {
   endpoint: '',                 // empty  → WhatsApp mode
-  whatsapp: '919938120356'      // international format, digits only
+  whatsapp: '919019526532'      // international format, digits only
 };
 ```
 
@@ -364,7 +364,7 @@ Fully static, so any host works. Nothing to build, nothing to configure.
 ### Pre-launch checklist
 
 - [x] Real email and phone published — `.is-placeholder` spans all removed
-- [x] Enquiry delivery connected — WhatsApp mode, `+91 99381 20356`
+- [x] Enquiry delivery connected — WhatsApp mode, `+91 90195 26532`
 - [x] `telephone` and `email` added to the JSON-LD block
 - [x] Add the logo — the client's monogram, circular, as `images/logo.png`
 - [x] Add a favicon — uses the badge

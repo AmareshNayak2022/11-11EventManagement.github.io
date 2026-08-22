@@ -52,8 +52,8 @@ company are a genuine legal risk.
 | Tagline | Where Rare Venues Meet Exceptional Talent |
 | Hero headline | *Where moments become legend.* — client copy, 22 Aug 2026 |
 | Badge sub-text | Bespoke Occasions & Curation |
-| Email | `concierge@1111events.in` — displayed. Enquiries route to `enquiries@1111events.in` |
-| Phone & WhatsApp | `+91 99381 20356` — the concierge desk line, one number for both |
+| Email | `connect@elevennelevenn.com` — displayed (client, 22 Aug 2026). Routing inbox unconfirmed |
+| Phone & WhatsApp | `+91 90195 26532` — the concierge desk line, one number for both (client, 22 Aug 2026) |
 | Second line | `+91 95915 09910` — also published with a WhatsApp link |
 | Address | Plot No. 30 & 30/982, Odyssa Business Centre, Bomikhal, Rasulgarh Square, Bhubaneswar 751010 (publish; visits by appointment only) |
 | Hours | Mon–Sat, 10:00–19:00 IST |
@@ -78,15 +78,17 @@ they do. Do not move it back into any heading.
 
 Two things about that table are worth knowing before you touch them:
 
-- **There are two addresses and they are not interchangeable.**
-  `concierge@1111events.in` (brief Q36) is the public one and the only one on
-  the page. `enquiries@1111events.in` (Q40) is the routing inbox — where form
-  submissions should be delivered if the form is ever moved off WhatsApp, with
-  the Lead Curator and Ops Head copied. An earlier `connect@elevennelevenn.com`
-  was sent in conversation and briefly published; the client has since confirmed
-  the `1111events.in` addresses are correct. The site's own *domain* is still
-  unconfirmed — an email domain is not proof of where the site will live — which
-  is why `url` stays omitted from the JSON-LD.
+- **The published email has changed twice, and the routing inbox has not
+  followed it.** `connect@elevennelevenn.com` is what the page shows, restored
+  at the client's instruction on 22 Aug 2026. It had been published once before,
+  then replaced by `concierge@1111events.in` (brief Q36) when the client
+  confirmed the brief's answers — and now replaced again. Do not "correct" it
+  back to the brief without asking; the brief is older than this instruction.
+  The routing inbox for form submissions, `enquiries@1111events.in` (Q40), sits
+  on the domain the page no longer shows, so it needs re-confirming before any
+  endpoint is wired — see the `DELIVERY` comment in `js/script.js`. The site's
+  own *domain* is still unconfirmed, which is why `url` stays omitted from the
+  JSON-LD; note that two different domains have now been the likely candidate.
 - **Two numbers, both on WhatsApp, but only one is the enquiry route.** Each
   contact row pairs a `tel:` link with a `wa.me` link. Their visible text is
   identical — the `<dt>` beside them says which desk — so each carries an
@@ -95,7 +97,7 @@ Two things about that table are worth knowing before you touch them:
   these rows.
   The **floating button and `DELIVERY.whatsapp` route to the concierge line
   only**, because brief Q37 makes that the desk that handles enquiries. So
-  `919938120356` appears three times (contact row, floating button, DELIVERY)
+  `919019526532` appears three times (contact row, floating button, DELIVERY)
   and `919591509910` once. Changing which desk takes enquiries means changing
   the first three together.
 

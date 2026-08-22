@@ -270,15 +270,17 @@
      ==================================================================== */
   var DELIVERY = {
     // Paste a Formspree/Netlify/your-own URL here to switch to email delivery.
-    // Route submissions to enquiries@1111events.in — the client's stated
-    // enquiry inbox, which is NOT the same as concierge@1111events.in shown on
-    // the page. The Lead Curator and Ops Head are to be copied on every brief.
+    // Route submissions to the client's enquiry inbox, which is NOT the address
+    // shown on the page — that is connect@elevennelevenn.com. The routing inbox
+    // was given as enquiries@1111events.in, on a domain the page no longer
+    // shows, so re-confirm it before wiring an endpoint. The Lead Curator and
+    // Ops Head are to be copied on every brief.
     endpoint: '',
     // International format, digits only — no plus sign, spaces, or dashes.
-    // The concierge desk line +91 99381 20356, which is also the WhatsApp
+    // The concierge desk line +91 90195 26532, which is also the WhatsApp
     // account. It appears in two more places: the contact block and the
     // floating button, both in index.html. Change it in all three or none.
-    whatsapp: '919938120356'
+    whatsapp: '919019526532'
   };
 
   var form        = $('#inquiry-form');
