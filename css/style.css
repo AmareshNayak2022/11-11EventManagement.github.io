@@ -744,6 +744,16 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
     linear-gradient(to right, rgb(var(--navy-rgb) / 0.32), rgb(var(--navy-rgb) / 0.12));
 }
 
+/* The scroll cue is absolutely positioned about 100px up from the hero's bottom
+   edge (a 24–44px offset, a 56px rule and its label). Once the client's
+   two-paragraph statement went in, the copy block outgrows 100vh on a 768px-tall
+   laptop, and at the 14vh floor above the buttons finished 5px inside the cue —
+   measured, not guessed. So wherever the cue is actually drawn (it is hidden
+   below 560px) the hero reserves the cue's own height beneath the copy. */
+@media (min-width: 560px) {
+  .hero { padding-bottom: clamp(8.5rem, 16vh, 10rem); }
+}
+
 .hero__inner {
   position: relative;
   max-width: 60rem;
@@ -751,11 +761,6 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   margin-inline: auto;
 }
 .hero__eyebrow { margin-bottom: clamp(1.25rem, 3vw, 2rem); }
-/* The eyebrow is two phrases either side of a middot. On a narrow phone the
-   whole line does not fit, and left to itself it breaks at whichever space runs
-   out first — "…Bhubaneswar &" / "Pan-India". Holding each half together forces
-   any break onto the separator, which is the only place it reads correctly. */
-.hero__eyebrow span { white-space: nowrap; }
 .hero__title {
   font-family: var(--font-display);
   font-size: var(--fs-h1);
@@ -774,6 +779,18 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   font-weight: 300;
   line-height: 1.75;
   color: rgb(var(--paper-rgb) / 0.92);
+}
+/* Second half of the client's hero statement. Same voice, quieter setting: one
+   step down in size and a shorter gap above, so the pair reads as one block
+   rather than two ledes competing, and the hero still fits 100svh on a 375px
+   phone. Colour is deliberately left inherited at 0.92 alpha — this text is
+   smaller than the lede above it over the same photograph, so it needs at
+   least as much contrast, not less. */
+.hero__lede--sub {
+  margin-top: clamp(0.85rem, 2vw, 1.15rem);
+  max-width: 54ch;
+  font-size: var(--fs-body);
+  line-height: 1.7;
 }
 .hero__actions {
   display: flex;

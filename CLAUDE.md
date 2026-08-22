@@ -50,6 +50,7 @@ company are a genuine legal risk.
 |------|-------|
 | Legal name | Elevenn Elevenn Archive Pvt Ltd |
 | Tagline | Where Rare Venues Meet Exceptional Talent |
+| Hero headline | *Where moments become legend.* — client copy, 22 Aug 2026 |
 | Badge sub-text | Bespoke Occasions & Curation |
 | Email | `concierge@1111events.in` — displayed. Enquiries route to `enquiries@1111events.in` |
 | Phone & WhatsApp | `+91 99381 20356` — the concierge desk line, one number for both |
@@ -58,6 +59,14 @@ company are a genuine legal risk.
 | Hours | Mon–Sat, 10:00–19:00 IST |
 | Palette | Midnight Navy `#0A1128`, Champagne Gold `#D4AF37`, Metallic Gold `#C5A059`, Warm Cream `#FDFBF7` |
 | Pricing floor | From ₹5,00,000 per project engagement |
+
+The hero is the client's own words and was changed once already: on 22 Aug
+2026 the eyebrow became the registered name *Elevenn Elevenn Archive*, the
+`<h1>` became *Where moments become legend.*, and the lede became the
+two-paragraph "architects of the exceptional" statement. The tagline is
+still the tagline — it survives in `#cta-title`, the footer, the JSON-LD
+`slogan` and the OG/Twitter descriptions — but do not move it back into the
+`<h1>`.
 
 Two things about that table are worth knowing before you touch them:
 
