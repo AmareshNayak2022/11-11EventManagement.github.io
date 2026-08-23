@@ -57,8 +57,8 @@ company are a genuine legal risk.
 | Hero headline | *Where moments become legend.* — client copy, 22 Aug 2026 |
 | Badge sub-text | Bespoke Occasions & Curation |
 | Email | `connect@elevennelevenn.com` — displayed (client, 22 Aug 2026). Routing inbox unconfirmed |
-| Phone & WhatsApp | `+91 90195 26532` — the concierge desk line, one number for both (client, 22 Aug 2026) |
-| Second line | `+91 95915 09910` — also published with a WhatsApp link |
+| Phone & WhatsApp | `+91 99381 20356` — the concierge desk line, one number for both (client, 23 Aug 2026) |
+| Second line | `+91 90195 26532` — also published with a WhatsApp link (client, 23 Aug 2026; replaced +91 95915 09910, now off the site) |
 | Address | Plot No. 30 & 30/982, Odyssa Business Centre, Bomikhal, Rasulgarh Square, Bhubaneswar 751010 (publish; visits by appointment only) |
 | Hours | Mon–Sat, 10:00–19:00 IST |
 | Palette | Midnight Navy `#0A1128`, Champagne Gold `#D4AF37`, Metallic Gold `#C5A059`, Warm Cream `#FDFBF7` |
@@ -110,8 +110,8 @@ Two things about that table are worth knowing before you touch them:
   these rows.
   The **floating button and `DELIVERY.whatsapp` route to the concierge line
   only**, because brief Q37 makes that the desk that handles enquiries. So
-  `919019526532` appears three times (contact row, floating button, DELIVERY)
-  and `919591509910` once. Changing which desk takes enquiries means changing
+  `919938120356` appears three times (contact row, floating button, DELIVERY)
+  and `919019526532` once. Changing which desk takes enquiries means changing
   the first three together.
 
 Still unconfirmed, and still listed in `CLIENT-BRIEF.md`: real past work and
