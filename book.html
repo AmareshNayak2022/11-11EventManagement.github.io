@@ -6,8 +6,8 @@
 
   <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
 
-  <title>Reserve a Seat | 11:11 — The Debut, 26 September 2026</title>
-  <meta name="description" content="Reserve a seat for 11:11's debut signature event on Saturday 26 September 2026. Early-bird admission Rs 2,999, standard admission Rs 5,999. Pay by UPI and our concierge desk confirms your seat.">
+  <title>Reserve Your Pass | NOXUS &mdash; 26 September 2026</title>
+  <meta name="description" content="Reserve your NOXUS pass for Saturday 26 September 2026 — Odisha's biggest sundowner drunch party, presented by 11:11. Reserve, Vogue and Elite passes. The early-bird rate ends when the venue is revealed on 7 September at 11:11 PM.">
   <meta name="author" content="Elevenn Elevenn Archive Pvt Ltd">
   <meta name="theme-color" content="#FDFBF7">
 
@@ -25,14 +25,14 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://elevennelevenn.in/book.html">
   <meta property="og:site_name" content="11:11">
-  <meta property="og:title" content="11:11 — The Debut · 26 September 2026">
-  <meta property="og:description" content="Our first signature event: an unforgettable night crafted to set the standard for every experience that follows. Early-bird admission from Rs 2,999.">
+  <meta property="og:title" content="NOXUS — Reserve Your Pass · 26 September 2026">
+  <meta property="og:description" content="Odisha's biggest sundowner drunch party, 26 September 2026. Reserve, Vogue and Elite passes — the early-bird rate ends the moment the venue is revealed on 7 September at 11:11 PM.">
   <meta property="og:locale" content="en_IN">
   <meta property="og:image" content="https://elevennelevenn.in/images/hero-1600.jpg">
   <meta property="og:image:alt" content="The 11:11 crest: a crowned lion between outspread golden wings, above the numerals 11:11, on midnight navy.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="11:11 — The Debut · 26 September 2026">
-  <meta name="twitter:description" content="Our first signature event. Early-bird admission from Rs 2,999. Reserve your seat.">
+  <meta name="twitter:title" content="NOXUS — Reserve Your Pass · 26 September 2026">
+  <meta name="twitter:description" content="NOXUS, 26 September 2026. Reserve, Vogue and Elite passes. The early-bird rate ends when the venue is revealed.">
   <meta name="twitter:image" content="https://elevennelevenn.in/images/hero-1600.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +40,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <!-- Same cache-buster string as index.html. Bump both together, always. -->
-  <link rel="stylesheet" href="css/style.css?v=2026-09-02a">
+  <link rel="stylesheet" href="css/style.css?v=2026-09-02b">
 </head>
 
 <body>
@@ -85,24 +85,32 @@
     <section class="book-head" aria-labelledby="book-title">
       <div class="container book-head__inner">
         <p class="eyebrow eyebrow--light book-head__eyebrow">
-          The Debut <span class="debut__dot" aria-hidden="true">&middot;</span>
+          <span class="debut__pulse" aria-hidden="true"></span>Noxus
+          <span class="debut__dot" aria-hidden="true">&middot;</span>
           Saturday, 26 September 2026
         </p>
 
         <h1 class="display display--lg book-head__title" id="book-title">
-          Reserve your seat
+          Reserve your pass
         </h1>
 
+        <p class="book-head__strap">The secret is worth the wait.</p>
+
         <p class="book-head__lede">
-          Our first signature event &mdash; an unforgettable night crafted to set
-          the standard for every experience that follows. Choose your admission,
-          pay by UPI, and our concierge desk confirms your seat.
+          Odisha&rsquo;s biggest sundowner drunch party, presented by 11:11. Choose
+          your pass, pay by UPI, and our concierge desk confirms it. The venue is
+          revealed on 7 September at 11:11 PM &mdash; and the early-bird rate ends
+          at the same moment.
         </p>
 
-        <!-- The same instant, the same explicit +05:30 offset, as the band on
-             index.html. If the doors time is confirmed, change BOTH. -->
-        <div class="countdown" data-countdown="2026-09-26T00:00:00+05:30"
-             data-countdown-done="Tonight is the night.">
+        <!-- On a checkout page the useful clock is the DEADLINE, not the event.
+             This counts to the venue unveiling on 7 September at 11:11 PM, which
+             is the same instant the early-bird rate ends (client's poster,
+             1 Sept 2026). The event's own countdown is on index.html.
+             Same explicit +05:30 offset as every other countdown here. -->
+        <p class="book-head__clock-label">Early-bird rate ends when the venue is revealed</p>
+        <div class="countdown" data-countdown="2026-09-07T23:11:00+05:30"
+             data-countdown-done="The venue is out &mdash; standard pricing now applies.">
           <div class="countdown__grid" aria-hidden="true">
             <div class="countdown__unit">
               <span class="countdown__num" data-countdown-part="days">--</span>
@@ -132,9 +140,11 @@
          HOW THIS ACTUALLY WORKS, because it is not a payment gateway and the
          page must never imply that it is:
 
-           1. The visitor picks a tier and a seat count. js/booking.js keeps a
-              running total and writes it into the summary, the pay panel and
-              the UPI deep link.
+           1. The visitor picks a pass count. The RATE is not a choice — the
+              early-bird price runs until the venue is unveiled on 7 September
+              at 11:11 PM and the standard price applies after, so js/booking.js
+              works out which is in force and writes the running total into the
+              pass card, the summary, the pay panel and the UPI deep link.
            2. They pay that exact amount to the company's UPI ID, either by
               scanning images/upi-qr.png or by tapping the button, which opens
               their UPI app with payee and amount pre-filled.
@@ -142,77 +152,127 @@
               submit. The details are handed to WhatsApp addressed to the
               concierge desk, exactly as the enquiry form does.
            4. A human matches the reference against the bank account and
-              confirms the seat.
+              confirms the pass.
 
          Step 4 is a person, not code. That is why nothing on this page says a
-         seat is "booked" or "confirmed" on submit — it says the reservation has
+         pass is "booked" or "confirmed" on submit — it says the reservation has
          been sent and will be confirmed. Do not soften that wording.
 
-         STILL UNCONFIRMED, and therefore deliberately unwritten: the venue, the
-         doors time, the lineup, the seat count, the early-bird closing date,
-         and the refund / transfer policy. That last one should exist in writing
-         before real money arrives — flag it to the client rather than drafting
-         terms here.
+         STILL UNCONFIRMED, and therefore deliberately unwritten: the doors
+         time, the lineup, the capacity, VOGUE's two prices, and the refund /
+         transfer policy. That last one should exist in writing before real
+         money arrives — flag it to the client rather than drafting terms here.
+         The venue and the early-bird deadline are no longer on that list: the
+         venue is deliberately secret until 7 September at 11:11 PM, which is
+         also when the early-bird rate ends.
          ============================================================ -->
     <section class="section book" id="reserve" aria-labelledby="reserve-title">
       <div class="container book__grid">
 
         <div class="book__main">
-          <h2 class="visually-hidden" id="reserve-title">Reserve a seat</h2>
+          <h2 class="visually-hidden" id="reserve-title">Reserve a Noxus pass</h2>
 
           <form class="form book-form" id="booking-form" novalidate>
 
-            <!-- ---------- Step 1: the tier ---------- -->
+            <!-- ---------- Step 1: which pass ----------
+              Three passes, but only one of them is bought on this page.
+
+              Reserve is invitation-only and Vogue's figures have not been
+              confirmed, so both route to the concierge desk on WhatsApp — which
+              is also what the client's own poster tells people to do ("DM us to
+              get your private passes"). Elite is the single pass with confirmed
+              pricing, so it is the one with a checkout.
+
+              When Vogue's early-bird and standard prices are confirmed, it
+              becomes a second .pass-card--book with its own data-price-* pair
+              and a radio, and js/booking.js picks it up with no other change.
+            -->
             <fieldset class="book-step">
               <legend class="book-step__legend">
                 <span class="book-step__num" aria-hidden="true">01</span>
-                Choose your admission
+                Choose your pass
               </legend>
 
-              <!--
-                Radio cards. The <input> is the real control and stays in the
-                DOM — it is visually hidden by clip, never display:none, so it
-                is still focusable and still announced. The card is the <label>,
-                which is why clicking anywhere on it selects the tier.
-                data-price is the single source of the figure: booking.js reads
-                it, so a price change is a one-word edit in each card and
-                nothing in the script.
-              -->
-              <div class="tier-choice">
-                <div class="tier-opt">
-                  <input class="tier-opt__input" type="radio" name="tier" id="tier-early"
-                         value="Early Bird" data-price="2999" checked>
-                  <label class="tier-opt__card" for="tier-early">
-                    <span class="tier-opt__flag">Early Bird</span>
-                    <span class="tier-opt__price">&#8377;2,999</span>
-                    <span class="tier-opt__meta">
-                      <span class="tier-opt__strike">&#8377;5,999</span>
-                      <span class="tier-opt__save">Save &#8377;3,000</span>
-                    </span>
-                    <span class="tier-opt__note">Limited allocation, while it lasts.</span>
-                    <span class="tier-opt__tick" aria-hidden="true"></span>
-                  </label>
-                </div>
+              <ul class="pass-choice">
+                <li class="pass-card">
+                  <p class="pass-card__flag">Reserve</p>
+                  <p class="pass-card__who">For elite families, corporates &amp; groups</p>
+                  <p class="pass-card__status pass-card__status--invite">Passes on invitation basis only</p>
+                  <p class="pass-card__note">
+                    Applications reach the concierge desk, who confirm availability before
+                    any payment is taken.
+                  </p>
+                  <a class="btn btn--outline btn--sm pass-card__cta"
+                     href="https://wa.me/919938120356?text=Hi%2011%3A11%2C%20I%27d%20like%20to%20apply%20for%20a%20NOXUS%20Reserve%20pass."
+                     target="_blank" rel="noopener">Apply on WhatsApp</a>
+                </li>
 
-                <div class="tier-opt">
-                  <input class="tier-opt__input" type="radio" name="tier" id="tier-standard"
-                         value="Standard" data-price="5999">
-                  <label class="tier-opt__card" for="tier-standard">
-                    <span class="tier-opt__flag">Standard</span>
-                    <span class="tier-opt__price">&#8377;5,999</span>
-                    <span class="tier-opt__meta">Full admission</span>
-                    <span class="tier-opt__note">The same room, the same night, at the standard price.</span>
-                    <span class="tier-opt__tick" aria-hidden="true"></span>
-                  </label>
-                </div>
-              </div>
+                <li class="pass-card">
+                  <p class="pass-card__flag">Vogue</p>
+                  <p class="pass-card__who">For powerful couples</p>
+                  <p class="pass-card__status pass-card__status--live">Early bird live now</p>
+                  <p class="pass-card__note">
+                    A pass for two. The desk confirms the current rate and holds your
+                    place while the early-bird window is open.
+                  </p>
+                  <a class="btn btn--outline btn--sm pass-card__cta"
+                     href="https://wa.me/919938120356?text=Hi%2011%3A11%2C%20I%27d%20like%20a%20NOXUS%20Vogue%20pass%20for%20two.%20Could%20you%20confirm%20the%20early-bird%20rate%3F"
+                     target="_blank" rel="noopener">Enquire on WhatsApp</a>
+                </li>
+
+                <!--
+                  The bookable pass. Both figures live on this element as
+                  data-price-early / data-price-standard, next to the numbers a
+                  visitor reads, and data-early-until carries the instant the
+                  first becomes the second. booking.js reads all three and
+                  hardcodes nothing — so a price change, or a change to the
+                  deadline, is an edit here and nowhere else.
+                -->
+                <li class="pass-card pass-card--book" id="pass-elite"
+                    data-pass
+                    data-price-early="2999"
+                    data-price-standard="5999"
+                    data-early-until="2026-09-07T23:11:00+05:30">
+                  <p class="pass-card__flag">Elite</p>
+                  <p class="pass-card__who">For individual trendsetters</p>
+
+                  <p class="pass-card__price">
+                    <span class="pass-card__amount" data-book="unit">&#8377;2,999</span>
+                    <span class="pass-card__was" data-book="was">
+                      <span class="pass-card__strike">&#8377;5,999</span>
+                    </span>
+                  </p>
+                  <p class="pass-card__status pass-card__status--live" data-book="window">
+                    Early-bird rate
+                  </p>
+                  <p class="pass-card__note">
+                    A single pass. This rate holds until the venue is revealed on
+                    7 September, then the standard rate applies.
+                  </p>
+                </li>
+              </ul>
+
+              <!-- The client's own passes artwork, supplied 1 Sept 2026. Every
+                   word on it is set as real text in the cards above, so this is
+                   reinforcement rather than the only carrier of the detail —
+                   which is what the alt text reflects. Modest by design: it
+                   sits under the passes, not above the form. -->
+              <figure class="pass-poster">
+                <img
+                  src="images/noxus-passes-640.jpg"
+                  srcset="images/noxus-passes-640.jpg 640w, images/noxus-passes-1024.jpg 1024w"
+                  sizes="(min-width: 720px) 20rem, 70vw"
+                  width="1024" height="1536"
+                  alt="NOXUS passes card: choose your experience. Reserve, for elite families, corporates and groups, passes on invitation basis only. Vogue, for powerful couples, early bird offers live now. Elite, for individual trendsetters, early bird offers live now. Venue reveal 7th September, 11:11 PM. Exclusive offers are live until the venue unveiling; once revealed, standard pricing will be applied."
+                  loading="lazy" decoding="async">
+              </figure>
             </fieldset>
 
             <!-- ---------- Step 2: how many ---------- -->
             <fieldset class="book-step">
               <legend class="book-step__legend">
                 <span class="book-step__num" aria-hidden="true">02</span>
-                How many seats
+                How many passes
               </legend>
 
               <!-- The buttons are a convenience on top of a real number input,
@@ -222,18 +282,19 @@
                    party should be a conversation with the desk, which is what
                    the hint says. -->
               <div class="field field--qty">
-                <label class="field__label" for="seats">Number of seats</label>
+                <label class="field__label" for="seats">Number of passes</label>
                 <div class="qty">
                   <button class="qty__btn" type="button" data-qty-step="-1"
-                          aria-label="One seat fewer">&minus;</button>
+                          aria-label="One pass fewer">&minus;</button>
                   <input class="field__input qty__input" type="number" id="seats" name="seats"
                          value="1" min="1" max="10" step="1" inputmode="numeric"
                          aria-describedby="seats-hint seats-error">
                   <button class="qty__btn" type="button" data-qty-step="1"
-                          aria-label="One seat more">+</button>
+                          aria-label="One pass more">+</button>
                 </div>
                 <p class="field__hint" id="seats-hint">
-                  Booking for more than ten? Message the concierge desk and we will arrange it.
+                  More than ten, or booking for a family, company or group? That is a
+                  Reserve pass &mdash; message the concierge desk and we will arrange it.
                 </p>
                 <p class="field__error" id="seats-error" data-book-error="seats"></p>
               </div>
@@ -285,7 +346,7 @@
                 <div class="pay__amount">
                   <p class="pay__amount-label">Amount to pay</p>
                   <p class="pay__amount-value" data-book="total">&#8377;2,999</p>
-                  <p class="pay__amount-note" data-book="breakdown">1 seat &times; &#8377;2,999 &mdash; Early Bird</p>
+                  <p class="pay__amount-note" data-book="breakdown">1 pass &times; &#8377;2,999 &mdash; Elite</p>
                 </div>
 
                 <div class="pay__body">
@@ -321,7 +382,7 @@
                     <!-- upi:// only resolves on a device with a UPI app, so the
                          QR above is the desktop path and this is the phone one.
                          booking.js rewrites the am= parameter every time the
-                         tier or the seat count changes. -->
+                         pass count or the rate changes. -->
                     <a class="btn btn--gold btn--block pay__app" id="upi-link"
                        href="upi://pay?pa=elevennelevenne-26@idfcbank&amp;pn=Elevenn%20Elevenn%20Archive%20Private%20Limited&amp;cu=INR&amp;am=2999.00">
                       Open UPI App <span data-book="total-short">&#8377;2,999</span>
@@ -371,7 +432,7 @@
 
               <p class="book-form__terms">
                 Submitting sends your reservation to our concierge desk on WhatsApp.
-                Your seat is held on payment and <strong>confirmed once we have matched
+                Your pass is held on payment and <strong>confirmed once we have matched
                 it against the account</strong> &mdash; you will hear from us on the number
                 above. Keep your payment receipt until then.
               </p>
@@ -403,7 +464,7 @@
                 your payment screenshot if you have it, it speeds the check up.
               </p>
               <p>
-                Our concierge desk confirms your seat once the payment is matched against
+                Our concierge desk confirms your pass once the payment is matched against
                 the account. We will message you on the number you gave us.
               </p>
             </div>
@@ -432,7 +493,7 @@
             <dl class="summary__list">
               <div class="summary__row">
                 <dt>Event</dt>
-                <dd>11:11 &mdash; The Debut</dd>
+                <dd>Noxus &mdash; presented by 11:11</dd>
               </div>
               <div class="summary__row">
                 <dt>Date</dt>
@@ -440,18 +501,18 @@
               </div>
               <div class="summary__row">
                 <dt>Venue</dt>
-                <dd>Announced to confirmed guests</dd>
+                <dd>Revealed 7 Sept, 11:11 PM</dd>
               </div>
               <div class="summary__row">
-                <dt>Admission</dt>
-                <dd data-book="tier">Early Bird</dd>
+                <dt>Pass</dt>
+                <dd data-book="tier">Elite</dd>
               </div>
               <div class="summary__row">
-                <dt>Seats</dt>
+                <dt>Passes</dt>
                 <dd data-book="seats">1</dd>
               </div>
               <div class="summary__row">
-                <dt>Per seat</dt>
+                <dt>Per pass</dt>
                 <dd data-book="unit">&#8377;2,999</dd>
               </div>
             </dl>
@@ -466,7 +527,7 @@
             <a class="btn btn--gold btn--block summary__cta" href="#pay">Go to payment</a>
 
             <p class="summary__note">
-              Seats are held on payment and confirmed by our concierge desk.
+              Passes are held on payment and confirmed by our concierge desk.
             </p>
           </div>
         </aside>
@@ -501,7 +562,7 @@
             <span class="step__num" aria-hidden="true">02</span>
             <h3 class="step__title">You get your confirmation</h3>
             <p class="step__text">
-              We message the WhatsApp number you gave us with your seat count and your
+              We message the WhatsApp number you gave us with your pass count and your
               name on the door list. If anything does not match, we will ask you first
               rather than cancel.
             </p>
@@ -576,7 +637,7 @@
 
   <!-- script.js first: it owns the header state and the countdown that this
        page shares with index.html. booking.js only knows about this form. -->
-  <script src="js/script.js?v=2026-09-02a"></script>
-  <script src="js/booking.js?v=2026-09-02a"></script>
+  <script src="js/script.js?v=2026-09-02b"></script>
+  <script src="js/booking.js?v=2026-09-02b"></script>
 </body>
 </html>

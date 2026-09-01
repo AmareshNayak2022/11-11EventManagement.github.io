@@ -11,7 +11,7 @@
    06. Header & navigation
    07. Mobile navigation
    08. Hero
-   08b. The debut band, countdown & ticket cards
+   08b. Noxus band, countdowns, passes & the booking-page pass cards
    09. About
    10. Services
    10b. Event types
@@ -853,10 +853,15 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 /* Progressive disclosure by width, most persuasive parts kept longest. The
    price outranks the date: a visitor who has not decided to care about the
    night yet is moved by ₹2,999, not by which Saturday it falls on. */
-@media (max-width: 899px) { .announce__date  { display: none; } }
-@media (max-width: 699px) { .announce__sep   { display: none; } }
-@media (max-width: 559px) { .announce__count { display: none; } }
-@media (max-width: 419px) { .announce__label { display: none; } }
+/* The countdown is never dropped wholesale: the words beside it read "Early
+   bird ends", and hiding the figure leaves that sentence hanging with nothing
+   after it. The minutes go instead, which keeps the phrase complete down to
+   320px and loses only the least useful digit. */
+.announce__unit { white-space: nowrap; }
+@media (max-width: 899px) { .announce__date       { display: none; } }
+@media (max-width: 699px) { .announce__sep        { display: none; } }
+@media (max-width: 559px) { .announce__unit--min  { display: none; } }
+@media (max-width: 419px) { .announce__label      { display: none; } }
 
 /* ==========================================================================
    07. MOBILE NAVIGATION
@@ -1205,7 +1210,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 
 
 /* ==========================================================================
-   08b. THE DEBUT  (dark band, countdown, ticket cards)
+   08b. NOXUS  (dark band, countdowns, passes)
 
    The launch announcement, directly under the hero. It keeps the hero's dark
    ground on purpose: the two read as one opening statement rather than as a
@@ -1453,6 +1458,395 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   color: rgb(var(--paper-rgb) / 0.6);
 }
 
+
+/* --- NOXUS: the announcement itself --------------------------------------
+   The section keeps .debut's dark ground, gold wash and vignette (above); what
+   follows is the campaign's own furniture. All measured on --navy: --paper is
+   18.1:1, --gold-bright 11.5:1, --gold 8.9:1, and paper at 78% is 11.2:1. */
+.noxus__top {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+  align-items: center;
+  text-align: left;
+}
+@media (min-width: 1024px) {
+  .noxus__top { grid-template-columns: minmax(0, 1fr) 26rem; }
+}
+@media (max-width: 1023px) {
+  /* Centred on a phone, where the poster sits under the words rather than
+     beside them and a left edge has nothing to align to. */
+  .noxus__top { text-align: center; justify-items: center; }
+}
+
+/* The event name, and the loudest word on the site. Capitals come from CSS,
+   not the keyboard — a screen reader spells out a real all-caps word often
+   enough that WCAG warns against it, and "N-O-X-U-S" is not the name. */
+.noxus__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(3.5rem, 1.9rem + 7vw, 8rem);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+/* Poured metal, the same device the process numerals use. Behind @supports
+   because background-clip: text with transparent type is invisible where it is
+   unsupported — the flat --paper above stays the truth for those browsers.
+   Every stop is a brand gold or paper, so no part of the word drops below the
+   7.6:1 the darkest gold measures on --navy. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .noxus__name {
+    background-image: linear-gradient(168deg,
+      var(--paper) 4%, var(--gold-bright) 34%, var(--gold) 62%, var(--gold-metal) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.noxus__strap {
+  margin: clamp(0.75rem, 1.6vw, 1.1rem) 0 0;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--gold-bright);            /* 11.5:1 on --navy */
+}
+
+.noxus__lede {
+  margin: clamp(1.5rem, 3vw, 2rem) 0 0;
+  max-width: 46ch;
+  font-size: var(--fs-lede);
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgb(var(--paper-rgb) / 0.82);
+}
+@media (max-width: 1023px) { .noxus__lede { margin-inline: auto; } }
+
+.noxus__date {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: clamp(1.5rem, 3vw, 2rem) 0 0;
+}
+.noxus__date-day {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 400;
+  color: var(--paper);
+}
+.noxus__date-note {
+  font-size: var(--fs-small);
+  font-style: italic;
+  color: rgb(var(--paper-rgb) / 0.66);
+}
+
+/* The compact countdown: same component, smaller numerals, left-aligned in the
+   two-column block where the full-width centred version would look adrift. */
+.countdown--compact { margin-top: clamp(1.75rem, 3.5vw, 2.5rem); }
+.countdown--compact .countdown__grid { max-width: 30rem; margin-inline: 0; }
+.countdown--compact .countdown__num { font-size: clamp(1.875rem, 1.2rem + 2.6vw, 3rem); }
+@media (max-width: 1023px) {
+  .countdown--compact .countdown__grid { margin-inline: auto; }
+}
+
+/* The client's artwork, framed rather than bled: a gold hairline and a deep
+   shadow so it reads as a printed card lying on the band. */
+.noxus__poster { margin: 0; width: 100%; max-width: 26rem; }
+.noxus__poster img {
+  width: 100%;
+  height: auto;
+  border: 1px solid rgb(var(--gold-rgb) / 0.4);
+  box-shadow: 0 30px 70px rgb(5 8 15 / 0.6);
+}
+
+/* --- The venue reveal, and the deadline it sets --------------------------
+   The campaign's engine, so it gets the only boxed treatment on the band. */
+.reveal-panel {
+  margin-top: clamp(3rem, 7vw, 5rem);
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  border: 1px solid rgb(var(--gold-rgb) / 0.45);
+  background: rgb(var(--gold-rgb) / 0.07);
+  display: grid;
+  gap: clamp(1.5rem, 3.5vw, 2.5rem);
+  text-align: left;
+}
+@media (min-width: 860px) {
+  .reveal-panel { grid-template-columns: auto minmax(0, 1fr); align-items: center; }
+  .reveal-panel__head { border-right: 1px solid rgb(var(--gold-rgb) / 0.3); padding-right: clamp(1.75rem, 4vw, 3rem); }
+}
+@media (max-width: 859px) { .reveal-panel { text-align: center; } }
+
+.reveal-panel__q {
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: rgb(var(--paper-rgb) / 0.7);
+}
+.reveal-panel__a {
+  margin-top: 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--gold-bright);            /* 11.5:1 on --navy */
+  white-space: nowrap;
+}
+
+.reveal-panel__when {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.9rem;
+}
+@media (max-width: 859px) { .reveal-panel__when { justify-content: center; } }
+.reveal-panel__when-label {
+  padding: 0.3rem 0.6rem;
+  background: var(--gold);
+  color: var(--navy);                   /* 8.9:1 */
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+}
+.reveal-panel__when-value {
+  font-size: var(--fs-body);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--paper);
+}
+.reveal-panel__warn {
+  margin-top: 0.25rem;
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: rgb(var(--paper-rgb) / 0.75);
+}
+.reveal-panel__warn strong { color: var(--gold-bright); font-weight: 600; }
+
+/* --- Section sub-headings on the band ------------------------------------ */
+.noxus__sub {
+  margin: clamp(3rem, 7vw, 5rem) 0 clamp(1.5rem, 3vw, 2.25rem);
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 300;
+  color: var(--paper);
+  text-align: center;
+}
+
+/* --- What the night includes ---------------------------------------------
+   Six short items. Two columns on a phone rather than one: they are two or
+   three words each, and a single column would run the section to a screen and
+   a half of near-empty rows. */
+.incl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--hairline-light);
+  border: 1px solid var(--hairline-light);
+}
+@media (min-width: 700px)  { .incl { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .incl { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+/* The 1px grid gap plus this background is what draws the dividing rules —
+   cheaper than a border-collapse dance, and it never doubles a line. */
+.incl__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem) 0.85rem;
+  background: var(--navy);
+  text-align: center;
+}
+.incl__icon {
+  width: 2rem;
+  height: 2rem;
+  flex: none;
+  fill: none;
+  stroke: var(--gold);                  /* 8.9:1 on --navy — a rule, not text */
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.incl__label {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--paper);
+}
+.incl__meta {
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--gold-bright);            /* 11.5:1 */
+}
+
+/* --- The three passes ----------------------------------------------------- */
+@media (min-width: 900px) {
+  .ticket-cards--three { grid-template-columns: repeat(3, 1fr); max-width: none; }
+}
+.ticket-cards--three { max-width: 68rem; margin-inline: auto; }
+
+.ticket-card__who {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: rgb(var(--paper-rgb) / 0.78);   /* 11.2:1 */
+}
+/* The status line is the one thing that differs between the three, so it is the
+   one thing given a colour. Invitation-only reads as a fact; early-bird reads
+   as an opportunity, so only the second is gold. */
+.ticket-card__status {
+  margin: 0.35rem 0 0;
+  padding: 0.35rem 0.7rem;
+  align-self: center;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+}
+.ticket-card__status--invite {
+  border: 1px solid var(--hairline-light);
+  color: rgb(var(--paper-rgb) / 0.78);
+}
+.ticket-card__status--live { background: var(--gold); color: var(--navy); }  /* 8.9:1 */
+.ticket-card__cta { margin-top: auto; padding-top: 1rem; align-self: center; }
+
+.noxus__sign {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
+}
+.noxus__sign-line {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--gold-bright);
+}
+.noxus__sign-warn {
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: rgb(var(--paper-rgb) / 0.6);
+}
+
+/* --- Booking page: the three passes --------------------------------------- */
+.book-head__strap {
+  margin-top: 0.75rem;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--gold-bright);
+}
+.book-head__clock-label {
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--gold-bright);            /* 11.5:1 on --navy */
+}
+.book-head__clock-label + .countdown { margin-top: 1rem; }
+
+.pass-choice {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--gap-sm);
+}
+@media (min-width: 860px) { .pass-choice { grid-template-columns: repeat(3, 1fr); } }
+
+.pass-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: clamp(1.4rem, 3vw, 1.9rem);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  text-align: center;
+}
+/* The bookable pass carries the same inner ring the tier chooser used, so
+   "this is the one you are buying" is stated by the border rather than only by
+   the presence of a price. */
+.pass-card--book {
+  border-color: var(--navy);
+  box-shadow: inset 0 0 0 1px var(--navy), var(--shadow-soft);
+}
+.pass-card__flag {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 400;
+  color: var(--heading);                /* 18.7:1 on --surface */
+}
+.pass-card__who {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--muted);                  /* 6.3:1 */
+}
+.pass-card__price { margin: 0.35rem 0 0; }
+.pass-card__amount {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--heading);
+}
+.pass-card__was { display: block; margin-top: 0.35rem; font-size: var(--fs-small); color: var(--muted); }
+.pass-card__was[hidden] { display: none; }
+.pass-card__strike { text-decoration: line-through; }
+
+.pass-card .pass-card__status {
+  margin: 0.35rem 0 0;
+  padding: 0.3rem 0.65rem;
+  align-self: center;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+}
+/* On the light page the invite chip needs a boundary that clears 3:1, which is
+   --gold-deep (5.7:1 on --surface), never the champagne gold's 2.1:1. */
+.pass-card__status--invite { border: 1px solid var(--gold-deep); color: var(--gold-deep); }
+.pass-card__status--live   { background: var(--gold); color: var(--navy); }   /* 8.9:1 */
+
+.pass-card__note {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--text);                   /* 8.8:1 */
+}
+.pass-card__cta { margin-top: auto; padding-top: 1rem; }
+
+.pass-poster {
+  margin: clamp(1.75rem, 4vw, 2.5rem) 0 0;
+  text-align: center;
+}
+.pass-poster img {
+  width: 100%;
+  max-width: 20rem;
+  /* The reset makes every img display:block, and a block box with a max-width
+     ignores the parent's text-align — it needs auto margins to centre. */
+  margin-inline: auto;
+  height: auto;
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-soft);
+}
 
 /* ==========================================================================
    09. ABOUT

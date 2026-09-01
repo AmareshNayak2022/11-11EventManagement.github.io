@@ -55,20 +55,40 @@ are still outstanding:
 4. **The Pinterest link in the footer still points at `#`.** Give it a real
    profile URL or delete the whole `<li>`.
 
-### The debut event (added 1 September 2026)
+### NOXUS — the debut event (added 1 September 2026)
 
-The landing page now carries an advert for the company's first signature event
-on **Saturday 26 September 2026**, and `book.html` takes the reservation and the
-payment. Five things about it are **still unconfirmed and deliberately unwritten
-anywhere on the site** — do not fill them in from guesswork:
+The landing page advertises **NOXUS**, the company's first event: *Odisha's
+biggest sundowner drunch party*, **Saturday 26 September 2026**, presented by
+11:11. `book.html` takes the reservation and the payment.
+
+The campaign runs on one confirmed deadline. **The venue is deliberately secret
+and is revealed on 7 September at 11:11 PM — and the early-bird rate ends at
+exactly that instant.** So the rate is not something the visitor chooses: the
+page checks the clock, charges ₹2,999 before that moment and ₹5,999 after, and
+re-checks every minute so a tab left open overnight cannot pay yesterday's
+price. That instant appears in four places (three countdowns plus
+`data-early-until` on the Elite pass) and they must always agree.
+
+Three passes, from the client's own poster: **Reserve** (elite families,
+corporates and groups — invitation only), **Vogue** (powerful couples) and
+**Elite** (individual trendsetters). Only Elite is bookable on the page; Vogue
+and Reserve route to the concierge desk on WhatsApp, which is what the poster
+itself tells people to do.
+
+Still **unconfirmed and deliberately unwritten** — do not fill these in from
+guesswork:
 
 | Missing | Why it matters |
 |---------|----------------|
-| The venue | Named nowhere. The summary rail says "announced to confirmed guests", and the `Event` structured data in `index.html` stays commented out until there is a real address to put in it. |
-| The doors time | Both countdowns target **midnight opening the 26th**, not a start time. When the real time is confirmed, change the `data-countdown` attribute in `index.html` **and** `book.html` — the same ISO string with the `+05:30` offset — and nothing else. |
-| The early-bird closing date | The cards say "limited allocation" and name no date, because there is not one yet. A second countdown to that deadline would sell harder; it needs a date first. |
-| The seat capacity | The form caps a self-service booking at ten seats. That is a sanity limit, not a stated capacity. |
+| **Vogue's two prices** | Which is why Vogue is not bookable on the page. Give it a `data-price-early` / `data-price-standard` pair and it becomes a second bookable pass with no JavaScript change. |
+| The doors time | The event countdown targets **midnight opening the 26th**, not a start time. "Sundowner" implies an evening, but implying is not confirming. Change the `data-countdown` in `index.html` and `book.html` together. |
+| The lineup | The whole positioning is scouting breakout artists. A named act is the strongest thing that could still be added to the advert. |
+| The capacity | The form caps self-service at ten passes. That is a sanity limit, not a stated capacity — beyond it, it becomes a Reserve enquiry. |
 | **The refund and transfer policy** | Nothing on the page states one, because nothing has been agreed. This should exist in writing before real money arrives. |
+
+**No prices appear on the landing page**, on purpose: the client's posters
+publish none — withholding is the marketing device — and only one pass's figures
+are confirmed.
 
 Payment is **UPI, reconciled by hand** — there is no gateway. The visitor pays
 `elevennelevenne-26@idfcbank` (IDFC FIRST Bank), enters the UPI reference from

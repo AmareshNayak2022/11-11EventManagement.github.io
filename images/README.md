@@ -111,6 +111,34 @@ CSS puts the image on a white plate), and all three corner squares.
 
 ---
 
+## 1c. The NOXUS campaign posters
+
+Four files, two designs, supplied by the client on 1 September 2026 and resized
+here from their 1024x1536 originals:
+
+| File | Where it appears |
+|------|------------------|
+| `noxus-teaser-640.jpg` / `-1024.jpg` | The `#debut` band on `index.html`, beside the announcement |
+| `noxus-passes-640.jpg` / `-1024.jpg` | Under the three passes on `book.html` |
+
+Both are **portrait, 2:3**. That is why neither is used as the `og:image`: a
+share preview is cropped to landscape and a tall poster loses its own headline
+in the crop. The 11:11 crest stays the share image on both pages.
+
+Every word on both posters is also set as **real text** in the page around them,
+so the images are reinforcement rather than the only carrier of the information
+— which is why their `alt` text is unusually long. If you swap in a new poster,
+rewrite the `alt` to describe what the new one actually says; a stale
+description of an image nobody can see is worse than none.
+
+One thing to know before editing them: both posters carry **"It Is Time"** under
+the 11:11 crest. That is the retired tagline, deliberately cropped out of the
+hero artwork (see the note in `index.html`). It stays on the posters because
+they are the client's own current creative — do not retouch their artwork, but
+do not reintroduce the line into the site's own copy either.
+
+---
+
 ## 2. Replacing the photography
 
 ### Why placeholders live on Pexels for now

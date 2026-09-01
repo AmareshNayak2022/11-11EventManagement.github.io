@@ -129,23 +129,74 @@ Still unconfirmed, and still listed in `CLIENT-BRIEF.md`: real past work and
 photography (Q19–26), the form's routing inbox (Q40), the remaining hosting
 and email items (Q45–51), and the legal and privacy items (Q52–56). The Pinterest link in the footer still points at `#`.
 
-## The debut event — added 1 September 2026
+## NOXUS — the debut event, added 1 September 2026
 
-The client is launching their **first signature event on Saturday 26 September
-2026**, and asked for it advertised on the landing page. That is the `#debut`
-band under the hero (a countdown, the two prices, one button), plus `book.html`,
-which takes the reservation and the UPI payment.
+The client's first event is **NOXUS**, on **Saturday 26 September 2026**. It is
+advertised in the `#debut` band under the hero — the section id and the
+`.debut*` class names predate the name and were left alone, but every visible
+word says Noxus — and sold on `book.html`.
 
-**Confirmed by the client, 1 Sept 2026, and safe to use:**
+**Confirmed by the client: the two campaign posters supplied 1 Sept 2026, plus
+their earlier message. All of it is safe to use verbatim.**
 
 | Fact | Value |
 |------|-------|
-| Date | Saturday, 26 September 2026 |
-| Standard admission | ₹5,999 |
-| Early-bird admission | ₹2,999 |
+| Name | **NOXUS** |
+| Strapline | *The secret is worth the wait.* |
+| Positioning | *Odisha's Biggest Sundowner Drunch Party* — "drunch" is theirs, not a typo |
+| Other lines | *The city is about to feel different.* / *The best sundowner gathering ever.* / *A State of Mind.* / *Miss it, regret it.* |
+| Date | Saturday 26 September 2026 |
+| **Venue** | **Deliberately secret.** Revealed **7 September 2026, 11:11 PM** |
+| Passes | **Reserve** (elite families, corporates & groups — invitation only, DM to apply) · **Vogue** (powerful couples) · **Elite** (individual trendsetters) |
+| Early bird | Live for Vogue & Elite, running **until the venue unveiling**; standard pricing after |
+| Elite pricing | ₹2,999 early bird / ₹5,999 standard |
+| Inclusions | Rich culinary experience (no limits) · Global premium beverages (no limits) · An elegant sonic affair · A sundowner like never before · Elite gathering · Impeccable service & ambience |
 | UPI ID | `elevennelevenne-26@idfcbank` — IDFC FIRST Bank, Elevenn Elevenn Archive Private Limited |
 | Payment QR | `images/upi-qr.png`, a crop of the client's own payment slip |
-| Heading | *We debut our first signature event — an unforgettable night crafted to set the standard for every experience that follows.* (client's sentence; only "unforgettable" was corrected) |
+| Posters | `images/noxus-teaser-*.jpg` (landing page), `images/noxus-passes-*.jpg` (booking page) |
+
+### The one deadline that runs the whole campaign
+
+`2026-09-07T23:11:00+05:30` does two jobs at once, because the poster says the
+early-bird offers run "until the venue unveiling" and the unveiling is 7
+September at 11:11 PM. That single instant closes the early-bird window and
+opens the venue. It appears in **four** places and they must agree:
+
+- the announcement bar's countdown (`index.html`)
+- the venue-reveal panel's countdown (`index.html`)
+- the booking page's countdown (`book.html`)
+- `data-early-until` on the Elite pass card (`book.html`) — the one that
+  actually switches the price
+
+**The rate is not a choice the visitor makes.** `js/booking.js` compares the
+clock against `data-early-until` and charges ₹2,999 before it and ₹5,999 after,
+repainting the pass card, the summary, the pay panel and the UPI link together.
+It re-checks once a minute, so a tab left open across the evening of the 7th
+switches under the visitor rather than letting them pay yesterday's rate. A
+malformed date falls back to the **standard** price, never the cheap one.
+
+### Still not confirmed — do not invent
+
+The **doors time**, the **lineup**, the **capacity**, **Vogue's two prices**, and
+the **refund / transfer policy**. Q62–Q66 in `CLIENT-BRIEF.md`; the refund policy
+is the urgent one now that money is arriving.
+
+- Vogue is therefore **not bookable on the page**. It and Reserve both route to
+  the concierge desk on WhatsApp, which is what the client's own poster tells
+  people to do ("DM us to get your private passes"). When Vogue's two prices are
+  confirmed it becomes a second `.pass-card--book` with its own `data-price-*`
+  pair, and `booking.js` needs no change.
+- Elite's ₹2,999/₹5,999 come from the client's message of 1 Sept, sent *before*
+  the three-pass structure was known. Elite is the individual pass, so that is
+  where they were applied — **flagged to the client, not silently assumed.**
+- The **event** countdown still targets midnight opening the 26th, because
+  "sundowner" implies an evening and implying is not confirming.
+- The `Event` JSON-LD stays **commented out** in `index.html`: `location` would
+  still be a guess, and the venue being secret is the point of the campaign.
+
+**No prices appear on the landing page.** The client's own posters publish none —
+withholding is the whole marketing device — and only one pass's figures are
+confirmed. Do not add them there without asking.
 
 ### Where the event appears, and why it appears there
 
@@ -156,15 +207,18 @@ the page pointed at the enquiry form. So it now appears in three places, in
 descending permanence:
 
 1. **The announcement bar** (`.announce`, top of `index.html`) — gold, the whole
-   strip is one link, carries a live countdown, and is visible at every scroll
-   position. This is the real fix, and it is why the header's gold *Tickets*
-   button was **removed**: it was a second gold thing doing a worse version of
-   the same job.
-2. **The hero strip** (`.hero__debut`) — flag, date and early-bird price
+   strip is one link, and it carries the **early-bird deadline** rather than the
+   event date: the event is weeks away and nobody hurries for that, while the
+   rate dies on 7 September. This is the real fix, and it is why the header's
+   gold *Tickets* button was **removed**: it was a second gold thing doing a
+   worse version of the same job.
+2. **The hero strip** (`.hero__debut`) — name, date and the venue-reveal moment
    directly above the buttons, and for the length of the campaign the hero's
-   gold goes to *Reserve Your Seat* while *Start a Brief* steps back to an
+   gold goes to *Reserve Your Pass* while *Start a Brief* steps back to an
    outline.
-3. **The `#debut` band** — the full pitch, with the countdown and both prices.
+3. **The `#debut` band** — the full pitch: the NOXUS wordmark, the client's
+   poster, the event countdown, the venue-reveal panel, the six inclusions and
+   the three passes.
 
 **Reverting after the night** means deleting the `<a class="announce">`, the
 `.hero__debut` paragraph, the `#debut` section and the nav item, and swapping
@@ -196,11 +250,11 @@ early-bird price closes, and the refund/transfer policy. They are Q61–Q66 in
   because `startDate` and `location` would both be guesses and a guessed venue
   goes straight to Google. Same reasoning as the omitted `url`.
 
-**This is the one place a rupee figure is published**, and it does not reopen the
-pricing decision above: the *agency's* project pricing is still unpublished
+**`book.html` is the one place a rupee figure is published**, and it does not
+reopen the pricing decision above: the *agency's* project pricing is still unpublished
 everywhere, and a ticket nobody can buy without knowing its price is a different
 thing. Do not take it as licence to re-add figures to the packages copy, the
-enquiry form or the JSON-LD.
+enquiry form, the JSON-LD — or the landing page.
 
 **There is no payment gateway, and the page must never imply one.** The visitor
 pays the UPI ID by QR or `upi://` intent, enters the reference from their

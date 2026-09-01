@@ -46,7 +46,7 @@
   var UPI_ID    = 'elevennelevenne-26@idfcbank';
   var UPI_PAYEE = 'Elevenn Elevenn Archive Private Limited';
   var WHATSAPP  = '919938120356';
-  var EVENT     = '11:11 — The Debut, Sat 26 September 2026';
+  var EVENT     = 'NOXUS — Sat 26 September 2026';
 
   /* ========================================================================
      02. HELPERS & MONEY
@@ -77,25 +77,39 @@
   }
 
   /* ========================================================================
-     03. LIVE TOTALS, THE SEAT STEPPER, AND THE UPI LINK
+     03. LIVE TOTALS, THE PASS PRICE, AND THE UPI LINK
+
+     THE PRICE IS NOT A CHOICE THE VISITOR MAKES. The client's campaign sets it
+     by the clock: the early-bird rate runs until the venue is unveiled on
+     7 September at 11:11 PM, and the standard rate applies from that instant.
+     So there is no early-bird/standard selector — the page works out which one
+     is in force and says so.
+
+     All three numbers live on the pass element in book.html, next to the
+     figures a visitor reads: data-price-early, data-price-standard, and
+     data-early-until. Nothing is hardcoded here, so a price change or a moved
+     deadline is an edit in the markup and nothing in this file.
 
      One function recomputes everything the visitor can see about the price, so
-     the summary, the pay panel, the confirmation checkbox and the UPI deep
-     link can never drift out of step with each other. It runs on every change
-     to either control.
+     the pass card, the summary, the pay panel, the confirmation tick and the
+     UPI deep link can never drift out of step with each other.
      ======================================================================== */
-  var tiers    = $$('input[name="tier"]', form);
-  var seatsEl  = $('#seats', form);
-  var upiLink  = $('#upi-link');
+  var passEl  = $('[data-pass]', form) || $('[data-pass]');
+  var seatsEl = $('#seats', form);
+  var upiLink = $('#upi-link');
 
-  function currentTier() {
-    for (var i = 0; i < tiers.length; i++) {
-      if (tiers[i].checked) return tiers[i];
-    }
-    return tiers[0];
+  var PASS_NAME   = 'Elite';
+  var PRICE_EARLY = parseInt(passEl.getAttribute('data-price-early'), 10);
+  var PRICE_STD   = parseInt(passEl.getAttribute('data-price-standard'), 10);
+  var EARLY_UNTIL = new Date(passEl.getAttribute('data-early-until')).getTime();
+
+  // A malformed deadline must not silently hand out the cheaper rate forever,
+  // so an unparseable date falls back to the standard price.
+  function isEarlyBird() {
+    return !isNaN(EARLY_UNTIL) && Date.now() < EARLY_UNTIL;
   }
 
-  // The seat count as an integer inside the input's own min/max, whatever the
+  // The pass count as an integer inside the input's own min/max, whatever the
   // visitor typed. A number input accepts "" and "-4" quite happily.
   function currentSeats() {
     var n = parseInt(seatsEl.value, 10);
@@ -108,11 +122,12 @@
   }
 
   function state() {
-    var tier  = currentTier();
-    var unit  = parseInt(tier.getAttribute('data-price'), 10);
+    var early = isEarlyBird();
+    var unit  = early ? PRICE_EARLY : PRICE_STD;
     var seats = currentSeats();
     return {
-      name:  tier.value,
+      name:  PASS_NAME,
+      early: early,
       unit:  unit,
       seats: seats,
       total: unit * seats
@@ -128,21 +143,25 @@
     setText('total', rupees(s.total));
     setText('total-short', rupees(s.total));
     setText('breakdown',
-      s.seats + (s.seats === 1 ? ' seat' : ' seats') +
+      s.seats + (s.seats === 1 ? ' pass' : ' passes') +
       ' × ' + rupees(s.unit) + ' — ' + s.name);
 
-    /* The saving is computed from the two tiers on the page rather than from a
-       hardcoded 3000, so it stays right if either price moves. It is shown
-       only when there is one — the standard tier saves nothing and a line
-       reading "You save ₹0" would be worse than no line. */
+    /* Which rate is in force, said in words as well as shown in the figure —
+       a struck-through price on its own does not tell anyone why. */
+    setText('window', s.early ? 'Early-bird rate' : 'Standard rate');
+
+    // The struck-through standard price only means something while the
+    // early-bird rate is actually cheaper than it.
+    var wasEl = $('[data-book="was"]');
+    if (wasEl) wasEl.hidden = !s.early;
+
+    /* The saving is computed from the two prices on the element rather than
+       from a hardcoded figure, so it stays right if either moves. It is hidden
+       outright once the early-bird window shuts — a line reading "You save ₹0"
+       would be worse than no line. */
     var saveEl = $('[data-book="saving"]');
     if (saveEl) {
-      var top = 0;
-      tiers.forEach(function (t) {
-        var p = parseInt(t.getAttribute('data-price'), 10);
-        if (p > top) top = p;
-      });
-      var saved = (top - s.unit) * s.seats;
+      var saved = s.early ? (PRICE_STD - PRICE_EARLY) * s.seats : 0;
       saveEl.textContent = saved > 0 ? 'You save ' + rupees(saved) : '';
       saveEl.hidden = saved <= 0;
     }
@@ -153,9 +172,8 @@
        and never "2,999.00", both of which UPI apps reject or silently drop.
        Note that a plain (unsigned) upi:// intent PRE-FILLS the amount but does
        not lock it: the payer can still edit the figure in their app. That is
-       exactly why step 05 asks for the reference number and a person checks
-       it against the account — the page never assumes the right amount
-       arrived. */
+       exactly why step 05 asks for the reference number and a person checks it
+       against the account — the page never assumes the right amount arrived. */
     if (upiLink) {
       upiLink.href =
         'upi://pay' +
@@ -163,11 +181,10 @@
         '&pn=' + encodeURIComponent(UPI_PAYEE) +
         '&cu=INR' +
         '&am=' + s.total.toFixed(2) +
-        '&tn=' + encodeURIComponent('1111 Debut 26Sep ' + s.seats + ' seat');
+        '&tn=' + encodeURIComponent('NOXUS ' + s.seats + ' pass');
     }
   }
 
-  tiers.forEach(function (t) { t.addEventListener('change', refresh); });
   if (seatsEl) {
     seatsEl.addEventListener('input',  refresh);
     seatsEl.addEventListener('change', function () {
@@ -188,6 +205,18 @@
       refresh();
     });
   });
+
+  /* If the deadline passes while the page is open — someone leaves a tab up
+     over the evening of the 7th — the price must change under them rather than
+     letting them pay yesterday's rate. Checked once a minute; the switch itself
+     is just refresh(), which repaints every figure at once. */
+  if (!isNaN(EARLY_UNTIL)) {
+    var wasEarly = isEarlyBird();
+    window.setInterval(function () {
+      var nowEarly = isEarlyBird();
+      if (nowEarly !== wasEarly) { wasEarly = nowEarly; refresh(); }
+    }, 60000);
+  }
 
   /* ========================================================================
      04. COPY THE UPI ID
@@ -246,9 +275,11 @@
     },
     seats: function (value) {
       var n = Number(value);
-      if (!value || !isFinite(n) || Math.floor(n) !== n) return 'Please enter a whole number of seats.';
-      if (n < 1) return 'Please reserve at least one seat.';
-      if (n > 10) return 'For more than ten seats, please message the concierge desk.';
+      if (!value || !isFinite(n) || Math.floor(n) !== n) return 'Please enter a whole number of passes.';
+      if (n < 1) return 'Please reserve at least one pass.';
+      // Above ten this stops being self-service and becomes a Reserve enquiry,
+      // which is a conversation with the desk rather than a form.
+      if (n > 10) return 'For more than ten passes, please message the concierge desk.';
       return '';
     },
     utr: function (value) {
@@ -333,13 +364,13 @@
       'WhatsApp: ' + $('#guest-phone').value.trim(),
       'Email: '    + $('#guest-email').value.trim(),
       '',
-      'Admission: ' + s.name,
-      'Seats: '     + s.seats + ' × ' + rupees(s.unit),
+      'Pass: '  + s.name + (s.early ? ' (early bird)' : ' (standard)'),
+      'Passes: ' + s.seats + ' × ' + rupees(s.unit),
       'Total paid: ' + rupees(s.total),
       'UPI reference: ' + $('#utr').value.trim(),
       'Paid to: ' + UPI_ID,
       '',
-      'Please confirm my seat.'
+      'Please confirm my pass.'
     ];
     return lines.join('\n');
   }
