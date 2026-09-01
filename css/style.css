@@ -3070,6 +3070,35 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 }
 .site-footer__fineprint { font-style: italic; }
 
+/* The build credit, as a second clause on the copyright line rather than a row
+   of its own: it belongs to that sentence, and a separate line would give it
+   more weight in the footer than the registered company above it.
+   It wraps to its own line below 480px, where the two will not share one. */
+/* No max-width: the credit belongs on the copyright line, and capping the
+   measure only forced "in association with" onto a second row. The footer bar
+   is already a wrapping flex row, so the fineprint moves down on its own when
+   there is no space. */
+.site-footer__copy { max-width: none; }
+/* The credit deliberately does NOT get its own dimmer colour. At 12px on
+   --navy-deep it has to clear 4.5:1, and paper at 42% measures 3.93:1 — it
+   inherits the bar's own 50% instead, which measures 5.20:1. The link beside
+   it carries the emphasis rather than the surrounding words carrying less. */
+.site-footer__assoc::before { content: " — "; }
+.site-footer__assoc a {
+  color: rgb(var(--paper-rgb) / 0.62);
+  border-bottom: 1px solid rgb(var(--gold-rgb) / 0.45);
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.site-footer__assoc a:hover,
+.site-footer__assoc a:focus-visible {
+  color: var(--paper);
+  border-bottom-color: var(--gold);
+}
+@media (max-width: 479px) {
+  .site-footer__assoc { display: block; }
+  .site-footer__assoc::before { content: none; }
+}
+
 /* At the very bottom of the page the floating WhatsApp button lands on top of
    this bar. Reserve room for it so the copyright line is never sitting under
    a green circle. 50px button + its 1rem offset, plus a little air. */
