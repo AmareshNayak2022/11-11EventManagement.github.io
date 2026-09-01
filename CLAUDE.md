@@ -185,9 +185,11 @@ the cheap one.
 
 **`data-min` is a pricing guard, not a preference.** Vogue is priced per person
 below Elite's single-pass rate, so one Vogue pass would undercut one Elite pass
-and nobody would ever buy Elite. Vogue's minimum of two is an inference from
-"for powerful couples" and "each" — flagged, not buried. Selecting Vogue lifts
-the quantity to 2 if it is lower, and the validator refuses less.
+and nobody would ever buy Elite. Vogue's minimum of two is **confirmed by the
+client** (1 Sept 2026): it was read from "for powerful couples" and "each",
+put to them, and agreed. Selecting Vogue lifts the quantity to 2 if it is lower,
+and the validator refuses less. Treat it as a commercial rule rather than a
+default — relaxing it makes Elite unsellable.
 
 ### Still not confirmed — do not invent
 
@@ -199,7 +201,6 @@ one now that money is arriving.
   ₹2,999/₹5,999 given earlier that day, which predated the three-pass structure
   and were briefly live against Elite. If you find those two figures anywhere,
   they are wrong.
-- Vogue's **minimum of two** is the one inferred number on the page. Confirm it.
 - The **event** countdown still targets midnight opening the 26th, because
   "sundowner" implies an evening and implying is not confirming.
 - The `Event` JSON-LD stays **commented out** in `index.html`: `location` would

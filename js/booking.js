@@ -100,9 +100,10 @@
 
      data-min is what stops Vogue being an arbitrage: it is priced PER PERSON at
      the lower figure, so a single Vogue pass would undercut a single Elite pass
-     and nobody would ever buy Elite. Vogue's minimum of two is an inference
-     from "for powerful couples" and "each" — flagged in book.html and in
-     CLAUDE.md rather than buried here.
+     and nobody would ever buy Elite. Vogue's minimum of two is CONFIRMED by the
+     client (1 Sept 2026) — read from "for powerful couples" and "each" first,
+     then put to them and agreed. It is a commercial rule, not a preference:
+     relaxing it makes Elite unsellable.
      ======================================================================== */
   var passInputs = $$('input[name="pass"]', form);
   var seatsEl    = $('#seats', form);

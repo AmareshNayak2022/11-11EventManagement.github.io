@@ -78,16 +78,15 @@ Three passes:
 | **Elite** | Individual trendsetters | **₹2,499** | ₹5,499 |
 
 Vogue and Elite are bookable on the page; Reserve routes to the concierge desk
-on WhatsApp. Vogue's minimum of two is not decoration — it is priced per person
-*below* Elite, so without a floor a single Vogue pass would undercut a single
-Elite one.
+on WhatsApp. Vogue's minimum of two is not decoration and not a guess — it is
+priced per person *below* Elite, so without a floor a single Vogue pass would
+undercut a single Elite one. The client confirmed the minimum on 1 September.
 
 Still **unconfirmed and deliberately unwritten** — do not fill these in from
 guesswork:
 
 | Missing | Why it matters |
 |---------|----------------|
-| **Vogue's minimum of two** | The one inferred number on the site, read from "for powerful couples" and "each". Everything else is the client's own. |
 | The doors time | The event countdown targets **midnight opening the 26th**, not a start time. "Sundowner" implies an evening, but implying is not confirming. Change the `data-countdown` in `index.html` and `book.html` together. |
 | The lineup | The whole positioning is scouting breakout artists. A named act is the strongest thing that could still be added to the advert. |
 | The capacity | The form caps self-service at ten passes. That is a sanity limit, not a stated capacity — beyond it, it becomes a Reserve enquiry. |
