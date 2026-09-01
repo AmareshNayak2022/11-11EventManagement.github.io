@@ -638,6 +638,11 @@
         done.textContent = message;
         grid.parentNode.replaceChild(done, grid);
         grid = null;
+      } else {
+        // An inline countdown — the announcement bar — has no grid to swap and
+        // sits inside a link, where a <p> would be invalid anyway. Replacing
+        // its text takes the digits and their d/h/m suffixes together.
+        root.textContent = message;
       }
       if (live) live.textContent = message;
       window.clearInterval(timer);

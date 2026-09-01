@@ -147,6 +147,41 @@ which takes the reservation and the UPI payment.
 | Payment QR | `images/upi-qr.png`, a crop of the client's own payment slip |
 | Heading | *We debut our first signature event — an unforgettable night crafted to set the standard for every experience that follows.* (client's sentence; only "unforgettable" was corrected) |
 
+### Where the event appears, and why it appears there
+
+The client's first reaction to the band alone was that the event "is not getting
+highlighted" — correctly, because the band sits below a 100vh hero. On the first
+screen the event was a small button and a nav link, while the one loud thing on
+the page pointed at the enquiry form. So it now appears in three places, in
+descending permanence:
+
+1. **The announcement bar** (`.announce`, top of `index.html`) — gold, the whole
+   strip is one link, carries a live countdown, and is visible at every scroll
+   position. This is the real fix, and it is why the header's gold *Tickets*
+   button was **removed**: it was a second gold thing doing a worse version of
+   the same job.
+2. **The hero strip** (`.hero__debut`) — flag, date and early-bird price
+   directly above the buttons, and for the length of the campaign the hero's
+   gold goes to *Reserve Your Seat* while *Start a Brief* steps back to an
+   outline.
+3. **The `#debut` band** — the full pitch, with the countdown and both prices.
+
+**Reverting after the night** means deleting the `<a class="announce">`, the
+`.hero__debut` paragraph, the `#debut` section and the nav item, and swapping
+the two hero button classes back. The comments in `index.html` say so at each
+site.
+
+⚠️ **`--nav-h` and `--header-h` are not the same token, and must not be merged.**
+`js/script.js` measures the whole `<header>` — bar included — into `--header-h`,
+which the hero padding and every `scroll-margin-top` depend on. The nav row's
+own `min-height` uses `--nav-h`. Point the row at `--header-h` and it grows by
+the bar's height on every measurement pass, compounding on each resize.
+
+Adding the bar and the strip cost about 110px of first screen, which pushed the
+hero buttons off a 1440x900 viewport. That was paid back out of spacing and an
+8% trim to the `--fs-h1` ceiling — **not** out of the client's hero copy, and
+not by shrinking the reserve button, which would have defeated the point.
+
 **Not confirmed, and written nowhere on the site. Do not invent any of them:**
 the venue, the doors time, the lineup, the seat capacity, the date the
 early-bird price closes, and the refund/transfer policy. They are Q61–Q66 in

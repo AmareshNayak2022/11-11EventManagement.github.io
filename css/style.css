@@ -108,7 +108,7 @@
   --fs-lede:      clamp(1.0625rem, 1rem + 0.42vw, 1.3125rem);
   --fs-h3:        clamp(1.375rem, 1.2rem + 0.8vw, 1.875rem);
   --fs-h2:        clamp(2rem, 1.35rem + 2.9vw, 3.75rem);
-  --fs-h1:        clamp(2.75rem, 1.7rem + 4.6vw, 5.75rem);
+  --fs-h1:        clamp(2.75rem, 1.7rem + 4.6vw, 5.25rem);
   --fs-xl:        clamp(2.375rem, 1.5rem + 3.9vw, 4.75rem);
 
   --tracking-wide:  0.22em;
@@ -124,7 +124,9 @@
   --gap:            clamp(1.5rem, 3.5vw, 2.75rem);
   --gap-lg:         clamp(2.5rem, 6vw, 5.5rem);
 
-  --header-h:       88px;
+  --nav-h:          88px;   /* the brand/nav row on its own */
+  --header-h:       88px;   /* the whole header, announcement bar included —
+                               measured and overwritten by js/script.js */
 
   /* --- Elevation -----------------------------------------------------------
      Two shadows, both cast in navy rather than black: a grey shadow on a warm
@@ -495,7 +497,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   align-items: center;
   justify-content: space-between;
   gap: var(--gap-sm);
-  min-height: var(--header-h);
+  min-height: var(--nav-h);
   padding-block: 1rem;
 }
 
@@ -730,17 +732,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   gap: clamp(0.75rem, 2vw, 1.5rem);
 }
 .site-header__cta { display: none; }
-/* Unlike Enquire, this one never hides. It is the page's primary action while
-   the debut is on sale, and it has to survive a 320px screen beside the lockup
-   and the hamburger — hence the tighter padding below 480px. */
-.site-header__tickets { display: inline-flex; }
-@media (max-width: 479px) {
-  .site-header__tickets {
-    min-height: 38px;
-    padding: 0.6rem 0.9rem;
-    letter-spacing: 0.1em;
-  }
-}
+
 
 /* --- Hamburger ----------------------------------------------------------- */
 .nav-toggle {
@@ -779,6 +771,92 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   .nav-toggle { display: none; }
 }
 
+/* --- Announcement bar -----------------------------------------------------
+   THE FIX FOR THE REAL PROBLEM. The debut band lives below a 100vh hero, so on
+   the screen most visitors ever see, the event was represented by a small
+   button and a nav link — the date, the price and the countdown were a full
+   scroll away, and the one loud thing on the page pointed at the enquiry form
+   instead. This bar puts the event on every screen of every page, at every
+   scroll position, and it is the whole reason it is allowed to be gold.
+
+   It lives INSIDE <header data-header>, so js/script.js measures it into
+   --header-h automatically and the hero padding and every scroll-margin follow
+   without being told. That is also why .site-header__inner switched from
+   --header-h to --nav-h: an inner row whose min-height was the measured height
+   of its own parent grows on every measurement pass.
+
+   The whole bar is one link. Navy on the gold gradient measures 7.6:1 at the
+   darkest stop and 11.5:1 at the lightest, so every word on it clears AA. */
+.announce {
+  display: block;
+  position: relative;
+  z-index: 1;
+  background-image: linear-gradient(100deg,
+    var(--gold-metal) 0%, var(--gold) 42%, var(--gold-bright) 72%, var(--gold) 100%);
+  color: var(--navy);
+  box-shadow: inset 0 -1px 0 rgb(var(--navy-rgb) / 0.14);
+}
+.announce__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: clamp(0.5rem, 1.6vw, 1.1rem);
+  min-height: 2.75rem;
+  padding-block: 0.5rem;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+/* A slow double-pulse. It is the only animated thing above the fold, which is
+   the point — motion is what the eye catches before it reads. Two seconds is
+   long enough not to nag; prefers-reduced-motion drops it in section 18. */
+.announce__pulse {
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--navy);
+  animation: announce-pulse 2s var(--ease-soft) infinite;
+}
+@keyframes announce-pulse {
+  0%, 60%, 100% { opacity: 1;   transform: scale(1); }
+  30%           { opacity: 0.25; transform: scale(0.6); }
+}
+
+.announce__sep { opacity: 0.4; }
+.announce__label { font-weight: 700; letter-spacing: var(--tracking-wide); }
+.announce__count {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+.announce__price { white-space: nowrap; }
+.announce__date  { white-space: nowrap; }
+
+/* The call to action is underlined rather than boxed: a button inside a bar
+   that is itself a button reads as two targets when it is one. */
+.announce__cta {
+  flex: none;
+  white-space: nowrap;
+  font-weight: 700;
+  border-bottom: 1.5px solid rgb(var(--navy-rgb) / 0.55);
+  padding-bottom: 1px;
+  transition: border-color var(--dur) var(--ease);
+}
+.announce:hover .announce__cta { border-bottom-color: var(--navy); }
+.announce:focus-visible { outline: 2px solid var(--navy); outline-offset: -4px; }
+
+/* Progressive disclosure by width, most persuasive parts kept longest. The
+   price outranks the date: a visitor who has not decided to care about the
+   night yet is moved by ₹2,999, not by which Saturday it falls on. */
+@media (max-width: 899px) { .announce__date  { display: none; } }
+@media (max-width: 699px) { .announce__sep   { display: none; } }
+@media (max-width: 559px) { .announce__count { display: none; } }
+@media (max-width: 419px) { .announce__label { display: none; } }
 
 /* ==========================================================================
    07. MOBILE NAVIGATION
@@ -906,7 +984,8 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   align-items: center;
   min-height: 100vh;
   min-height: 100svh; /* avoids the mobile browser-chrome jump */
-  padding-block: calc(var(--header-h) + 3rem) clamp(6rem, 14vh, 9rem);
+  padding-block: calc(var(--header-h) + clamp(1.25rem, 3.5vh, 2.75rem))
+                 clamp(3.5rem, 8vh, 6rem);
   overflow: hidden;
   isolation: isolate;
 }
@@ -973,7 +1052,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   text-align: center;
   margin-inline: auto;
 }
-.hero__eyebrow { margin-bottom: clamp(1.25rem, 3vw, 2rem); }
+.hero__eyebrow { margin-bottom: clamp(1rem, 2.2vw, 1.5rem); }
 .hero__title {
   font-family: var(--font-display);
   font-size: var(--fs-h1);
@@ -995,11 +1074,11 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 }
 
 .hero__lede {
-  margin: clamp(1.5rem, 3.5vw, 2.25rem) auto 0;
+  margin: clamp(1.25rem, 2.5vw, 1.75rem) auto 0;
   max-width: 46ch;
   font-size: var(--fs-lede);
   font-weight: 300;
-  line-height: 1.75;
+  line-height: 1.65;
   color: rgb(var(--paper-rgb) / 0.92);
 }
 /* Second half of the client's hero statement. Same voice, quieter setting: one
@@ -1014,25 +1093,65 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   font-size: var(--fs-body);
   line-height: 1.7;
 }
+@media (max-width: 599px) {
+  .hero__lede--sub { font-size: var(--fs-small); line-height: 1.62; }
+}
+/* The event, stated in the hero rather than only below it. It sits directly
+   above the buttons because that is where the eye already is when it decides
+   what to click.
+
+   The ground is opaque navy, not a translucent tint, and that is deliberate:
+   everything else in the hero floats on the photograph, but this strip carries
+   a date and a price — the two things a visitor must be able to read at a
+   glance and on a phone in daylight. On the solid ground, --paper measures
+   18.0:1 and --gold-bright 11.4:1, neither of which depends on which pixel of
+   the artwork happens to be behind it. */
+.hero__debut {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem 0.9rem;
+  margin-top: clamp(1.25rem, 3vw, 2rem);
+  padding: 0.7rem 1.1rem;
+  background: #0B1226;
+  border: 1px solid rgb(var(--gold-rgb) / 0.45);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+}
+.hero__debut-flag {
+  padding: 0.3rem 0.6rem;
+  background: var(--gold);
+  color: var(--navy);              /* 8.9:1 */
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+}
+.hero__debut-text { color: var(--paper); }
+.hero__debut-price { color: var(--gold-bright); font-weight: 600; }
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: clamp(1.25rem, 3vw, 2.25rem);
-  margin-top: clamp(2.25rem, 5vw, 3.25rem);
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  margin-top: clamp(1rem, 2.5vw, 1.5rem);
 }
 
 /* Reveal the hero content once, on load */
 .hero__eyebrow,
 .hero__title,
 .hero__lede,
+.hero__debut,
 .hero__actions {
   animation: rise-in 1.1s var(--ease) both;
 }
 .hero__title    { animation-delay: 0.12s; }
 .hero__lede     { animation-delay: 0.24s; }
-.hero__actions  { animation-delay: 0.36s; }
+.hero__debut    { animation-delay: 0.34s; }
+.hero__actions  { animation-delay: 0.44s; }
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: none; }
@@ -1139,6 +1258,18 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
 }
 .debut__dot { margin: 0 0.45em; opacity: 0.6; }
+/* The same heartbeat as the announcement bar, in gold on the dark band. It is
+   what tells a scrolling visitor this section is live rather than decorative. */
+.debut__pulse {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.6rem;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  vertical-align: baseline;
+  animation: announce-pulse 2s var(--ease-soft) infinite;
+}
 
 .debut__title {
   color: var(--paper);                  /* .display defaults to navy */

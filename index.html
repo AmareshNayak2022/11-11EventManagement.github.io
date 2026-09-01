@@ -76,7 +76,7 @@
        page updates, the capitals and the gold do not. Bump the date whenever
        css/style.css or js/script.js changes and every browser fetches it fresh;
        the same string is on the <script> tag at the end of <body>. -->
-  <link rel="stylesheet" href="css/style.css?v=2026-09-01a">
+  <link rel="stylesheet" href="css/style.css?v=2026-09-01b">
 
   <!--
     Structured data for Elevenn Elevenn Archive Pvt Ltd, trading as 11:11.
@@ -185,6 +185,48 @@
        HEADER / NAVIGATION
        ============================================================ -->
   <header class="site-header" id="site-header" data-header>
+
+    <!--
+      ANNOUNCEMENT BAR.
+      The debut band sits below a 100vh hero, so on the first screen — the only
+      screen most visitors ever see — the event was a small button and a nav
+      link. The date, the price and the clock were a full scroll away. This bar
+      carries all three at every scroll position, and it is why the gold rule
+      ("one loud thing") now spends its budget here instead of on the header
+      ticket button, which has been removed as redundant.
+
+      It must stay INSIDE <header data-header>: js/script.js measures that
+      element into --header-h, so the hero padding and every section's
+      scroll-margin follow automatically. The nav row below uses --nav-h for its
+      own min-height — see the note in section 06 of the stylesheet for why
+      those cannot be the same token.
+
+      The whole bar is one link. The countdown inside it is aria-hidden: it
+      duplicates the one in the debut band, which owns the live region, and a
+      screen reader should hear "The Debut, Saturday 26 September 2026, early
+      bird two thousand nine hundred and ninety-nine rupees, reserve" — not a
+      clock.
+
+      AFTER THE NIGHT: delete this whole <a>, the hero strip, and the nav item.
+    -->
+    <a class="announce" href="book.html">
+      <span class="container announce__inner">
+        <span class="announce__pulse" aria-hidden="true"></span>
+        <span class="announce__label">The Debut</span>
+        <span class="announce__sep" aria-hidden="true">&middot;</span>
+        <span class="announce__date">Sat 26 Sep 2026</span>
+        <span class="announce__count" aria-hidden="true"
+              data-countdown="2026-09-26T00:00:00+05:30"
+              data-countdown-done="Tonight">
+          <span data-countdown-part="days">--</span>d
+          <span data-countdown-part="hours">--</span>h
+          <span data-countdown-part="minutes">--</span>m
+        </span>
+        <span class="announce__price">Early bird &#8377;2,999</span>
+        <span class="announce__cta">Reserve <span aria-hidden="true">&rarr;</span></span>
+      </span>
+    </a>
+
     <div class="container site-header__inner">
 
       <!--
@@ -234,12 +276,6 @@
       </nav>
 
       <div class="site-header__actions">
-        <!-- The only gold in the header, and it stays visible on a phone where
-             "Enquire" does not: on a launch page the ticket is the action, and
-             a visitor who has scrolled past the debut band should never have to
-             open the menu to find it again. Kept to one word so the lockup,
-             the button and the hamburger still fit across a 320px screen. -->
-        <a class="btn btn--gold btn--sm site-header__tickets" href="book.html">Tickets</a>
         <a class="btn btn--outline btn--sm site-header__cta" href="#contact">Enquire</a>
 
         <button
@@ -364,11 +400,24 @@
           world&rsquo;s most elusive destinations.
         </p>
 
+        <!-- The event, in the hero itself. Everything above this line is the
+             agency; this is the one dated, priced, buyable thing on the page,
+             and it belongs on the first screen rather than only below it. -->
+        <p class="hero__debut">
+          <span class="hero__debut-flag">The Debut</span>
+          <span class="hero__debut-text">Saturday 26 September 2026</span>
+          <span class="hero__debut-price">Early bird &#8377;2,999</span>
+        </p>
+
+        <!-- For the length of the campaign the ticket takes the gold and the
+             brief steps back to an outline. Reverting after the night means
+             swapping these two classes back, not rewriting the block.
+             The "What We Do" arrow that used to sit here is gone: it did the
+             same job as the scroll cue directly below, and with the strip added
+             the hero no longer had room for a third action. -->
         <div class="hero__actions">
-          <a class="btn btn--gold" href="#contact">Start a Brief</a>
-          <a class="link-arrow link-arrow--light" href="#services">
-            What We Do <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
-          </a>
+          <a class="btn btn--gold btn--lg" href="book.html">Reserve Your Seat</a>
+          <a class="btn btn--light" href="#contact">Start a Brief</a>
         </div>
       </div>
 
@@ -402,7 +451,8 @@
       <div class="container debut__inner">
 
         <p class="eyebrow eyebrow--light debut__eyebrow" data-reveal>
-          The Debut <span class="debut__dot" aria-hidden="true">&middot;</span>
+          <span class="debut__pulse" aria-hidden="true"></span>The Debut
+          <span class="debut__dot" aria-hidden="true">&middot;</span>
           Saturday, 26 September 2026
         </p>
 
@@ -1458,6 +1508,6 @@
     <span class="wa-float__label">WhatsApp</span>
   </a>
 
-  <script src="js/script.js?v=2026-09-01a"></script>
+  <script src="js/script.js?v=2026-09-01b"></script>
 </body>
 </html>

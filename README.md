@@ -313,6 +313,14 @@ measured with the same formula:
 | Tier flags, summary labels, QR caption | `--muted` on `--surface` | 6.3:1 |
 | The payment caution, the saving line, the step numerals | `--gold-deep` on `--surface` | 5.7:1 |
 
+The debut event is deliberately loud in three places: the gold **announcement
+bar** pinned above the header on every screen (the whole strip is one link, and
+navy on its gradient measures 7.6:1 at the darkest stop), the **hero strip**
+above the buttons (`#0B1226` ground so its date and price never depend on the
+photograph behind them — `--paper` 18.0:1, `--gold-bright` 11.4:1), and the
+`#debut` band itself. The header's gold *Tickets* button was removed when the
+bar arrived; two gold things in 90px of screen is no primary action at all.
+
 The one trap worth naming: the header rule `.site-header .btn { color: var(--paper) }`
 is more specific than `.btn--gold`'s own foreground, so the gold *Tickets*
 button in the header would have been repainted cream on gold — about **1.6:1**,
