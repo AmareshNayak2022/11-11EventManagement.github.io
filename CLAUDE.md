@@ -149,7 +149,9 @@ their earlier message. All of it is safe to use verbatim.**
 | **Venue** | **Deliberately secret.** Revealed **7 September 2026, 11:11 PM** |
 | Passes | **Reserve** (elite families, corporates & groups — invitation only, DM to apply) · **Vogue** (powerful couples) · **Elite** (individual trendsetters) |
 | Early bird | Live for Vogue & Elite, running **until the venue unveiling**; standard pricing after |
-| Elite pricing | ₹2,999 early bird / ₹5,999 standard |
+| **Elite** | individual — ₹5,499 → **₹2,499** |
+| **Vogue** | couples, **priced per person** — ₹4,999 → **₹1,999 each**, minimum 2 |
+| **Reserve** | invitation only, **minimum 3**, DM 9938120356 to apply |
 | Inclusions | Rich culinary experience (no limits) · Global premium beverages (no limits) · An elegant sonic affair · A sundowner like never before · Elite gathering · Impeccable service & ambience |
 | UPI ID | `elevennelevenne-26@idfcbank` — IDFC FIRST Bank, Elevenn Elevenn Archive Private Limited |
 | Payment QR | `images/upi-qr.png`, a crop of the client's own payment slip |
@@ -165,38 +167,47 @@ opens the venue. It appears in **four** places and they must agree:
 - the announcement bar's countdown (`index.html`)
 - the venue-reveal panel's countdown (`index.html`)
 - the booking page's countdown (`book.html`)
-- `data-early-until` on the Elite pass card (`book.html`) — the one that
-  actually switches the price
+- `EARLY_BIRD_ENDS` in `js/booking.js` — the one that actually switches the
+  price. It is a constant rather than a data attribute because a single deadline
+  shared by both passes belongs in one place; the per-pass **prices** stay in
+  the markup.
 
 **The rate is not a choice the visitor makes.** `js/booking.js` compares the
-clock against `data-early-until` and charges ₹2,999 before it and ₹5,999 after,
-repainting the pass card, the summary, the pay panel and the UPI link together.
-It re-checks once a minute, so a tab left open across the evening of the 7th
-switches under the visitor rather than letting them pay yesterday's rate. A
-malformed date falls back to the **standard** price, never the cheap one.
+clock against `EARLY_BIRD_ENDS` and reads whichever of `data-price-early` /
+`data-price-standard` applies, repainting **every** pass card, the summary, the
+pay panel and the UPI link together — every card, not just the selected one, or
+a visitor comparing the two after the deadline would see one live figure beside
+one stale advertisement. It re-checks once a minute, so a tab left open across
+the evening of the 7th switches under the visitor rather than letting them pay
+yesterday's rate. A malformed date falls back to the **standard** price, never
+the cheap one.
+
+**`data-min` is a pricing guard, not a preference.** Vogue is priced per person
+below Elite's single-pass rate, so one Vogue pass would undercut one Elite pass
+and nobody would ever buy Elite. Vogue's minimum of two is an inference from
+"for powerful couples" and "each" — flagged, not buried. Selecting Vogue lifts
+the quantity to 2 if it is lower, and the validator refuses less.
 
 ### Still not confirmed — do not invent
 
-The **doors time**, the **lineup**, the **capacity**, **Vogue's two prices**, and
-the **refund / transfer policy**. Q62–Q66 in `CLIENT-BRIEF.md`; the refund policy
-is the urgent one now that money is arriving.
+The **doors time**, the **lineup**, the **capacity**, and the **refund /
+transfer policy**. Q62–Q66 in `CLIENT-BRIEF.md`; the refund policy is the urgent
+one now that money is arriving.
 
-- Vogue is therefore **not bookable on the page**. It and Reserve both route to
-  the concierge desk on WhatsApp, which is what the client's own poster tells
-  people to do ("DM us to get your private passes"). When Vogue's two prices are
-  confirmed it becomes a second `.pass-card--book` with its own `data-price-*`
-  pair, and `booking.js` needs no change.
-- Elite's ₹2,999/₹5,999 come from the client's message of 1 Sept, sent *before*
-  the three-pass structure was known. Elite is the individual pass, so that is
-  where they were applied — **flagged to the client, not silently assumed.**
+- **Prices are settled** (client, evening of 1 Sept) and supersede the
+  ₹2,999/₹5,999 given earlier that day, which predated the three-pass structure
+  and were briefly live against Elite. If you find those two figures anywhere,
+  they are wrong.
+- Vogue's **minimum of two** is the one inferred number on the page. Confirm it.
 - The **event** countdown still targets midnight opening the 26th, because
   "sundowner" implies an evening and implying is not confirming.
 - The `Event` JSON-LD stays **commented out** in `index.html`: `location` would
   still be a guess, and the venue being secret is the point of the campaign.
 
-**No prices appear on the landing page.** The client's own posters publish none —
-withholding is the whole marketing device — and only one pass's figures are
-confirmed. Do not add them there without asking.
+Prices **do** now appear on the landing page's pass cards, because the client
+published them in that struck-through form themselves. They still appear nowhere
+else: the agency's own project pricing stays unpublished, and the posters
+deliberately carry no figures at all.
 
 ### Where the event appears, and why it appears there
 

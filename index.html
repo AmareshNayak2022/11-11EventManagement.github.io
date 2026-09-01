@@ -80,7 +80,7 @@
        page updates, the capitals and the gold do not. Bump the date whenever
        css/style.css or js/script.js changes and every browser fetches it fresh;
        the same string is on the <script> tag at the end of <body>. -->
-  <link rel="stylesheet" href="css/style.css?v=2026-09-02b">
+  <link rel="stylesheet" href="css/style.css?v=2026-09-02c">
 
   <!--
     Structured data for Elevenn Elevenn Archive Pvt Ltd, trading as 11:11.
@@ -524,8 +524,8 @@
                 <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
               </a>
               <p class="debut__note">
-                Vogue and Elite passes are booked here. Reserve is by invitation &mdash;
-                apply through the concierge desk.
+                Vogue and Elite passes are booked here. Reserve is by invitation,
+                minimum three &mdash; apply through the concierge desk.
               </p>
             </div>
           </div>
@@ -652,23 +652,29 @@
         </ul>
 
         <!-- ---------- The three passes ----------
-             Names, who each is for, and their early-bird status are the
-             client's own, from the passes poster. NO PRICES ARE SHOWN HERE, and
-             that is deliberate on two counts: the poster itself publishes none
-             — the whole campaign is built on withholding — and only one tier's
-             figures are confirmed. See the note in CLAUDE.md before adding any. -->
-        <h3 class="noxus__sub" id="noxus-passes" data-reveal>Choose your experience</h3>
+             Names, audiences, minimums and prices are all the client's own
+             (posters plus their message of 1 Sept 2026 evening). Note Vogue is
+             priced PER PERSON — "1999/- each" — which is why it says so and why
+             the booking page will not sell fewer than two of them. -->
+        <h3 class="noxus__sub" id="noxus-passes" data-reveal>Book your private passes now</h3>
+        <p class="noxus__sub-note" data-reveal>
+          Exclusive offers for the extraordinary.
+          <strong>Early-bird offers end upon the venue reveal.</strong>
+        </p>
 
         <ul class="ticket-cards ticket-cards--three" aria-labelledby="noxus-passes" data-reveal>
           <li class="ticket-card">
             <p class="ticket-card__flag">Reserve</p>
-            <p class="ticket-card__who">For elite families, corporates &amp; groups</p>
-            <p class="ticket-card__status ticket-card__status--invite">Passes on invitation basis only</p>
+            <p class="ticket-card__who">
+              The elites, corporates &amp; groups
+              <span class="ticket-card__min">Min. 3</span>
+            </p>
+            <p class="ticket-card__status ticket-card__status--invite">Private passes on invitation basis only</p>
             <p class="ticket-card__note">
               Applications go to the concierge desk, who confirm availability before any payment.
             </p>
             <a class="link-arrow link-arrow--light ticket-card__cta"
-               href="https://wa.me/919938120356?text=Hi%2011%3A11%2C%20I%27d%20like%20to%20apply%20for%20a%20NOXUS%20Reserve%20pass."
+               href="https://wa.me/919938120356?text=Hi%2011%3A11%2C%20I%27d%20like%20to%20apply%20for%20a%20NOXUS%20Reserve%20pass%20(minimum%203)."
                target="_blank" rel="noopener">
               DM to apply <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
             </a>
@@ -676,11 +682,16 @@
 
           <li class="ticket-card ticket-card--featured">
             <p class="ticket-card__flag">Vogue</p>
-            <p class="ticket-card__who">For powerful couples</p>
-            <p class="ticket-card__status ticket-card__status--live">Early bird live now</p>
-            <p class="ticket-card__note">
-              Priced for two. The early-bird rate holds only until the venue is unveiled.
+            <p class="ticket-card__who">Powerful couples</p>
+            <p class="ticket-card__price">
+              <span class="ticket-card__amount">&#8377;1,999</span>
+              <span class="ticket-card__per">each</span>
             </p>
+            <p class="ticket-card__was">
+              <span class="ticket-card__strike">&#8377;4,999</span>
+              <span class="ticket-card__save">Live now</span>
+            </p>
+            <p class="ticket-card__note">Booked in pairs &mdash; two passes minimum.</p>
             <a class="link-arrow link-arrow--light ticket-card__cta" href="book.html">
               Book Vogue <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
             </a>
@@ -688,11 +699,15 @@
 
           <li class="ticket-card ticket-card--featured">
             <p class="ticket-card__flag">Elite</p>
-            <p class="ticket-card__who">For individual trendsetters</p>
-            <p class="ticket-card__status ticket-card__status--live">Early bird live now</p>
-            <p class="ticket-card__note">
-              A single pass. The early-bird rate holds only until the venue is unveiled.
+            <p class="ticket-card__who">Individual trendsetters</p>
+            <p class="ticket-card__price">
+              <span class="ticket-card__amount">&#8377;2,499</span>
             </p>
+            <p class="ticket-card__was">
+              <span class="ticket-card__strike">&#8377;5,499</span>
+              <span class="ticket-card__save">Live now</span>
+            </p>
+            <p class="ticket-card__note">A single pass.</p>
             <a class="link-arrow link-arrow--light ticket-card__cta" href="book.html">
               Book Elite <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
             </a>
@@ -1681,6 +1696,6 @@
     <span class="wa-float__label">WhatsApp</span>
   </a>
 
-  <script src="js/script.js?v=2026-09-02b"></script>
+  <script src="js/script.js?v=2026-09-02c"></script>
 </body>
 </html>

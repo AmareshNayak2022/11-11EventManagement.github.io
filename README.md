@@ -64,23 +64,30 @@ biggest sundowner drunch party*, **Saturday 26 September 2026**, presented by
 The campaign runs on one confirmed deadline. **The venue is deliberately secret
 and is revealed on 7 September at 11:11 PM — and the early-bird rate ends at
 exactly that instant.** So the rate is not something the visitor chooses: the
-page checks the clock, charges ₹2,999 before that moment and ₹5,999 after, and
-re-checks every minute so a tab left open overnight cannot pay yesterday's
-price. That instant appears in four places (three countdowns plus
-`data-early-until` on the Elite pass) and they must always agree.
+page checks the clock and charges the early-bird or the standard rate
+accordingly, re-checking every minute so a tab left open overnight cannot pay
+yesterday's price. That instant appears in four places (three countdowns plus
+`EARLY_BIRD_ENDS` in `js/booking.js`) and they must always agree.
 
-Three passes, from the client's own poster: **Reserve** (elite families,
-corporates and groups — invitation only), **Vogue** (powerful couples) and
-**Elite** (individual trendsetters). Only Elite is bookable on the page; Vogue
-and Reserve route to the concierge desk on WhatsApp, which is what the poster
-itself tells people to do.
+Three passes:
+
+| Pass | For | Early bird | Standard |
+|------|-----|-----------|----------|
+| **Reserve** | The elites, corporates & groups, **min. 3** | Invitation only — DM to apply | — |
+| **Vogue** | Powerful couples, **per person, min. 2** | **₹1,999 each** | ₹4,999 each |
+| **Elite** | Individual trendsetters | **₹2,499** | ₹5,499 |
+
+Vogue and Elite are bookable on the page; Reserve routes to the concierge desk
+on WhatsApp. Vogue's minimum of two is not decoration — it is priced per person
+*below* Elite, so without a floor a single Vogue pass would undercut a single
+Elite one.
 
 Still **unconfirmed and deliberately unwritten** — do not fill these in from
 guesswork:
 
 | Missing | Why it matters |
 |---------|----------------|
-| **Vogue's two prices** | Which is why Vogue is not bookable on the page. Give it a `data-price-early` / `data-price-standard` pair and it becomes a second bookable pass with no JavaScript change. |
+| **Vogue's minimum of two** | The one inferred number on the site, read from "for powerful couples" and "each". Everything else is the client's own. |
 | The doors time | The event countdown targets **midnight opening the 26th**, not a start time. "Sundowner" implies an evening, but implying is not confirming. Change the `data-countdown` in `index.html` and `book.html` together. |
 | The lineup | The whole positioning is scouting breakout artists. A named act is the strongest thing that could still be added to the advert. |
 | The capacity | The form caps self-service at ten passes. That is a sanity limit, not a stated capacity — beyond it, it becomes a Reserve enquiry. |

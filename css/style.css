@@ -1718,6 +1718,97 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 }
 .ticket-card__status--live { background: var(--gold); color: var(--navy); }  /* 8.9:1 */
 .ticket-card__cta { margin-top: auto; padding-top: 1rem; align-self: center; }
+/* "each" rides the figure at body size — the price is display type, and a
+   matching-size qualifier would read as part of the number. */
+.ticket-card__per {
+  font-size: var(--fs-small);
+  font-weight: 400;
+  color: rgb(var(--paper-rgb) / 0.72);
+  margin-left: 0.35rem;
+}
+.ticket-card__min {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.12rem 0.45rem;
+  border: 1px solid var(--hairline-light);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: rgb(var(--paper-rgb) / 0.8);
+}
+.noxus__sub-note {
+  margin: -0.75rem 0 clamp(1.5rem, 3vw, 2.25rem);
+  text-align: center;
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: rgb(var(--paper-rgb) / 0.72);
+}
+.noxus__sub-note strong { color: var(--gold-bright); font-weight: 600; }
+
+/* --- Booking page: the radio pass cards ----------------------------------
+   The <input> stays in the layout and is only visually replaced — the same
+   technique .check and .tier-opt use — so it keeps keyboard focus and its
+   place in the accessibility tree. */
+.pass-opt { position: relative; display: flex; }
+.pass-opt__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+.pass-opt .pass-card { flex: 1; cursor: pointer; padding-right: 3rem; }
+.pass-opt__input:checked + .pass-card {
+  border-color: var(--navy);
+  box-shadow: inset 0 0 0 1px var(--navy), var(--shadow-soft);
+}
+.pass-opt__input:focus-visible + .pass-card {
+  outline: 2px solid var(--navy);
+  outline-offset: 3px;
+}
+/* The tick is reused wholesale from the old tier chooser; only the ring's
+   resting state needed a home here. */
+.pass-opt .tier-opt__tick {
+  top: clamp(1.4rem, 3vw, 1.9rem);
+  right: clamp(1.4rem, 3vw, 1.9rem);
+}
+.pass-opt__input:checked + .pass-card .tier-opt__tick {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.pass-opt__input:checked + .pass-card .tier-opt__tick::after {
+  content: "";
+  position: absolute;
+  left: 0.42rem;
+  top: 0.2rem;
+  width: 0.35rem;
+  height: 0.6rem;
+  border: solid var(--paper);
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+
+/* Reserve is not a choice on this page, so its card must not look like one. */
+.pass-card--static { background: var(--bg-alt); }
+
+.pass-card__per { font-size: var(--fs-small); color: var(--muted); margin-left: 0.3rem; }
+.pass-card__min {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--gold-deep);   /* a boundary on light: 5.7:1 */
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+.book-step__intro {
+  margin: -0.5rem 0 clamp(1.25rem, 2.5vw, 1.75rem);
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--text);
+}
+.book-step__intro strong { color: var(--gold-deep); font-weight: 600; }
 
 .noxus__sign {
   margin-top: clamp(2.5rem, 5vw, 3.5rem);

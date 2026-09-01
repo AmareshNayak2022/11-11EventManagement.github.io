@@ -40,7 +40,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <!-- Same cache-buster string as index.html. Bump both together, always. -->
-  <link rel="stylesheet" href="css/style.css?v=2026-09-02b">
+  <link rel="stylesheet" href="css/style.css?v=2026-09-02c">
 </head>
 
 <body>
@@ -175,17 +175,25 @@
           <form class="form book-form" id="booking-form" novalidate>
 
             <!-- ---------- Step 1: which pass ----------
-              Three passes, but only one of them is bought on this page.
+              Three passes; two of them are bought here.
 
-              Reserve is invitation-only and Vogue's figures have not been
-              confirmed, so both route to the concierge desk on WhatsApp — which
-              is also what the client's own poster tells people to do ("DM us to
-              get your private passes"). Elite is the single pass with confirmed
-              pricing, so it is the one with a checkout.
+              PRICES (client, 1 Sept 2026, evening — these SUPERSEDE the
+              ₹2,999/₹5,999 figures given earlier in the day, which predated the
+              three-pass structure and were briefly live against Elite):
 
-              When Vogue's early-bird and standard prices are confirmed, it
-              becomes a second .pass-card--book with its own data-price-* pair
-              and a radio, and js/booking.js picks it up with no other change.
+                Elite   individual        ₹5,499 → ₹2,499
+                Vogue   couples, EACH     ₹4,999 → ₹1,999   (per person)
+                Reserve invitation only, minimum 3
+
+              Vogue is priced PER PERSON, which is why it carries data-min="2":
+              a single Vogue pass at ₹1,999 would otherwise undercut a single
+              Elite pass at ₹2,499 and nobody would ever buy Elite. Two is the
+              smallest number that matches "for powerful couples" — it is an
+              inference from the client's own wording, so it is flagged rather
+              than buried.
+
+              Every figure lives on the radio, beside the number a visitor
+              reads. js/booking.js hardcodes no amount.
             -->
             <fieldset class="book-step">
               <legend class="book-step__legend">
@@ -193,70 +201,72 @@
                 Choose your pass
               </legend>
 
+              <p class="book-step__intro">
+                Exclusive offers for the extraordinary.
+                <strong>Early-bird offers end upon the venue reveal.</strong>
+              </p>
+
               <ul class="pass-choice">
-                <li class="pass-card">
+                <li class="pass-card pass-card--static">
                   <p class="pass-card__flag">Reserve</p>
-                  <p class="pass-card__who">For elite families, corporates &amp; groups</p>
-                  <p class="pass-card__status pass-card__status--invite">Passes on invitation basis only</p>
+                  <p class="pass-card__who">The elites, corporates &amp; groups <span class="pass-card__min">Min. 3</span></p>
+                  <p class="pass-card__status pass-card__status--invite">Private passes on invitation basis only</p>
                   <p class="pass-card__note">
-                    Applications reach the concierge desk, who confirm availability before
-                    any payment is taken.
+                    Applications reach the concierge desk, who confirm availability
+                    before any payment is taken.
                   </p>
                   <a class="btn btn--outline btn--sm pass-card__cta"
-                     href="https://wa.me/919938120356?text=Hi%2011%3A11%2C%20I%27d%20like%20to%20apply%20for%20a%20NOXUS%20Reserve%20pass."
+                     href="https://wa.me/919938120356?text=Hi%2011%3A11%2C%20I%27d%20like%20to%20apply%20for%20a%20NOXUS%20Reserve%20pass%20(minimum%203)."
                      target="_blank" rel="noopener">Apply on WhatsApp</a>
                 </li>
 
-                <li class="pass-card">
-                  <p class="pass-card__flag">Vogue</p>
-                  <p class="pass-card__who">For powerful couples</p>
-                  <p class="pass-card__status pass-card__status--live">Early bird live now</p>
-                  <p class="pass-card__note">
-                    A pass for two. The desk confirms the current rate and holds your
-                    place while the early-bird window is open.
-                  </p>
-                  <a class="btn btn--outline btn--sm pass-card__cta"
-                     href="https://wa.me/919938120356?text=Hi%2011%3A11%2C%20I%27d%20like%20a%20NOXUS%20Vogue%20pass%20for%20two.%20Could%20you%20confirm%20the%20early-bird%20rate%3F"
-                     target="_blank" rel="noopener">Enquire on WhatsApp</a>
+                <li class="pass-opt">
+                  <input class="pass-opt__input" type="radio" name="pass" id="pass-vogue"
+                         value="Vogue"
+                         data-price-early="1999" data-price-standard="4999"
+                         data-min="2" data-per="each">
+                  <label class="pass-card pass-card--book" for="pass-vogue">
+                    <span class="pass-card__flag">Vogue</span>
+                    <span class="pass-card__who">Powerful couples</span>
+                    <span class="pass-card__price">
+                      <span class="pass-card__amount" data-pass-amount>&#8377;1,999</span>
+                      <span class="pass-card__per">each</span>
+                      <span class="pass-card__was" data-pass-was>
+                        <span class="pass-card__strike">&#8377;4,999</span>
+                      </span>
+                    </span>
+                    <span class="pass-card__status pass-card__status--live" data-pass-window>Live now</span>
+                    <span class="pass-card__note">Booked in pairs &mdash; two passes minimum.</span>
+                    <span class="tier-opt__tick" aria-hidden="true"></span>
+                  </label>
                 </li>
 
-                <!--
-                  The bookable pass. Both figures live on this element as
-                  data-price-early / data-price-standard, next to the numbers a
-                  visitor reads, and data-early-until carries the instant the
-                  first becomes the second. booking.js reads all three and
-                  hardcodes nothing — so a price change, or a change to the
-                  deadline, is an edit here and nowhere else.
-                -->
-                <li class="pass-card pass-card--book" id="pass-elite"
-                    data-pass
-                    data-price-early="2999"
-                    data-price-standard="5999"
-                    data-early-until="2026-09-07T23:11:00+05:30">
-                  <p class="pass-card__flag">Elite</p>
-                  <p class="pass-card__who">For individual trendsetters</p>
-
-                  <p class="pass-card__price">
-                    <span class="pass-card__amount" data-book="unit">&#8377;2,999</span>
-                    <span class="pass-card__was" data-book="was">
-                      <span class="pass-card__strike">&#8377;5,999</span>
+                <li class="pass-opt">
+                  <input class="pass-opt__input" type="radio" name="pass" id="pass-elite"
+                         value="Elite" checked
+                         data-price-early="2499" data-price-standard="5499"
+                         data-min="1" data-per="">
+                  <label class="pass-card pass-card--book" for="pass-elite">
+                    <span class="pass-card__flag">Elite</span>
+                    <span class="pass-card__who">Individual trendsetters</span>
+                    <span class="pass-card__price">
+                      <span class="pass-card__amount" data-pass-amount>&#8377;2,499</span>
+                      <span class="pass-card__was" data-pass-was>
+                        <span class="pass-card__strike">&#8377;5,499</span>
+                      </span>
                     </span>
-                  </p>
-                  <p class="pass-card__status pass-card__status--live" data-book="window">
-                    Early-bird rate
-                  </p>
-                  <p class="pass-card__note">
-                    A single pass. This rate holds until the venue is revealed on
-                    7 September, then the standard rate applies.
-                  </p>
+                    <span class="pass-card__status pass-card__status--live" data-pass-window>Live now</span>
+                    <span class="pass-card__note">A single pass.</span>
+                    <span class="tier-opt__tick" aria-hidden="true"></span>
+                  </label>
                 </li>
               </ul>
 
               <!-- The client's own passes artwork, supplied 1 Sept 2026. Every
                    word on it is set as real text in the cards above, so this is
                    reinforcement rather than the only carrier of the detail —
-                   which is what the alt text reflects. Modest by design: it
-                   sits under the passes, not above the form. -->
+                   which is what the alt text reflects. Note the poster shows no
+                   figures; the prices came separately. -->
               <figure class="pass-poster">
                 <img
                   src="images/noxus-passes-640.jpg"
@@ -293,6 +303,7 @@
                           aria-label="One pass more">+</button>
                 </div>
                 <p class="field__hint" id="seats-hint">
+                  <span data-book="min-hint"></span>
                   More than ten, or booking for a family, company or group? That is a
                   Reserve pass &mdash; message the concierge desk and we will arrange it.
                 </p>
@@ -345,8 +356,8 @@
               <div class="pay">
                 <div class="pay__amount">
                   <p class="pay__amount-label">Amount to pay</p>
-                  <p class="pay__amount-value" data-book="total">&#8377;2,999</p>
-                  <p class="pay__amount-note" data-book="breakdown">1 pass &times; &#8377;2,999 &mdash; Elite</p>
+                  <p class="pay__amount-value" data-book="total">&#8377;2,499</p>
+                  <p class="pay__amount-note" data-book="breakdown">1 pass &times; &#8377;2,499 &mdash; Elite</p>
                 </div>
 
                 <div class="pay__body">
@@ -384,8 +395,8 @@
                          booking.js rewrites the am= parameter every time the
                          pass count or the rate changes. -->
                     <a class="btn btn--gold btn--block pay__app" id="upi-link"
-                       href="upi://pay?pa=elevennelevenne-26@idfcbank&amp;pn=Elevenn%20Elevenn%20Archive%20Private%20Limited&amp;cu=INR&amp;am=2999.00">
-                      Open UPI App <span data-book="total-short">&#8377;2,999</span>
+                       href="upi://pay?pa=elevennelevenne-26@idfcbank&amp;pn=Elevenn%20Elevenn%20Archive%20Private%20Limited&amp;cu=INR&amp;am=2499.00">
+                      Open UPI App <span data-book="total-short">&#8377;2,499</span>
                     </a>
                     <p class="pay__app-note">
                       On a phone this opens GPay, PhonePe, Paytm or your bank app with the
@@ -425,7 +436,7 @@
                   <input type="checkbox" id="paid" name="paid" value="Payment made"
                          aria-describedby="paid-error" required>
                   <span class="check__box" aria-hidden="true"></span>
-                  <span>I have paid <span data-book="total-short">&#8377;2,999</span> to the UPI ID above.</span>
+                  <span>I have paid <span data-book="total-short">&#8377;2,499</span> to the UPI ID above.</span>
                 </label>
                 <p class="field__error" id="paid-error" data-book-error="paid"></p>
               </div>
@@ -513,13 +524,13 @@
               </div>
               <div class="summary__row">
                 <dt>Per pass</dt>
-                <dd data-book="unit">&#8377;2,999</dd>
+                <dd data-book="unit">&#8377;2,499</dd>
               </div>
             </dl>
 
             <p class="summary__total">
               <span class="summary__total-label">Total</span>
-              <span class="summary__total-value" data-book="total">&#8377;2,999</span>
+              <span class="summary__total-value" data-book="total">&#8377;2,499</span>
             </p>
 
             <p class="summary__save" data-book="saving" hidden></p>
@@ -637,7 +648,7 @@
 
   <!-- script.js first: it owns the header state and the countdown that this
        page shares with index.html. booking.js only knows about this form. -->
-  <script src="js/script.js?v=2026-09-02b"></script>
-  <script src="js/booking.js?v=2026-09-02b"></script>
+  <script src="js/script.js?v=2026-09-02c"></script>
+  <script src="js/booking.js?v=2026-09-02c"></script>
 </body>
 </html>

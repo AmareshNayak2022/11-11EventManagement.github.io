@@ -48,6 +48,13 @@
   var WHATSAPP  = '919938120356';
   var EVENT     = 'NOXUS — Sat 26 September 2026';
 
+  /* The instant the early-bird rate ends, which is also the instant the venue
+     is revealed (client's poster, 1 Sept 2026). The explicit +05:30 matters: a
+     bare '2026-09-07' parses as midnight UTC and would end the offer five and a
+     half hours early for everyone. The same instant drives three countdowns in
+     the markup — keep all four in step. */
+  var EARLY_BIRD_ENDS = '2026-09-07T23:11:00+05:30';
+
   /* ========================================================================
      02. HELPERS & MONEY
      ======================================================================== */
@@ -77,31 +84,31 @@
   }
 
   /* ========================================================================
-     03. LIVE TOTALS, THE PASS PRICE, AND THE UPI LINK
+     03. THE PASSES, THE RATE, AND THE UPI LINK
 
-     THE PRICE IS NOT A CHOICE THE VISITOR MAKES. The client's campaign sets it
-     by the clock: the early-bird rate runs until the venue is unveiled on
-     7 September at 11:11 PM, and the standard rate applies from that instant.
-     So there is no early-bird/standard selector — the page works out which one
-     is in force and says so.
+     TWO THINGS SET THE PRICE, AND NEITHER IS A DROPDOWN.
 
-     All three numbers live on the pass element in book.html, next to the
-     figures a visitor reads: data-price-early, data-price-standard, and
-     data-early-until. Nothing is hardcoded here, so a price change or a moved
-     deadline is an edit in the markup and nothing in this file.
+     1. WHICH PASS. Vogue and Elite are bought here; Reserve is invitation-only
+        and lives outside the form. Each pass carries its own figures on its
+        radio in book.html — data-price-early, data-price-standard, data-min —
+        next to the numbers a visitor reads. Nothing is hardcoded in this file,
+        so a price change is an edit in the markup alone.
 
-     One function recomputes everything the visitor can see about the price, so
-     the pass card, the summary, the pay panel, the confirmation tick and the
-     UPI deep link can never drift out of step with each other.
+     2. WHEN. The early-bird rate runs until the venue is unveiled and the
+        standard rate applies from that instant, so the page works out which is
+        in force rather than offering it as a choice.
+
+     data-min is what stops Vogue being an arbitrage: it is priced PER PERSON at
+     the lower figure, so a single Vogue pass would undercut a single Elite pass
+     and nobody would ever buy Elite. Vogue's minimum of two is an inference
+     from "for powerful couples" and "each" — flagged in book.html and in
+     CLAUDE.md rather than buried here.
      ======================================================================== */
-  var passEl  = $('[data-pass]', form) || $('[data-pass]');
-  var seatsEl = $('#seats', form);
-  var upiLink = $('#upi-link');
+  var passInputs = $$('input[name="pass"]', form);
+  var seatsEl    = $('#seats', form);
+  var upiLink    = $('#upi-link');
 
-  var PASS_NAME   = 'Elite';
-  var PRICE_EARLY = parseInt(passEl.getAttribute('data-price-early'), 10);
-  var PRICE_STD   = parseInt(passEl.getAttribute('data-price-standard'), 10);
-  var EARLY_UNTIL = new Date(passEl.getAttribute('data-early-until')).getTime();
+  var EARLY_UNTIL = new Date(EARLY_BIRD_ENDS).getTime();
 
   // A malformed deadline must not silently hand out the cheaper rate forever,
   // so an unparseable date falls back to the standard price.
@@ -109,67 +116,102 @@
     return !isNaN(EARLY_UNTIL) && Date.now() < EARLY_UNTIL;
   }
 
-  // The pass count as an integer inside the input's own min/max, whatever the
-  // visitor typed. A number input accepts "" and "-4" quite happily.
+  function currentPass() {
+    for (var i = 0; i < passInputs.length; i++) {
+      if (passInputs[i].checked) return passInputs[i];
+    }
+    return passInputs[0];
+  }
+
+  function priceOf(input) {
+    return parseInt(input.getAttribute(
+      isEarlyBird() ? 'data-price-early' : 'data-price-standard'), 10);
+  }
+  function minOf(input) {
+    return parseInt(input.getAttribute('data-min'), 10) || 1;
+  }
+
+  // The pass count as an integer inside the current pass's own floor and the
+  // input's ceiling, whatever the visitor typed. A number input accepts "" and
+  // "-4" quite happily.
   function currentSeats() {
     var n = parseInt(seatsEl.value, 10);
-    if (!isFinite(n)) n = 1;
-    var min = parseInt(seatsEl.getAttribute('min'), 10) || 1;
+    var min = minOf(currentPass());
     var max = parseInt(seatsEl.getAttribute('max'), 10) || 10;
+    if (!isFinite(n)) n = min;
     if (n < min) n = min;
     if (n > max) n = max;
     return n;
   }
 
   function state() {
+    var pass  = currentPass();
     var early = isEarlyBird();
-    var unit  = early ? PRICE_EARLY : PRICE_STD;
+    var unit  = priceOf(pass);
     var seats = currentSeats();
     return {
-      name:  PASS_NAME,
+      name:  pass.value,
+      per:   pass.getAttribute('data-per') || '',
       early: early,
       unit:  unit,
       seats: seats,
+      min:   minOf(pass),
       total: unit * seats
     };
   }
 
   function refresh() {
     var s = state();
+    var early = s.early;
+
+    /* Every pass card repaints, not just the selected one: a visitor comparing
+       Vogue against Elite after the deadline must see both standard prices,
+       not one live figure beside one stale advertisement. */
+    passInputs.forEach(function (input) {
+      var card = document.querySelector('label[for="' + input.id + '"]');
+      if (!card) return;
+      var amount = card.querySelector('[data-pass-amount]');
+      var was    = card.querySelector('[data-pass-was]');
+      var win    = card.querySelector('[data-pass-window]');
+      if (amount) amount.textContent = rupees(priceOf(input));
+      if (was)    was.hidden = !early;
+      if (win)    win.textContent = early ? 'Live now' : 'Standard rate';
+    });
+
+    // The floor moves with the pass, so the input has to agree with it or the
+    // browser's own validation would disagree with ours.
+    seatsEl.setAttribute('min', String(s.min));
 
     setText('tier',  s.name);
     setText('seats', String(s.seats));
-    setText('unit',  rupees(s.unit));
+    setText('unit',  rupees(s.unit) + (s.per ? ' ' + s.per : ''));
     setText('total', rupees(s.total));
     setText('total-short', rupees(s.total));
     setText('breakdown',
       s.seats + (s.seats === 1 ? ' pass' : ' passes') +
       ' × ' + rupees(s.unit) + ' — ' + s.name);
+    setText('min-hint', s.min > 1
+      ? s.name + ' is priced per person and booked in pairs, so ' + s.min + ' is the minimum.'
+      : s.name + ' is a single pass, so one is enough.');
 
-    /* Which rate is in force, said in words as well as shown in the figure —
-       a struck-through price on its own does not tell anyone why. */
-    setText('window', s.early ? 'Early-bird rate' : 'Standard rate');
-
-    // The struck-through standard price only means something while the
-    // early-bird rate is actually cheaper than it.
-    var wasEl = $('[data-book="was"]');
-    if (wasEl) wasEl.hidden = !s.early;
-
-    /* The saving is computed from the two prices on the element rather than
-       from a hardcoded figure, so it stays right if either moves. It is hidden
-       outright once the early-bird window shuts — a line reading "You save ₹0"
-       would be worse than no line. */
+    /* The saving comes from the selected pass's own two figures, so it stays
+       right if either moves, and it is hidden outright once the early-bird
+       window shuts — a line reading "You save zero" would be worse than none. */
     var saveEl = $('[data-book="saving"]');
     if (saveEl) {
-      var saved = s.early ? (PRICE_STD - PRICE_EARLY) * s.seats : 0;
+      var pass  = currentPass();
+      var saved = early
+        ? (parseInt(pass.getAttribute('data-price-standard'), 10) -
+           parseInt(pass.getAttribute('data-price-early'), 10)) * s.seats
+        : 0;
       saveEl.textContent = saved > 0 ? 'You save ' + rupees(saved) : '';
       saveEl.hidden = saved <= 0;
     }
 
     /* The UPI intent, rebuilt from scratch each time.
 
-       am= must be a plain decimal with two places — "2999.00", never "₹2,999"
-       and never "2,999.00", both of which UPI apps reject or silently drop.
+       am= must be a plain decimal with two places, never a grouped or
+       symbol-prefixed figure, both of which UPI apps reject or silently drop.
        Note that a plain (unsigned) upi:// intent PRE-FILLS the amount but does
        not lock it: the payer can still edit the figure in their app. That is
        exactly why step 05 asks for the reference number and a person checks it
@@ -181,9 +223,18 @@
         '&pn=' + encodeURIComponent(UPI_PAYEE) +
         '&cu=INR' +
         '&am=' + s.total.toFixed(2) +
-        '&tn=' + encodeURIComponent('NOXUS ' + s.seats + ' pass');
+        '&tn=' + encodeURIComponent('NOXUS ' + s.name + ' x' + s.seats);
     }
   }
+
+  passInputs.forEach(function (input) {
+    input.addEventListener('change', function () {
+      // Switching to a pass with a higher floor must lift the count with it,
+      // or the form would sit on an invalid quantity the visitor never chose.
+      seatsEl.value = currentSeats();
+      refresh();
+    });
+  });
 
   if (seatsEl) {
     seatsEl.addEventListener('input',  refresh);
@@ -207,9 +258,9 @@
   });
 
   /* If the deadline passes while the page is open — someone leaves a tab up
-     over the evening of the 7th — the price must change under them rather than
-     letting them pay yesterday's rate. Checked once a minute; the switch itself
-     is just refresh(), which repaints every figure at once. */
+     over the evening of the 7th — the prices must change under them rather
+     than letting them pay yesterday's rate. Checked once a minute; the switch
+     itself is just refresh(), which repaints every figure at once. */
   if (!isNaN(EARLY_UNTIL)) {
     var wasEarly = isEarlyBird();
     window.setInterval(function () {
@@ -276,7 +327,12 @@
     seats: function (value) {
       var n = Number(value);
       if (!value || !isFinite(n) || Math.floor(n) !== n) return 'Please enter a whole number of passes.';
-      if (n < 1) return 'Please reserve at least one pass.';
+      var floor = minOf(currentPass());
+      if (n < floor) {
+        return floor > 1
+          ? currentPass().value + ' is booked in pairs, so please choose at least ' + floor + '.'
+          : 'Please reserve at least one pass.';
+      }
       // Above ten this stops being self-service and becomes a Reserve enquiry,
       // which is a conversation with the desk rather than a form.
       if (n > 10) return 'For more than ten passes, please message the concierge desk.';
