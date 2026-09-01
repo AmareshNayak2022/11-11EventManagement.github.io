@@ -84,11 +84,13 @@ bought without its price is a different thing.
 
 Two smaller open items:
 
-- **The site's own domain is unconfirmed**, so `url` is still omitted from the
-  structured data, and `og:image` / `twitter:image` point at the hero artwork on
-  the **GitHub Pages** host rather than on your own domain — absolute, so share
-  previews work today, but they must be repointed when the domain lands.
-  `telephone` and `email` are now filled in with the real values.
+- **The domain is settled — this one is done.** The site lives at
+  **https://elevennelevenn.in** (confirmed 1 September 2026), served by GitHub
+  Pages, with the old `github.io` address 301-redirecting to it. `url` is in the
+  structured data, both pages carry a `canonical` and an `og:url`, and every
+  absolute image URL is on that host. One thing not to trip over: the site
+  domain is `.in` and the published email is on `elevennelevenn.com` — two
+  separate registrations, both correct, neither to be "fixed" to match.
 - **Both numbers are tappable on WhatsApp**, each paired with its own
   tap-to-call link. The floating button and the enquiry form still go to the
   concierge line, since that is the desk meant to handle enquiries.
@@ -446,8 +448,10 @@ Fully static, so any host works. Nothing to build, nothing to configure.
 - [ ] Replace the Pexels photography with your own (`images/README.md`)
 - [ ] Rewrite every `alt` attribute to describe your actual images
 - [ ] Swap `images/logo.png` for the vector artwork (SVG/EPS) if it turns up
-- [ ] Confirm the domain, then add `url` to the JSON-LD block
-- [ ] Update `og:image` / `twitter:image` to absolute URLs on that domain
+- [x] ~~Confirm the domain, then add `url` to the JSON-LD block~~ — done, `elevennelevenn.in`
+- [x] ~~Update `og:image` / `twitter:image` to absolute URLs on that domain~~ — done
+- [ ] Confirm which inbox the enquiry form should route to — `enquiries@1111events.in`
+      is on a third domain the site has never used
 - [ ] Point the Pinterest link at a real profile, or delete it (currently `#`)
 - [ ] Add a privacy notice before the contact form goes live
 - [ ] Confirm the copyright year in the footer

@@ -73,17 +73,17 @@ artwork (SVG/EPS) turns up it is still worth installing:
 ### The social share image
 
 `og:image` and `twitter:image` in `<head>` point at the hero crest artwork, as
-an **absolute** URL on the GitHub Pages host:
+an **absolute** URL on the site's own domain:
 
 ```html
 <meta property="og:image"
-      content="https://amareshnayak2022.github.io/11-11EventManagement.github.io/images/hero-1600.jpg">
+      content="https://elevennelevenn.in/images/hero-1600.jpg">
 ```
 
 Absolute because a share preview is fetched by WhatsApp's or LinkedIn's servers,
-not by the visitor's browser — a relative path means nothing there. **Repoint
-both at your own domain when it is confirmed**, in the same pass as adding `url`
-to the JSON-LD.
+not by the visitor's browser — a relative path means nothing there. The same URL
+appears four times in total: `og:image` and `twitter:image` in **both**
+`index.html` and `book.html`, plus `image` in the JSON-LD. Move them together.
 
 Worth doing eventually: a purpose-made 1200 × 630 landscape composition. The
 crest is 1600 × 770, close enough that platforms crop it tidily, but a share
@@ -202,10 +202,9 @@ keep the single `src`.
    misleading to screen reader users — if left in place.
 6. If you replace the hero image, also update the `<link rel="preload">` in
    `<head>` (including its `imagesrcset`) and the `og:image` / `twitter:image`
-   meta tags. Those two are **absolute** URLs, currently on the GitHub Pages
-   host — a share preview is fetched by someone else's server, so a relative
-   path means nothing there. Repoint them at your own domain when it is
-   confirmed.
+   meta tags — in `book.html` as well as `index.html`. Those are **absolute**
+   URLs on `https://elevennelevenn.in`, because a share preview is fetched by
+   someone else's server and a relative path means nothing there.
 
 ### Recommended export settings
 

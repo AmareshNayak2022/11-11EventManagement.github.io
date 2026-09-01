@@ -10,6 +10,36 @@ How to get this site online, what it costs, and which platform to pick.
 
 ---
 
+## ✅ Where the site actually is, right now
+
+**Live at https://elevennelevenn.in** — confirmed and switched on 1 September
+2026. Served by **GitHub Pages** from `origin/main`; a push goes live in under a
+minute. HTTPS is on, and the old
+`amareshnayak2022.github.io/11-11EventManagement.github.io/` address returns a
+**301** to the custom domain.
+
+The binding is the `CNAME` file in the repo root, which GitHub writes and
+rewrites from the repository's **Settings → Pages → Custom domain** box. It has
+already been removed and re-added once from the web UI. So: change the domain
+there, never by hand-editing `CNAME`, and **`git fetch` before pushing** — a push
+was rejected on 1 Sept 2026 for exactly this reason.
+
+Two things that are decided, and two that are not:
+
+| | |
+|---|---|
+| ✅ Host | GitHub Pages |
+| ✅ Domain | `elevennelevenn.in` |
+| ❓ `www` | Only the apex is confirmed working. See the checklist below. |
+| ❓ Mail routing | The published address is `connect@elevennelevenn.com` — a **different** registration from the site's `.in`. The enquiry form's intended inbox, `enquiries@1111events.in`, is on a **third** domain. Settle this before wiring a form endpoint. |
+
+Everything below still stands as reference — the cost comparisons, the email
+options, the registrar advice, and the go-live checklist. Read the Cloudflare
+Pages recommendation as *the alternative if you ever outgrow GitHub Pages*,
+not as a pending decision.
+
+---
+
 ## The short answer
 
 **Host on Cloudflare Pages. It is both the best option and the free one.**
@@ -95,14 +125,17 @@ sound; `.com` has the edge if the work really is pan-India and destination.
 If both are available and affordable, buy both and redirect one to the other —
 it stops a competitor taking the near-identical name.
 
-⚠️ **This may already be settled — but it has moved once.** The published email
-is `connect@elevennelevenn.com` (changed 22 Aug 2026, from an address on
-`1111events.in`), which implies `elevennelevenn.com` is registered and in use.
-Confirm that before buying anything — and if the site is to live there too, its
-canonical URL and share image should point at it. Note that owning the domain
-for email does not automatically mean you want the website on it, so this is a
-decision, not just a lookup. If both domains are held, decide which one the
-brand leads with; the site should not show one and route mail to the other.
+✅ **Settled as of 1 September 2026: the site is on `elevennelevenn.in`.** Its
+canonical URL, `og:image` / `twitter:image` on both pages, and the JSON-LD `url`
+all point there.
+
+⚠️ **The mail side is not settled, and it is now a three-domain problem.** The
+published email is `connect@elevennelevenn.com` — a **different registration**
+from the site's `.in`. That is a perfectly normal arrangement and nothing is
+broken by it, but it means the brand answers on two names. Worse, the enquiry
+form's intended routing inbox is `enquiries@1111events.in`, on a **third** name
+the site has never shown. Before wiring any form endpoint, decide which inbox
+actually receives enquiries, and confirm someone reads it.
 
 Given the brand is `11:11`, be aware that domains starting with digits are fine
 technically, but spell-ability matters when a CXO reads it aloud down a phone.
@@ -323,13 +356,18 @@ Content and credibility:
 
 Technical:
 
-- [ ] `telephone`, `email`, `url` added to the JSON-LD block
-- [ ] `og:image` / `twitter:image` changed to absolute URLs on your domain
+- [x] **`telephone`, `email`, `url` added to the JSON-LD block**
+- [x] **`og:image` / `twitter:image` absolute on `elevennelevenn.in`** — in
+      `book.html` as well as `index.html`
+- [x] **`canonical` and `og:url` on both pages** — matters here because the
+      pages also answer on the old `github.io` host
+- [ ] Decide which inbox enquiries route to (three domains are in play)
 - [x] **Contact form connected** — WhatsApp mode
 - [ ] **Tested with a real submission from a phone**
 - [ ] Privacy notice published and linked
-- [ ] `www` and apex both resolve, one redirecting to the other
-- [ ] HTTPS active, HTTP redirecting to HTTPS
+- [ ] `www.elevennelevenn.in` resolves and redirects to the apex — **only the
+      apex is confirmed working; test `www` and add the DNS record if missing**
+- [x] **HTTPS active** on the apex
 - [ ] Tested on a real phone on mobile data, not just desktop
 - [ ] Domain auto-renew enabled
 

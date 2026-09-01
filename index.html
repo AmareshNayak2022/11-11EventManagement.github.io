@@ -22,23 +22,34 @@
   <link rel="icon" href="images/logo.png" type="image/png" sizes="512x512">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
-  <!-- Open Graph / social sharing.
-       TODO before launch: og:image must be an ABSOLUTE url on your own domain. -->
+  <!-- The site's own address, confirmed 1 September 2026: the CNAME is live and
+       elevennelevenn.in serves the site, with the old GitHub Pages URL now
+       301-redirecting to it. Everything absolute below points here.
+
+       Canonical matters more than usual on this site, because the same pages
+       answer on two hosts. Without it, anything that still links the github.io
+       address can have search engines treat that as a second copy of the site.
+       Note the trailing slash: this is the home page, and the canonical must be
+       the exact URL you want indexed. -->
+  <link rel="canonical" href="https://elevennelevenn.in/">
+
+  <!-- Open Graph / social sharing -->
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elevennelevenn.in/">
   <meta property="og:site_name" content="11:11">
   <meta property="og:title" content="11:11 — Where Moments Become Legend">
   <meta property="og:description" content="An experiential design house: bespoke private concerts, premium corporate gatherings, and curated venue and artist matchmaking across India.">
   <meta property="og:locale" content="en_IN">
-  <!-- Absolute, because a share preview is fetched by someone else's server and
-       a relative path means nothing there. This points at the GitHub Pages host
-       the site is being reviewed on; when the real domain is confirmed, change
-       both image URLs and add "url" to the JSON-LD in the same pass. -->
-  <meta property="og:image" content="https://amareshnayak2022.github.io/11-11EventManagement.github.io/images/hero-1600.jpg">
+  <!-- Absolute, because a share preview is fetched by someone else's server
+       and a relative path means nothing there. Now on the real domain — the
+       twitter:image below and "image" in the JSON-LD are the same URL, so all
+       three move together. -->
+  <meta property="og:image" content="https://elevennelevenn.in/images/hero-1600.jpg">
   <meta property="og:image:alt" content="The 11:11 crest: a crowned lion between outspread golden wings, above the numerals 11:11, on midnight navy.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="11:11 — Where Moments Become Legend">
   <meta name="twitter:description" content="An experiential design house: private concerts, bespoke celebrations and high-concept productions across India.">
-  <meta name="twitter:image" content="https://amareshnayak2022.github.io/11-11EventManagement.github.io/images/hero-1600.jpg">
+  <meta name="twitter:image" content="https://elevennelevenn.in/images/hero-1600.jpg">
 
   <!-- Typography: editorial serif + clean geometric sans.
        Cormorant Garamond and Montserrat are both on the client's approved list
@@ -70,14 +81,17 @@
   <!--
     Structured data for Elevenn Elevenn Archive Pvt Ltd, trading as 11:11.
     `telephone` and `email` are the client's public details, changed on
-    22 Aug 2026 to the address and concierge line below. `url` is still omitted:
-    the site's own domain has not been confirmed, and a wrong canonical URL here
-    is published straight to Google. The public email now sits on
-    `elevennelevenn.com`, so that is the likely candidate — but an email domain
-    is not proof of where the site will live, and this is the second domain to
-    have been the likely candidate. Confirm it, then add
-      "url": "https://elevennelevenn.com",
-    and update og:image / twitter:image to absolute URLs on the same host.
+    22 Aug 2026 to the address and concierge line below.
+
+    `url` was omitted for months because the domain kept changing — two
+    different addresses had been the likely candidate, and a wrong canonical URL
+    here goes straight to Google. It is filled in now: the client confirmed
+    `elevennelevenn.in` on 1 September 2026, and the site answers on it.
+
+    Worth noting that the site's domain (`.in`) and the published email's domain
+    (`elevennelevenn.com`) are still two different registrations. That is a
+    perfectly normal arrangement and neither is wrong — just do not "correct"
+    one to match the other.
   -->
   <!--
     THE DEBUT EVENT, as structured data — written out, deliberately NOT enabled.
@@ -122,9 +136,10 @@
     "name": "11:11",
     "legalName": "Elevenn Elevenn Archive Pvt Ltd",
     "alternateName": "Elevenn Elevenn Archive",
+    "url": "https://elevennelevenn.in",
     "slogan": "Where Rare Venues Meet Exceptional Talent",
     "description": "11:11 is an experiential event agency curating high-impact atmospheric experiences — bespoke private concerts, premium corporate and institutional gatherings, and curated venue and artist matchmaking across India.",
-    "image": "https://amareshnayak2022.github.io/11-11EventManagement.github.io/images/hero-1600.jpg",
+    "image": "https://elevennelevenn.in/images/hero-1600.jpg",
     "telephone": "+91-9938120356",
     "email": "connect@elevennelevenn.com",
     "address": {

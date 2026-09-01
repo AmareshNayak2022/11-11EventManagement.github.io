@@ -100,10 +100,18 @@ Two things about that table are worth knowing before you touch them:
   confirmed the brief's answers — and now replaced again. Do not "correct" it
   back to the brief without asking; the brief is older than this instruction.
   The routing inbox for form submissions, `enquiries@1111events.in` (Q40), sits
-  on the domain the page no longer shows, so it needs re-confirming before any
-  endpoint is wired — see the `DELIVERY` comment in `js/script.js`. The site's
-  own *domain* is still unconfirmed, which is why `url` stays omitted from the
-  JSON-LD; note that two different domains have now been the likely candidate.
+  on a third domain — one the page has never shown — so it still needs
+  re-confirming before any endpoint is wired. See the `DELIVERY` comment in
+  `js/script.js`. **Confirming the site's domain did not confirm this**; they are
+  separate questions and the site domain is not `1111events.in`.
+
+  The site's own domain **is** now settled: **`elevennelevenn.in`**, confirmed by
+  the client on 1 Sept 2026, live over HTTPS, with the old GitHub Pages URL
+  301-redirecting to it. So `url` is filled in in the JSON-LD, both pages carry a
+  `canonical` and an `og:url`, and every absolute image URL is on that host. Note
+  that the site domain (`.in`) and the published email domain
+  (`elevennelevenn.com`) are two different registrations — that is fine, and
+  neither should be "corrected" to match the other.
 - **Two numbers, both on WhatsApp, but only one is the enquiry route.** Each
   contact row pairs a `tel:` link with a `wa.me` link. Their visible text is
   identical — the `<dt>` beside them says which desk — so each carries an
@@ -118,8 +126,8 @@ Two things about that table are worth knowing before you touch them:
   five together. See the debut-event section below.
 
 Still unconfirmed, and still listed in `CLIENT-BRIEF.md`: real past work and
-photography (Q19–26), the domain and hosting (Q44–51), and the legal and
-privacy items (Q52–56). The Pinterest link in the footer still points at `#`.
+photography (Q19–26), the form's routing inbox (Q40), the remaining hosting
+and email items (Q45–51), and the legal and privacy items (Q52–56). The Pinterest link in the footer still points at `#`.
 
 ## The debut event — added 1 September 2026
 
@@ -202,9 +210,20 @@ files. Without it a phone that has the old stylesheet cached shows the new copy
 in the old styling and the change looks like it never deployed — this has already cost one
 round of "I don't see the changes".
 
-**Git is set up**, pushed to `origin/main` and deployed by GitHub Pages at
-https://amareshnayak2022.github.io/11-11EventManagement.github.io/ — a push to
-`main` goes live in under a minute. Verify against that URL, not just locally.
+**Git is set up**, pushed to `origin/main` and deployed by GitHub Pages on the
+client's own domain, **https://elevennelevenn.in** — a push to `main` goes live
+in under a minute. Verify against that URL, not just locally.
+
+The `CNAME` file in the repo root is what binds the domain, and GitHub rewrites
+it whenever the custom domain is changed in the repository's Pages settings. It
+has been removed and re-added once already, from the GitHub web UI rather than
+from here, so **fetch before you push** — that is exactly how a rejected push
+happened on 1 Sept 2026. Do not delete or hand-edit `CNAME`; change the domain
+in the Pages settings and let GitHub write the file.
+
+The old `https://amareshnayak2022.github.io/11-11EventManagement.github.io/`
+address now returns **301** to the custom domain. A `curl` check that expects
+`200` there will hang or fail — follow redirects, or just test the real host.
 
 To actually see a change, render with headless Chrome:
 
