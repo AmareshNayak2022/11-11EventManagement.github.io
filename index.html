@@ -80,7 +80,7 @@
        page updates, the capitals and the gold do not. Bump the date whenever
        css/style.css or js/script.js changes and every browser fetches it fresh;
        the same string is on the <script> tag at the end of <body>. -->
-  <link rel="stylesheet" href="css/style.css?v=2026-09-02c">
+  <link rel="stylesheet" href="css/style.css?v=2026-09-02d">
 
   <!--
     Structured data for Elevenn Elevenn Archive Pvt Ltd, trading as 11:11.
@@ -530,18 +530,46 @@
             </div>
           </div>
 
-          <!-- The client's own campaign artwork, supplied 1 Sept 2026. Every
-               word on this poster is repeated as real text in this section, so
-               the image is a visual anchor rather than the only carrier of the
-               information — which is what the long alt text below reflects. -->
-          <figure class="noxus__poster" data-reveal>
-            <img
-              src="images/noxus-teaser-1024.jpg"
-              srcset="images/noxus-teaser-640.jpg 640w, images/noxus-teaser-1024.jpg 1024w"
-              sizes="(min-width: 1024px) 30rem, 90vw"
-              width="1024" height="1536"
-              alt="NOXUS campaign poster: Odisha's biggest sundowner drunch party, presented by 11:11. The secret is worth the wait. September 26th 2026. The city is about to feel different. Venue: a secret, to be unveiled in 7 days."
-              loading="lazy" decoding="async">
+          <!--
+            The client's campaign film (supplied 1 Sept 2026) — a 20-second
+            vertical reel, which is the moving version of the teaser poster. It
+            takes the poster's slot because motion is what the eye catches, and
+            the poster survives inside it twice over: as the `poster` frame
+            (extracted from the film itself, so it matches to the pixel) and as
+            the fallback <img> for anything that cannot play MP4.
+
+            `controls` is in the MARKUP and removed by JavaScript, not the other
+            way round: with the script dead a visitor still gets native controls
+            rather than a still image they cannot start. Section 09 of
+            js/script.js swaps them for the two buttons below, and only then
+            starts playback.
+
+            It is muted, and it stays muted until someone asks otherwise —
+            autoplay with sound is blocked by every browser worth naming, and
+            deserves to be.
+          -->
+          <figure class="noxus__media" data-reveal>
+            <div class="noxus__video-frame">
+              <video class="noxus__video" id="noxus-video"
+                     poster="images/noxus-video-poster.jpg"
+                     width="478" height="850"
+                     muted loop playsinline controls preload="metadata">
+                <source src="videos/noxus-teaser.mp4" type="video/mp4">
+                <img src="images/noxus-teaser-1024.jpg"
+                     alt="NOXUS campaign poster: Odisha's biggest sundowner drunch party, presented by 11:11. The secret is worth the wait. September 26th 2026. Venue: a secret, to be unveiled in 7 days.">
+              </video>
+
+              <p class="noxus__video-controls" hidden data-video-controls>
+                <button class="vbtn" type="button" data-video-toggle aria-controls="noxus-video">
+                  <span class="vbtn__icon" aria-hidden="true"></span>
+                  <span class="vbtn__label">Pause</span>
+                </button>
+                <button class="vbtn" type="button" data-video-sound aria-controls="noxus-video">
+                  <span class="vbtn__label">Sound on</span>
+                </button>
+              </p>
+            </div>
+            <figcaption class="noxus__media-cap">The campaign film &middot; 20 seconds</figcaption>
           </figure>
         </div>
 
@@ -1696,6 +1724,6 @@
     <span class="wa-float__label">WhatsApp</span>
   </a>
 
-  <script src="js/script.js?v=2026-09-02c"></script>
+  <script src="js/script.js?v=2026-09-02d"></script>
 </body>
 </html>

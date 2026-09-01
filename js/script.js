@@ -10,7 +10,8 @@
    05. Scroll reveal (IntersectionObserver)
    06. Active navigation link
    07. Contact form validation + success state
-   08. Countdown (the debut band, and the booking page header)
+   08. Countdown (the Noxus band, and the booking page header)
+   09. The campaign film (index.html only)
    ========================================================================== */
 
 (function () {
@@ -679,6 +680,109 @@
 
   $$('[data-countdown]').forEach(initCountdown);
 
+
+  /* ========================================================================
+     09. THE CAMPAIGN FILM
+     Only present on index.html; everything below no-ops elsewhere.
+
+     PROGRESSIVE, IN THAT ORDER. The <video> ships with `controls` in the
+     markup, so a visitor whose JavaScript never arrives still gets native
+     ones. This takes them away and puts our two buttons up only once it knows
+     it can drive the thing.
+
+     WCAG 2.2.2 asks for a way to stop anything that moves on its own for more
+     than five seconds. The film is twenty and it loops, so the pause button is
+     a requirement rather than a nicety — do not remove it.
+
+     Three reasons it will not autoplay at all:
+       - prefers-reduced-motion is set;
+       - the browser refuses (a policy we do not fight — the poster frame is a
+         perfectly good still, and the play button is right there);
+       - the visitor is on a metered connection with Data Saver on, where
+         pulling ~3.7 MB uninvited is simply rude.
+     ======================================================================== */
+  var film = $('#noxus-video');
+
+  if (film) {
+    var filmControls = $('[data-video-controls]');
+    var toggleBtn    = $('[data-video-toggle]');
+    var soundBtn     = $('[data-video-sound]');
+    var userPaused   = false;
+
+    // Data Saver is only exposed by some browsers; absence is not consent, but
+    // it is the only signal we get, so we act on it when it is there.
+    var conn = navigator.connection || navigator.webkitConnection;
+    var saveData = Boolean(conn && conn.saveData);
+
+    film.removeAttribute('controls');
+    film.muted = true;            // belt and braces: the attribute can be stale
+    if (filmControls) filmControls.hidden = false;
+
+    function syncToggle() {
+      if (!toggleBtn) return;
+      var playing = !film.paused;
+      $('.vbtn__label', toggleBtn).textContent = playing ? 'Pause' : 'Play';
+      toggleBtn.setAttribute('aria-label', playing ? 'Pause the film' : 'Play the film');
+      toggleBtn.classList.toggle('is-playing', playing);
+    }
+
+    function syncSound() {
+      if (!soundBtn) return;
+      $('.vbtn__label', soundBtn).textContent = film.muted ? 'Sound on' : 'Mute';
+      soundBtn.setAttribute('aria-label', film.muted ? 'Turn the sound on' : 'Mute the film');
+    }
+
+    // play() returns a promise in every current browser and rejects when the
+    // autoplay policy says no. An unhandled rejection there is a console error
+    // on a page that is working exactly as intended, so it is swallowed.
+    function tryPlay() {
+      var p = film.play();
+      if (p && typeof p['catch'] === 'function') p['catch'](function () { syncToggle(); });
+    }
+
+    film.addEventListener('play',  syncToggle);
+    film.addEventListener('pause', syncToggle);
+    film.addEventListener('volumechange', syncSound);
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', function () {
+        if (film.paused) { userPaused = false; tryPlay(); }
+        else             { userPaused = true;  film.pause(); }
+      });
+    }
+
+    if (soundBtn) {
+      soundBtn.addEventListener('click', function () {
+        film.muted = !film.muted;
+        // Turning the sound on while it sits paused is a clear request to
+        // watch it, so start it too rather than making that two clicks.
+        if (!film.muted && film.paused) { userPaused = false; tryPlay(); }
+        syncSound();
+      });
+    }
+
+    /* A looping film playing to nobody while the visitor reads the footer is
+       wasted battery and wasted data, so it pauses off-screen and resumes on.
+       userPaused is what keeps that from overriding a deliberate pause: once
+       someone has stopped it by hand, scrolling past must not start it again. */
+    if ('IntersectionObserver' in window) {
+      var filmSpy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            if (!userPaused && !prefersReducedMotion() && !saveData) tryPlay();
+          } else if (!film.paused) {
+            film.pause();
+          }
+        });
+      }, { threshold: 0.25 });
+      filmSpy.observe(film);
+    } else if (!prefersReducedMotion() && !saveData) {
+      tryPlay();
+    }
+
+    syncToggle();
+    syncSound();
+  }
 
   /* ========================================================================
      GLOBAL LISTENERS

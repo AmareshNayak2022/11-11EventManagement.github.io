@@ -118,8 +118,33 @@ here from their 1024x1536 originals:
 
 | File | Where it appears |
 |------|------------------|
-| `noxus-teaser-640.jpg` / `-1024.jpg` | The `#debut` band on `index.html`, beside the announcement |
+| `noxus-teaser-640.jpg` / `-1024.jpg` | Fallback inside the `<video>` on `index.html`, for anything that cannot play MP4 |
 | `noxus-passes-640.jpg` / `-1024.jpg` | Under the three passes on `book.html` |
+| `noxus-video-poster.jpg` | The still behind the film before it plays — **not hand-picked**, it is frame one of the film itself, so it matches to the pixel |
+
+### The campaign film
+
+`videos/noxus-teaser.mp4` — the client's 20-second vertical reel (478x850,
+H.264 + AAC, 3.7 MB), supplied 1 September 2026. It is the moving version of the
+teaser poster, which is why the poster now sits *inside* the `<video>` as its
+fallback rather than beside it.
+
+`noxus-video-poster.jpg` was extracted from the file itself by decoding frame
+one in a browser canvas, so it needs no separate art direction and can never
+drift from the film. If the film is ever replaced, regenerate it — a poster
+frame from the *old* film is worse than none.
+
+Three things about how it is embedded, all deliberate:
+
+- **It does not autoplay on page load.** It starts only when it scrolls into
+  view, and pauses again when it leaves. Someone who never reaches the band
+  never downloads 3.7 MB.
+- **`controls` is in the markup and removed by JavaScript**, not added by it. If
+  the script fails, a visitor still gets native controls instead of a still they
+  cannot start.
+- **It is muted, and it stays muted** until someone presses the sound button.
+
+---
 
 Both are **portrait, 2:3**. That is why neither is used as the `og:image`: a
 share preview is cropped to landscape and a tall poster loses its own headline

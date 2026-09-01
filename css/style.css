@@ -1552,14 +1552,85 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   .countdown--compact .countdown__grid { margin-inline: auto; }
 }
 
-/* The client's artwork, framed rather than bled: a gold hairline and a deep
-   shadow so it reads as a printed card lying on the band. */
-.noxus__poster { margin: 0; width: 100%; max-width: 26rem; }
-.noxus__poster img {
-  width: 100%;
-  height: auto;
+/* The client's film, framed rather than bled: a gold hairline and a deep
+   shadow so it reads as a card lying on the band. aspect-ratio holds the slot
+   open at the file's own 478x850 before a single byte of video arrives, which
+   is what stops the page jumping when it loads. */
+.noxus__media { margin: 0; width: 100%; max-width: 24rem; }
+.noxus__video-frame {
+  position: relative;
   border: 1px solid rgb(var(--gold-rgb) / 0.4);
   box-shadow: 0 30px 70px rgb(5 8 15 / 0.6);
+  background: var(--navy-deep);
+  line-height: 0;
+}
+.noxus__video,
+.noxus__video-frame img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 478 / 850;
+  object-fit: cover;
+  display: block;
+}
+.noxus__media-cap {
+  margin-top: 0.85rem;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: rgb(var(--paper-rgb) / 0.55);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* The controls sit on the film, so they carry their own dark plate rather than
+   trusting whatever frame happens to be behind them: paper on this plate
+   measures 15.9:1, and it does not change when the picture does. */
+.noxus__video-controls {
+  position: absolute;
+  left: 0.7rem;
+  bottom: 0.7rem;
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  line-height: 1;
+}
+.noxus__video-controls[hidden] { display: none; }
+.vbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid rgb(var(--paper-rgb) / 0.28);
+  background: rgb(5 8 15 / 0.72);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.vbtn:hover,
+.vbtn:focus-visible { background: rgb(5 8 15 / 0.9); border-color: var(--gold); }
+
+/* A play triangle that becomes a pause bar pair, drawn in borders rather than
+   fetched as an icon — two states, no request, and it inherits currentColor. */
+.vbtn__icon {
+  width: 0.6rem;
+  height: 0.6rem;
+  flex: none;
+  border-style: solid;
+  border-width: 0.3rem 0 0.3rem 0.5rem;
+  border-color: transparent transparent transparent currentColor;
+}
+.vbtn.is-playing .vbtn__icon {
+  border-width: 0 0 0 0.5rem;
+  height: 0.62rem;
+  border-left-width: 0.16rem;
+  box-shadow: 0.19rem 0 0 0 currentColor;
 }
 
 /* --- The venue reveal, and the deadline it sets --------------------------

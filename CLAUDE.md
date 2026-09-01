@@ -155,7 +155,8 @@ their earlier message. All of it is safe to use verbatim.**
 | Inclusions | Rich culinary experience (no limits) · Global premium beverages (no limits) · An elegant sonic affair · A sundowner like never before · Elite gathering · Impeccable service & ambience |
 | UPI ID | `elevennelevenne-26@idfcbank` — IDFC FIRST Bank, Elevenn Elevenn Archive Private Limited |
 | Payment QR | `images/upi-qr.png`, a crop of the client's own payment slip |
-| Posters | `images/noxus-teaser-*.jpg` (landing page), `images/noxus-passes-*.jpg` (booking page) |
+| Posters | `images/noxus-passes-*.jpg` (booking page); `images/noxus-teaser-*.jpg` is now the `<video>` fallback |
+| Film | `videos/noxus-teaser.mp4` — 20s vertical reel, the moving version of the teaser poster. Poster frame `images/noxus-video-poster.jpg` was decoded from frame one of the film itself |
 
 ### The one deadline that runs the whole campaign
 
@@ -228,8 +229,19 @@ descending permanence:
    gold goes to *Reserve Your Pass* while *Start a Brief* steps back to an
    outline.
 3. **The `#debut` band** — the full pitch: the NOXUS wordmark, the client's
-   poster, the event countdown, the venue-reveal panel, the six inclusions and
+   **film**, the event countdown, the venue-reveal panel, the six inclusions and
    the three passes.
+
+The film (section 09 of `js/script.js`) has three rules worth keeping. It
+**does not autoplay on load** — an IntersectionObserver starts it when it
+scrolls into view and pauses it when it leaves, so a visitor who never reaches
+the band never pulls 3.7 MB. `controls` sits in the **markup** and JavaScript
+removes it, never the reverse, so a dead script leaves native controls rather
+than an unstartable still. And the pause button is a **WCAG 2.2.2 requirement**,
+not decoration: the film loops and runs past five seconds. It also declines to
+autoplay under `prefers-reduced-motion` or Data Saver, and swallows the
+autoplay-policy rejection rather than logging an error on a page that is
+behaving correctly.
 
 **Reverting after the night** means deleting the `<a class="announce">`, the
 `.hero__debut` paragraph, the `#debut` section and the nav item, and swapping
