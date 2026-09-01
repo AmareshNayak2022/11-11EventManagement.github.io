@@ -1473,9 +1473,14 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   .noxus__top { grid-template-columns: minmax(0, 1fr) 26rem; }
 }
 @media (max-width: 1023px) {
-  /* Centred on a phone, where the poster sits under the words rather than
-     beside them and a left edge has nothing to align to. */
-  .noxus__top { text-align: center; justify-items: center; }
+  /* Centred on a phone, where the film sits under the words rather than beside
+     them and a left edge has nothing to align to. It also moves to the FRONT of
+     the band: stacked, it was landing after the wordmark, the lede, the date,
+     the countdown and the button — over two screens down, which is how it came
+     to be missed entirely. The film carries the name and the strapline itself,
+     so it introduces the section perfectly well on its own. */
+  .noxus__top { display: flex; flex-direction: column; text-align: center; align-items: center; }
+  .noxus__media { order: -1; }
 }
 
 /* The event name, and the loudest word on the site. Capitals come from CSS,
@@ -1580,6 +1585,67 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   color: rgb(var(--paper-rgb) / 0.55);
   text-align: center;
   line-height: 1.5;
+}
+
+/* The big play control. A paused film shows its poster frame, which here is a
+   still of the campaign poster — so without this, a film that has not started
+   is indistinguishable from a picture. It covers the whole frame so the target
+   is the film itself, and it is the state a blocked autoplay lands in.
+
+   Hidden until JavaScript reveals it, for the same reason `controls` is removed
+   rather than added: a control that cannot work should not be on screen. */
+.film-play {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: rgb(5 8 15 / 0.42);
+  color: var(--paper);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease);
+}
+.film-play[hidden] { display: none; }
+.noxus__video-frame.is-paused .film-play { display: flex; }
+.film-play:hover,
+.film-play:focus-visible { background: rgb(5 8 15 / 0.55); }
+
+/* The disc is a gold ring with a triangle punched out of it, drawn in borders
+   so it needs no icon file and inherits the palette. */
+.film-play__disc {
+  position: relative;
+  width: 4.5rem;
+  height: 4.5rem;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  background: rgb(5 8 15 / 0.55);
+  transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.film-play__disc::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 0.7rem 0 0.7rem 1.15rem;
+  border-color: transparent transparent transparent var(--gold);
+}
+.film-play:hover .film-play__disc { transform: scale(1.06); background: rgb(5 8 15 / 0.75); }
+.film-play__word {
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  /* On the dark scrim this measures well past AA; it is a label on a plate we
+     control, not on whatever frame the film happens to be showing. */
+  color: var(--paper);
 }
 
 /* The controls sit on the film, so they carry their own dark plate rather than

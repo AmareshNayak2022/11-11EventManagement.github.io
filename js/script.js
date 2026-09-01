@@ -707,6 +707,8 @@
     var filmControls = $('[data-video-controls]');
     var toggleBtn    = $('[data-video-toggle]');
     var soundBtn     = $('[data-video-sound]');
+    var bigPlay      = $('[data-video-play]');
+    var filmFrame    = film.parentNode;
     var userPaused   = false;
 
     // Data Saver is only exposed by some browsers; absence is not consent, but
@@ -717,10 +719,20 @@
     film.removeAttribute('controls');
     film.muted = true;            // belt and braces: the attribute can be stale
     if (filmControls) filmControls.hidden = false;
+    if (bigPlay) bigPlay.hidden = false;
 
     function syncToggle() {
-      if (!toggleBtn) return;
       var playing = !film.paused;
+
+      /* The big centred play control is the whole reason a visitor can tell
+         this is a film at all: its poster frame is a still of the campaign
+         poster, so a paused film and a picture of the poster look identical.
+         It shows whenever the film is not running — including when the browser
+         refuses to autoplay, which is the case that made it look like a plain
+         image in the first place. */
+      if (filmFrame) filmFrame.classList.toggle('is-paused', !playing);
+
+      if (!toggleBtn) return;
       $('.vbtn__label', toggleBtn).textContent = playing ? 'Pause' : 'Play';
       toggleBtn.setAttribute('aria-label', playing ? 'Pause the film' : 'Play the film');
       toggleBtn.classList.toggle('is-playing', playing);
@@ -748,6 +760,13 @@
       toggleBtn.addEventListener('click', function () {
         if (film.paused) { userPaused = false; tryPlay(); }
         else             { userPaused = true;  film.pause(); }
+      });
+    }
+
+    if (bigPlay) {
+      bigPlay.addEventListener('click', function () {
+        userPaused = false;
+        tryPlay();
       });
     }
 

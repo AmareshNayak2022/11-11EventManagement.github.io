@@ -233,7 +233,16 @@ descending permanence:
    **film**, the event countdown, the venue-reveal panel, the six inclusions and
    the three passes.
 
-The film (section 09 of `js/script.js`) has three rules worth keeping. It
+**The film needs its big play control.** Its poster frame is a still of the
+campaign poster, so a paused film and a picture of the poster are the same
+image — the client could not find the video on the live site for exactly this
+reason. `.film-play` covers the frame whenever the film is not running, which
+includes the case where the browser refuses to autoplay. Do not remove it, and
+do not swap the poster for something that makes the film look more like a
+picture. On phones the film also leads the band (`order: -1`): stacked, it was
+landing two screens down, after the wordmark, lede, date, countdown and button.
+
+The film (section 09 of `js/script.js`) has three more rules worth keeping. It
 **does not autoplay on load** — an IntersectionObserver starts it when it
 scrolls into view and pauses it when it leaves, so a visitor who never reaches
 the band never pulls 3.7 MB. `controls` sits in the **markup** and JavaScript
