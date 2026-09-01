@@ -55,6 +55,33 @@ are still outstanding:
 4. **The Pinterest link in the footer still points at `#`.** Give it a real
    profile URL or delete the whole `<li>`.
 
+### The debut event (added 1 September 2026)
+
+The landing page now carries an advert for the company's first signature event
+on **Saturday 26 September 2026**, and `book.html` takes the reservation and the
+payment. Five things about it are **still unconfirmed and deliberately unwritten
+anywhere on the site** — do not fill them in from guesswork:
+
+| Missing | Why it matters |
+|---------|----------------|
+| The venue | Named nowhere. The summary rail says "announced to confirmed guests", and the `Event` structured data in `index.html` stays commented out until there is a real address to put in it. |
+| The doors time | Both countdowns target **midnight opening the 26th**, not a start time. When the real time is confirmed, change the `data-countdown` attribute in `index.html` **and** `book.html` — the same ISO string with the `+05:30` offset — and nothing else. |
+| The early-bird closing date | The cards say "limited allocation" and name no date, because there is not one yet. A second countdown to that deadline would sell harder; it needs a date first. |
+| The seat capacity | The form caps a self-service booking at ten seats. That is a sanity limit, not a stated capacity. |
+| **The refund and transfer policy** | Nothing on the page states one, because nothing has been agreed. This should exist in writing before real money arrives. |
+
+Payment is **UPI, reconciled by hand** — there is no gateway. The visitor pays
+`elevennelevenne-26@idfcbank` (IDFC FIRST Bank), enters the UPI reference from
+their receipt, and the reservation reaches the concierge desk on WhatsApp. A
+person then matches the reference against the account and confirms the seat.
+That is why nothing on the page says a seat is "booked" on submit — it says the
+reservation has been *sent*, and will be *confirmed*. Keep that wording.
+
+Note also that `book.html` is the only place on the site where a **rupee figure
+is published**. That is not a reversal of the pricing decision: the agency's own
+project pricing is still unpublished everywhere, and a ticket that cannot be
+bought without its price is a different thing.
+
 Two smaller open items:
 
 - **The site's own domain is unconfirmed**, so `url` is still omitted from the
@@ -108,14 +135,17 @@ jQuery, npm, Maven, Java, Spring Boot, or any bundler. There is no
 ```
 event-management/
 ├── .idea/              IntelliJ project settings (untouched)
-├── index.html          All markup and the image URLs
+├── index.html          The marketing page — all markup and the image URLs
+├── book.html           The debut event's reservation and UPI payment page
 ├── css/
 │   └── style.css       All styling, organised into numbered sections
 ├── js/
-│   └── script.js       All behaviour, organised into 7 numbered sections
+│   ├── script.js       Site-wide behaviour, in 8 numbered sections
+│   └── booking.js      The reservation form on book.html, in 6 sections
 ├── images/
 │   ├── logo.png        The circular brand badge — header, menu, footer, favicon
 │   ├── apple-touch-icon.png  The same mark, opaque and square, for iOS
+│   ├── upi-qr.png      The company's UPI payment QR, shown on book.html
 │   └── README.md       Logo notes and how to swap in real photography
 ├── CLAUDE.md           Instructions for Claude Code
 ├── CLIENT-BRIEF.md     The 60 open questions — source for the PDF and .docx
@@ -261,6 +291,31 @@ safe there (9.5:1), but one word should not be two different golds on one page.
 
 So: `--gold-bright` for gold *words* over imagery, `--gold-deep` for gold words
 on cream, and the brand gold itself for dark solids and hairlines.
+
+**The debut band and the booking page** added a fourth context: solid navy with
+no photograph behind it, which is the most forgiving ground on the site.
+`--gold-bright` is used there as an ordinary text colour — the countdown
+numerals, the eyebrows, the early-bird price, the amount to pay — because it
+measures **11.5:1** on `--navy`. Every ratio those two additions rely on,
+measured with the same formula:
+
+| Where | Colours | Ratio |
+|-------|---------|-------|
+| Countdown numerals, debut/booking eyebrows, pay amount | `--gold-bright` on `--navy` | 11.5:1 |
+| Debut band and booking-head body copy | paper at 78% on `--navy` | 11.2:1 |
+| Early-bird card ground (gold at 16% over navy, `#2A2A2A`) | `--paper` on it | 13.9:1 |
+| …the same ground | `--gold-bright` on it | 8.8:1 |
+| "Save ₹3,000" pill, both pages | `--navy` on `--gold` | 8.9:1 |
+| Tier cards, step numerals, summary rail | `--heading` on `--surface` | 18.7:1 |
+| Tier card notes | `--text` on `--surface` | 8.8:1 |
+| Tier flags, summary labels, QR caption | `--muted` on `--surface` | 6.3:1 |
+| The payment caution, the saving line, the step numerals | `--gold-deep` on `--surface` | 5.7:1 |
+
+The one trap worth naming: the header rule `.site-header .btn { color: var(--paper) }`
+is more specific than `.btn--gold`'s own foreground, so the gold *Tickets*
+button in the header would have been repainted cream on gold — about **1.6:1**,
+unreadable. Section 06 carries an explicit override putting it back to navy in
+every header state. Any future gold button in the header needs the same.
 
 ### Change the typography
 

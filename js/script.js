@@ -10,6 +10,7 @@
    05. Scroll reveal (IntersectionObserver)
    06. Active navigation link
    07. Contact form validation + success state
+   08. Countdown (the debut band, and the booking page header)
    ========================================================================== */
 
 (function () {
@@ -593,6 +594,86 @@
       }
     });
   }
+
+  /* ========================================================================
+     08. COUNTDOWN
+     Drives every [data-countdown] on the page — the debut band on index.html
+     and the booking page's header both use one, and both must agree.
+
+     The target is read from the element's own data-countdown attribute as an
+     ISO instant WITH an explicit offset (…+05:30), never as a bare date. A
+     bare "2026-09-26" is parsed as midnight UTC, which is 05:30 IST — the
+     clock would then be five and a half hours out for everyone, and correct
+     for nobody. Keeping the offset in the markup also means the doors time is
+     changed in the HTML, not here.
+
+     ACCESSIBILITY: the visible digits are aria-hidden, and the count is
+     announced instead through a visually-hidden live region that is written
+     only when the DAY figure changes. A live region updated every second
+     would make a screen reader talk over the whole page once a second, which
+     is worse than useless.
+     ======================================================================== */
+  function pad2(n) { return n < 10 ? '0' + n : String(n); }
+
+  function initCountdown(root) {
+    var target = new Date(root.getAttribute('data-countdown')).getTime();
+    if (isNaN(target)) return;   // a malformed date leaves the "--" placeholders
+
+    var grid = $('.countdown__grid', root);
+    var live = $('[data-countdown-live]', root);
+    var parts = {
+      days:    $('[data-countdown-part="days"]', root),
+      hours:   $('[data-countdown-part="hours"]', root),
+      minutes: $('[data-countdown-part="minutes"]', root),
+      seconds: $('[data-countdown-part="seconds"]', root)
+    };
+    var lastDays = null;
+    var timer = null;
+
+    function finish() {
+      var message = root.getAttribute('data-countdown-done') || 'The night is here.';
+      if (grid) {
+        var done = document.createElement('p');
+        done.className = 'countdown__done';
+        done.textContent = message;
+        grid.parentNode.replaceChild(done, grid);
+        grid = null;
+      }
+      if (live) live.textContent = message;
+      window.clearInterval(timer);
+    }
+
+    function tick() {
+      var diff = target - Date.now();
+      if (diff <= 0) { finish(); return; }
+
+      var total   = Math.floor(diff / 1000);
+      var days    = Math.floor(total / 86400);
+      var hours   = Math.floor((total % 86400) / 3600);
+      var minutes = Math.floor((total % 3600) / 60);
+      var seconds = total % 60;
+
+      // Always two digits, so a font without tabular figures still cannot make
+      // the row jump when 10 becomes 9.
+      if (parts.days)    parts.days.textContent    = pad2(days);
+      if (parts.hours)   parts.hours.textContent   = pad2(hours);
+      if (parts.minutes) parts.minutes.textContent = pad2(minutes);
+      if (parts.seconds) parts.seconds.textContent = pad2(seconds);
+
+      if (live && days !== lastDays) {
+        lastDays = days;
+        live.textContent = days === 0
+          ? 'Less than a day until the event.'
+          : days + (days === 1 ? ' day' : ' days') + ' until the event.';
+      }
+    }
+
+    tick();
+    timer = window.setInterval(tick, 1000);
+  }
+
+  $$('[data-countdown]').forEach(initCountdown);
+
 
   /* ========================================================================
      GLOBAL LISTENERS

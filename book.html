@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en-IN" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+
+  <title>Reserve a Seat | 11:11 — The Debut, 26 September 2026</title>
+  <meta name="description" content="Reserve a seat for 11:11's debut signature event on Saturday 26 September 2026. Early-bird admission Rs 2,999, standard admission Rs 5,999. Pay by UPI and our concierge desk confirms your seat.">
+  <meta name="author" content="Elevenn Elevenn Archive Pvt Ltd">
+  <meta name="theme-color" content="#FDFBF7">
+
+  <link rel="icon" href="images/logo.png" type="image/png" sizes="512x512">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+  <!-- This page gets shared far more than the home page will: a ticket link is
+       pasted into WhatsApp groups, and the preview card is the advert. Same
+       absolute host as index.html — change both files together when the real
+       domain is confirmed. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="11:11">
+  <meta property="og:title" content="11:11 — The Debut · 26 September 2026">
+  <meta property="og:description" content="Our first signature event: an unforgettable night crafted to set the standard for every experience that follows. Early-bird admission from Rs 2,999.">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://amareshnayak2022.github.io/11-11EventManagement.github.io/images/hero-1600.jpg">
+  <meta property="og:image:alt" content="The 11:11 crest: a crowned lion between outspread golden wings, above the numerals 11:11, on midnight navy.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="11:11 — The Debut · 26 September 2026">
+  <meta name="twitter:description" content="Our first signature event. Early-bird admission from Rs 2,999. Reserve your seat.">
+  <meta name="twitter:image" content="https://amareshnayak2022.github.io/11-11EventManagement.github.io/images/hero-1600.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Same cache-buster string as index.html. Bump both together, always. -->
+  <link rel="stylesheet" href="css/style.css?v=2026-09-01a">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ============================================================
+       HEADER
+       Deliberately not the site header: this is a checkout page, and a full
+       navigation here exists only to lead people away from it mid-payment.
+       Brand, one way back, one way to ask a question.
+
+       --solid because there is no dark hero underneath — see section 06 of
+       the stylesheet.
+       ============================================================ -->
+  <header class="site-header site-header--solid" id="site-header" data-header>
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html" aria-label="11:11 — home">
+        <img class="logo__badge" src="images/logo.png" alt="" aria-hidden="true"
+             width="512" height="512" decoding="async">
+        <span class="logo__text">
+          <span class="logo__mark">11<span class="logo__colon">:</span>11</span>
+          <span class="logo__sub">Bespoke Occasions &amp; Curation</span>
+        </span>
+      </a>
+
+      <div class="site-header__actions">
+        <a class="link-arrow book-back" href="index.html">
+          <span class="link-arrow__icon book-back__icon" aria-hidden="true">&larr;</span>
+          <span class="book-back__label">Back to 11:11</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================================
+         1. THE HEAD OF THE PAGE
+         Repeats the date and the countdown from the landing band, because a
+         visitor arriving from a pasted link has not seen either.
+         ============================================================ -->
+    <section class="book-head" aria-labelledby="book-title">
+      <div class="container book-head__inner">
+        <p class="eyebrow eyebrow--light book-head__eyebrow">
+          The Debut <span class="debut__dot" aria-hidden="true">&middot;</span>
+          Saturday, 26 September 2026
+        </p>
+
+        <h1 class="display display--lg book-head__title" id="book-title">
+          Reserve your seat
+        </h1>
+
+        <p class="book-head__lede">
+          Our first signature event &mdash; an unforgettable night crafted to set
+          the standard for every experience that follows. Choose your admission,
+          pay by UPI, and our concierge desk confirms your seat.
+        </p>
+
+        <!-- The same instant, the same explicit +05:30 offset, as the band on
+             index.html. If the doors time is confirmed, change BOTH. -->
+        <div class="countdown" data-countdown="2026-09-26T00:00:00+05:30"
+             data-countdown-done="Tonight is the night.">
+          <div class="countdown__grid" aria-hidden="true">
+            <div class="countdown__unit">
+              <span class="countdown__num" data-countdown-part="days">--</span>
+              <span class="countdown__label">Days</span>
+            </div>
+            <div class="countdown__unit">
+              <span class="countdown__num" data-countdown-part="hours">--</span>
+              <span class="countdown__label">Hours</span>
+            </div>
+            <div class="countdown__unit">
+              <span class="countdown__num" data-countdown-part="minutes">--</span>
+              <span class="countdown__label">Minutes</span>
+            </div>
+            <div class="countdown__unit">
+              <span class="countdown__num" data-countdown-part="seconds">--</span>
+              <span class="countdown__label">Seconds</span>
+            </div>
+          </div>
+          <p class="visually-hidden" data-countdown-live role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. THE RESERVATION
+
+         HOW THIS ACTUALLY WORKS, because it is not a payment gateway and the
+         page must never imply that it is:
+
+           1. The visitor picks a tier and a seat count. js/booking.js keeps a
+              running total and writes it into the summary, the pay panel and
+              the UPI deep link.
+           2. They pay that exact amount to the company's UPI ID, either by
+              scanning images/upi-qr.png or by tapping the button, which opens
+              their UPI app with payee and amount pre-filled.
+           3. They come back, enter the UPI reference their app gave them, and
+              submit. The details are handed to WhatsApp addressed to the
+              concierge desk, exactly as the enquiry form does.
+           4. A human matches the reference against the bank account and
+              confirms the seat.
+
+         Step 4 is a person, not code. That is why nothing on this page says a
+         seat is "booked" or "confirmed" on submit — it says the reservation has
+         been sent and will be confirmed. Do not soften that wording.
+
+         STILL UNCONFIRMED, and therefore deliberately unwritten: the venue, the
+         doors time, the lineup, the seat count, the early-bird closing date,
+         and the refund / transfer policy. That last one should exist in writing
+         before real money arrives — flag it to the client rather than drafting
+         terms here.
+         ============================================================ -->
+    <section class="section book" id="reserve" aria-labelledby="reserve-title">
+      <div class="container book__grid">
+
+        <div class="book__main">
+          <h2 class="visually-hidden" id="reserve-title">Reserve a seat</h2>
+
+          <form class="form book-form" id="booking-form" novalidate>
+
+            <!-- ---------- Step 1: the tier ---------- -->
+            <fieldset class="book-step">
+              <legend class="book-step__legend">
+                <span class="book-step__num" aria-hidden="true">01</span>
+                Choose your admission
+              </legend>
+
+              <!--
+                Radio cards. The <input> is the real control and stays in the
+                DOM — it is visually hidden by clip, never display:none, so it
+                is still focusable and still announced. The card is the <label>,
+                which is why clicking anywhere on it selects the tier.
+                data-price is the single source of the figure: booking.js reads
+                it, so a price change is a one-word edit in each card and
+                nothing in the script.
+              -->
+              <div class="tier-choice">
+                <div class="tier-opt">
+                  <input class="tier-opt__input" type="radio" name="tier" id="tier-early"
+                         value="Early Bird" data-price="2999" checked>
+                  <label class="tier-opt__card" for="tier-early">
+                    <span class="tier-opt__flag">Early Bird</span>
+                    <span class="tier-opt__price">&#8377;2,999</span>
+                    <span class="tier-opt__meta">
+                      <span class="tier-opt__strike">&#8377;5,999</span>
+                      <span class="tier-opt__save">Save &#8377;3,000</span>
+                    </span>
+                    <span class="tier-opt__note">Limited allocation, while it lasts.</span>
+                    <span class="tier-opt__tick" aria-hidden="true"></span>
+                  </label>
+                </div>
+
+                <div class="tier-opt">
+                  <input class="tier-opt__input" type="radio" name="tier" id="tier-standard"
+                         value="Standard" data-price="5999">
+                  <label class="tier-opt__card" for="tier-standard">
+                    <span class="tier-opt__flag">Standard</span>
+                    <span class="tier-opt__price">&#8377;5,999</span>
+                    <span class="tier-opt__meta">Full admission</span>
+                    <span class="tier-opt__note">The same room, the same night, at the standard price.</span>
+                    <span class="tier-opt__tick" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- ---------- Step 2: how many ---------- -->
+            <fieldset class="book-step">
+              <legend class="book-step__legend">
+                <span class="book-step__num" aria-hidden="true">02</span>
+                How many seats
+              </legend>
+
+              <!-- The buttons are a convenience on top of a real number input,
+                   not a replacement for it: typing 6 works, and so does a
+                   phone's numeric keypad. The ceiling of 10 is a sanity limit
+                   on a self-service form, not a stated capacity — a larger
+                   party should be a conversation with the desk, which is what
+                   the hint says. -->
+              <div class="field field--qty">
+                <label class="field__label" for="seats">Number of seats</label>
+                <div class="qty">
+                  <button class="qty__btn" type="button" data-qty-step="-1"
+                          aria-label="One seat fewer">&minus;</button>
+                  <input class="field__input qty__input" type="number" id="seats" name="seats"
+                         value="1" min="1" max="10" step="1" inputmode="numeric"
+                         aria-describedby="seats-hint seats-error">
+                  <button class="qty__btn" type="button" data-qty-step="1"
+                          aria-label="One seat more">+</button>
+                </div>
+                <p class="field__hint" id="seats-hint">
+                  Booking for more than ten? Message the concierge desk and we will arrange it.
+                </p>
+                <p class="field__error" id="seats-error" data-book-error="seats"></p>
+              </div>
+            </fieldset>
+
+            <!-- ---------- Step 3: who ---------- -->
+            <fieldset class="book-step">
+              <legend class="book-step__legend">
+                <span class="book-step__num" aria-hidden="true">03</span>
+                Your details
+              </legend>
+
+              <div class="form__grid">
+                <div class="field field--full">
+                  <label class="field__label" for="guest-name">Full Name <span class="req" aria-hidden="true">*</span></label>
+                  <input class="field__input" type="text" id="guest-name" name="guest-name"
+                         autocomplete="name" placeholder="The name on the door list"
+                         aria-describedby="guest-name-error" required>
+                  <p class="field__error" id="guest-name-error" data-book-error="guest-name"></p>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="guest-phone">WhatsApp Number <span class="req" aria-hidden="true">*</span></label>
+                  <input class="field__input" type="tel" id="guest-phone" name="guest-phone"
+                         autocomplete="tel" placeholder="+91 00000 00000"
+                         aria-describedby="guest-phone-hint guest-phone-error" required>
+                  <p class="field__hint" id="guest-phone-hint">Your confirmation is sent here.</p>
+                  <p class="field__error" id="guest-phone-error" data-book-error="guest-phone"></p>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="guest-email">Email <span class="req" aria-hidden="true">*</span></label>
+                  <input class="field__input" type="email" id="guest-email" name="guest-email"
+                         autocomplete="email" placeholder="you@example.com"
+                         aria-describedby="guest-email-error" required>
+                  <p class="field__error" id="guest-email-error" data-book-error="guest-email"></p>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- ---------- Step 4: pay ---------- -->
+            <fieldset class="book-step" id="pay">
+              <legend class="book-step__legend">
+                <span class="book-step__num" aria-hidden="true">04</span>
+                Pay by UPI
+              </legend>
+
+              <div class="pay">
+                <div class="pay__amount">
+                  <p class="pay__amount-label">Amount to pay</p>
+                  <p class="pay__amount-value" data-book="total">&#8377;2,999</p>
+                  <p class="pay__amount-note" data-book="breakdown">1 seat &times; &#8377;2,999 &mdash; Early Bird</p>
+                </div>
+
+                <div class="pay__body">
+                  <div class="pay__qr">
+                    <!-- The client's own UPI QR, cropped to the code alone. The
+                         wording that came with it (company name, UPI ID, bank)
+                         is re-set as real text beside it: legible at any size,
+                         and the UPI ID can be selected and copied, which a
+                         picture of it cannot. -->
+                    <img src="images/upi-qr.png" width="610" height="610"
+                         alt="UPI QR code for Elevenn Elevenn Archive Private Limited, UPI ID elevennelevenne-26@idfcbank."
+                         decoding="async">
+                    <p class="pay__qr-cap">Scan with any UPI app</p>
+                  </div>
+
+                  <div class="pay__details">
+                    <dl class="pay__list">
+                      <dt>Paying</dt>
+                      <dd>Elevenn Elevenn Archive Private Limited</dd>
+                      <dt>UPI ID</dt>
+                      <dd class="pay__upi">
+                        <span id="upi-id">elevennelevenne-26@idfcbank</span>
+                        <!-- Progressive: booking.js only shows this once it has
+                             confirmed the browser has a clipboard API, so the
+                             button is never a dead control. -->
+                        <button class="pay__copy" type="button" id="upi-copy" hidden
+                                data-copy-target="upi-id">Copy</button>
+                      </dd>
+                      <dt>Bank</dt>
+                      <dd>IDFC FIRST Bank</dd>
+                    </dl>
+
+                    <!-- upi:// only resolves on a device with a UPI app, so the
+                         QR above is the desktop path and this is the phone one.
+                         booking.js rewrites the am= parameter every time the
+                         tier or the seat count changes. -->
+                    <a class="btn btn--gold btn--block pay__app" id="upi-link"
+                       href="upi://pay?pa=elevennelevenne-26@idfcbank&amp;pn=Elevenn%20Elevenn%20Archive%20Private%20Limited&amp;cu=INR&amp;am=2999.00">
+                      Open UPI App <span data-book="total-short">&#8377;2,999</span>
+                    </a>
+                    <p class="pay__app-note">
+                      On a phone this opens GPay, PhonePe, Paytm or your bank app with the
+                      amount already filled in. On a computer, scan the code instead.
+                    </p>
+
+                    <p class="pay__warn">
+                      Please send the exact amount shown. A different figure cannot be
+                      matched to your reservation, and slows your confirmation down.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- ---------- Step 5: confirm ---------- -->
+            <fieldset class="book-step">
+              <legend class="book-step__legend">
+                <span class="book-step__num" aria-hidden="true">05</span>
+                Confirm your payment
+              </legend>
+
+              <div class="field">
+                <label class="field__label" for="utr">UPI Reference Number <span class="req" aria-hidden="true">*</span></label>
+                <input class="field__input" type="text" id="utr" name="utr"
+                       inputmode="numeric" placeholder="e.g. 123456789012"
+                       autocomplete="off" aria-describedby="utr-hint utr-error" required>
+                <p class="field__hint" id="utr-hint">
+                  Your UPI app shows this on the receipt, as the UTR or transaction ID.
+                  It is how we find your payment.
+                </p>
+                <p class="field__error" id="utr-error" data-book-error="utr"></p>
+              </div>
+
+              <div class="field field--check">
+                <label class="check check--wide">
+                  <input type="checkbox" id="paid" name="paid" value="Payment made"
+                         aria-describedby="paid-error" required>
+                  <span class="check__box" aria-hidden="true"></span>
+                  <span>I have paid <span data-book="total-short">&#8377;2,999</span> to the UPI ID above.</span>
+                </label>
+                <p class="field__error" id="paid-error" data-book-error="paid"></p>
+              </div>
+
+              <p class="book-form__terms">
+                Submitting sends your reservation to our concierge desk on WhatsApp.
+                Your seat is held on payment and <strong>confirmed once we have matched
+                it against the account</strong> &mdash; you will hear from us on the number
+                above. Keep your payment receipt until then.
+              </p>
+            </fieldset>
+
+            <div class="form__actions">
+              <button class="btn btn--gold btn--lg btn--block-sm" type="submit">
+                Send Reservation
+              </button>
+              <p class="form__note">
+                Questions first? <a href="index.html#contact">Talk to the concierge desk</a>.
+              </p>
+            </div>
+
+            <p class="form__summary" id="book-summary" role="alert" hidden></p>
+          </form>
+
+          <!-- Success panel, same pattern as the enquiry form on index.html:
+               swapped in place of the form, or shown alongside it if the
+               WhatsApp window was blocked and the fallback link is the only way
+               through. -->
+          <div class="form-success" id="book-success" role="status" aria-live="polite" hidden>
+            <p class="form-success__mark" aria-hidden="true">11:11</p>
+
+            <div data-book-success="whatsapp">
+              <h3 class="form-success__title">Reservation sent</h3>
+              <p>
+                WhatsApp is open with your details. <strong>Press send</strong> — and attach
+                your payment screenshot if you have it, it speeds the check up.
+              </p>
+              <p>
+                Our concierge desk confirms your seat once the payment is matched against
+                the account. We will message you on the number you gave us.
+              </p>
+            </div>
+
+            <div data-book-success="whatsapp-blocked" hidden>
+              <h3 class="form-success__title">One more step</h3>
+              <p>
+                Your browser blocked the WhatsApp window. Your details are still filled in
+                below &mdash; use this link instead:
+              </p>
+              <p><a class="btn btn--solid btn--sm" id="book-wa-link" href="#" target="_blank" rel="noopener">Open WhatsApp</a></p>
+            </div>
+
+            <a class="btn btn--outline btn--sm" href="index.html">Back to 11:11</a>
+          </div>
+        </div>
+
+        <!-- ---------- The running summary ----------
+             Sticky from 1024px, where there is a column to spare. Below that it
+             sits above the form as a plain block, which is the right order on a
+             phone: what you are buying, then the buying. -->
+        <aside class="book__rail" aria-labelledby="summary-title">
+          <div class="summary">
+            <h2 class="summary__title" id="summary-title">Your reservation</h2>
+
+            <dl class="summary__list">
+              <div class="summary__row">
+                <dt>Event</dt>
+                <dd>11:11 &mdash; The Debut</dd>
+              </div>
+              <div class="summary__row">
+                <dt>Date</dt>
+                <dd>Sat, 26 September 2026</dd>
+              </div>
+              <div class="summary__row">
+                <dt>Venue</dt>
+                <dd>Announced to confirmed guests</dd>
+              </div>
+              <div class="summary__row">
+                <dt>Admission</dt>
+                <dd data-book="tier">Early Bird</dd>
+              </div>
+              <div class="summary__row">
+                <dt>Seats</dt>
+                <dd data-book="seats">1</dd>
+              </div>
+              <div class="summary__row">
+                <dt>Per seat</dt>
+                <dd data-book="unit">&#8377;2,999</dd>
+              </div>
+            </dl>
+
+            <p class="summary__total">
+              <span class="summary__total-label">Total</span>
+              <span class="summary__total-value" data-book="total">&#8377;2,999</span>
+            </p>
+
+            <p class="summary__save" data-book="saving" hidden></p>
+
+            <a class="btn btn--gold btn--block summary__cta" href="#pay">Go to payment</a>
+
+            <p class="summary__note">
+              Seats are held on payment and confirmed by our concierge desk.
+            </p>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. WHAT HAPPENS NEXT
+         Three sentences that exist because this is not a gateway: a visitor who
+         has just sent money to a UPI ID needs to know, on the page, what the
+         next twenty-four hours look like.
+         ============================================================ -->
+    <section class="section book-next" aria-labelledby="next-title">
+      <div class="container">
+        <header class="section-head section-head--light" data-reveal>
+          <p class="eyebrow eyebrow--light">After you send</p>
+          <h2 class="display display--lg" id="next-title">What happens next</h2>
+        </header>
+
+        <ol class="process__list book-next__list" data-reveal>
+          <li class="step">
+            <span class="step__num" aria-hidden="true">01</span>
+            <h3 class="step__title">We match your payment</h3>
+            <p class="step__text">
+              Your reference is checked against the account. This is a person, not an
+              automatic system, so it happens during desk hours &mdash; Monday to
+              Saturday, 10:00 to 19:00 IST.
+            </p>
+          </li>
+          <li class="step">
+            <span class="step__num" aria-hidden="true">02</span>
+            <h3 class="step__title">You get your confirmation</h3>
+            <p class="step__text">
+              We message the WhatsApp number you gave us with your seat count and your
+              name on the door list. If anything does not match, we will ask you first
+              rather than cancel.
+            </p>
+          </li>
+          <li class="step">
+            <span class="step__num" aria-hidden="true">03</span>
+            <h3 class="step__title">The details reach you before the night</h3>
+            <p class="step__text">
+              Venue, timings and arrival instructions go to confirmed guests ahead of
+              26 September. Nothing else is asked of you before then.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       Cut down to what a checkout page needs: who you just paid, how to reach
+       them, and the way back.
+       ============================================================ -->
+  <footer class="site-footer site-footer--slim">
+    <div class="container site-footer__slim">
+      <div>
+        <p class="logo__mark logo__mark--footer">11<span class="logo__colon">:</span>11</p>
+        <p class="site-footer__name">Elevenn Elevenn Archive</p>
+      </div>
+
+      <div class="site-footer__slim-contact">
+        <p class="site-footer__heading">Concierge desk</p>
+        <p>
+          <a href="tel:+919938120356">+91 99381 20356</a>
+          <span aria-hidden="true"> &middot; </span>
+          <a href="https://wa.me/919938120356" target="_blank" rel="noopener">WhatsApp</a>
+        </p>
+        <p><a href="mailto:connect@elevennelevenn.com">connect@elevennelevenn.com</a></p>
+        <p class="site-footer__note">Mon&ndash;Sat, 10:00&ndash;19:00 IST</p>
+      </div>
+
+      <div>
+        <a class="link-arrow link-arrow--light" href="index.html">
+          Back to 11:11 <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="container site-footer__bar">
+      <p>&copy; 2026 Elevenn Elevenn Archive Pvt Ltd</p>
+    </div>
+  </footer>
+
+  <a class="wa-float"
+     href="https://wa.me/919938120356?text=Hi%2011%3A11%2C%20I%20have%20a%20question%20about%20the%20debut%20event%20on%2026%20September."
+     target="_blank" rel="noopener"
+     aria-label="Chat with 11:11 on WhatsApp">
+    <svg class="wa-float__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"/>
+    </svg>
+    <span class="wa-float__label">WhatsApp</span>
+  </a>
+
+  <!-- script.js first: it owns the header state and the countdown that this
+       page shares with index.html. booking.js only knows about this form. -->
+  <script src="js/script.js?v=2026-09-01a"></script>
+  <script src="js/booking.js?v=2026-09-01a"></script>
+</body>
+</html>

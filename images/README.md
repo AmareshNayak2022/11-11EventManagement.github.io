@@ -91,6 +91,26 @@ image can carry the name and the line as well as the mark.
 
 ---
 
+## 1b. The UPI payment QR
+
+`upi-qr.png` (610×610) is the code shown in step 04 of `book.html`. It is a crop
+of the payment slip the client supplied on 1 September 2026 — the QR square
+plus its white quiet zone, with the slip's own wording cut away because that
+wording is re-set as real HTML text beside it (legible at any size, and the UPI
+ID can be selected and copied, which a picture of it cannot).
+
+**This file and the `UPI_ID` constant at the top of `js/booking.js` are the same
+account** — `elevennelevenne-26@idfcbank`, IDFC FIRST Bank, Elevenn Elevenn
+Archive Private Limited. If the account ever changes, change both in the same
+commit, or the page will show a code and an ID that disagree and money will go
+to the wrong place.
+
+Two things to preserve if you ever re-crop it: the white margin around the code
+(a scanner needs that quiet zone, and the page ground is cream, which is why the
+CSS puts the image on a white plate), and all three corner squares.
+
+---
+
 ## 2. Replacing the photography
 
 ### Why placeholders live on Pexels for now

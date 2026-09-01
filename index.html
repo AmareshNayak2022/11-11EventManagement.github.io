@@ -65,7 +65,7 @@
        page updates, the capitals and the gold do not. Bump the date whenever
        css/style.css or js/script.js changes and every browser fetches it fresh;
        the same string is on the <script> tag at the end of <body>. -->
-  <link rel="stylesheet" href="css/style.css?v=2026-08-23a">
+  <link rel="stylesheet" href="css/style.css?v=2026-09-01a">
 
   <!--
     Structured data for Elevenn Elevenn Archive Pvt Ltd, trading as 11:11.
@@ -79,6 +79,42 @@
       "url": "https://elevennelevenn.com",
     and update og:image / twitter:image to absolute URLs on the same host.
   -->
+  <!--
+    THE DEBUT EVENT, as structured data — written out, deliberately NOT enabled.
+
+    Google will happily show an event card for this, and that card would carry
+    a start time and a venue to anyone searching. Both are unconfirmed: the
+    client has given the date (26 September 2026) and the two prices, and
+    nothing else. A guessed venue published to Google is the same class of
+    mistake as a guessed phone number, so this stays commented until the client
+    confirms the venue name, its street address, and the doors time.
+
+    To enable: fill in startDate with the real time, replace the location block
+    with the real venue, check the two offer prices still match the page, and
+    move this out of the comment as a second <script type="application/ld+json">.
+
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "11:11 — The Debut",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "startDate": "2026-09-26T19:00:00+05:30",          << CONFIRM THE TIME
+      "organizer": { "@type": "Organization", "name": "11:11" },
+      "location": {                                       << CONFIRM THE VENUE
+        "@type": "Place",
+        "name": "",
+        "address": { "@type": "PostalAddress", "addressCountry": "IN" }
+      },
+      "offers": [
+        { "@type": "Offer", "name": "Early Bird", "price": "2999", "priceCurrency": "INR",
+          "availability": "https://schema.org/LimitedAvailability" },
+        { "@type": "Offer", "name": "Standard", "price": "5999", "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock" }
+      ]
+    }
+  -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -169,6 +205,10 @@
 
       <nav class="nav-desktop" aria-label="Primary">
         <ul class="nav-desktop__list">
+          <!-- The debut leads the list and is the only flagged link: it is the
+               one item with a date on it. Remove this <li> and the header
+               ticket button together once the night has passed. -->
+          <li><a class="nav-link nav-link--flag" href="#debut">The Debut</a></li>
           <li><a class="nav-link" href="#about">About</a></li>
           <li><a class="nav-link" href="#services">Services</a></li>
           <li><a class="nav-link" href="#experiences">Experiences</a></li>
@@ -179,6 +219,12 @@
       </nav>
 
       <div class="site-header__actions">
+        <!-- The only gold in the header, and it stays visible on a phone where
+             "Enquire" does not: on a launch page the ticket is the action, and
+             a visitor who has scrolled past the debut band should never have to
+             open the menu to find it again. Kept to one word so the lockup,
+             the button and the hamburger still fit across a 320px screen. -->
+        <a class="btn btn--gold btn--sm site-header__tickets" href="book.html">Tickets</a>
         <a class="btn btn--outline btn--sm site-header__cta" href="#contact">Enquire</a>
 
         <button
@@ -213,6 +259,7 @@
       </div>
 
       <ul class="mobile-nav__list">
+        <li><a class="is-flagged" href="#debut">The Debut</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#experiences">Experiences</a></li>
@@ -223,7 +270,8 @@
       </ul>
 
       <div class="mobile-nav__foot">
-        <a class="btn btn--gold btn--block" href="#contact">Start a Brief</a>
+        <a class="btn btn--gold btn--block" href="book.html">Reserve a Seat</a>
+        <a class="btn btn--outline btn--block" href="#contact">Start a Brief</a>
         <p class="mobile-nav__meta">Bhubaneswar &middot; Pan-India</p>
       </div>
     </nav>
@@ -309,10 +357,125 @@
         </div>
       </div>
 
-      <a class="scroll-cue" href="#about" aria-label="Scroll to the about section">
+      <a class="scroll-cue" href="#debut" aria-label="Scroll to the debut event announcement">
         <span class="scroll-cue__label">Scroll</span>
         <span class="scroll-cue__line" aria-hidden="true"></span>
       </a>
+    </section>
+
+    <!-- ============================================================
+         1b. THE DEBUT  (dark band — the launch announcement)
+
+         This is an ad, and it is the only section on the page that sells a
+         dated, priced, buyable thing. It sits directly under the hero, sharing
+         its dark ground, so it reads as the second half of the first screen
+         rather than an interruption.
+
+         CONFIRMED (client, 1 Sept 2026): the debut is on 26 September 2026;
+         standard admission is Rs 5,999 and early-bird admission Rs 2,999.
+         NOT confirmed, and therefore not written anywhere here — the venue, the
+         start time, the lineup, the seat count, and the date the early-bird
+         price closes. Do not fill any of those in from guesswork; the note
+         under the buttons says "announced soon" precisely because it is true.
+
+         Note this is the one place on the site where a rupee figure appears.
+         Everything in CLAUDE.md about no published figures is about the
+         AGENCY's project pricing, which is still unpublished; a ticket that
+         cannot be bought without its price is a different thing.
+         ============================================================ -->
+    <section class="section debut" id="debut" aria-labelledby="debut-title">
+      <div class="container debut__inner">
+
+        <p class="eyebrow eyebrow--light debut__eyebrow" data-reveal>
+          The Debut <span class="debut__dot" aria-hidden="true">&middot;</span>
+          Saturday, 26 September 2026
+        </p>
+
+        <!-- The client's sentence, whole. The second clause is a <span> inside
+             the same heading rather than a separate lede, because the line was
+             given as one heading and reads as one thought; section 08b sets it
+             a step down so the pair works as display type. -->
+        <h2 class="display display--lg debut__title" id="debut-title" data-reveal>
+          <span class="debut__title-main">We debut our first signature event</span>
+          <span class="debut__title-sub">&mdash; an unforgettable night crafted to
+          set the standard for every experience that follows.</span>
+        </h2>
+
+        <!--
+          COUNTDOWN.
+          data-countdown is an ISO instant with an explicit +05:30 offset, so it
+          counts to the same moment for a visitor in Bhubaneswar and one in
+          London. It targets MIDNIGHT that opens the 26th because the start time
+          is not confirmed — when the client gives the doors time, change this
+          attribute here and the matching one in book.html to, for example,
+          2026-09-26T19:00:00+05:30, and nothing else needs touching.
+
+          The digits are aria-hidden and a visually-hidden live region carries
+          the count instead: a region that changed every second would make a
+          screen reader read the page aloud once a second, which is why section
+          08 of js/script.js only updates it when the DAY figure changes.
+        -->
+        <div class="countdown" data-countdown="2026-09-26T00:00:00+05:30"
+             data-countdown-done="Tonight is the night." data-reveal>
+          <div class="countdown__grid" aria-hidden="true">
+            <div class="countdown__unit">
+              <span class="countdown__num" data-countdown-part="days">--</span>
+              <span class="countdown__label">Days</span>
+            </div>
+            <div class="countdown__unit">
+              <span class="countdown__num" data-countdown-part="hours">--</span>
+              <span class="countdown__label">Hours</span>
+            </div>
+            <div class="countdown__unit">
+              <span class="countdown__num" data-countdown-part="minutes">--</span>
+              <span class="countdown__label">Minutes</span>
+            </div>
+            <div class="countdown__unit">
+              <span class="countdown__num" data-countdown-part="seconds">--</span>
+              <span class="countdown__label">Seconds</span>
+            </div>
+          </div>
+          <p class="visually-hidden" data-countdown-live role="status" aria-live="polite"></p>
+        </div>
+
+        <!-- The two prices, as a pair, so the early-bird saving is visible
+             rather than asserted. .ticket-card is a new component but it is
+             deliberately close to .event-type: same hairline, same padding
+             rhythm, just inverted for the dark band. -->
+        <ul class="ticket-cards" data-reveal>
+          <li class="ticket-card ticket-card--featured">
+            <p class="ticket-card__flag">Early Bird</p>
+            <p class="ticket-card__price">
+              <span class="ticket-card__amount">&#8377;2,999</span>
+            </p>
+            <p class="ticket-card__was">
+              <span class="ticket-card__strike">&#8377;5,999</span>
+              <span class="ticket-card__save">Save &#8377;3,000</span>
+            </p>
+            <p class="ticket-card__note">Limited allocation. Once it is gone, admission is at the standard price.</p>
+          </li>
+          <li class="ticket-card">
+            <p class="ticket-card__flag">Standard</p>
+            <p class="ticket-card__price">
+              <span class="ticket-card__amount">&#8377;5,999</span>
+            </p>
+            <p class="ticket-card__was">Full admission</p>
+            <p class="ticket-card__note">The same room, the same night, at the standard price.</p>
+          </li>
+        </ul>
+
+        <div class="debut__actions" data-reveal>
+          <a class="btn btn--gold btn--lg" href="book.html">
+            Reserve Your Seat
+            <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
+          </a>
+          <p class="debut__note">
+            Venue and timings are announced to confirmed guests closer to the night.
+            Seats are held on payment and confirmed by our concierge desk.
+          </p>
+        </div>
+
+      </div>
     </section>
 
     <!-- ============================================================
@@ -1190,6 +1353,7 @@
       <nav class="site-footer__col" aria-label="Footer">
         <h2 class="site-footer__heading">Explore</h2>
         <ul class="site-footer__list">
+          <li><a href="#debut">The Debut</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#experiences">Experiences</a></li>
@@ -1235,9 +1399,12 @@
       <div class="site-footer__col">
         <h2 class="site-footer__heading">Enquiries</h2>
         <p class="site-footer__note">
-          Now taking briefs for 2026 and 2027.
+          Our debut night is on 26 September 2026. Briefs are open for 2026 and 2027.
         </p>
-        <a class="link-arrow link-arrow--light" href="#contact">
+        <a class="link-arrow link-arrow--light" href="book.html">
+          Reserve a Seat <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
+        </a>
+        <a class="link-arrow link-arrow--light site-footer__second-link" href="#contact">
           Start a Brief <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
         </a>
       </div>
@@ -1276,6 +1443,6 @@
     <span class="wa-float__label">WhatsApp</span>
   </a>
 
-  <script src="js/script.js?v=2026-08-23a"></script>
+  <script src="js/script.js?v=2026-09-01a"></script>
 </body>
 </html>

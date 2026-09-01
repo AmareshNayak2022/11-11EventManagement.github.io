@@ -4,8 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A single-page marketing site for **11:11** (Elevenn Elevenn Archive Pvt Ltd,
-Bhubaneswar). Static: `index.html`, `css/style.css`, `js/script.js`.
+A marketing site for **11:11** (Elevenn Elevenn Archive Pvt Ltd, Bhubaneswar).
+Static, and two pages: `index.html`, the marketing page, and `book.html`, the
+reservation and payment page for the debut event. Shared `css/style.css` and
+`js/script.js`; `js/booking.js` is loaded by `book.html` alone.
 
 **What the business is (confirmed by the client, August 2026):** an
 *experiential event agency* — premium and high-concept work only. It curates
@@ -110,23 +112,94 @@ Two things about that table are worth knowing before you touch them:
   these rows.
   The **floating button and `DELIVERY.whatsapp` route to the concierge line
   only**, because brief Q37 makes that the desk that handles enquiries. So
-  `919938120356` appears three times (contact row, floating button, DELIVERY)
-  and `919019526532` once. Changing which desk takes enquiries means changing
-  the first three together.
+  `919938120356` now appears **five** times — contact row, floating button,
+  `DELIVERY`, plus `book.html`'s footer and `WHATSAPP` in `js/booking.js` — and
+  `919019526532` once. Changing which desk takes enquiries means changing all
+  five together. See the debut-event section below.
 
 Still unconfirmed, and still listed in `CLIENT-BRIEF.md`: real past work and
 photography (Q19–26), the domain and hosting (Q44–51), and the legal and
 privacy items (Q52–56). The Pinterest link in the footer still points at `#`.
 
+## The debut event — added 1 September 2026
+
+The client is launching their **first signature event on Saturday 26 September
+2026**, and asked for it advertised on the landing page. That is the `#debut`
+band under the hero (a countdown, the two prices, one button), plus `book.html`,
+which takes the reservation and the UPI payment.
+
+**Confirmed by the client, 1 Sept 2026, and safe to use:**
+
+| Fact | Value |
+|------|-------|
+| Date | Saturday, 26 September 2026 |
+| Standard admission | ₹5,999 |
+| Early-bird admission | ₹2,999 |
+| UPI ID | `elevennelevenne-26@idfcbank` — IDFC FIRST Bank, Elevenn Elevenn Archive Private Limited |
+| Payment QR | `images/upi-qr.png`, a crop of the client's own payment slip |
+| Heading | *We debut our first signature event — an unforgettable night crafted to set the standard for every experience that follows.* (client's sentence; only "unforgettable" was corrected) |
+
+**Not confirmed, and written nowhere on the site. Do not invent any of them:**
+the venue, the doors time, the lineup, the seat capacity, the date the
+early-bird price closes, and the refund/transfer policy. They are Q61–Q66 in
+`CLIENT-BRIEF.md`. Two consequences already built in:
+
+- Both countdowns target **midnight opening the 26th**, not a start time,
+  written as an ISO instant with an explicit `+05:30` offset. A bare
+  `2026-09-26` parses as midnight *UTC* and would be five and a half hours out
+  for everyone. When the doors time lands, change the `data-countdown`
+  attribute in `index.html` **and** `book.html` — nothing in the JS.
+- The `Event` JSON-LD is written out but **commented out** in `index.html`,
+  because `startDate` and `location` would both be guesses and a guessed venue
+  goes straight to Google. Same reasoning as the omitted `url`.
+
+**This is the one place a rupee figure is published**, and it does not reopen the
+pricing decision above: the *agency's* project pricing is still unpublished
+everywhere, and a ticket nobody can buy without knowing its price is a different
+thing. Do not take it as licence to re-add figures to the packages copy, the
+enquiry form or the JSON-LD.
+
+**There is no payment gateway, and the page must never imply one.** The visitor
+pays the UPI ID by QR or `upi://` intent, enters the reference from their
+receipt, and `js/booking.js` hands the reservation to the concierge desk on
+WhatsApp exactly as the enquiry form does. A person then matches it against the
+account. So the page says a reservation has been *sent* and will be *confirmed*,
+never that a seat is "booked" on submit. Keep that wording, and keep the note
+that confirmation comes from a human during desk hours.
+
+Two more things that must move together:
+
+- `images/upi-qr.png` and `UPI_ID` at the top of `js/booking.js` are **the same
+  account**. Change one without the other and the page shows a code and an ID
+  that disagree — money to the wrong place.
+- The ticket **prices live in the markup**, as `data-price` on the tier radios in
+  `book.html`, next to the figure the visitor reads. `booking.js` reads them and
+  hardcodes no amount. Keep it that way; the saving line is computed from the
+  two tiers rather than from a hardcoded ₹3,000, so it survives a price change.
+
+The concierge number `919938120356` now appears in **five** places, not three:
+the contact row, the floating button and `DELIVERY` in `js/script.js`, plus
+`book.html`'s footer and `WHATSAPP` in `js/booking.js`. Changing which desk takes
+enquiries means changing all five.
+
 ## Running and verifying
 
 No build step, no `package.json`, nothing to install. Open `index.html`
 directly — `file://` works, there are no modules or fetch calls at load.
+`book.html` works the same way; its `upi://` button is the one thing that does
+nothing on a desktop, because it needs a UPI app to resolve.
 
-**The stylesheet and script are linked with a `?v=<date>` query.** Bump both
-when you change `css/style.css` or `js/script.js`, in the same commit. Without
-it a phone that has the old stylesheet cached shows the new copy in the old
-styling and the change looks like it never deployed — this has already cost one
+To check the booking page's arithmetic rather than its looks, drive it: load a
+copy in headless Chrome with a script that flips the tier, sets a seat count,
+writes the resulting total and the UPI `am=` into `document.title`, then read it
+back with `--dump-dom`. Faster and far more certain than reading a screenshot,
+and it is how the ₹59,990 Indian-grouping case was verified.
+
+**The stylesheet and scripts are linked with a `?v=<date>` query, on both
+pages.** Bump every one of them when you change `css/style.css`, `js/script.js`
+or `js/booking.js` — in the same commit, and to the same string in both HTML
+files. Without it a phone that has the old stylesheet cached shows the new copy
+in the old styling and the change looks like it never deployed — this has already cost one
 round of "I don't see the changes".
 
 **Git is set up**, pushed to `origin/main` and deployed by GitHub Pages at
@@ -212,9 +285,14 @@ emptiness, because an unticked box still carries its `value`.
 
 ## Conventions
 
-- `css/style.css` and `js/script.js` are organised into numbered sections listed
-  at the top of each file. Add to the right section and keep the contents list
-  accurate.
+- `css/style.css`, `js/script.js` and `js/booking.js` are organised into
+  numbered sections listed at the top of each file. Add to the right section and
+  keep the contents list accurate.
+- The booking page reuses site components rather than growing its own set:
+  `.field` / `.field__input` / `.field__error` for inputs, `.check` for the
+  confirmation tick, `.btn` throughout, and `.process` / `.step` for the "what
+  happens next" band — `.book-next` is named alongside `.process` in section 11
+  rather than restating the dark ground. Keep adding that way.
 - Comments in this project explain *why*, especially where a value was measured
   or a trap avoided. Match that when adding code.
 - Vanilla only — no framework, no build step, no npm. This is a hard constraint:
