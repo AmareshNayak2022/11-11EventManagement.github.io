@@ -3712,10 +3712,15 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 }
 .site-footer__fineprint { font-style: italic; }
 
-/* The build credit, as a second clause on the copyright line rather than a row
-   of its own: it belongs to that sentence, and a separate line would give it
-   more weight in the footer than the registered company above it.
-   It wraps to its own line below 480px, where the two will not share one. */
+/* The build credit sits on the copyright line rather than taking a row of its
+   own: a separate line would give it more weight in the footer than the
+   registered company above it. It wraps to its own line below 480px, where the
+   two will not share one.
+   No " — " separator any more. It used to join two halves of one sentence
+   ("...Pvt Ltd — in association with Jollymynah"); the line now ends in "All
+   rights reserved." and the full stop does that job, so a dash on top of it
+   would be doubling up. The space between the two comes from the newline in
+   the markup, and the mobile block rule below no longer has a dash to hide. */
 /* No max-width: the credit belongs on the copyright line, and capping the
    measure only forced "in association with" onto a second row. The footer bar
    is already a wrapping flex row, so the fineprint moves down on its own when
@@ -3725,7 +3730,6 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
    --navy-deep it has to clear 4.5:1, and paper at 42% measures 3.93:1 — it
    inherits the bar's own 50% instead, which measures 5.20:1. The link beside
    it carries the emphasis rather than the surrounding words carrying less. */
-.site-footer__assoc::before { content: " — "; }
 .site-footer__assoc a {
   color: rgb(var(--paper-rgb) / 0.62);
   border-bottom: 1px solid rgb(var(--gold-rgb) / 0.45);
@@ -3738,7 +3742,6 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 }
 @media (max-width: 479px) {
   .site-footer__assoc { display: block; }
-  .site-footer__assoc::before { content: none; }
 }
 
 /* At the very bottom of the page the floating WhatsApp button lands on top of
