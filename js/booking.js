@@ -10,9 +10,10 @@
    01. Configuration (prices live in the HTML, not here)
    02. Helpers & money formatting
    03. Live totals, the seat stepper, and the UPI link
-   04. Copy the UPI ID
-   05. Validation
-   06. Submit — hand the reservation to WhatsApp
+   04. The payment QR — drawn from that same link
+   05. Copy the UPI ID
+   06. Validation
+   07. Submit — hand the reservation to WhatsApp
    ========================================================================== */
 
 (function () {
@@ -108,6 +109,9 @@
   var passInputs = $$('input[name="pass"]', form);
   var seatsEl    = $('#seats', form);
   var upiLink    = $('#upi-link');
+  var qrHolder   = $('.pay__qr');
+  var qrImage    = $('#upi-qr-img');
+  var qrCap      = $('[data-book="qr-cap"]');
 
   var EARLY_UNTIL = new Date(EARLY_BIRD_ENDS).getTime();
 
@@ -217,15 +221,24 @@
        not lock it: the payer can still edit the figure in their app. That is
        exactly why step 05 asks for the reference number and a person checks it
        against the account — the page never assumes the right amount arrived. */
-    if (upiLink) {
-      upiLink.href =
-        'upi://pay' +
-        '?pa=' + encodeURIComponent(UPI_ID) +
-        '&pn=' + encodeURIComponent(UPI_PAYEE) +
-        '&cu=INR' +
-        '&am=' + s.total.toFixed(2) +
-        '&tn=' + encodeURIComponent('NOXUS ' + s.name + ' x' + s.seats);
-    }
+    /* pa= keeps a LITERAL @. encodeURIComponent turns it into %40, and while
+       that is correct URI escaping, "@" is a legal query character and some
+       UPI apps do not unescape the VPA before using it — which turns the
+       payee into elevennelevenne-26%40idfcbank and the payment into nothing.
+       The client's own working QR codes and the static href in book.html both
+       use the bare @, so this matches them. */
+    var intent =
+      'upi://pay' +
+      '?pa=' + encodeURIComponent(UPI_ID).replace(/%40/g, '@') +
+      '&pn=' + encodeURIComponent(UPI_PAYEE) +
+      '&cu=INR' +
+      '&am=' + s.total.toFixed(2) +
+      '&tn=' + encodeURIComponent('NOXUS ' + s.name + ' x' + s.seats);
+
+    if (upiLink) upiLink.href = intent;
+
+    // The scanned code and the tapped link are the same string, always.
+    paintQr(intent, s);
   }
 
   passInputs.forEach(function (input) {
@@ -271,7 +284,67 @@
   }
 
   /* ========================================================================
-     04. COPY THE UPI ID
+     04. THE PAYMENT QR
+
+     images/upi-qr.png is the client's own code and carries the payee but NO
+     amount — verified by decoding it — so a visitor scanning it on a desktop
+     has to key the figure in by hand. On 2 Sept 2026 the client patched that
+     by hand instead, sending two fixed QR images: am=3998 for two Vogue
+     passes and am=2499 for one Elite. Right account, right figures — for
+     exactly those two baskets, on exactly this side of 7 September.
+
+     A picture cannot follow a running total. So the code is drawn here from
+     the SAME upi:// string the "Open UPI App" button uses, which is the only
+     arrangement in which the scanned amount and the tapped amount cannot
+     drift apart: three Elite passes, or any basket at all after the venue is
+     unveiled and standard pricing takes over, and both still agree.
+
+     PROGRESSIVE, and deliberately so. The static image stays in the markup
+     and is only hidden once a code has actually been painted. If js/qr.js is
+     missing, or the browser has no canvas, the visitor still gets the
+     client's own working QR — it simply asks them to type the amount, which
+     is what the live page does today. A blank square would be worse.
+     ======================================================================== */
+  var qrCanvas = null;
+
+  function paintQr(intent, state) {
+    if (!qrHolder || !window.QR || !window.QR.paint) return;
+
+    if (!qrCanvas) {
+      if (!document.createElement('canvas').getContext) return;
+      qrCanvas = document.createElement('canvas');
+      qrCanvas.className = 'pay__qr-canvas';
+      qrCanvas.setAttribute('role', 'img');
+      qrHolder.insertBefore(qrCanvas, qrHolder.firstChild);
+    }
+
+    /* margin 2, not the spec's 4: the .pay__qr plate already puts 0.75rem of
+       white all round the canvas, so the real quiet zone is comfortably over
+       four modules. Spending them here instead buys about 7% more pixels per
+       module, which is what a phone camera actually needs from a 49-module
+       code shown at 14rem. */
+    if (!window.QR.paint(qrCanvas, intent, { target: 600, margin: 2 })) {
+      // Could not encode — leave the client's static code showing.
+      if (qrCanvas.parentNode) qrCanvas.parentNode.removeChild(qrCanvas);
+      qrCanvas = null;
+      return;
+    }
+
+    var amount = rupees(state.total);
+    qrCanvas.setAttribute('aria-label',
+      'UPI QR code to pay ' + amount + ' to ' + UPI_PAYEE +
+      ', UPI ID ' + UPI_ID + '. ' + state.seats + ' ' + state.name +
+      (state.seats === 1 ? ' pass.' : ' passes.'));
+
+    if (qrImage) qrImage.hidden = true;
+    if (qrCap) {
+      qrCap.textContent = 'Scan with any UPI app — ' + amount +
+                          ' already filled in';
+    }
+  }
+
+  /* ========================================================================
+     05. COPY THE UPI ID
      The button ships hidden and is only revealed once we know the clipboard
      API is actually there — a visible Copy button that does nothing is worse
      than no button. Nothing is lost without it: the ID beside it is ordinary
@@ -299,7 +372,7 @@
   }
 
   /* ========================================================================
-     05. VALIDATION
+     06. VALIDATION
      Same shape as the enquiry form in section 07 of js/script.js: a rule per
      field name, returning a message to mark it invalid and '' to pass. The
      error paragraphs use data-book-error rather than data-error-for so the two
@@ -401,7 +474,7 @@
   });
 
   /* ========================================================================
-     06. SUBMIT — HAND THE RESERVATION TO WHATSAPP
+     07. SUBMIT — HAND THE RESERVATION TO WHATSAPP
 
      Same delivery model as the enquiry form, and the same limitation: this is
      a static site, so nothing is stored anywhere. The message opens in

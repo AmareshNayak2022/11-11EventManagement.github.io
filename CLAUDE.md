@@ -7,7 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A marketing site for **11:11** (Elevenn Elevenn Archive Pvt Ltd, Bhubaneswar).
 Static, and two pages: `index.html`, the marketing page, and `book.html`, the
 reservation and payment page for the debut event. Shared `css/style.css` and
-`js/script.js`; `js/booking.js` is loaded by `book.html` alone.
+`js/script.js`; `js/qr.js` and `js/booking.js` are loaded by `book.html` alone,
+in that order — `booking.js` calls the encoder in `qr.js`.
 
 **What the business is (confirmed by the client, August 2026):** an
 *experiential event agency* — premium and high-concept work only. It curates
@@ -154,9 +155,11 @@ their earlier message. All of it is safe to use verbatim.**
 | **Reserve** | invitation only, **minimum 3**, DM 9938120356 to apply |
 | Inclusions | Rich culinary experience (no limits) · Global premium beverages (no limits) · An elegant sonic affair · A sundowner like never before · Elite gathering · Impeccable service & ambience |
 | UPI ID | `elevennelevenne-26@idfcbank` — IDFC FIRST Bank, Elevenn Elevenn Archive Private Limited |
-| Payment QR | `images/upi-qr.png`, a crop of the client's own payment slip |
+| Payment QR | `images/upi-qr.png`, a crop of the client's own payment slip — payee only, **no amount**; now the fallback behind the live code `js/qr.js` draws |
 | Posters | `images/noxus-passes-*.jpg` (booking page); `images/noxus-teaser-*.jpg` is now the `<video>` fallback |
 | Film | `videos/noxus-teaser.mp4` — 20s vertical reel, the moving version of the teaser poster. Poster frame `images/noxus-video-poster.jpg` was decoded from frame one of the film itself |
+| Band lede | *NOXUS is a meticulously curated social experience where elegance, indulgence and connection come together — creating an evening designed to be experienced, not simply attended.* (client, 2 Sept 2026) |
+| Unveiling, as worded | *Venue Unveiling on 7th Sep'26 at 11:11 PM* (client, 2 Sept 2026) |
 
 ### The one deadline that runs the whole campaign
 
@@ -182,6 +185,16 @@ one stale advertisement. It re-checks once a minute, so a tab left open across
 the evening of the 7th switches under the visitor rather than letting them pay
 yesterday's rate. A malformed date falls back to the **standard** price, never
 the cheap one.
+
+On 2 September 2026 the client marked up two screenshots of the live site and
+sent the replacement copy. Both changes are in:
+
+- the `#debut` band's lede was the one line on that section that had been ours
+  to write. It is now theirs, verbatim — see the table above. Do not tighten it.
+- the venue-reveal line is worded *their* way now, in the hero strip
+  (`.hero__debut-price`) and in the booking summary's Venue row. The reveal
+  panel's own label follows it to "Venue unveiling". The **instant** did not
+  change; only the words did.
 
 **`data-min` is a pricing guard, not a preference.** Vogue is priced per person
 below Elite's single-pass rate, so one Vogue pass would undercut one Elite pass
@@ -297,11 +310,36 @@ account. So the page says a reservation has been *sent* and will be *confirmed*,
 never that a seat is "booked" on submit. Keep that wording, and keep the note
 that confirmation comes from a human during desk hours.
 
-Two more things that must move together:
+Four more things that must move together:
 
 - `images/upi-qr.png` and `UPI_ID` at the top of `js/booking.js` are **the same
   account**. Change one without the other and the page shows a code and an ID
   that disagree — money to the wrong place.
+- **The QR the visitor scans is drawn on the page, not shipped as an image.**
+  Decoded, `images/upi-qr.png` reads `…&cu=INR` — payee, *no amount* — so
+  scanning it leaves the visitor to key the figure in. On 2 Sept 2026 the client
+  patched that by hand and sent two fixed QR images instead, `am=3998&tn=Vogue`
+  and `am=2499&tn=Elite`. Same account, and correct — for exactly those two
+  baskets, on exactly this side of 7 September. They are **not** in the repo and
+  must not be added: a picture cannot follow a running total, and after the
+  unveiling every one of them under-charges by more than half.
+
+  So section 04 of `js/booking.js` paints the code with `js/qr.js`, from the
+  **same `upi://` string** the "Open UPI App" button uses. One string, so the
+  scanned amount and the tapped amount cannot drift apart at any pass count or
+  either rate. The static image stays in the markup and is hidden only once a
+  live code has actually been painted — no canvas, or no `qr.js`, and the
+  visitor still gets the client's own working code.
+
+  `js/qr.js` is byte mode, level M, versions 1–12, and nothing else. **Round-trip
+  it if you edit it**: encode, render, decode with an independent decoder, and
+  check the string returns byte-for-byte including `am=`. A QR carrying the wrong
+  figure looks completely normal on screen.
+- **`pa=` keeps a literal `@`.** `encodeURIComponent` escapes it to `%40`, which
+  is valid URI syntax but which some UPI apps do not unescape before using the
+  VPA — turning the payee into `elevennelevenne-26%40idfcbank`. The client's own
+  working codes and the static `href` in `book.html` both use the bare `@`, and
+  the built intent now matches them.
 - The ticket **prices live in the markup**, as `data-price` on the tier radios in
   `book.html`, next to the figure the visitor reads. `booking.js` reads them and
   hardcodes no amount. Keep it that way; the saving line is computed from the
@@ -326,8 +364,8 @@ back with `--dump-dom`. Faster and far more certain than reading a screenshot,
 and it is how the ₹59,990 Indian-grouping case was verified.
 
 **The stylesheet and scripts are linked with a `?v=<date>` query, on both
-pages.** Bump every one of them when you change `css/style.css`, `js/script.js`
-or `js/booking.js` — in the same commit, and to the same string in both HTML
+pages.** Bump every one of them when you change `css/style.css`, `js/script.js`,
+`js/qr.js` or `js/booking.js` — in the same commit, and to the same string in both HTML
 files. Without it a phone that has the old stylesheet cached shows the new copy
 in the old styling and the change looks like it never deployed — this has already cost one
 round of "I don't see the changes".
@@ -426,8 +464,8 @@ emptiness, because an unticked box still carries its `value`.
 
 ## Conventions
 
-- `css/style.css`, `js/script.js` and `js/booking.js` are organised into
-  numbered sections listed at the top of each file. Add to the right section and
+- `css/style.css`, `js/script.js`, `js/qr.js` and `js/booking.js` are organised
+  into numbered sections listed at the top of each file. Add to the right section and
   keep the contents list accurate.
 - The booking page reuses site components rather than growing its own set:
   `.field` / `.field__input` / `.field__error` for inputs, `.check` for the

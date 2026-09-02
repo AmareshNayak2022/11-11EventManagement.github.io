@@ -103,6 +103,25 @@ person then matches the reference against the account and confirms the seat.
 That is why nothing on the page says a seat is "booked" on submit — it says the
 reservation has been *sent*, and will be *confirmed*. Keep that wording.
 
+**The payment QR is drawn in the browser, not shipped as an image.** The
+client's `images/upi-qr.png` carries the payee but no amount, so on 2 September
+2026 they sent two hand-made replacements instead — one fixed at ₹3,998 (two
+Vogue passes), one at ₹2,499 (one Elite). Right account, wrong answer for every
+other basket, and both stale from the moment standard pricing starts on 7
+September. So `js/qr.js` encodes the code on the page from the *same* `upi://`
+string the "Open UPI App" button uses. The scanned amount and the tapped amount
+cannot disagree. The static image stays in the markup and is only hidden once a
+live code has actually been painted, so a browser without canvas still gets the
+client's own working code.
+
+**If you touch `js/qr.js`, round-trip it before pushing.** Encode a payload,
+render it, decode it with an independent decoder, and check the string comes
+back byte-for-byte — including `am=`. A QR that encodes the wrong figure is
+money in the wrong place, and it looks perfectly normal on screen. The last
+verified run covered Elite ×1 and ×3 and Vogue ×2 and ×10, on both sides of the
+early-bird deadline, decoded both from the canvas and from a screenshot of the
+rendered page.
+
 Note also that `book.html` is the only place on the site where a **rupee figure
 is published**. That is not a reversal of the pricing decision: the agency's own
 project pricing is still unpublished everywhere, and a ticket that cannot be
@@ -169,7 +188,8 @@ event-management/
 │   └── style.css       All styling, organised into numbered sections
 ├── js/
 │   ├── script.js       Site-wide behaviour, in 8 numbered sections
-│   └── booking.js      The reservation form on book.html, in 6 sections
+│   ├── qr.js           QR encoder — draws the UPI code on book.html
+│   └── booking.js      The reservation form on book.html, in 7 sections
 ├── images/
 │   ├── logo.png        The circular brand badge — header, menu, footer, favicon
 │   ├── apple-touch-icon.png  The same mark, opaque and square, for iOS

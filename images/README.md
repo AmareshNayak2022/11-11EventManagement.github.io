@@ -109,6 +109,19 @@ Two things to preserve if you ever re-crop it: the white margin around the code
 (a scanner needs that quiet zone, and the page ground is cream, which is why the
 CSS puts the image on a white plate), and all three corner squares.
 
+**It is now the fallback, not the code most visitors see.** Decoded, this image
+reads `upi://pay?pa=…&pn=…&cu=INR` — payee, no amount — so a visitor scanning it
+has to key the figure in themselves. `js/qr.js` draws a code that does carry the
+amount, from the same `upi://` string as the "Open UPI App" button, and
+`js/booking.js` hides this image only once that has succeeded. With no canvas,
+or no `qr.js`, the visitor still gets this working code.
+
+On 2 September 2026 the client sent two hand-made QR images to plug the same
+gap — `am=3998&tn=Vogue` and `am=2499&tn=Elite`. **They are deliberately not in
+this folder.** Both are the right account, but each is fixed to one basket at
+one price, and both go stale on 7 September when standard pricing starts. A
+picture cannot follow a running total.
+
 ---
 
 ## 1c. The NOXUS campaign posters

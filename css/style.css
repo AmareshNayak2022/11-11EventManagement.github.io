@@ -3332,19 +3332,39 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   padding: clamp(1.5rem, 4vw, 2.5rem);
 }
 @media (min-width: 760px) {
-  .pay__body { grid-template-columns: 14rem minmax(0, 1fr); align-items: start; }
+  /* Must stay in step with the QR's own max-width below: the column IS the
+     code's size. Widened from 14rem when the live code arrived — it is a
+     49-module symbol where the static image was 37, so at 14rem it fell to
+     3.8 screen pixels per module. The 2rem comes out of the details column
+     beside it, which costs the payee name a second line. A code scanned off
+     a laptop screen is worth more than that line. */
+  .pay__body { grid-template-columns: 16rem minmax(0, 1fr); align-items: start; }
 }
 
 .pay__qr { text-align: center; }
 /* The white plate is not decoration: a QR scanner needs the quiet zone around
    the code to stay white, and the page ground is cream. */
-.pay__qr img {
+.pay__qr img,
+.pay__qr-canvas {
+  display: block;
   width: 100%;
-  max-width: 14rem;
+  max-width: 16rem;
   margin: 0 auto;
   padding: 0.75rem;
   background: #FFFFFF;
   border: 1px solid var(--hairline);
+}
+/* display:block above beats the [hidden] attribute's own display:none, and
+   booking.js hides the static image with `hidden` once it has drawn the live
+   code — without this the visitor sees two QR codes stacked. */
+.pay__qr img[hidden] { display: none; }
+/* The canvas is drawn at a whole number of pixels per module and then scaled
+   down by the width above. Smoothing that would soften every module edge, and
+   a scanner reads edges — so keep the nearest-neighbour hint. */
+.pay__qr-canvas {
+  height: auto;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
 }
 .pay__qr-cap {
   margin-top: 0.85rem;
