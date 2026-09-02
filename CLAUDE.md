@@ -196,6 +196,20 @@ sent the replacement copy. Both changes are in:
   panel's own label follows it to "Venue unveiling". The **instant** did not
   change; only the words did.
 
+**"Unveil", not "reveal", everywhere the visitor or a share preview can see
+it.** That word is the client's and the poster's. It was aligned across all
+twelve places on 2 Sept 2026 — both pages' `description`, `og:description` and
+`twitter:description`, the booking lede and its clock label, the reveal panel's
+label, warning and `data-countdown-done`, and the passes sub-note on both pages.
+The **one deliberate exception** is the `alt` text on `images/noxus-passes-*.jpg`,
+which transcribes what the poster itself says ("Venue reveal 7th September") and
+must keep matching the picture. Note the trap that hid three of these at first:
+the sentences wrap across source lines, so a line-based `grep` misses them —
+strip tags and comments and normalise whitespace before auditing.
+
+The class names (`.reveal-panel`, `data-reveal`) are untouched and should stay:
+`data-reveal` is the scroll-reveal hook and has nothing to do with the venue.
+
 **`data-min` is a pricing guard, not a preference.** Vogue is priced per person
 below Elite's single-pass rate, so one Vogue pass would undercut one Elite pass
 and nobody would ever buy Elite. Vogue's minimum of two is **confirmed by the
