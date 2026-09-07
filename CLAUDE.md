@@ -324,6 +324,43 @@ account. So the page says a reservation has been *sent* and will be *confirmed*,
 never that a seat is "booked" on submit. Keep that wording, and keep the note
 that confirmation comes from a human during desk hours.
 
+**Card payment is a Razorpay *payment link*, and it ships switched off.**
+`RAZORPAY` at the top of `js/booking.js` holds a public link URL and the
+whole-rupee amount that link is fixed at (`null` if the payer types the
+amount). `url: ''` is the off switch and is how it currently ships — no button,
+no hint, no change to the page. This does not reopen the "no gateway" rule
+above: a payment link is a URL, Razorpay takes the money, and a person still
+reconciles it by hand, so the *sent / confirmed* wording stands unchanged.
+
+Three rules on it, all of them for the same reason the QR is drawn rather than
+shipped:
+
+- **No Razorpay key belongs in this repo, ever** — not the `key_secret`, which
+  signs refunds and reads settlements, and not the publishable `key_id` either,
+  because a payment link needs neither. Every file here is public and
+  unminified on GitHub Pages, and there is no server to hold a secret. If a key
+  is ever pasted into a chat or a commit, treat it as burned and rotate it.
+- **The link is shown only while its fixed amount equals the total on screen.**
+  One link carries one amount; the page has many baskets, and every figure
+  roughly doubles at the early-bird deadline. A link fixed at ₹2,499 is right
+  for one Elite pass for a few hours and wrong for everything else — so it
+  hides itself rather than undercharging. Do not relax this into "show it
+  always and let the payer edit the amount"; that is only safe on a link that
+  is *declared* open (`amount: null`).
+- **The dashboard URL is not the payment link.** `…/app/paymentlinks/plink_…`
+  and anything with `/auth?redirecturl=` sit behind a login wall; a visitor
+  sent there sees the client's Razorpay sign-in screen, which reads as phishing
+  on a page that has just asked for money. `js/booking.js` refuses those
+  outright and warns in the console. The publishable link is the short one
+  behind **Copy link** in the dashboard.
+
+Everything the card route reveals is marked `data-rzp` in `book.html` — the
+button, the " or card" in the step-04 legend, and the `pay_` sentence in the
+step-05 hint — and they are toggled together, so the page can never advertise a
+route it is not offering. The reference field is now "Payment Reference Number"
+rather than "UPI Reference Number", because a Razorpay receipt gives a `pay_`
+id and not a UTR.
+
 Four more things that must move together:
 
 - `images/upi-qr.png` and `UPI_ID` at the top of `js/booking.js` are **the same

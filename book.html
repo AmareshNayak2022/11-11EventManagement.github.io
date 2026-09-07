@@ -40,7 +40,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <!-- Same cache-buster string as index.html. Bump both together, always. -->
-  <link rel="stylesheet" href="css/style.css?v=2026-09-02g">
+  <link rel="stylesheet" href="css/style.css?v=2026-09-07a">
 </head>
 
 <body>
@@ -351,7 +351,7 @@
             <fieldset class="book-step" id="pay">
               <legend class="book-step__legend">
                 <span class="book-step__num" aria-hidden="true">04</span>
-                Pay by UPI
+                Pay by UPI<span data-rzp hidden> or card</span>
               </legend>
 
               <div class="pay">
@@ -417,6 +417,35 @@
                     </p>
                   </div>
                 </div>
+
+                <!-- ---------- Card, netbanking and wallets ----------
+                     A Razorpay payment link, and it ships HIDDEN. js/booking.js
+                     reveals it only when RAZORPAY.url is filled in AND the
+                     link's own fixed amount still equals the total on screen.
+
+                     That second condition is the whole point. A payment link
+                     carries ONE amount, while this page has many baskets — one
+                     Elite is 2,499, three is 7,497, two Vogue is 3,998 — and at
+                     23:11 on 7 September every one of those figures roughly
+                     doubles as the standard rate takes over. A link fixed at an
+                     early-bird figure is right for one basket for a few hours
+                     and wrong after that, in the direction that costs the client
+                     money. So it hides itself rather than undercharging. Same
+                     reasoning as the QR above, which is drawn rather than
+                     shipped as a picture. See section 04b of js/booking.js. -->
+                <div class="pay__alt" data-rzp hidden>
+                  <p class="pay__alt-or"><span>or</span></p>
+                  <a class="btn btn--outline btn--block" id="rzp-link"
+                     href="#" target="_blank" rel="noopener">
+                    Pay by Card, Netbanking or Wallet
+                    <span data-book="total-short">&#8377;2,499</span>
+                  </a>
+                  <p class="pay__app-note">
+                    Opens Razorpay in a new tab. Come back to step 05 afterwards with
+                    the payment reference from your receipt &mdash; your pass is not held
+                    until the reservation reaches our desk.
+                  </p>
+                </div>
               </div>
             </fieldset>
 
@@ -428,12 +457,14 @@
               </legend>
 
               <div class="field">
-                <label class="field__label" for="utr">UPI Reference Number <span class="req" aria-hidden="true">*</span></label>
+                <label class="field__label" for="utr">Payment Reference Number <span class="req" aria-hidden="true">*</span></label>
                 <input class="field__input" type="text" id="utr" name="utr"
                        inputmode="numeric" placeholder="e.g. 123456789012"
                        autocomplete="off" aria-describedby="utr-hint utr-error" required>
                 <p class="field__hint" id="utr-hint">
-                  Your UPI app shows this on the receipt, as the UTR or transaction ID.
+                  Your UPI app shows this on the receipt, as the UTR or transaction ID.<span data-rzp hidden>
+                  If you paid by card, Razorpay emails you a Payment ID beginning
+                  <code>pay_</code>.</span>
                   It is how we find your payment.
                 </p>
                 <p class="field__error" id="utr-error" data-book-error="utr"></p>
@@ -444,7 +475,7 @@
                   <input type="checkbox" id="paid" name="paid" value="Payment made"
                          aria-describedby="paid-error" required>
                   <span class="check__box" aria-hidden="true"></span>
-                  <span>I have paid <span data-book="total-short">&#8377;2,499</span> to the UPI ID above.</span>
+                  <span>I have paid <span data-book="total-short">&#8377;2,499</span> for these passes.</span>
                 </label>
                 <p class="field__error" id="paid-error" data-book-error="paid"></p>
               </div>
@@ -656,10 +687,10 @@
 
   <!-- script.js first: it owns the header state and the countdown that this
        page shares with index.html. booking.js only knows about this form. -->
-  <script src="js/script.js?v=2026-09-02g"></script>
+  <script src="js/script.js?v=2026-09-07a"></script>
   <!-- qr.js only draws the payment code; it must load before booking.js,
        which calls it. Nothing else on the site uses it. -->
-  <script src="js/qr.js?v=2026-09-02g"></script>
-  <script src="js/booking.js?v=2026-09-02g"></script>
+  <script src="js/qr.js?v=2026-09-07a"></script>
+  <script src="js/booking.js?v=2026-09-07a"></script>
 </body>
 </html>

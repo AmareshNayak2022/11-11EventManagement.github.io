@@ -122,6 +122,35 @@ verified run covered Elite ×1 and ×3 and Vogue ×2 and ×10, on both sides of 
 early-bird deadline, decoded both from the canvas and from a screenshot of the
 rendered page.
 
+**Card and netbanking, when a payment link is supplied.** `RAZORPAY` at the top
+of `js/booking.js` holds two values and nothing else: `url`, the *public*
+payment link, and `amount`, the whole-rupee figure that link is fixed at (or
+`null` if the link asks the payer to type the amount). It ships with `url: ''`,
+which is the off switch — no button, no change to the page. There is still no
+gateway and no API call; a payment link is a URL, Razorpay takes the money, and
+a person reconciles it exactly as with UPI.
+
+**No Razorpay key ever belongs in this repo.** Every file here is served public
+and unminified from GitHub Pages. The `key_secret` can sign refunds and read
+settlements, and a payment link needs no key at all — which is why it was
+chosen over Checkout, and why there is no server here to hold one.
+
+The link is shown **only while its fixed amount still equals the total on
+screen**, and hides itself otherwise. A payment link carries one amount; this
+page has many baskets, and every figure roughly doubles when standard pricing
+starts. A link fixed at an early-bird figure is right for one basket for a few
+hours and wrong afterwards, in the direction that costs the client money — the
+same reasoning that made the QR drawn rather than shipped. Verified in headless
+Chrome across five configurations: unset, fixed-and-matching, fixed-and-not,
+open-amount, and a fixed link carried past the deadline.
+
+There is also a guard on the URL itself. The Razorpay dashboard's own
+`…/app/paymentlinks/plink_…` address is behind a login wall, and a visitor sent
+there lands on the client's Razorpay sign-in screen — which reads as a phishing
+page on a site that has just asked for money. `js/booking.js` refuses any URL
+of that shape, keeps the card option hidden, and says so in the console. Use
+the short public link behind **Copy link** in the dashboard.
+
 Note also that `book.html` is the only place on the site where a **rupee figure
 is published**. That is not a reversal of the pricing decision: the agency's own
 project pricing is still unpublished everywhere, and a ticket that cannot be
@@ -189,7 +218,7 @@ event-management/
 ├── js/
 │   ├── script.js       Site-wide behaviour, in 8 numbered sections
 │   ├── qr.js           QR encoder — draws the UPI code on book.html
-│   └── booking.js      The reservation form on book.html, in 7 sections
+│   └── booking.js      The reservation form on book.html, in 8 sections
 ├── images/
 │   ├── logo.png        The circular brand badge — header, menu, footer, favicon
 │   ├── apple-touch-icon.png  The same mark, opaque and square, for iOS

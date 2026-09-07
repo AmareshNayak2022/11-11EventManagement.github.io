@@ -11,6 +11,7 @@
    02. Helpers & money formatting
    03. Live totals, the seat stepper, and the UPI link
    04. The payment QR — drawn from that same link
+   04b. Card, netbanking & wallets — the Razorpay payment link
    05. Copy the UPI ID
    06. Validation
    07. Submit — hand the reservation to WhatsApp
@@ -55,6 +56,46 @@
      half hours early for everyone. The same instant drives three countdowns in
      the markup — keep all four in step. */
   var EARLY_BIRD_ENDS = '2026-09-07T23:11:00+05:30';
+
+  /* ------------------------------------------------------------------------
+     THE CARD ROUTE — A RAZORPAY PAYMENT LINK
+
+     There is still no gateway on this page and nothing here talks to an API.
+     A payment link is just a URL the visitor opens; Razorpay takes the money
+     and a person reconciles it afterwards, exactly as with UPI. Nothing on
+     this page may ever hold a Razorpay key_secret — every file here is served
+     public and unminified from GitHub Pages, and the secret can sign refunds
+     and read settlements. The publishable key_id is not needed either: a
+     payment link needs no code at all, which is precisely why it was chosen.
+
+     `url` — the PUBLIC link, the short one behind "Copy link" in the Razorpay
+     dashboard (rzp.io/… or razorpay.me/…). It is NOT the address the dashboard
+     shows in its own bar while you are looking at the link
+     (…/app/paymentlinks/plink_…, or anything with /auth?redirecturl=): that
+     one is behind a login wall, and a visitor sent there lands on the client's
+     own Razorpay sign-in screen. The guard below refuses those outright.
+
+     `amount` — the whole-rupee figure the link is fixed at, or null if the
+     link asks the payer to type the amount in themselves.
+
+     WHY THE AMOUNT IS DECLARED HERE, AND CHECKED ON EVERY REPAINT.
+     A payment link carries ONE amount. This page has many baskets — one Elite
+     is 2,499, three is 7,497, two Vogue is 3,998 — and at the instant above
+     every one of those figures roughly doubles as the standard rate takes
+     over. So a link fixed at an early-bird figure is correct for exactly one
+     basket, for a few hours, and wrong afterwards in the direction that costs
+     the client money. The button is therefore shown only while the declared
+     amount still equals the total on screen, and disappears the moment it does
+     not — leaving UPI, which follows any total. This is the same reasoning
+     that made section 04 draw the QR rather than ship a picture of one.
+
+     An empty `url` is the off switch: no button, no hint, no change to the
+     page at all. That is how it ships until the client supplies the link.
+     ---------------------------------------------------------------------- */
+  var RAZORPAY = {
+    url:    '',
+    amount: null
+  };
 
   /* ========================================================================
      02. HELPERS & MONEY
@@ -239,6 +280,9 @@
 
     // The scanned code and the tapped link are the same string, always.
     paintQr(intent, s);
+
+    // And the card route only while its one fixed amount still matches.
+    paintCard(s);
   }
 
   passInputs.forEach(function (input) {
@@ -341,6 +385,70 @@
       qrCap.textContent = 'Scan with any UPI app — ' + amount +
                           ' already filled in';
     }
+  }
+
+  /* ========================================================================
+     04b. CARD, NETBANKING & WALLETS — THE RAZORPAY PAYMENT LINK
+
+     Everything marked data-rzp in book.html is hidden in the markup and
+     revealed together here: the button itself, the " or card" in the step
+     legend, and the sentence in step 05 about Razorpay's pay_ reference. One
+     switch, so the page can never advertise a route it is not offering.
+
+     Two conditions, both of which must hold:
+
+       1. A link is configured, and it is a PUBLIC one. The dashboard's own
+          /app/paymentlinks/… address is behind a login wall — sending a
+          visitor there shows them the client's Razorpay sign-in screen, which
+          reads as a phishing page on a site that has just asked for money.
+          That URL is what arrived the first time this was set up, so it is
+          worth a real guard rather than a comment.
+
+       2. The link's fixed amount still equals the total on screen. See the
+          configuration block for why this is the important one.
+
+     Failing either leaves UPI alone and untouched, which is the working page.
+     ======================================================================== */
+  var rzpParts = $$('[data-rzp]');
+  var rzpLink  = $('#rzp-link');
+
+  // A dashboard URL is a configuration mistake, not a visitor's problem, so it
+  // is refused here and said out loud once for whoever is editing the file.
+  var ADMIN_URL = /\/app\/paymentlinks|[?&]redirecturl=|\/auth\?/i;
+  var rzpUsable = true;
+
+  if (RAZORPAY.url && ADMIN_URL.test(RAZORPAY.url)) {
+    rzpUsable = false;
+    if (window.console && console.warn) {
+      console.warn('[booking] RAZORPAY.url is a Razorpay dashboard address, ' +
+        'not a payment link. Use the short public link behind "Copy link" ' +
+        '(rzp.io/… or razorpay.me/…). The card option stays hidden.');
+    }
+  }
+
+  function paintCard(s) {
+    var declared = RAZORPAY.amount;
+    var matches  = (declared === null || declared === undefined)
+      ? true                                   // the payer types the amount
+      : Number(declared) === s.total;          // fixed link — must agree exactly
+
+    var show = Boolean(RAZORPAY.url) && rzpUsable && matches;
+
+    rzpParts.forEach(function (el) { el.hidden = !show; });
+    if (show && rzpLink) rzpLink.href = RAZORPAY.url;
+  }
+
+  /* Which route the visitor actually took, for the desk that has to find the
+     money afterwards — a UPI payment lands in the IDFC account and a card
+     payment lands in Razorpay, and they are reconciled in different places.
+     Set on the click, so it reports what was opened rather than claiming
+     anything about what was paid. */
+  var payMethod = { label: 'UPI', dest: UPI_ID };
+
+  if (rzpLink) {
+    rzpLink.addEventListener('click', function () {
+      payMethod = { label: 'Card / netbanking (Razorpay)', dest: 'Razorpay payment link' };
+    });
   }
 
   /* ========================================================================
@@ -497,8 +605,9 @@
       'Pass: '  + s.name + (s.early ? ' (early bird)' : ' (standard)'),
       'Passes: ' + s.seats + ' × ' + rupees(s.unit),
       'Total paid: ' + rupees(s.total),
-      'UPI reference: ' + $('#utr').value.trim(),
-      'Paid to: ' + UPI_ID,
+      'Paid by: ' + payMethod.label,
+      'Reference: ' + $('#utr').value.trim(),
+      'Paid to: ' + payMethod.dest,
       '',
       'Please confirm my pass.'
     ];
