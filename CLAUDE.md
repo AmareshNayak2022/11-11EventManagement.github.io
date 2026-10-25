@@ -5,10 +5,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 A marketing site for **11:11** (Elevenn Elevenn Archive Pvt Ltd, Bhubaneswar).
-Static, and two pages: `index.html`, the marketing page, and `book.html`, the
-reservation and payment page for the debut event. Shared `css/style.css` and
-`js/script.js`; `js/qr.js` and `js/booking.js` are loaded by `book.html` alone,
-in that order — `booking.js` calls the encoder in `qr.js`.
+Static, one page: `index.html`, with `css/style.css` and `js/script.js`.
+`book.html` was the NOXUS ticket page; since 25 Oct 2026 it is only a
+`noindex` meta-refresh to `/#past-events`, kept so the link handed out during
+the campaign does not 404. It loads no stylesheet and no script.
 
 **What the business is (confirmed by the client, August 2026):** an
 *experiential event agency* — premium and high-concept work only. It curates
@@ -28,10 +28,12 @@ The site has been rewritten around that positioning twice now — first away fro
 wedding planning, then away from general event management. If a future
 instruction seems to pull it back toward either, check the brief before acting.
 
-### The client is pre-launch on this initiative
+### The client has exactly one piece of real work to show
 
-This is the single most important constraint on the copy. There is **no past
-work to show, no client to quote, and no statistic to cite.** The section that
+This is the single most important constraint on the copy. There is **one
+past event on the site — the film in `#past-events` — and no client to quote
+and no statistic to cite.** See the past-events section below for what may and
+may not be said about that film. The section that
 was a portfolio is now `#atmosphere`, a stated reference board of stock
 photography, with a lede that says so in plain words. (The hero is the one
 image that is not stock: since 22 Aug 2026 it is the client's own crest
@@ -121,303 +123,84 @@ Two things about that table are worth knowing before you touch them:
   these rows.
   The **floating button and `DELIVERY.whatsapp` route to the concierge line
   only**, because brief Q37 makes that the desk that handles enquiries. So
-  `919938120356` now appears **five** times — contact row, floating button,
-  `DELIVERY`, plus `book.html`'s footer and `WHATSAPP` in `js/booking.js` — and
-  `919019526532` once. Changing which desk takes enquiries means changing all
-  five together. See the debut-event section below.
+  `919938120356` appears **three** times — contact row, floating button and
+  `DELIVERY` — and `919019526532` once. Changing which desk takes enquiries
+  means changing all three together.
 
 Still unconfirmed, and still listed in `CLIENT-BRIEF.md`: real past work and
 photography (Q19–26), the form's routing inbox (Q40), the remaining hosting
 and email items (Q45–51), and the legal and privacy items (Q52–56). The Pinterest link in the footer still points at `#`.
 
-## NOXUS — the debut event, added 1 September 2026
+## Past events — the showreel, added 25 October 2026
 
-The client's first event is **NOXUS**, on **Saturday 26 September 2026**. It is
-advertised in the `#debut` band under the hero — the section id and the
-`.debut*` class names predate the name and were left alone, but every visible
-word says Noxus — and sold on `book.html`.
+**NOXUS** (Saturday 26 September 2026) was the client's debut event, and it has
+happened. On 25 Oct 2026 the client asked for every NOXUS detail to come off
+the site, and it has: the announcement bar, the hero strip, the countdowns, the
+venue-reveal panel, the inclusions, the pass cards, the whole booking page with
+its UPI / QR / Razorpay payment flow, `js/booking.js`, `js/qr.js`, the posters,
+the payment QR and the teaser film. **Git history has all of it** (last commit
+with it: `73941cc`) — recover from there if a future ticketed event needs the
+same machinery, rather than rebuilding it. Do not reintroduce NOXUS copy.
 
-**Confirmed by the client: the two campaign posters supplied 1 Sept 2026, plus
-their earlier message. All of it is safe to use verbatim.**
+In its place, directly under the hero, is the `#past-events` band
+(`.showreel`, section 08b of the stylesheet; section 08 of `js/script.js`): the
+client's own **32-second vertical film** of a night 11:11 produced, there "for
+audiences to see how you conduct events".
 
-| Fact | Value |
-|------|-------|
-| Name | **NOXUS** |
-| Strapline | *The secret is worth the wait.* |
-| Positioning | *Odisha's Biggest Sundowner Drunch Party* — "drunch" is theirs, not a typo |
-| Other lines | *The city is about to feel different.* / *The best sundowner gathering ever.* / *A State of Mind.* / *Miss it, regret it.* |
-| Date | Saturday 26 September 2026 |
-| **Venue** | **Deliberately secret.** Revealed **7 September 2026, 11:11 PM** |
-| Passes | **Reserve** (elite families, corporates & groups — invitation only, DM to apply) · **Vogue** (powerful couples) · **Elite** (individual trendsetters) |
-| Early bird | Live for Vogue & Elite, running **until the venue unveiling**; standard pricing after |
-| **Elite** | individual — ₹5,499 → **₹2,499** |
-| **Vogue** | couples, **priced per person** — ₹4,999 → **₹1,999 each**, minimum 2 |
-| **Reserve** | invitation only, **minimum 3**, DM 9938120356 to apply |
-| Inclusions | Rich culinary experience (no limits) · Global premium beverages (no limits) · An elegant sonic affair · A sundowner like never before · Elite gathering · Impeccable service & ambience |
-| UPI ID | `elevennelevenne-26@idfcbank` — IDFC FIRST Bank, Elevenn Elevenn Archive Private Limited |
-| Payment QR | `images/upi-qr.png`, a crop of the client's own payment slip — payee only, **no amount**; now the fallback behind the live code `js/qr.js` draws |
-| Posters | `images/noxus-passes-*.jpg` (booking page); `images/noxus-teaser-*.jpg` is now the `<video>` fallback |
-| Film | `videos/noxus-teaser.mp4` — 20s vertical reel, the moving version of the teaser poster. Poster frame `images/noxus-video-poster.jpg` was decoded from frame one of the film itself |
-| Band lede | *NOXUS is a meticulously curated social experience where elegance, indulgence and connection come together — creating an evening designed to be experienced, not simply attended.* (client, 2 Sept 2026) |
-| Unveiling, as worded | *Venue Unveiling on 7th Sep'26 at 11:11 PM* (client, 2 Sept 2026) |
+**Only what the film itself shows is written beside it**:
 
-### The one deadline that runs the whole campaign
+| Fact | Source |
+|------|--------|
+| Venue: **Vivanta Bhubaneswar, DN Square** | the film's end card and the stage backdrop |
+| Credit: **Film by Zenvy Studios** | the film's end card |
 
-`2026-09-07T23:11:00+05:30` does two jobs at once, because the poster says the
-early-bird offers run "until the venue unveiling" and the unveiling is 7
-September at 11:11 PM. That single instant closes the early-bird window and
-opens the venue. It appears in **four** places and they must agree:
+The film does **not** name the event, its date, its artists or its headcount,
+so none of those is on the page — not even "NOXUS", although it may well be
+that night. Q70–Q74 in `CLIENT-BRIEF.md` ask the client. Until they answer, do
+not caption it with an event name, a date, an artist (a DJ's name is visible on
+a screen in it) or a crowd figure.
 
-- the announcement bar's countdown (`index.html`)
-- the venue-reveal panel's countdown (`index.html`)
-- the booking page's countdown (`book.html`)
-- `EARLY_BIRD_ENDS` in `js/booking.js` — the one that actually switches the
-  price. It is a constant rather than a data attribute because a single deadline
-  shared by both passes belongs in one place; the per-pass **prices** stay in
-  the markup.
+The film's files:
 
-**The rate is not a choice the visitor makes.** `js/booking.js` compares the
-clock against `EARLY_BIRD_ENDS` and reads whichever of `data-price-early` /
-`data-price-standard` applies, repainting **every** pass card, the summary, the
-pay panel and the UPI link together — every card, not just the selected one, or
-a visitor comparing the two after the deadline would see one live figure beside
-one stale advertisement. It re-checks once a minute, so a tab left open across
-the evening of the 7th switches under the visitor rather than letting them pay
-yesterday's rate. A malformed date falls back to the **standard** price, never
-the cheap one.
+- `videos/vivanta-night.mp4` — a 720x1280 re-encode (H.264 CRF 30, AAC 112k,
+  `+faststart`, ~6.4 MB) of the client's 48 MB master. The command is in
+  `images/README.md`. **Never commit the master**; Pages would serve all of it.
+- `images/vivanta-film-poster.jpg` — the poster frame *and* the `<img>`
+  fallback, decoded from the film at 20.5 s (frame one is a white flash).
 
-On 2 September 2026 the client marked up two screenshots of the live site and
-sent the replacement copy. Both changes are in:
+The player rules carried over from the NOXUS film and still hold:
 
-- the `#debut` band's lede was the one line on that section that had been ours
-  to write. It is now theirs, verbatim — see the table above. Do not tighten it.
-- the venue-reveal line is worded *their* way now, in the hero strip
-  (`.hero__debut-price`) and in the booking summary's Venue row. The reveal
-  panel's own label follows it to "Venue unveiling". The **instant** did not
-  change; only the words did.
+- **`.film-play` covers the frame whenever the film is not running.** A paused
+  film shows only a still, and a still looks like a photograph — the client
+  once could not find the old film for exactly this reason. Do not remove it.
+- **It does not load or autoplay on page load** (`preload="none"`). An
+  IntersectionObserver starts it when it scrolls into view and pauses it when
+  it leaves. It declines to autoplay under `prefers-reduced-motion` or Data
+  Saver, and swallows the autoplay-policy rejection.
+- **`controls` sits in the markup and JavaScript removes it**, never the
+  reverse, so a dead script leaves native controls.
+- **The pause button is a WCAG 2.2.2 requirement**: the film loops and runs
+  past five seconds. *Sound on* exists because this film has a soundtrack;
+  it starts muted.
+- On phones the film leads the band (`order: -1`).
 
-**"Unveil", not "reveal", everywhere the visitor or a share preview can see
-it.** That word is the client's and the poster's. It was aligned across all
-twelve places on 2 Sept 2026 — both pages' `description`, `og:description` and
-`twitter:description`, the booking lede and its clock label, the reveal panel's
-label, warning and `data-countdown-done`, and the passes sub-note on both pages.
-The **one deliberate exception** is the `alt` text on `images/noxus-passes-*.jpg`,
-which transcribes what the poster itself says ("Venue reveal 7th September") and
-must keep matching the picture. Note the trap that hid three of these at first:
-the sentences wrap across source lines, so a line-based `grep` misses them —
-strip tags and comments and normalise whitespace before auditing.
+The hero's gold button is **Start a Brief** again, with *Watch the Film* beside
+it as the outline button, and the scroll cue points at `#past-events`.
 
-The class names (`.reveal-panel`, `data-reveal`) are untouched and should stay:
-`data-reveal` is the scroll-reveal hook and has nothing to do with the venue.
-
-**`data-min` is a pricing guard, not a preference.** Vogue is priced per person
-below Elite's single-pass rate, so one Vogue pass would undercut one Elite pass
-and nobody would ever buy Elite. Vogue's minimum of two is **confirmed by the
-client** (1 Sept 2026): it was read from "for powerful couples" and "each",
-put to them, and agreed. Selecting Vogue lifts the quantity to 2 if it is lower,
-and the validator refuses less. Treat it as a commercial rule rather than a
-default — relaxing it makes Elite unsellable.
-
-### Still not confirmed — do not invent
-
-The **doors time**, the **lineup**, the **capacity**, and the **refund /
-transfer policy**. Q62–Q66 in `CLIENT-BRIEF.md`; the refund policy is the urgent
-one now that money is arriving.
-
-- **Prices are settled** (client, evening of 1 Sept) and supersede the
-  ₹2,999/₹5,999 given earlier that day, which predated the three-pass structure
-  and were briefly live against Elite. If you find those two figures anywhere,
-  they are wrong.
-- The **event** countdown still targets midnight opening the 26th, because
-  "sundowner" implies an evening and implying is not confirming.
-- The `Event` JSON-LD stays **commented out** in `index.html`: `location` would
-  still be a guess, and the venue being secret is the point of the campaign.
-
-Prices **do** now appear on the landing page's pass cards, because the client
-published them in that struck-through form themselves. They still appear nowhere
-else: the agency's own project pricing stays unpublished, and the posters
-deliberately carry no figures at all.
-
-### Where the event appears, and why it appears there
-
-The client's first reaction to the band alone was that the event "is not getting
-highlighted" — correctly, because the band sits below a 100vh hero. On the first
-screen the event was a small button and a nav link, while the one loud thing on
-the page pointed at the enquiry form. So it now appears in three places, in
-descending permanence:
-
-1. **The announcement bar** (`.announce`, top of `index.html`) — gold, the whole
-   strip is one link, and it carries the **early-bird deadline** rather than the
-   event date: the event is weeks away and nobody hurries for that, while the
-   rate dies on 7 September. This is the real fix, and it is why the header's
-   gold *Tickets* button was **removed**: it was a second gold thing doing a
-   worse version of the same job.
-2. **The hero strip** (`.hero__debut`) — name, date and the venue-reveal moment
-   directly above the buttons, and for the length of the campaign the hero's
-   gold goes to *Reserve Your Pass* while *Start a Brief* steps back to an
-   outline.
-3. **The `#debut` band** — the full pitch: the NOXUS wordmark, the client's
-   **film**, the event countdown, the venue-reveal panel, the six inclusions and
-   the three passes.
-
-**The film needs its big play control.** Its poster frame is a still of the
-campaign poster, so a paused film and a picture of the poster are the same
-image — the client could not find the video on the live site for exactly this
-reason. `.film-play` covers the frame whenever the film is not running, which
-includes the case where the browser refuses to autoplay. Do not remove it, and
-do not swap the poster for something that makes the film look more like a
-picture. On phones the film also leads the band (`order: -1`): stacked, it was
-landing two screens down, after the wordmark, lede, date, countdown and button.
-
-The film (section 09 of `js/script.js`) has three more rules worth keeping. It
-**does not autoplay on load** — an IntersectionObserver starts it when it
-scrolls into view and pauses it when it leaves, so a visitor who never reaches
-the band never pulls 3.7 MB. `controls` sits in the **markup** and JavaScript
-removes it, never the reverse, so a dead script leaves native controls rather
-than an unstartable still. And the pause button is a **WCAG 2.2.2 requirement**,
-not decoration: the film loops and runs past five seconds. It also declines to
-autoplay under `prefers-reduced-motion` or Data Saver, and swallows the
-autoplay-policy rejection rather than logging an error on a page that is
-behaving correctly.
-
-**Reverting after the night** means deleting the `<a class="announce">`, the
-`.hero__debut` paragraph, the `#debut` section and the nav item, and swapping
-the two hero button classes back. The comments in `index.html` say so at each
-site.
-
-⚠️ **`--nav-h` and `--header-h` are not the same token, and must not be merged.**
-`js/script.js` measures the whole `<header>` — bar included — into `--header-h`,
-which the hero padding and every `scroll-margin-top` depend on. The nav row's
-own `min-height` uses `--nav-h`. Point the row at `--header-h` and it grows by
-the bar's height on every measurement pass, compounding on each resize.
-
-Adding the bar and the strip cost about 110px of first screen, which pushed the
-hero buttons off a 1440x900 viewport. That was paid back out of spacing and an
-8% trim to the `--fs-h1` ceiling — **not** out of the client's hero copy, and
-not by shrinking the reserve button, which would have defeated the point.
-
-**Not confirmed, and written nowhere on the site. Do not invent any of them:**
-the venue, the doors time, the lineup, the seat capacity, the date the
-early-bird price closes, and the refund/transfer policy. They are Q61–Q66 in
-`CLIENT-BRIEF.md`. Two consequences already built in:
-
-- Both countdowns target **midnight opening the 26th**, not a start time,
-  written as an ISO instant with an explicit `+05:30` offset. A bare
-  `2026-09-26` parses as midnight *UTC* and would be five and a half hours out
-  for everyone. When the doors time lands, change the `data-countdown`
-  attribute in `index.html` **and** `book.html` — nothing in the JS.
-- The `Event` JSON-LD is written out but **commented out** in `index.html`,
-  because `startDate` and `location` would both be guesses and a guessed venue
-  goes straight to Google. Same reasoning as the omitted `url`.
-
-**`book.html` is the one place a rupee figure is published**, and it does not
-reopen the pricing decision above: the *agency's* project pricing is still unpublished
-everywhere, and a ticket nobody can buy without knowing its price is a different
-thing. Do not take it as licence to re-add figures to the packages copy, the
-enquiry form, the JSON-LD — or the landing page.
-
-**There is no payment gateway, and the page must never imply one.** The visitor
-pays the UPI ID by QR or `upi://` intent, enters the reference from their
-receipt, and `js/booking.js` hands the reservation to the concierge desk on
-WhatsApp exactly as the enquiry form does. A person then matches it against the
-account. So the page says a reservation has been *sent* and will be *confirmed*,
-never that a seat is "booked" on submit. Keep that wording, and keep the note
-that confirmation comes from a human during desk hours.
-
-**Card payment is a Razorpay *payment link*, and it ships switched off.**
-`RAZORPAY` at the top of `js/booking.js` holds a public link URL and the
-whole-rupee amount that link is fixed at (`null` if the payer types the
-amount). `url: ''` is the off switch and is how it currently ships — no button,
-no hint, no change to the page. This does not reopen the "no gateway" rule
-above: a payment link is a URL, Razorpay takes the money, and a person still
-reconciles it by hand, so the *sent / confirmed* wording stands unchanged.
-
-Three rules on it, all of them for the same reason the QR is drawn rather than
-shipped:
-
-- **No Razorpay key belongs in this repo, ever** — not the `key_secret`, which
-  signs refunds and reads settlements, and not the publishable `key_id` either,
-  because a payment link needs neither. Every file here is public and
-  unminified on GitHub Pages, and there is no server to hold a secret. If a key
-  is ever pasted into a chat or a commit, treat it as burned and rotate it.
-- **The link is shown only while its fixed amount equals the total on screen.**
-  One link carries one amount; the page has many baskets, and every figure
-  roughly doubles at the early-bird deadline. A link fixed at ₹2,499 is right
-  for one Elite pass for a few hours and wrong for everything else — so it
-  hides itself rather than undercharging. Do not relax this into "show it
-  always and let the payer edit the amount"; that is only safe on a link that
-  is *declared* open (`amount: null`).
-- **The dashboard URL is not the payment link.** `…/app/paymentlinks/plink_…`
-  and anything with `/auth?redirecturl=` sit behind a login wall; a visitor
-  sent there sees the client's Razorpay sign-in screen, which reads as phishing
-  on a page that has just asked for money. `js/booking.js` refuses those
-  outright and warns in the console. The publishable link is the short one
-  behind **Copy link** in the dashboard.
-
-Everything the card route reveals is marked `data-rzp` in `book.html` — the
-button, the " or card" in the step-04 legend, and the `pay_` sentence in the
-step-05 hint — and they are toggled together, so the page can never advertise a
-route it is not offering. The reference field is now "Payment Reference Number"
-rather than "UPI Reference Number", because a Razorpay receipt gives a `pay_`
-id and not a UTR.
-
-Four more things that must move together:
-
-- `images/upi-qr.png` and `UPI_ID` at the top of `js/booking.js` are **the same
-  account**. Change one without the other and the page shows a code and an ID
-  that disagree — money to the wrong place.
-- **The QR the visitor scans is drawn on the page, not shipped as an image.**
-  Decoded, `images/upi-qr.png` reads `…&cu=INR` — payee, *no amount* — so
-  scanning it leaves the visitor to key the figure in. On 2 Sept 2026 the client
-  patched that by hand and sent two fixed QR images instead, `am=3998&tn=Vogue`
-  and `am=2499&tn=Elite`. Same account, and correct — for exactly those two
-  baskets, on exactly this side of 7 September. They are **not** in the repo and
-  must not be added: a picture cannot follow a running total, and after the
-  unveiling every one of them under-charges by more than half.
-
-  So section 04 of `js/booking.js` paints the code with `js/qr.js`, from the
-  **same `upi://` string** the "Open UPI App" button uses. One string, so the
-  scanned amount and the tapped amount cannot drift apart at any pass count or
-  either rate. The static image stays in the markup and is hidden only once a
-  live code has actually been painted — no canvas, or no `qr.js`, and the
-  visitor still gets the client's own working code.
-
-  `js/qr.js` is byte mode, level M, versions 1–12, and nothing else. **Round-trip
-  it if you edit it**: encode, render, decode with an independent decoder, and
-  check the string returns byte-for-byte including `am=`. A QR carrying the wrong
-  figure looks completely normal on screen.
-- **`pa=` keeps a literal `@`.** `encodeURIComponent` escapes it to `%40`, which
-  is valid URI syntax but which some UPI apps do not unescape before using the
-  VPA — turning the payee into `elevennelevenne-26%40idfcbank`. The client's own
-  working codes and the static `href` in `book.html` both use the bare `@`, and
-  the built intent now matches them.
-- The ticket **prices live in the markup**, as `data-price` on the tier radios in
-  `book.html`, next to the figure the visitor reads. `booking.js` reads them and
-  hardcodes no amount. Keep it that way; the saving line is computed from the
-  two tiers rather than from a hardcoded ₹3,000, so it survives a price change.
-
-The concierge number `919938120356` now appears in **five** places, not three:
-the contact row, the floating button and `DELIVERY` in `js/script.js`, plus
-`book.html`'s footer and `WHATSAPP` in `js/booking.js`. Changing which desk takes
-enquiries means changing all five.
+⚠️ **`--nav-h` and `--header-h` are still not the same token, and must not be
+merged**, even though without the announcement bar they now measure the same.
+`js/script.js` measures the whole `<header>` into `--header-h`; the nav row's
+own `min-height` uses `--nav-h`. Point the row at `--header-h` and it grows on
+every measurement pass the moment anything else is added to the header.
 
 ## Running and verifying
 
 No build step, no `package.json`, nothing to install. Open `index.html`
 directly — `file://` works, there are no modules or fetch calls at load.
-`book.html` works the same way; its `upi://` button is the one thing that does
-nothing on a desktop, because it needs a UPI app to resolve.
 
-To check the booking page's arithmetic rather than its looks, drive it: load a
-copy in headless Chrome with a script that flips the tier, sets a seat count,
-writes the resulting total and the UPI `am=` into `document.title`, then read it
-back with `--dump-dom`. Faster and far more certain than reading a screenshot,
-and it is how the ₹59,990 Indian-grouping case was verified.
-
-**The stylesheet and scripts are linked with a `?v=<date>` query, on both
-pages.** Bump every one of them when you change `css/style.css`, `js/script.js`,
-`js/qr.js` or `js/booking.js` — in the same commit, and to the same string in both HTML
-files. Without it a phone that has the old stylesheet cached shows the new copy
+**The stylesheet and script are linked with a `?v=<date>` query.** Bump both
+when you change `css/style.css` or `js/script.js` — in the same commit, and to
+the same string. Without it a phone that has the old stylesheet cached shows the new copy
 in the old styling and the change looks like it never deployed — this has already cost one
 round of "I don't see the changes".
 
@@ -515,14 +298,9 @@ emptiness, because an unticked box still carries its `value`.
 
 ## Conventions
 
-- `css/style.css`, `js/script.js`, `js/qr.js` and `js/booking.js` are organised
+- `css/style.css` and `js/script.js` are organised
   into numbered sections listed at the top of each file. Add to the right section and
   keep the contents list accurate.
-- The booking page reuses site components rather than growing its own set:
-  `.field` / `.field__input` / `.field__error` for inputs, `.check` for the
-  confirmation tick, `.btn` throughout, and `.process` / `.step` for the "what
-  happens next" band — `.book-next` is named alongside `.process` in section 11
-  rather than restating the dark ground. Keep adding that way.
 - Comments in this project explain *why*, especially where a value was measured
   or a trap avoided. Match that when adding code.
 - Vanilla only — no framework, no build step, no npm. This is a hard constraint:

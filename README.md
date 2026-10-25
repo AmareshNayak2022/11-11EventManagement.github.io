@@ -55,106 +55,33 @@ are still outstanding:
 4. **The Pinterest link in the footer still points at `#`.** Give it a real
    profile URL or delete the whole `<li>`.
 
-### NOXUS — the debut event (added 1 September 2026)
+### Past events — the showreel (added 25 October 2026)
 
-The landing page advertises **NOXUS**, the company's first event: *Odisha's
-biggest sundowner drunch party*, **Saturday 26 September 2026**, presented by
-11:11. `book.html` takes the reservation and the payment.
+**NOXUS** (26 September 2026) has happened, and everything that sold it is gone:
+the announcement bar, the hero strip, the countdowns, the pass cards, the UPI /
+QR / Razorpay payment page, `js/booking.js`, `js/qr.js` and the campaign
+artwork. Git history has all of it if a future event needs the same machinery.
 
-The campaign runs on one confirmed deadline. **The venue is deliberately secret
-and is revealed on 7 September at 11:11 PM — and the early-bird rate ends at
-exactly that instant.** So the rate is not something the visitor chooses: the
-page checks the clock and charges the early-bird or the standard rate
-accordingly, re-checking every minute so a tab left open overnight cannot pay
-yesterday's price. That instant appears in four places (three countdowns plus
-`EARLY_BIRD_ENDS` in `js/booking.js`) and they must always agree.
+In its place, directly under the hero, is `#past-events`: the client's own
+32-second vertical film of a night 11:11 produced, with a play control, a
+pause button (a WCAG 2.2.2 requirement — it loops past five seconds) and a
+sound toggle. It is the first real work the site can show.
 
-Three passes:
+Everything written beside it is read off the film itself — the venue
+(**Vivanta Bhubaneswar, DN Square**, on its end card and stage backdrop) and the
+credit (**Zenvy Studios**). The film does not name the event, its date, its
+artists or its headcount, so **none of those is on the page**. Do not add them
+without the client confirming them.
 
-| Pass | For | Early bird | Standard |
-|------|-----|-----------|----------|
-| **Reserve** | The elites, corporates & groups, **min. 3** | Invitation only — DM to apply | — |
-| **Vogue** | Powerful couples, **per person, min. 2** | **₹1,999 each** | ₹4,999 each |
-| **Elite** | Individual trendsetters | **₹2,499** | ₹5,499 |
+`videos/vivanta-night.mp4` is a re-encode of the client's 48 MB master
+(`vivanta V5.mp4`, 1080x1920, 12 Mb/s) to 720x1280, H.264 CRF 30, AAC 112k,
+`+faststart` — about 6.4 MB. It loads nothing until it scrolls into view
+(`preload="none"`, then an IntersectionObserver), and does not autoplay under
+reduced motion or Data Saver.
 
-Vogue and Elite are bookable on the page; Reserve routes to the concierge desk
-on WhatsApp. Vogue's minimum of two is not decoration and not a guess — it is
-priced per person *below* Elite, so without a floor a single Vogue pass would
-undercut a single Elite one. The client confirmed the minimum on 1 September.
-
-Still **unconfirmed and deliberately unwritten** — do not fill these in from
-guesswork:
-
-| Missing | Why it matters |
-|---------|----------------|
-| The doors time | The event countdown targets **midnight opening the 26th**, not a start time. "Sundowner" implies an evening, but implying is not confirming. Change the `data-countdown` in `index.html` and `book.html` together. |
-| The lineup | The whole positioning is scouting breakout artists. A named act is the strongest thing that could still be added to the advert. |
-| The capacity | The form caps self-service at ten passes. That is a sanity limit, not a stated capacity — beyond it, it becomes a Reserve enquiry. |
-| **The refund and transfer policy** | Nothing on the page states one, because nothing has been agreed. This should exist in writing before real money arrives. |
-
-**No prices appear on the landing page**, on purpose: the client's posters
-publish none — withholding is the marketing device — and only one pass's figures
-are confirmed.
-
-Payment is **UPI, reconciled by hand** — there is no gateway. The visitor pays
-`elevennelevenne-26@idfcbank` (IDFC FIRST Bank), enters the UPI reference from
-their receipt, and the reservation reaches the concierge desk on WhatsApp. A
-person then matches the reference against the account and confirms the seat.
-That is why nothing on the page says a seat is "booked" on submit — it says the
-reservation has been *sent*, and will be *confirmed*. Keep that wording.
-
-**The payment QR is drawn in the browser, not shipped as an image.** The
-client's `images/upi-qr.png` carries the payee but no amount, so on 2 September
-2026 they sent two hand-made replacements instead — one fixed at ₹3,998 (two
-Vogue passes), one at ₹2,499 (one Elite). Right account, wrong answer for every
-other basket, and both stale from the moment standard pricing starts on 7
-September. So `js/qr.js` encodes the code on the page from the *same* `upi://`
-string the "Open UPI App" button uses. The scanned amount and the tapped amount
-cannot disagree. The static image stays in the markup and is only hidden once a
-live code has actually been painted, so a browser without canvas still gets the
-client's own working code.
-
-**If you touch `js/qr.js`, round-trip it before pushing.** Encode a payload,
-render it, decode it with an independent decoder, and check the string comes
-back byte-for-byte — including `am=`. A QR that encodes the wrong figure is
-money in the wrong place, and it looks perfectly normal on screen. The last
-verified run covered Elite ×1 and ×3 and Vogue ×2 and ×10, on both sides of the
-early-bird deadline, decoded both from the canvas and from a screenshot of the
-rendered page.
-
-**Card and netbanking, when a payment link is supplied.** `RAZORPAY` at the top
-of `js/booking.js` holds two values and nothing else: `url`, the *public*
-payment link, and `amount`, the whole-rupee figure that link is fixed at (or
-`null` if the link asks the payer to type the amount). It ships with `url: ''`,
-which is the off switch — no button, no change to the page. There is still no
-gateway and no API call; a payment link is a URL, Razorpay takes the money, and
-a person reconciles it exactly as with UPI.
-
-**No Razorpay key ever belongs in this repo.** Every file here is served public
-and unminified from GitHub Pages. The `key_secret` can sign refunds and read
-settlements, and a payment link needs no key at all — which is why it was
-chosen over Checkout, and why there is no server here to hold one.
-
-The link is shown **only while its fixed amount still equals the total on
-screen**, and hides itself otherwise. A payment link carries one amount; this
-page has many baskets, and every figure roughly doubles when standard pricing
-starts. A link fixed at an early-bird figure is right for one basket for a few
-hours and wrong afterwards, in the direction that costs the client money — the
-same reasoning that made the QR drawn rather than shipped. Verified in headless
-Chrome across five configurations: unset, fixed-and-matching, fixed-and-not,
-open-amount, and a fixed link carried past the deadline.
-
-There is also a guard on the URL itself. The Razorpay dashboard's own
-`…/app/paymentlinks/plink_…` address is behind a login wall, and a visitor sent
-there lands on the client's Razorpay sign-in screen — which reads as a phishing
-page on a site that has just asked for money. `js/booking.js` refuses any URL
-of that shape, keeps the card option hidden, and says so in the console. Use
-the short public link behind **Copy link** in the dashboard.
-
-Note also that `book.html` is the only place on the site where a **rupee figure
-is published**. That is not a reversal of the pricing decision: the agency's own
-project pricing is still unpublished everywhere, and a ticket that cannot be
-bought without its price is a different thing.
+`book.html` survives only as a redirect to `/#past-events`, because the ticket
+link was handed out during the campaign and should not become a 404. It is
+`noindex`, with the home page as its canonical.
 
 Two smaller open items:
 
@@ -212,17 +139,17 @@ jQuery, npm, Maven, Java, Spring Boot, or any bundler. There is no
 event-management/
 ├── .idea/              IntelliJ project settings (untouched)
 ├── index.html          The marketing page — all markup and the image URLs
-├── book.html           The debut event's reservation and UPI payment page
+├── book.html           Retired NOXUS ticket page — now a redirect to /#past-events
 ├── css/
 │   └── style.css       All styling, organised into numbered sections
 ├── js/
-│   ├── script.js       Site-wide behaviour, in 8 numbered sections
-│   ├── qr.js           QR encoder — draws the UPI code on book.html
-│   └── booking.js      The reservation form on book.html, in 8 sections
+│   └── script.js       Site-wide behaviour, in 8 numbered sections
+├── videos/
+│   └── vivanta-night.mp4  The past-event film, 720x1280, ~6.4 MB
 ├── images/
 │   ├── logo.png        The circular brand badge — header, menu, footer, favicon
 │   ├── apple-touch-icon.png  The same mark, opaque and square, for iOS
-│   ├── upi-qr.png      The company's UPI payment QR, shown on book.html
+│   ├── vivanta-film-poster.jpg  Poster frame of the event film (frame at 20.5 s)
 │   └── README.md       Logo notes and how to swap in real photography
 ├── CLAUDE.md           Instructions for Claude Code
 ├── CLIENT-BRIEF.md     The 60 open questions — source for the PDF and .docx
@@ -369,36 +296,21 @@ safe there (9.5:1), but one word should not be two different golds on one page.
 So: `--gold-bright` for gold *words* over imagery, `--gold-deep` for gold words
 on cream, and the brand gold itself for dark solids and hairlines.
 
-**The debut band and the booking page** added a fourth context: solid navy with
-no photograph behind it, which is the most forgiving ground on the site.
-`--gold-bright` is used there as an ordinary text colour — the countdown
-numerals, the eyebrows, the early-bird price, the amount to pay — because it
-measures **11.5:1** on `--navy`. Every ratio those two additions rely on,
-measured with the same formula:
+**The past-events band** is the fourth context: solid navy with no
+photograph behind it, the most forgiving ground on the site. `--gold-bright` is
+an ordinary text colour there because it measures **11.5:1** on `--navy`:
 
 | Where | Colours | Ratio |
 |-------|---------|-------|
-| Countdown numerals, debut/booking eyebrows, pay amount | `--gold-bright` on `--navy` | 11.5:1 |
-| Debut band and booking-head body copy | paper at 78% on `--navy` | 11.2:1 |
-| Early-bird card ground (gold at 16% over navy, `#2A2A2A`) | `--paper` on it | 13.9:1 |
-| …the same ground | `--gold-bright` on it | 8.8:1 |
-| "Save ₹3,000" pill, both pages | `--navy` on `--gold` | 8.9:1 |
-| Tier cards, step numerals, summary rail | `--heading` on `--surface` | 18.7:1 |
-| Tier card notes | `--text` on `--surface` | 8.8:1 |
-| Tier flags, summary labels, QR caption | `--muted` on `--surface` | 6.3:1 |
-| The payment caution, the saving line, the step numerals | `--gold-deep` on `--surface` | 5.7:1 |
-
-The debut event is deliberately loud in three places: the gold **announcement
-bar** pinned above the header on every screen (the whole strip is one link, and
-navy on its gradient measures 7.6:1 at the darkest stop), the **hero strip**
-above the buttons (`#0B1226` ground so its date and price never depend on the
-photograph behind them — `--paper` 18.0:1, `--gold-bright` 11.4:1), and the
-`#debut` band itself. The header's gold *Tickets* button was removed when the
-bar arrived; two gold things in 90px of screen is no primary action at all.
+| Past-events eyebrow | `--gold-bright` on `--navy` | 11.5:1 |
+| Past-events body copy | paper at 78% on `--navy` | 11.1:1 |
+| Venue label | paper at 60% on `--navy` | 6.9:1 |
+| Film caption | paper at 55% on `--navy` | 6.0:1 |
+| Film controls | `--paper` on the navy-deep plate at 72%, over a pure-white frame (worst case) | 8.2:1 |
 
 The one trap worth naming: the header rule `.site-header .btn { color: var(--paper) }`
-is more specific than `.btn--gold`'s own foreground, so the gold *Tickets*
-button in the header would have been repainted cream on gold — about **1.6:1**,
+is more specific than `.btn--gold`'s own foreground, so a gold button in the
+header would have been repainted cream on gold — about **1.6:1**,
 unreadable. Section 06 carries an explicit override putting it back to navy in
 every header state. Any future gold button in the header needs the same.
 

@@ -8,12 +8,8 @@
        visitors whose JavaScript fails to load. Must run before first paint. -->
   <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
 
-  <!-- The campaign leads the title while it runs: NOXUS is what people will
-       search for and paste into WhatsApp. Revert to the agency line
-       ("11:11 | Bespoke Private Concerts &amp; Curated Venue Experiences")
-       after 26 September 2026. -->
-  <title>NOXUS &mdash; The Secret Is Worth The Wait | 11:11</title>
-  <meta name="description" content="NOXUS — Odisha's biggest sundowner drunch party, presented by 11:11. Saturday 26 September 2026. Venue unveiling 7 September, 11:11 PM. Reserve, Vogue and Elite passes; early-bird offers live until then.">
+  <title>11:11 | Bespoke Private Concerts &amp; Curated Venue Experiences</title>
+  <meta name="description" content="11:11 is an experiential event agency pairing rare, off-market venues across India with hand-picked artists — bespoke private concerts, premium corporate gatherings, and curated venue and artist matchmaking.">
   <meta name="author" content="Elevenn Elevenn Archive Pvt Ltd">
   <meta name="theme-color" content="#FDFBF7">
 
@@ -41,8 +37,8 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://elevennelevenn.in/">
   <meta property="og:site_name" content="11:11">
-  <meta property="og:title" content="NOXUS — The Secret Is Worth The Wait">
-  <meta property="og:description" content="Odisha's biggest sundowner drunch party, presented by 11:11. Saturday 26 September 2026. The venue is a secret until 7 September, 11:11 PM — and early-bird offers close the moment it is unveiled.">
+  <meta property="og:title" content="11:11 — Where Moments Become Legend">
+  <meta property="og:description" content="An experiential design house: bespoke private concerts, premium corporate gatherings, and curated venue and artist matchmaking across India.">
   <meta property="og:locale" content="en_IN">
   <!-- Absolute, because a share preview is fetched by someone else's server
        and a relative path means nothing there. Now on the real domain — the
@@ -51,8 +47,8 @@
   <meta property="og:image" content="https://elevennelevenn.in/images/hero-1600.jpg">
   <meta property="og:image:alt" content="The 11:11 crest: a crowned lion between outspread golden wings, above the numerals 11:11, on midnight navy.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="NOXUS — The Secret Is Worth The Wait">
-  <meta name="twitter:description" content="Odisha's biggest sundowner drunch party, 26 September 2026. Venue unveiling 7 September, 11:11 PM — early-bird offers close with it.">
+  <meta name="twitter:title" content="11:11 — Where Moments Become Legend">
+  <meta name="twitter:description" content="An experiential design house: private concerts, bespoke celebrations and high-concept productions across India.">
   <meta name="twitter:image" content="https://elevennelevenn.in/images/hero-1600.jpg">
 
   <!-- Typography: editorial serif + clean geometric sans.
@@ -80,7 +76,7 @@
        page updates, the capitals and the gold do not. Bump the date whenever
        css/style.css or js/script.js changes and every browser fetches it fresh;
        the same string is on the <script> tag at the end of <body>. -->
-  <link rel="stylesheet" href="css/style.css?v=2026-09-07a">
+  <link rel="stylesheet" href="css/style.css?v=2026-10-25a">
 
   <!--
     Structured data for Elevenn Elevenn Archive Pvt Ltd, trading as 11:11.
@@ -96,41 +92,6 @@
     (`elevennelevenn.com`) are still two different registrations. That is a
     perfectly normal arrangement and neither is wrong — just do not "correct"
     one to match the other.
-  -->
-  <!--
-    THE DEBUT EVENT, as structured data — written out, deliberately NOT enabled.
-
-    Google will happily show an event card for this, and that card would carry
-    a start time and a venue to anyone searching. Both are unconfirmed: the
-    client has given the date (26 September 2026) and the two prices, and
-    nothing else. A guessed venue published to Google is the same class of
-    mistake as a guessed phone number, so this stays commented until the client
-    confirms the venue name, its street address, and the doors time.
-
-    To enable: fill in startDate with the real time, replace the location block
-    with the real venue, check the two offer prices still match the page, and
-    move this out of the comment as a second <script type="application/ld+json">.
-
-    {
-      "@context": "https://schema.org",
-      "@type": "Event",
-      "name": "NOXUS — presented by 11:11",
-      "eventStatus": "https://schema.org/EventScheduled",
-      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "startDate": "2026-09-26T19:00:00+05:30",          << CONFIRM THE TIME
-      "organizer": { "@type": "Organization", "name": "11:11" },
-      "location": {                                       << CONFIRM THE VENUE
-        "@type": "Place",
-        "name": "",
-        "address": { "@type": "PostalAddress", "addressCountry": "IN" }
-      },
-      "offers": [
-        { "@type": "Offer", "name": "Early Bird", "price": "2999", "priceCurrency": "INR",
-          "availability": "https://schema.org/LimitedAvailability" },
-        { "@type": "Offer", "name": "Standard", "price": "5999", "priceCurrency": "INR",
-          "availability": "https://schema.org/InStock" }
-      ]
-    }
   -->
 
   <script type="application/ld+json">
@@ -190,50 +151,6 @@
        ============================================================ -->
   <header class="site-header" id="site-header" data-header>
 
-    <!--
-      ANNOUNCEMENT BAR.
-      The debut band sits below a 100vh hero, so on the first screen — the only
-      screen most visitors ever see — the event was a small button and a nav
-      link. The date, the price and the clock were a full scroll away. This bar
-      carries all three at every scroll position, and it is why the gold rule
-      ("one loud thing") now spends its budget here instead of on the header
-      ticket button, which has been removed as redundant.
-
-      It must stay INSIDE <header data-header>: js/script.js measures that
-      element into --header-h, so the hero padding and every section's
-      scroll-margin follow automatically. The nav row below uses --nav-h for its
-      own min-height — see the note in section 06 of the stylesheet for why
-      those cannot be the same token.
-
-      The whole bar is one link. The countdown inside it is aria-hidden: it
-      duplicates the venue-reveal clock in the Noxus band, which owns the live
-      region, and nobody should have a clock read to them once a second.
-
-      Hiding the digits would leave "early bird ends" dangling, so the sentence
-      is finished for screen readers only — they hear "early bird ends on 7
-      September at 11:11 PM" while the eye gets the running figure. Keep both
-      halves if you edit this.
-
-      AFTER THE NIGHT: delete this whole <a>, the hero strip, and the nav item.
-    -->
-    <a class="announce" href="book.html">
-      <span class="container announce__inner">
-        <span class="announce__pulse" aria-hidden="true"></span>
-        <span class="announce__label">Noxus</span>
-        <span class="announce__sep" aria-hidden="true">&middot;</span>
-        <span class="announce__date">Sat 26 Sep 2026</span>
-        <span class="announce__price">Early bird ends<span class="visually-hidden"> on 7 September at 11:11 PM</span></span>
-        <span class="announce__count" aria-hidden="true"
-              data-countdown="2026-09-07T23:11:00+05:30"
-              data-countdown-done="Standard pricing now applies">
-          <span class="announce__unit"><span data-countdown-part="days">--</span>d</span>
-          <span class="announce__unit"><span data-countdown-part="hours">--</span>h</span>
-          <span class="announce__unit announce__unit--min"><span data-countdown-part="minutes">--</span>m</span>
-        </span>
-        <span class="announce__cta">Reserve <span aria-hidden="true">&rarr;</span></span>
-      </span>
-    </a>
-
     <div class="container site-header__inner">
 
       <!--
@@ -269,10 +186,7 @@
 
       <nav class="nav-desktop" aria-label="Primary">
         <ul class="nav-desktop__list">
-          <!-- The debut leads the list and is the only flagged link: it is the
-               one item with a date on it. Remove this <li> and the header
-               ticket button together once the night has passed. -->
-          <li><a class="nav-link nav-link--flag" href="#debut">Noxus</a></li>
+          <li><a class="nav-link" href="#past-events">Past Events</a></li>
           <li><a class="nav-link" href="#about">About</a></li>
           <li><a class="nav-link" href="#services">Services</a></li>
           <li><a class="nav-link" href="#experiences">Experiences</a></li>
@@ -317,7 +231,7 @@
       </div>
 
       <ul class="mobile-nav__list">
-        <li><a class="is-flagged" href="#debut">Noxus</a></li>
+        <li><a href="#past-events">Past Events</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#experiences">Experiences</a></li>
@@ -328,8 +242,7 @@
       </ul>
 
       <div class="mobile-nav__foot">
-        <a class="btn btn--gold btn--block" href="book.html">Reserve a Seat</a>
-        <a class="btn btn--outline btn--block" href="#contact">Start a Brief</a>
+        <a class="btn btn--gold btn--block" href="#contact">Start a Brief</a>
         <p class="mobile-nav__meta">Bhubaneswar &middot; Pan-India</p>
       </div>
     </nav>
@@ -407,352 +320,112 @@
           world&rsquo;s most elusive destinations.
         </p>
 
-        <!-- The event, in the hero itself. Everything above this line is the
-             agency; this is the one dated, priced, buyable thing on the page,
-             and it belongs on the first screen rather than only below it. -->
-        <p class="hero__debut">
-          <span class="hero__debut-flag">Noxus</span>
-          <span class="hero__debut-text">Saturday 26 September 2026</span>
-          <span class="hero__debut-price">Venue Unveiling on 7th Sep&rsquo;26 at 11:11 PM</span>
-        </p>
-
-        <!-- For the length of the campaign the ticket takes the gold and the
-             brief steps back to an outline. Reverting after the night means
-             swapping these two classes back, not rewriting the block.
-             The "What We Do" arrow that used to sit here is gone: it did the
-             same job as the scroll cue directly below, and with the strip added
-             the hero no longer had room for a third action. -->
         <div class="hero__actions">
-          <a class="btn btn--gold btn--lg" href="book.html">Reserve Your Pass</a>
-          <a class="btn btn--light" href="#contact">Start a Brief</a>
+          <a class="btn btn--gold btn--lg" href="#contact">Start a Brief</a>
+          <a class="btn btn--light" href="#past-events">Watch the Film</a>
         </div>
       </div>
 
-      <a class="scroll-cue" href="#debut" aria-label="Scroll to the Noxus announcement">
+      <a class="scroll-cue" href="#past-events" aria-label="Scroll to the event film">
         <span class="scroll-cue__label">Scroll</span>
         <span class="scroll-cue__line" aria-hidden="true"></span>
       </a>
     </section>
 
     <!-- ============================================================
-         1b. NOXUS  (dark band — the launch announcement)
+         1b. PAST EVENTS  (dark band — the showreel)
 
-         This is an ad, and it is the only section on the page that sells a
-         dated, priced, buyable thing. It sits directly under the hero, sharing
-         its dark ground, so it reads as the second half of the first screen
-         rather than an interruption.
+         The client's own film of a night 11:11 produced (supplied 25 Oct
+         2026), and the first real work the site has been able to show. It
+         sits directly under the hero, sharing its dark ground, so the claim
+         and the proof read as one opening statement.
 
-         CONFIRMED (client, 1 Sept 2026): the debut is on 26 September 2026;
-         standard admission is Rs 5,999 and early-bird admission Rs 2,999.
-         NOT confirmed, and therefore not written anywhere here — the venue, the
-         start time, the lineup, the seat count, and the date the early-bird
-         price closes. Do not fill any of those in from guesswork; the note
-         under the buttons says "announced soon" precisely because it is true.
+         Every fact here is taken from the film itself, and nothing else:
+           - the venue, "Vivanta Bhubaneswar, DN Square", is on its end card
+             and on the stage backdrop;
+           - "Zenvy Studios" is the film credit on its end card.
+         The film does NOT name the event, its date, its artists or its
+         headcount, so none of those is written here. Do not add a date, a
+         crowd figure or an artist's name without the client confirming it.
 
-         Note this is the one place on the site where a rupee figure appears.
-         Everything in CLAUDE.md about no published figures is about the
-         AGENCY's project pricing, which is still unpublished; a ticket that
-         cannot be bought without its price is a different thing.
+         This band was the NOXUS campaign (26 Sept 2026) until the night had
+         passed. The section was rebuilt rather than relabelled: no countdown,
+         no prices, no booking link survives.
          ============================================================ -->
-    <section class="section debut" id="debut" aria-labelledby="debut-title">
-      <div class="container">
+    <section class="section showreel" id="past-events" aria-labelledby="past-events-title">
+      <div class="container showreel__grid">
 
-        <!-- ---------- The announcement, beside the client's own artwork ---------- -->
-        <div class="noxus__top">
-          <div class="noxus__intro">
+        <div class="showreel__intro">
+          <p class="eyebrow eyebrow--light showreel__eyebrow" data-reveal>Past Events</p>
 
-            <p class="eyebrow eyebrow--light debut__eyebrow" data-reveal>
-              <span class="debut__pulse" aria-hidden="true"></span>Presented by 11:11
-              <span class="debut__dot" aria-hidden="true">&middot;</span>
-              Odisha&rsquo;s Biggest Sundowner Drunch Party
-            </p>
+          <h2 class="display display--lg showreel__title" id="past-events-title" data-reveal>
+            See how we run a night.
+          </h2>
 
-            <!-- The event's name, set as a wordmark rather than a heading-sized
-                 line: it is the loudest word on the page and the thing people
-                 will search for. Typed in sentence case and capitalised in CSS
-                 so a screen reader says "Noxus" rather than spelling it out. -->
-            <h2 class="noxus__name" id="debut-title" data-reveal>Noxus</h2>
+          <p class="showreel__lede" data-reveal>
+            Words only go so far. This is a night 11:11 produced &mdash; the stage,
+            the sound, the light and the room, filmed on the floor. Watch it before
+            you write to us; it says more about how we work than any page could.
+          </p>
 
-            <p class="noxus__strap" data-reveal>The secret is worth the wait.</p>
+          <p class="showreel__place" data-reveal>
+            <span class="showreel__place-label">Venue</span>
+            <span class="showreel__place-name">Vivanta Bhubaneswar, DN Square</span>
+          </p>
 
-            <!-- The client's own sentence, given 2 Sept 2026 to replace the
-                 one line on this band that had been ours to write. Every word
-                 in this section is now theirs. Verbatim — do not tighten it. -->
-            <p class="noxus__lede" data-reveal>
-              NOXUS is a meticulously curated social experience where elegance,
-              indulgence and connection come together &mdash; creating an evening
-              designed to be experienced, not simply attended.
-            </p>
-
-            <p class="noxus__date" data-reveal>
-              <span class="noxus__date-day">Saturday 26 September 2026</span>
-              <span class="noxus__date-note">The city is about to feel different.</span>
-            </p>
-
-            <!--
-              THE EVENT COUNTDOWN.
-              Still midnight opening the 26th, because the posters give a date
-              and no start time. "Sundowner" implies an evening, but implying is
-              not confirming — when the doors time is given, change the
-              data-countdown here and the matching one in book.html.
-            -->
-            <div class="countdown countdown--compact" data-countdown="2026-09-26T00:00:00+05:30"
-                 data-countdown-done="Tonight is the night." data-reveal>
-              <div class="countdown__grid" aria-hidden="true">
-                <div class="countdown__unit">
-                  <span class="countdown__num" data-countdown-part="days">--</span>
-                  <span class="countdown__label">Days</span>
-                </div>
-                <div class="countdown__unit">
-                  <span class="countdown__num" data-countdown-part="hours">--</span>
-                  <span class="countdown__label">Hours</span>
-                </div>
-                <div class="countdown__unit">
-                  <span class="countdown__num" data-countdown-part="minutes">--</span>
-                  <span class="countdown__label">Minutes</span>
-                </div>
-                <div class="countdown__unit">
-                  <span class="countdown__num" data-countdown-part="seconds">--</span>
-                  <span class="countdown__label">Seconds</span>
-                </div>
-              </div>
-              <p class="visually-hidden" data-countdown-live role="status" aria-live="polite"></p>
-            </div>
-
-            <div class="debut__actions" data-reveal>
-              <a class="btn btn--gold btn--lg" href="book.html">
-                Reserve Your Pass
-                <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
-              </a>
-              <p class="debut__note">
-                Vogue and Elite passes are booked here. Reserve is by invitation,
-                minimum three &mdash; apply through the concierge desk.
-              </p>
-            </div>
+          <div class="showreel__actions" data-reveal>
+            <a class="btn btn--gold" href="#contact">Start a Brief</a>
+            <a class="link-arrow link-arrow--light" href="#services">
+              How We Work <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
+            </a>
           </div>
+        </div>
 
-          <!--
-            The client's campaign film (supplied 1 Sept 2026) — a 20-second
-            vertical reel, which is the moving version of the teaser poster. It
-            takes the poster's slot because motion is what the eye catches, and
-            the poster survives inside it twice over: as the `poster` frame
-            (extracted from the film itself, so it matches to the pixel) and as
-            the fallback <img> for anything that cannot play MP4.
+        <!--
+          The film: 32 seconds, vertical, re-encoded from the client's 48 MB
+          master to 720x1280 (videos/vivanta-night.mp4, ~6.4 MB, faststart so
+          it begins playing before it has finished arriving). The poster frame
+          was decoded from the film itself at 20.5 s.
 
-            `controls` is in the MARKUP and removed by JavaScript, not the other
-            way round: with the script dead a visitor still gets native controls
-            rather than a still image they cannot start. Section 09 of
-            js/script.js swaps them for the two buttons below, and only then
-            starts playback.
+          `controls` is in the MARKUP and removed by JavaScript, not the other
+          way round: with the script dead a visitor still gets native controls
+          rather than a still image they cannot start. Section 09 of
+          js/script.js swaps them for the two buttons below and starts playback
+          only when the film scrolls into view.
 
-            It is muted, and it stays muted until someone asks otherwise —
-            autoplay with sound is blocked by every browser worth naming, and
-            deserves to be.
-          -->
-          <figure class="noxus__media" data-reveal>
-            <div class="noxus__video-frame">
-              <video class="noxus__video" id="noxus-video"
-                     poster="images/noxus-video-poster.jpg"
-                     width="478" height="850"
-                     muted loop playsinline controls preload="metadata">
-                <source src="videos/noxus-teaser.mp4" type="video/mp4">
-                <img src="images/noxus-teaser-1024.jpg"
-                     alt="NOXUS campaign poster: Odisha's biggest sundowner drunch party, presented by 11:11. The secret is worth the wait. September 26th 2026. Venue: a secret, to be unveiled in 7 days.">
-              </video>
+          It is muted, and stays muted until someone asks otherwise — autoplay
+          with sound is blocked by every browser worth naming, and deserves to
+          be. The film does have a soundtrack, which is why "Sound on" exists.
+        -->
+        <figure class="showreel__media" data-reveal>
+          <div class="film-frame">
+            <video id="showreel-video"
+                   poster="images/vivanta-film-poster.jpg"
+                   width="720" height="1280"
+                   muted loop playsinline controls preload="none">
+              <source src="videos/vivanta-night.mp4" type="video/mp4">
+              <img src="images/vivanta-film-poster.jpg"
+                   alt="A DJ at the decks under gold stage light, at a night produced by 11:11 at Vivanta Bhubaneswar, DN Square.">
+            </video>
 
-              <button class="film-play" type="button" hidden data-video-play
-                      aria-controls="noxus-video" aria-label="Play the film">
-                <span class="film-play__disc" aria-hidden="true"></span>
-                <span class="film-play__word">Play the film</span>
+            <button class="film-play" type="button" hidden data-video-play
+                    aria-controls="showreel-video" aria-label="Play the film">
+              <span class="film-play__disc" aria-hidden="true"></span>
+              <span class="film-play__word">Play the film</span>
+            </button>
+
+            <p class="film-controls" hidden data-video-controls>
+              <button class="vbtn" type="button" data-video-toggle aria-controls="showreel-video">
+                <span class="vbtn__icon" aria-hidden="true"></span>
+                <span class="vbtn__label">Pause</span>
               </button>
-
-              <p class="noxus__video-controls" hidden data-video-controls>
-                <button class="vbtn" type="button" data-video-toggle aria-controls="noxus-video">
-                  <span class="vbtn__icon" aria-hidden="true"></span>
-                  <span class="vbtn__label">Pause</span>
-                </button>
-                <button class="vbtn" type="button" data-video-sound aria-controls="noxus-video">
-                  <span class="vbtn__label">Sound on</span>
-                </button>
-              </p>
-            </div>
-            <figcaption class="noxus__media-cap">Watch the film &middot; 20 seconds</figcaption>
-          </figure>
-        </div>
-
-        <!-- ---------- The venue, and the deadline it sets ----------
-             This is the campaign's engine and the reason the section is built
-             around it: the venue is deliberately secret, the reveal is dated,
-             and the early-bird price dies at the same instant. One confirmed
-             deadline doing two jobs. -->
-        <div class="reveal-panel" data-reveal>
-          <div class="reveal-panel__head">
-            <p class="reveal-panel__q">Venue?</p>
-            <p class="reveal-panel__a">It&rsquo;s a secret.</p>
-          </div>
-
-          <div class="reveal-panel__body">
-            <p class="reveal-panel__when">
-              <span class="reveal-panel__when-label">Venue unveiling</span>
-              <span class="reveal-panel__when-value">7 September 2026 &middot; 11:11 PM</span>
-            </p>
-
-            <!-- CONFIRMED from the client's poster: early-bird offers run
-                 "until the venue unveiling", and the unveiling is 7 September at
-                 11:11 PM. So this single instant closes the early-bird window
-                 and opens the venue. It is the same ISO-with-offset form as
-                 every other countdown here. -->
-            <div class="countdown countdown--compact" data-countdown="2026-09-07T23:11:00+05:30"
-                 data-countdown-done="The venue has been unveiled &mdash; standard pricing now applies.">
-              <div class="countdown__grid" aria-hidden="true">
-                <div class="countdown__unit">
-                  <span class="countdown__num" data-countdown-part="days">--</span>
-                  <span class="countdown__label">Days</span>
-                </div>
-                <div class="countdown__unit">
-                  <span class="countdown__num" data-countdown-part="hours">--</span>
-                  <span class="countdown__label">Hours</span>
-                </div>
-                <div class="countdown__unit">
-                  <span class="countdown__num" data-countdown-part="minutes">--</span>
-                  <span class="countdown__label">Minutes</span>
-                </div>
-                <div class="countdown__unit">
-                  <span class="countdown__num" data-countdown-part="seconds">--</span>
-                  <span class="countdown__label">Seconds</span>
-                </div>
-              </div>
-              <p class="visually-hidden" data-countdown-live role="status" aria-live="polite"></p>
-            </div>
-
-            <p class="reveal-panel__warn">
-              Early-bird offers are live until the venue is unveiled.
-              <strong>Once unveiled, standard pricing applies.</strong>
+              <button class="vbtn" type="button" data-video-sound aria-controls="showreel-video">
+                <span class="vbtn__label">Sound on</span>
+              </button>
             </p>
           </div>
-        </div>
-
-        <!-- ---------- What the night includes ----------
-             The client's six lines, verbatim. The icons are inline SVG for the
-             same reasons the footer's brand marks are: they inherit the gold
-             through currentColor, stay sharp at any density, and cost no extra
-             request. All six are decorative — the words beside them say the
-             same thing — so every one is aria-hidden. -->
-        <h3 class="noxus__sub" id="noxus-includes" data-reveal>What the night includes</h3>
-
-        <ul class="incl" aria-labelledby="noxus-includes" data-reveal>
-          <li class="incl__item">
-            <svg class="incl__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M2.5 19h19M4.5 19a7.5 7.5 0 0 1 15 0M12 11.5V9.7"/>
-              <circle cx="12" cy="8.5" r="1.1"/>
-            </svg>
-            <span class="incl__label">Rich Culinary Experience</span>
-            <span class="incl__meta">No limits</span>
-          </li>
-          <li class="incl__item">
-            <svg class="incl__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M4 4h16l-8 8zM12 12v7M8.5 19h7M16 6.5l3-2.5"/>
-            </svg>
-            <span class="incl__label">Global Premium Beverages</span>
-            <span class="incl__meta">No limits</span>
-          </li>
-          <li class="incl__item">
-            <svg class="incl__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M4 14.5v-2.5a8 8 0 0 1 16 0v2.5"/>
-              <path d="M4 13h2.2a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H5.4A1.4 1.4 0 0 1 4 17.6zM20 13h-2.2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h.8a1.4 1.4 0 0 0 1.4-1.4z"/>
-            </svg>
-            <span class="incl__label">An Elegant Sonic Affair</span>
-          </li>
-          <li class="incl__item">
-            <svg class="incl__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M2.5 18.5h19M7 18.5a5 5 0 0 1 10 0M12 9.4v2.1M7.2 11l1.5 1.5M16.8 11l-1.5 1.5M3 15.4h2.1M18.9 15.4h2.1"/>
-            </svg>
-            <span class="incl__label">A Sundowner Like Never Before</span>
-          </li>
-          <li class="incl__item">
-            <svg class="incl__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <circle cx="12" cy="8" r="2.6"/>
-              <circle cx="5.2" cy="9.5" r="2.1"/>
-              <circle cx="18.8" cy="9.5" r="2.1"/>
-              <path d="M7.5 18.5a4.5 4.5 0 0 1 9 0M1.6 17.5a3.8 3.8 0 0 1 3.9-3.6M22.4 17.5a3.8 3.8 0 0 0-3.9-3.6"/>
-            </svg>
-            <span class="incl__label">Elite Gathering</span>
-          </li>
-          <li class="incl__item">
-            <svg class="incl__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M6.5 3.5h11l3.5 5.5L12 20.5 1.5 9zM1.5 9h21M8.5 3.5 6 9l6 11.5L18 9l-2.5-5.5"/>
-            </svg>
-            <span class="incl__label">Impeccable Service &amp; Ambience</span>
-          </li>
-        </ul>
-
-        <!-- ---------- The three passes ----------
-             Names, audiences, minimums and prices are all the client's own
-             (posters plus their message of 1 Sept 2026 evening). Note Vogue is
-             priced PER PERSON — "1999/- each" — which is why it says so and why
-             the booking page will not sell fewer than two of them. -->
-        <h3 class="noxus__sub" id="noxus-passes" data-reveal>Book your private passes now</h3>
-        <p class="noxus__sub-note" data-reveal>
-          Exclusive offers for the extraordinary.
-          <strong>Early-bird offers end upon the venue unveiling.</strong>
-        </p>
-
-        <ul class="ticket-cards ticket-cards--three" aria-labelledby="noxus-passes" data-reveal>
-          <li class="ticket-card">
-            <p class="ticket-card__flag">Reserve</p>
-            <p class="ticket-card__who">
-              The elites, corporates &amp; groups
-              <span class="ticket-card__min">Min. 3</span>
-            </p>
-            <p class="ticket-card__status ticket-card__status--invite">Private passes on invitation basis only</p>
-            <p class="ticket-card__note">
-              Applications go to the concierge desk, who confirm availability before any payment.
-            </p>
-            <a class="link-arrow link-arrow--light ticket-card__cta"
-               href="https://wa.me/919938120356?text=Hi%2011%3A11%2C%20I%27d%20like%20to%20apply%20for%20a%20NOXUS%20Reserve%20pass%20(minimum%203)."
-               target="_blank" rel="noopener">
-              DM to apply <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
-            </a>
-          </li>
-
-          <li class="ticket-card ticket-card--featured">
-            <p class="ticket-card__flag">Vogue</p>
-            <p class="ticket-card__who">Powerful couples</p>
-            <p class="ticket-card__price">
-              <span class="ticket-card__amount">&#8377;1,999</span>
-              <span class="ticket-card__per">each</span>
-            </p>
-            <p class="ticket-card__was">
-              <span class="ticket-card__strike">&#8377;4,999</span>
-              <span class="ticket-card__save">Live now</span>
-            </p>
-            <p class="ticket-card__note">Booked in pairs &mdash; two passes minimum.</p>
-            <a class="link-arrow link-arrow--light ticket-card__cta" href="book.html">
-              Book Vogue <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
-            </a>
-          </li>
-
-          <li class="ticket-card ticket-card--featured">
-            <p class="ticket-card__flag">Elite</p>
-            <p class="ticket-card__who">Individual trendsetters</p>
-            <p class="ticket-card__price">
-              <span class="ticket-card__amount">&#8377;2,499</span>
-            </p>
-            <p class="ticket-card__was">
-              <span class="ticket-card__strike">&#8377;5,499</span>
-              <span class="ticket-card__save">Live now</span>
-            </p>
-            <p class="ticket-card__note">A single pass.</p>
-            <a class="link-arrow link-arrow--light ticket-card__cta" href="book.html">
-              Book Elite <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
-            </a>
-          </li>
-        </ul>
-
-        <p class="noxus__sign" data-reveal>
-          <span class="noxus__sign-line">A State of Mind.</span>
-          <span class="noxus__sign-warn">Miss it, regret it.</span>
-        </p>
+          <figcaption class="showreel__cap">Watch the film &middot; 32 seconds &middot; Film by Zenvy Studios</figcaption>
+        </figure>
 
       </div>
     </section>
@@ -1135,8 +808,9 @@
          6. ATMOSPHERE  (was: Portfolio)
          ⚠ READ BEFORE EDITING.
 
-         The client is pre-launch on this initiative, so there is no past work
-         to show and nothing here may imply otherwise. This section was a
+         The photographs here are stock, and nothing here may imply otherwise.
+         The client's one real event so far is the film in section 1b; it is
+         theirs and is labelled as theirs, and none of these pictures are. This section was a
          portfolio headed "Events We've Run", with captions naming cities and
          event types — every one of which described an event that never
          happened. It has been rebuilt as a stated reference board: no place
@@ -1153,9 +827,9 @@
           <p class="eyebrow">Atmosphere</p>
           <h2 class="display display--lg" id="atmosphere-title">The Feeling We Build Toward</h2>
           <p class="section-head__lede">
-            A reference board, not a portfolio. 11:11 is pre-launch on this initiative, so
-            these are stock photographs chosen to show the register we work in &mdash; not
-            events we have run. Real work replaces them as it happens.
+            A reference board, not a portfolio. These are stock photographs chosen to show
+            the register we work in &mdash; not events we have run. Our own work is in the
+            film at the top of the page, and replaces these as it builds up.
           </p>
         </header>
 
@@ -1632,7 +1306,7 @@
       <nav class="site-footer__col" aria-label="Footer">
         <h2 class="site-footer__heading">Explore</h2>
         <ul class="site-footer__list">
-          <li><a href="#debut">Noxus</a></li>
+          <li><a href="#past-events">Past Events</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#experiences">Experiences</a></li>
@@ -1678,12 +1352,9 @@
       <div class="site-footer__col">
         <h2 class="site-footer__heading">Enquiries</h2>
         <p class="site-footer__note">
-          Our debut night is on 26 September 2026. Briefs are open for 2026 and 2027.
+          Now taking briefs for 2026 and 2027.
         </p>
-        <a class="link-arrow link-arrow--light" href="book.html">
-          Reserve a Seat <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
-        </a>
-        <a class="link-arrow link-arrow--light site-footer__second-link" href="#contact">
+        <a class="link-arrow link-arrow--light" href="#contact">
           Start a Brief <span class="link-arrow__icon" aria-hidden="true">&rarr;</span>
         </a>
       </div>
@@ -1731,6 +1402,6 @@
     <span class="wa-float__label">WhatsApp</span>
   </a>
 
-  <script src="js/script.js?v=2026-09-07a"></script>
+  <script src="js/script.js?v=2026-10-25a"></script>
 </body>
 </html>

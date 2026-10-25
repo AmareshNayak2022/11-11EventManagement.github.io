@@ -11,7 +11,7 @@
    06. Header & navigation
    07. Mobile navigation
    08. Hero
-   08b. Noxus band, countdowns, passes & the booking-page pass cards
+   08b. Showreel (the film of a past event)
    09. About
    10. Services
    10b. Event types
@@ -21,7 +21,6 @@
    13. Testimonials (section removed from the page; styles kept)
    14. Call to action
    15. Contact & form
-   15b. Booking page (book.html) — payment panel, card route, summary
    16. Footer
    16b. WhatsApp contact
    17. Scroll reveal animations
@@ -66,6 +65,7 @@
   --navy-rgb:  10 17 40;
   --paper-rgb: 253 251 247;
   --gold-rgb:  212 175 55;
+  --navy-deep-rgb: 5 8 15;
 
   --hairline:       rgb(var(--navy-rgb) / 0.14);
   --hairline-soft:  rgb(var(--navy-rgb) / 0.08);
@@ -125,7 +125,7 @@
   --gap-lg:         clamp(2.5rem, 6vw, 5.5rem);
 
   --nav-h:          88px;   /* the brand/nav row on its own */
-  --header-h:       88px;   /* the whole header, announcement bar included —
+  --header-h:       88px;   /* the whole header —
                                measured and overwritten by js/script.js */
 
   /* --- Elevation -----------------------------------------------------------
@@ -196,8 +196,7 @@ textarea {
 
 /* Text for screen readers only. Not `display: none` and not `hidden`, both of
    which remove it from the accessibility tree as well as the page — this keeps
-   it announced while taking no space. Used by the countdown, whose visible
-   digits are aria-hidden. */
+   it announced while taking no space. */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -220,8 +219,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   border-radius: 1px;
 }
 .process :focus-visible,
-.book-head :focus-visible,
-.book-next :focus-visible,
+.showreel :focus-visible,
 .hero :focus-visible,
 .cta :focus-visible,
 .site-footer :focus-visible {
@@ -291,8 +289,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
    brand gold outright — 4.95:1 on --navy. Over the hero and CTA photographs it
    stays light, because the colour behind it there is whatever the photograph
    happens to be. */
-.process .eyebrow--light,
-.book-next .eyebrow--light { color: var(--accent); }
+.process .eyebrow--light { color: var(--accent); }
 
 .lede {
   font-size: var(--fs-lede);
@@ -412,7 +409,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 
 .btn--sm { min-height: 42px; padding: 0.7rem 1.4rem; }
 /* One step up from the default, for the single most important action on a
-   page — the reserve button on the debut band and on the booking page. */
+   page. */
 .btn--lg {
   min-height: 62px;
   padding: 1.15rem 2.6rem;
@@ -535,7 +532,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 .site-header--solid::after { opacity: 1; }
 
 /* --solid is the scrolled appearance, pinned on. Pages without a dark hero
-   under the header (book.html) have nothing for the transparent state to sit
+   under the header have nothing for the transparent state to sit
    on: cream-on-cream type is invisible from the first paint until the visitor
    happens to scroll. */
 .site-header.is-scrolled,
@@ -562,7 +559,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 .site-header.is-scrolled .nav-toggle__bars span,
 .site-header--solid .nav-toggle__bars span { background: var(--navy); }
 
-/* The gold ticket button is the one exception to both header states above:
+/* A gold button is the one exception to both header states above:
    `.site-header .btn` would repaint its label cream, which on the gold fill is
    about 1.6:1 — unreadable. Navy on that gradient is 7.6:1 at its darkest
    stop, so the button keeps its own colour in every header state. */
@@ -710,22 +707,6 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 .nav-link:focus-visible::after,
 .nav-link.is-active::after { transform: scaleX(1); transform-origin: left; }
 
-/* The debut link, marked with a gold dot rather than a colour: the header sits
-   over a photograph for the whole hero, and gold type there is the 2.75:1 case
-   documented in README. A dot is decoration, so it is allowed to be quiet. */
-.nav-link--flag { padding-left: 0.9rem; }
-.nav-link--flag::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 6px;
-  height: 6px;
-  margin-top: -3px;
-  border-radius: 50%;
-  background: var(--gold);
-}
-
 .site-header__actions {
   display: flex;
   align-items: center;
@@ -771,97 +752,6 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   .nav-toggle { display: none; }
 }
 
-/* --- Announcement bar -----------------------------------------------------
-   THE FIX FOR THE REAL PROBLEM. The debut band lives below a 100vh hero, so on
-   the screen most visitors ever see, the event was represented by a small
-   button and a nav link — the date, the price and the countdown were a full
-   scroll away, and the one loud thing on the page pointed at the enquiry form
-   instead. This bar puts the event on every screen of every page, at every
-   scroll position, and it is the whole reason it is allowed to be gold.
-
-   It lives INSIDE <header data-header>, so js/script.js measures it into
-   --header-h automatically and the hero padding and every scroll-margin follow
-   without being told. That is also why .site-header__inner switched from
-   --header-h to --nav-h: an inner row whose min-height was the measured height
-   of its own parent grows on every measurement pass.
-
-   The whole bar is one link. Navy on the gold gradient measures 7.6:1 at the
-   darkest stop and 11.5:1 at the lightest, so every word on it clears AA. */
-.announce {
-  display: block;
-  position: relative;
-  z-index: 1;
-  background-image: linear-gradient(100deg,
-    var(--gold-metal) 0%, var(--gold) 42%, var(--gold-bright) 72%, var(--gold) 100%);
-  color: var(--navy);
-  box-shadow: inset 0 -1px 0 rgb(var(--navy-rgb) / 0.14);
-}
-.announce__inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
-  gap: clamp(0.5rem, 1.6vw, 1.1rem);
-  min-height: 2.75rem;
-  padding-block: 0.5rem;
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-  line-height: 1.2;
-}
-
-/* A slow double-pulse. It is the only animated thing above the fold, which is
-   the point — motion is what the eye catches before it reads. Two seconds is
-   long enough not to nag; prefers-reduced-motion drops it in section 18. */
-.announce__pulse {
-  flex: none;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: var(--navy);
-  animation: announce-pulse 2s var(--ease-soft) infinite;
-}
-@keyframes announce-pulse {
-  0%, 60%, 100% { opacity: 1;   transform: scale(1); }
-  30%           { opacity: 0.25; transform: scale(0.6); }
-}
-
-.announce__sep { opacity: 0.4; }
-.announce__label { font-weight: 700; letter-spacing: var(--tracking-wide); }
-.announce__count {
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-  opacity: 0.85;
-}
-.announce__price { white-space: nowrap; }
-.announce__date  { white-space: nowrap; }
-
-/* The call to action is underlined rather than boxed: a button inside a bar
-   that is itself a button reads as two targets when it is one. */
-.announce__cta {
-  flex: none;
-  white-space: nowrap;
-  font-weight: 700;
-  border-bottom: 1.5px solid rgb(var(--navy-rgb) / 0.55);
-  padding-bottom: 1px;
-  transition: border-color var(--dur) var(--ease);
-}
-.announce:hover .announce__cta { border-bottom-color: var(--navy); }
-.announce:focus-visible { outline: 2px solid var(--navy); outline-offset: -4px; }
-
-/* Progressive disclosure by width, most persuasive parts kept longest. The
-   price outranks the date: a visitor who has not decided to care about the
-   night yet is moved by ₹2,999, not by which Saturday it falls on. */
-/* The countdown is never dropped wholesale: the words beside it read "Early
-   bird ends", and hiding the figure leaves that sentence hanging with nothing
-   after it. The minutes go instead, which keeps the phrase complete down to
-   320px and loses only the least useful digit. */
-.announce__unit { white-space: nowrap; }
-@media (max-width: 899px) { .announce__date       { display: none; } }
-@media (max-width: 699px) { .announce__sep        { display: none; } }
-@media (max-width: 559px) { .announce__unit--min  { display: none; } }
-@media (max-width: 419px) { .announce__label      { display: none; } }
 
 /* ==========================================================================
    07. MOBILE NAVIGATION
@@ -951,24 +841,11 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 }
 .mobile-nav__list a:hover { color: var(--slate); padding-left: 0.5rem; }
 
-/* Two buttons now, so they need a gap; the gold one is the ticket. */
+/* Room for more than one button. */
 .mobile-nav__foot {
   margin-top: auto;
   display: grid;
   gap: 0.75rem;
-}
-/* The debut item, given the same gold dot as its desktop counterpart. */
-.mobile-nav__list a.is-flagged { padding-left: 1rem; position: relative; }
-.mobile-nav__list a.is-flagged::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 7px;
-  height: 7px;
-  margin-top: -3px;
-  border-radius: 50%;
-  background: var(--gold);
 }
 .mobile-nav__meta {
   margin-top: 1.25rem;
@@ -1101,61 +978,24 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 @media (max-width: 599px) {
   .hero__lede--sub { font-size: var(--fs-small); line-height: 1.62; }
 }
-/* The event, stated in the hero rather than only below it. It sits directly
-   above the buttons because that is where the eye already is when it decides
-   what to click.
-
-   The ground is opaque navy, not a translucent tint, and that is deliberate:
-   everything else in the hero floats on the photograph, but this strip carries
-   a date and a price — the two things a visitor must be able to read at a
-   glance and on a phone in daylight. On the solid ground, --paper measures
-   18.0:1 and --gold-bright 11.4:1, neither of which depends on which pixel of
-   the artwork happens to be behind it. */
-.hero__debut {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem 0.9rem;
-  margin-top: clamp(1.25rem, 3vw, 2rem);
-  padding: 0.7rem 1.1rem;
-  background: #0B1226;
-  border: 1px solid rgb(var(--gold-rgb) / 0.45);
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-}
-.hero__debut-flag {
-  padding: 0.3rem 0.6rem;
-  background: var(--gold);
-  color: var(--navy);              /* 8.9:1 */
-  font-weight: 700;
-  letter-spacing: var(--tracking-wide);
-}
-.hero__debut-text { color: var(--paper); }
-.hero__debut-price { color: var(--gold-bright); font-weight: 600; }
-
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: clamp(1rem, 2.5vw, 1.75rem);
-  margin-top: clamp(1rem, 2.5vw, 1.5rem);
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
 }
 
 /* Reveal the hero content once, on load */
 .hero__eyebrow,
 .hero__title,
 .hero__lede,
-.hero__debut,
 .hero__actions {
   animation: rise-in 1.1s var(--ease) both;
 }
 .hero__title    { animation-delay: 0.12s; }
 .hero__lede     { animation-delay: 0.24s; }
-.hero__debut    { animation-delay: 0.34s; }
 .hero__actions  { animation-delay: 0.44s; }
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(20px); }
@@ -1210,30 +1050,32 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 
 
 /* ==========================================================================
-   08b. NOXUS  (dark band, countdowns, passes)
+   08b. SHOWREEL  (dark band — a night we have already produced)
 
-   The launch announcement, directly under the hero. It keeps the hero's dark
-   ground on purpose: the two read as one opening statement rather than as a
-   page with an advert stapled to it.
+   The client's own event film, directly under the hero. It keeps the hero's
+   dark ground on purpose: the two read as one opening statement, and the
+   film is the first proof on the page that the words above it are true.
+
+   This band was the NOXUS campaign until the night itself (26 Sept 2026) had
+   passed; the dark ground, the framed film and its two controls are what
+   survived. Everything sold or counted down here is gone.
 
    Every colour below was measured on --navy with the WCAG formula, not chosen
-   by eye. The band is the strongest case for the plain brand gold anywhere on
-   the site — 8.89:1 on --navy, and 11.48:1 for --gold-bright — which is why
-   gold carries words freely here, unlike on the cream sections.
+   by eye: --paper 18.1:1, --gold-bright 11.5:1, --gold 8.9:1, and paper at
+   78% 11.1:1 — which is why gold carries words freely here, unlike on the
+   cream sections.
    ========================================================================== */
-.debut {
+.showreel {
   position: relative;
   overflow: hidden;
   background: var(--navy);
-  color: rgb(var(--paper-rgb) / 0.78);   /* 11.18:1 on --navy */
+  color: rgb(var(--paper-rgb) / 0.78);   /* 11.1:1 on --navy */
   border-top: 1px solid rgb(var(--gold-rgb) / 0.42);
-  text-align: center;
 }
 /* Two lights, not one. The gold wash from above is the same device the process
-   band uses; the deep vignette underneath it darkens the lower corners so the
-   ticket cards sit on a slightly deeper ground than the headline does, and the
-   eye is pulled down the section rather than across it. */
-.debut::before {
+   band uses; the deep vignette underneath darkens the lower corners so the
+   film sits on a slightly deeper ground than the words do. */
+.showreel::before {
   content: "";
   position: absolute;
   inset: -30% -10% auto;
@@ -1242,285 +1084,43 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
     rgb(var(--gold-rgb) / 0.13), rgb(var(--gold-rgb) / 0) 72%);
   pointer-events: none;
 }
-.debut::after {
+.showreel::after {
   content: "";
   position: absolute;
   inset: 40% -20% -20%;
   background: radial-gradient(60% 70% at 50% 100%,
-    rgb(5 8 15 / 0.85), rgb(5 8 15 / 0) 70%);
+    rgb(var(--navy-deep-rgb) / 0.85), rgb(var(--navy-deep-rgb) / 0) 70%);
   pointer-events: none;
 }
-.debut > * { position: relative; z-index: 1; }
+.showreel > * { position: relative; z-index: 1; }
 
-.debut__inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.debut__eyebrow {
-  color: var(--gold-bright);            /* 11.48:1 on --navy */
-  margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
-}
-.debut__dot { margin: 0 0.45em; opacity: 0.6; }
-/* The same heartbeat as the announcement bar, in gold on the dark band. It is
-   what tells a scrolling visitor this section is live rather than decorative. */
-.debut__pulse {
-  display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-right: 0.6rem;
-  border-radius: 50%;
-  background: var(--gold-bright);
-  vertical-align: baseline;
-  animation: announce-pulse 2s var(--ease-soft) infinite;
-}
-
-.debut__title {
-  color: var(--paper);                  /* .display defaults to navy */
-  max-width: 44ch;
-  margin: 0;
-}
-/* The two halves of the client's sentence are measured separately. A single
-   max-width on the <h2> cannot do this: it caps whichever span is inside it
-   too, so the wide second clause was being squeezed into the narrow first
-   one's column. */
-.debut__title-main {
-  display: block;
-  max-width: 20ch;
-  margin-inline: auto;
-}
-/* The second half of the client's sentence. It sits inside the same <h2>, so
-   it has to step down rather than start a new block — smaller, lighter, and
-   set to a wider measure so it reads as a continuation and not a second
-   title. */
-.debut__title-sub {
-  display: block;
-  max-width: 42ch;
-  margin: clamp(0.75rem, 1.6vw, 1.15rem) auto 0;
-  font-size: clamp(1.0625rem, 0.86rem + 0.95vw, 1.6875rem);
-  line-height: 1.45;
-  letter-spacing: 0;
-  color: rgb(var(--paper-rgb) / 0.8);
-}
-
-/* --- Countdown ------------------------------------------------------------
-   Four figures on one row at every width. A countdown that reflows into a 2x2
-   grid on a phone stops reading as a clock, so the numerals shrink instead.
-   tabular-nums keeps the seconds column from changing width twelve times a
-   minute and shoving the row sideways; the two-digit padding in section 08 of
-   js/script.js does the rest of that job for fonts with no tabular figures. */
-.countdown {
-  margin: clamp(2.25rem, 5vw, 3.25rem) 0 0;
-  width: 100%;
-}
-.countdown__grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  max-width: 640px;
-  margin: 0 auto;
-}
-.countdown__unit {
-  padding: 0 clamp(0.25rem, 1.5vw, 1rem);
-  border-left: 1px solid var(--hairline-light);
-}
-.countdown__unit:first-child { border-left: 0; }
-
-.countdown__num {
-  display: block;
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(2.25rem, 1.1rem + 5.2vw, 4.5rem);
-  line-height: 1;
-  color: var(--gold-bright);            /* 11.48:1 on --navy */
-  font-variant-numeric: tabular-nums;
-}
-.countdown__label {
-  display: block;
-  margin-top: 0.7rem;
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-  color: rgb(var(--paper-rgb) / 0.7);
-}
-/* The state after the clock runs out — the script swaps the grid for this. */
-.countdown__done {
-  font-family: var(--font-display);
-  font-size: clamp(1.75rem, 1.1rem + 2.6vw, 3rem);
-  font-weight: 300;
-  line-height: 1.1;
-  color: var(--gold-bright);
-  margin: 0;
-}
-
-/* --- Ticket cards ---------------------------------------------------------
-   A deliberately close cousin of .event-type rather than a fourth card style:
-   same hairline, same padding rhythm, inverted for the dark band. Two of them
-   side by side from 560px, so the early-bird saving is shown rather than
-   claimed. */
-.ticket-cards {
-  list-style: none;
-  margin: clamp(2.5rem, 5.5vw, 4rem) 0 0;
-  padding: 0;
-  display: grid;
-  gap: var(--gap-sm);
-  width: 100%;
-  max-width: 760px;
-}
-@media (min-width: 560px) {
-  .ticket-cards { grid-template-columns: repeat(2, 1fr); }
-}
-
-.ticket-card {
-  padding: clamp(1.75rem, 3.5vw, 2.5rem) clamp(1.25rem, 3vw, 2rem);
-  border: 1px solid var(--hairline-light);
-  background: rgb(var(--paper-rgb) / 0.035);  /* barely there — the featured card is the lit one */
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-/* The early-bird card is the one being sold. It takes a gold border and a gold
-   tint rather than a badge or a shadow — the band has no light source to cast
-   one, and a coloured ground is the cheapest way to make one of two otherwise
-   equal cards the obvious answer. Its ground computes to #2A2A2A: --paper
-   measures 13.89:1 on it and --gold-bright 8.82:1, so nothing sitting on the
-   tint is weakened by it. */
-.ticket-card--featured {
-  border-color: rgb(var(--gold-rgb) / 0.55);
-  background: rgb(var(--gold-rgb) / 0.16);
-  box-shadow: 0 0 0 1px rgb(var(--gold-rgb) / 0.12),
-              0 18px 46px rgb(5 8 15 / 0.5);
-}
-
-.ticket-card__flag {
-  margin: 0;
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: rgb(var(--paper-rgb) / 0.72);
-}
-.ticket-card--featured .ticket-card__flag { color: var(--gold-bright); }
-
-.ticket-card__price { margin: 0; }
-.ticket-card__amount {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(2.5rem, 1.6rem + 3.4vw, 3.75rem);
-  line-height: 1;
-  color: var(--paper);
-}
-.ticket-card--featured .ticket-card__amount { color: var(--gold-bright); }
-
-.ticket-card__was {
-  margin: 0;
-  font-size: var(--fs-small);
-  color: rgb(var(--paper-rgb) / 0.66);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-}
-.ticket-card__strike { text-decoration: line-through; }
-/* The saving, as a pill. Navy on the solid brand gold measures 8.89:1. */
-.ticket-card__save {
-  display: inline-block;
-  padding: 0.3rem 0.7rem;
-  background: var(--gold);
-  color: var(--navy);
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-}
-.ticket-card__note {
-  margin: 0.35rem 0 0;
-  font-size: var(--fs-small);
-  line-height: 1.65;
-  color: rgb(var(--paper-rgb) / 0.68);
-}
-
-.debut__actions {
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(1.25rem, 2.5vw, 1.75rem);
-}
-.debut__note {
-  margin: 0;
-  max-width: 52ch;
-  font-size: var(--fs-small);
-  line-height: 1.75;
-  color: rgb(var(--paper-rgb) / 0.6);
-}
-
-
-/* --- NOXUS: the announcement itself --------------------------------------
-   The section keeps .debut's dark ground, gold wash and vignette (above); what
-   follows is the campaign's own furniture. All measured on --navy: --paper is
-   18.1:1, --gold-bright 11.5:1, --gold 8.9:1, and paper at 78% is 11.2:1. */
-.noxus__top {
+.showreel__grid {
   display: grid;
   gap: clamp(2.5rem, 6vw, 4.5rem);
   align-items: center;
-  text-align: left;
 }
 @media (min-width: 1024px) {
-  .noxus__top { grid-template-columns: minmax(0, 1fr) 26rem; }
+  .showreel__grid { grid-template-columns: minmax(0, 1fr) 26rem; }
 }
 @media (max-width: 1023px) {
-  /* Centred on a phone, where the film sits under the words rather than beside
-     them and a left edge has nothing to align to. It also moves to the FRONT of
-     the band: stacked, it was landing after the wordmark, the lede, the date,
-     the countdown and the button — over two screens down, which is how it came
-     to be missed entirely. The film carries the name and the strapline itself,
-     so it introduces the section perfectly well on its own. */
-  .noxus__top { display: flex; flex-direction: column; text-align: center; align-items: center; }
-  .noxus__media { order: -1; }
+  /* Centred and film-first on a phone. Stacked, the words would push the film
+     a screen down, and the film is the reason the band exists. */
+  .showreel__grid { display: flex; flex-direction: column; text-align: center; align-items: center; }
+  .showreel__media { order: -1; }
 }
 
-/* The event name, and the loudest word on the site. Capitals come from CSS,
-   not the keyboard — a screen reader spells out a real all-caps word often
-   enough that WCAG warns against it, and "N-O-X-U-S" is not the name. */
-.noxus__name {
+.showreel__eyebrow {
+  color: var(--gold-bright);            /* 11.48:1 on --navy */
+  margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+.showreel__title {
+  color: var(--paper);                  /* .display defaults to navy */
+  max-width: 16ch;
   margin: 0;
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(3.5rem, 1.9rem + 7vw, 8rem);
-  line-height: 0.92;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--paper);
 }
-/* Poured metal, the same device the process numerals use. Behind @supports
-   because background-clip: text with transparent type is invisible where it is
-   unsupported — the flat --paper above stays the truth for those browsers.
-   Every stop is a brand gold or paper, so no part of the word drops below the
-   7.6:1 the darkest gold measures on --navy. */
-@supports ((-webkit-background-clip: text) or (background-clip: text)) {
-  .noxus__name {
-    background-image: linear-gradient(168deg,
-      var(--paper) 4%, var(--gold-bright) 34%, var(--gold) 62%, var(--gold-metal) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-}
+@media (max-width: 1023px) { .showreel__title { margin-inline: auto; } }
 
-.noxus__strap {
-  margin: clamp(0.75rem, 1.6vw, 1.1rem) 0 0;
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--gold-bright);            /* 11.5:1 on --navy */
-}
-
-.noxus__lede {
+.showreel__lede {
   margin: clamp(1.5rem, 3vw, 2rem) 0 0;
   max-width: 46ch;
   font-size: var(--fs-lede);
@@ -1528,69 +1128,72 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   line-height: 1.6;
   color: rgb(var(--paper-rgb) / 0.82);
 }
-@media (max-width: 1023px) { .noxus__lede { margin-inline: auto; } }
+@media (max-width: 1023px) { .showreel__lede { margin-inline: auto; } }
 
-.noxus__date {
+/* Where it happened, set as a quiet fact rather than a headline. */
+.showreel__place {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   margin: clamp(1.5rem, 3vw, 2rem) 0 0;
 }
-.noxus__date-day {
+.showreel__place-label {
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: rgb(var(--paper-rgb) / 0.6);   /* 6.9:1 */
+}
+.showreel__place-name {
   font-family: var(--font-display);
   font-size: var(--fs-h3);
   font-weight: 400;
   color: var(--paper);
 }
-.noxus__date-note {
-  font-size: var(--fs-small);
-  font-style: italic;
-  color: rgb(var(--paper-rgb) / 0.66);
-}
 
-/* The compact countdown: same component, smaller numerals, left-aligned in the
-   two-column block where the full-width centred version would look adrift. */
-.countdown--compact { margin-top: clamp(1.75rem, 3.5vw, 2.5rem); }
-.countdown--compact .countdown__grid { max-width: 30rem; margin-inline: 0; }
-.countdown--compact .countdown__num { font-size: clamp(1.875rem, 1.2rem + 2.6vw, 3rem); }
-@media (max-width: 1023px) {
-  .countdown--compact .countdown__grid { margin-inline: auto; }
+.showreel__actions {
+  margin-top: clamp(2rem, 4.5vw, 3rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.75rem;
+  align-items: center;
 }
+@media (max-width: 1023px) { .showreel__actions { justify-content: center; } }
 
-/* The client's film, framed rather than bled: a gold hairline and a deep
-   shadow so it reads as a card lying on the band. aspect-ratio holds the slot
-   open at the file's own 478x850 before a single byte of video arrives, which
-   is what stops the page jumping when it loads. */
-.noxus__media { margin: 0; width: 100%; max-width: 24rem; }
-.noxus__video-frame {
+/* The film, framed rather than bled: a gold hairline and a deep shadow so it
+   reads as a card lying on the band. aspect-ratio holds the slot open at the
+   file's own 720x1280 before a single byte of video arrives, which is what
+   stops the page jumping when it loads. */
+.showreel__media { margin: 0; width: 100%; max-width: 24rem; }
+.film-frame {
   position: relative;
   border: 1px solid rgb(var(--gold-rgb) / 0.4);
-  box-shadow: 0 30px 70px rgb(5 8 15 / 0.6);
+  box-shadow: 0 30px 70px rgb(var(--navy-deep-rgb) / 0.6);
   background: var(--navy-deep);
   line-height: 0;
 }
-.noxus__video,
-.noxus__video-frame img {
+.film-frame video,
+.film-frame img {
   width: 100%;
   height: auto;
-  aspect-ratio: 478 / 850;
+  aspect-ratio: 9 / 16;
   object-fit: cover;
   display: block;
 }
-.noxus__media-cap {
+.showreel__cap {
   margin-top: 0.85rem;
   font-size: var(--fs-eyebrow);
   letter-spacing: var(--tracking-mid);
   text-transform: uppercase;
-  color: rgb(var(--paper-rgb) / 0.55);
+  color: rgb(var(--paper-rgb) / 0.55);  /* 6.0:1 */
   text-align: center;
   line-height: 1.5;
 }
 
-/* The big play control. A paused film shows its poster frame, which here is a
-   still of the campaign poster — so without this, a film that has not started
-   is indistinguishable from a picture. It covers the whole frame so the target
-   is the film itself, and it is the state a blocked autoplay lands in.
+/* The big play control. A paused film shows only its poster frame, which is
+   a still — so without this, a film that has not started is indistinguishable
+   from a photograph. It covers the whole frame so the target is the film
+   itself, and it is the state a blocked autoplay lands in.
 
    Hidden until JavaScript reveals it, for the same reason `controls` is removed
    rather than added: a control that cannot work should not be on screen. */
@@ -1605,16 +1208,16 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   width: 100%;
   border: 0;
   padding: 0;
-  background: rgb(5 8 15 / 0.42);
+  background: rgb(var(--navy-deep-rgb) / 0.42);
   color: var(--paper);
   font-family: var(--font-body);
   cursor: pointer;
   transition: background-color var(--dur) var(--ease);
 }
 .film-play[hidden] { display: none; }
-.noxus__video-frame.is-paused .film-play { display: flex; }
+.film-frame.is-paused .film-play { display: flex; }
 .film-play:hover,
-.film-play:focus-visible { background: rgb(5 8 15 / 0.55); }
+.film-play:focus-visible { background: rgb(var(--navy-deep-rgb) / 0.55); }
 
 /* The disc is a gold ring with a triangle punched out of it, drawn in borders
    so it needs no icon file and inherits the palette. */
@@ -1624,7 +1227,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   height: 4.5rem;
   border: 2px solid var(--gold);
   border-radius: 50%;
-  background: rgb(5 8 15 / 0.55);
+  background: rgb(var(--navy-deep-rgb) / 0.55);
   transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease);
 }
 .film-play__disc::after {
@@ -1637,7 +1240,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   border-width: 0.7rem 0 0.7rem 1.15rem;
   border-color: transparent transparent transparent var(--gold);
 }
-.film-play:hover .film-play__disc { transform: scale(1.06); background: rgb(5 8 15 / 0.75); }
+.film-play:hover .film-play__disc { transform: scale(1.06); background: rgb(var(--navy-deep-rgb) / 0.75); }
 .film-play__word {
   font-size: var(--fs-eyebrow);
   font-weight: 600;
@@ -1650,8 +1253,8 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 
 /* The controls sit on the film, so they carry their own dark plate rather than
    trusting whatever frame happens to be behind them: paper on this plate
-   measures 15.9:1, and it does not change when the picture does. */
-.noxus__video-controls {
+   measures 8.2:1 even over a pure-white frame, and 19.1:1 over navy. */
+.film-controls {
   position: absolute;
   left: 0.7rem;
   bottom: 0.7rem;
@@ -1660,14 +1263,14 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   margin: 0;
   line-height: 1;
 }
-.noxus__video-controls[hidden] { display: none; }
+.film-controls[hidden] { display: none; }
 .vbtn {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
   padding: 0.5rem 0.8rem;
   border: 1px solid rgb(var(--paper-rgb) / 0.28);
-  background: rgb(5 8 15 / 0.72);
+  background: rgb(var(--navy-deep-rgb) / 0.72);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   color: var(--paper);
@@ -1680,7 +1283,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 .vbtn:hover,
-.vbtn:focus-visible { background: rgb(5 8 15 / 0.9); border-color: var(--gold); }
+.vbtn:focus-visible { background: rgb(var(--navy-deep-rgb) / 0.9); border-color: var(--gold); }
 
 /* A play triangle that becomes a pause bar pair, drawn in borders rather than
    fetched as an icon — two states, no request, and it inherits currentColor. */
@@ -1699,382 +1302,6 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   box-shadow: 0.19rem 0 0 0 currentColor;
 }
 
-/* --- The venue reveal, and the deadline it sets --------------------------
-   The campaign's engine, so it gets the only boxed treatment on the band. */
-.reveal-panel {
-  margin-top: clamp(3rem, 7vw, 5rem);
-  padding: clamp(1.75rem, 4vw, 2.75rem);
-  border: 1px solid rgb(var(--gold-rgb) / 0.45);
-  background: rgb(var(--gold-rgb) / 0.07);
-  display: grid;
-  gap: clamp(1.5rem, 3.5vw, 2.5rem);
-  text-align: left;
-}
-@media (min-width: 860px) {
-  .reveal-panel { grid-template-columns: auto minmax(0, 1fr); align-items: center; }
-  .reveal-panel__head { border-right: 1px solid rgb(var(--gold-rgb) / 0.3); padding-right: clamp(1.75rem, 4vw, 3rem); }
-}
-@media (max-width: 859px) { .reveal-panel { text-align: center; } }
-
-.reveal-panel__q {
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: rgb(var(--paper-rgb) / 0.7);
-}
-.reveal-panel__a {
-  margin-top: 0.5rem;
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
-  font-weight: 300;
-  line-height: 1;
-  color: var(--gold-bright);            /* 11.5:1 on --navy */
-  white-space: nowrap;
-}
-
-.reveal-panel__when {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.5rem 0.9rem;
-}
-@media (max-width: 859px) { .reveal-panel__when { justify-content: center; } }
-.reveal-panel__when-label {
-  padding: 0.3rem 0.6rem;
-  background: var(--gold);
-  color: var(--navy);                   /* 8.9:1 */
-  font-size: var(--fs-eyebrow);
-  font-weight: 700;
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-}
-.reveal-panel__when-value {
-  font-size: var(--fs-body);
-  font-weight: 500;
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-  color: var(--paper);
-}
-.reveal-panel__warn {
-  margin-top: 0.25rem;
-  font-size: var(--fs-small);
-  line-height: 1.7;
-  color: rgb(var(--paper-rgb) / 0.75);
-}
-.reveal-panel__warn strong { color: var(--gold-bright); font-weight: 600; }
-
-/* --- Section sub-headings on the band ------------------------------------ */
-.noxus__sub {
-  margin: clamp(3rem, 7vw, 5rem) 0 clamp(1.5rem, 3vw, 2.25rem);
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  font-weight: 300;
-  color: var(--paper);
-  text-align: center;
-}
-
-/* --- What the night includes ---------------------------------------------
-   Six short items. Two columns on a phone rather than one: they are two or
-   three words each, and a single column would run the section to a screen and
-   a half of near-empty rows. */
-.incl {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  background: var(--hairline-light);
-  border: 1px solid var(--hairline-light);
-}
-@media (min-width: 700px)  { .incl { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (min-width: 1100px) { .incl { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
-
-/* The 1px grid gap plus this background is what draws the dividing rules —
-   cheaper than a border-collapse dance, and it never doubles a line. */
-.incl__item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.7rem;
-  padding: clamp(1.25rem, 3vw, 1.75rem) 0.85rem;
-  background: var(--navy);
-  text-align: center;
-}
-.incl__icon {
-  width: 2rem;
-  height: 2rem;
-  flex: none;
-  fill: none;
-  stroke: var(--gold);                  /* 8.9:1 on --navy — a rule, not text */
-  stroke-width: 1.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.incl__label {
-  font-size: var(--fs-small);
-  font-weight: 500;
-  line-height: 1.4;
-  color: var(--paper);
-}
-.incl__meta {
-  font-size: var(--fs-eyebrow);
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-  color: var(--gold-bright);            /* 11.5:1 */
-}
-
-/* --- The three passes ----------------------------------------------------- */
-@media (min-width: 900px) {
-  .ticket-cards--three { grid-template-columns: repeat(3, 1fr); max-width: none; }
-}
-.ticket-cards--three { max-width: 68rem; margin-inline: auto; }
-
-.ticket-card__who {
-  margin: 0;
-  font-size: var(--fs-small);
-  line-height: 1.5;
-  color: rgb(var(--paper-rgb) / 0.78);   /* 11.2:1 */
-}
-/* The status line is the one thing that differs between the three, so it is the
-   one thing given a colour. Invitation-only reads as a fact; early-bird reads
-   as an opportunity, so only the second is gold. */
-.ticket-card__status {
-  margin: 0.35rem 0 0;
-  padding: 0.35rem 0.7rem;
-  align-self: center;
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-}
-.ticket-card__status--invite {
-  border: 1px solid var(--hairline-light);
-  color: rgb(var(--paper-rgb) / 0.78);
-}
-.ticket-card__status--live { background: var(--gold); color: var(--navy); }  /* 8.9:1 */
-.ticket-card__cta { margin-top: auto; padding-top: 1rem; align-self: center; }
-/* "each" rides the figure at body size — the price is display type, and a
-   matching-size qualifier would read as part of the number. */
-.ticket-card__per {
-  font-size: var(--fs-small);
-  font-weight: 400;
-  color: rgb(var(--paper-rgb) / 0.72);
-  margin-left: 0.35rem;
-}
-.ticket-card__min {
-  display: inline-block;
-  margin-left: 0.4rem;
-  padding: 0.12rem 0.45rem;
-  border: 1px solid var(--hairline-light);
-  font-size: var(--fs-eyebrow);
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-  color: rgb(var(--paper-rgb) / 0.8);
-}
-.noxus__sub-note {
-  margin: -0.75rem 0 clamp(1.5rem, 3vw, 2.25rem);
-  text-align: center;
-  font-size: var(--fs-small);
-  line-height: 1.7;
-  color: rgb(var(--paper-rgb) / 0.72);
-}
-.noxus__sub-note strong { color: var(--gold-bright); font-weight: 600; }
-
-/* --- Booking page: the radio pass cards ----------------------------------
-   The <input> stays in the layout and is only visually replaced — the same
-   technique .check and .tier-opt use — so it keeps keyboard focus and its
-   place in the accessibility tree. */
-.pass-opt { position: relative; display: flex; }
-.pass-opt__input {
-  position: absolute;
-  opacity: 0;
-  width: 1px;
-  height: 1px;
-  margin: 0;
-}
-.pass-opt .pass-card { flex: 1; cursor: pointer; padding-right: 3rem; }
-.pass-opt__input:checked + .pass-card {
-  border-color: var(--navy);
-  box-shadow: inset 0 0 0 1px var(--navy), var(--shadow-soft);
-}
-.pass-opt__input:focus-visible + .pass-card {
-  outline: 2px solid var(--navy);
-  outline-offset: 3px;
-}
-/* The tick is reused wholesale from the old tier chooser; only the ring's
-   resting state needed a home here. */
-.pass-opt .tier-opt__tick {
-  top: clamp(1.4rem, 3vw, 1.9rem);
-  right: clamp(1.4rem, 3vw, 1.9rem);
-}
-.pass-opt__input:checked + .pass-card .tier-opt__tick {
-  background: var(--navy);
-  border-color: var(--navy);
-}
-.pass-opt__input:checked + .pass-card .tier-opt__tick::after {
-  content: "";
-  position: absolute;
-  left: 0.42rem;
-  top: 0.2rem;
-  width: 0.35rem;
-  height: 0.6rem;
-  border: solid var(--paper);
-  border-width: 0 1.5px 1.5px 0;
-  transform: rotate(45deg);
-}
-
-/* Reserve is not a choice on this page, so its card must not look like one. */
-.pass-card--static { background: var(--bg-alt); }
-
-.pass-card__per { font-size: var(--fs-small); color: var(--muted); margin-left: 0.3rem; }
-.pass-card__min {
-  display: inline-block;
-  margin-left: 0.4rem;
-  padding: 0.1rem 0.4rem;
-  border: 1px solid var(--gold-deep);   /* a boundary on light: 5.7:1 */
-  font-size: var(--fs-eyebrow);
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-  color: var(--gold-deep);
-}
-.book-step__intro {
-  margin: -0.5rem 0 clamp(1.25rem, 2.5vw, 1.75rem);
-  font-size: var(--fs-small);
-  line-height: 1.7;
-  color: var(--text);
-}
-.book-step__intro strong { color: var(--gold-deep); font-weight: 600; }
-
-.noxus__sign {
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-  text-align: center;
-}
-.noxus__sign-line {
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  font-style: italic;
-  font-weight: 300;
-  color: var(--gold-bright);
-}
-.noxus__sign-warn {
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: rgb(var(--paper-rgb) / 0.6);
-}
-
-/* --- Booking page: the three passes --------------------------------------- */
-.book-head__strap {
-  margin-top: 0.75rem;
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--gold-bright);
-}
-.book-head__clock-label {
-  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-  color: var(--gold-bright);            /* 11.5:1 on --navy */
-}
-.book-head__clock-label + .countdown { margin-top: 1rem; }
-
-.pass-choice {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: var(--gap-sm);
-}
-@media (min-width: 860px) { .pass-choice { grid-template-columns: repeat(3, 1fr); } }
-
-.pass-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: clamp(1.4rem, 3vw, 1.9rem);
-  border: 1px solid var(--hairline);
-  background: var(--surface);
-  text-align: center;
-}
-/* The bookable pass carries the same inner ring the tier chooser used, so
-   "this is the one you are buying" is stated by the border rather than only by
-   the presence of a price. */
-.pass-card--book {
-  border-color: var(--navy);
-  box-shadow: inset 0 0 0 1px var(--navy), var(--shadow-soft);
-}
-.pass-card__flag {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  font-weight: 400;
-  color: var(--heading);                /* 18.7:1 on --surface */
-}
-.pass-card__who {
-  margin: 0;
-  font-size: var(--fs-small);
-  line-height: 1.5;
-  color: var(--muted);                  /* 6.3:1 */
-}
-.pass-card__price { margin: 0.35rem 0 0; }
-.pass-card__amount {
-  font-family: var(--font-display);
-  font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3rem);
-  font-weight: 300;
-  line-height: 1;
-  color: var(--heading);
-}
-.pass-card__was { display: block; margin-top: 0.35rem; font-size: var(--fs-small); color: var(--muted); }
-.pass-card__was[hidden] { display: none; }
-.pass-card__strike { text-decoration: line-through; }
-
-.pass-card .pass-card__status {
-  margin: 0.35rem 0 0;
-  padding: 0.3rem 0.65rem;
-  align-self: center;
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-}
-/* On the light page the invite chip needs a boundary that clears 3:1, which is
-   --gold-deep (5.7:1 on --surface), never the champagne gold's 2.1:1. */
-.pass-card__status--invite { border: 1px solid var(--gold-deep); color: var(--gold-deep); }
-.pass-card__status--live   { background: var(--gold); color: var(--navy); }   /* 8.9:1 */
-
-.pass-card__note {
-  margin: 0;
-  font-size: var(--fs-small);
-  line-height: 1.6;
-  color: var(--text);                   /* 8.8:1 */
-}
-.pass-card__cta { margin-top: auto; padding-top: 1rem; }
-
-.pass-poster {
-  margin: clamp(1.75rem, 4vw, 2.5rem) 0 0;
-  text-align: center;
-}
-.pass-poster img {
-  width: 100%;
-  max-width: 20rem;
-  /* The reset makes every img display:block, and a block box with a max-width
-     ignores the parent's text-align — it needs auto margins to centre. */
-  margin-inline: auto;
-  height: auto;
-  border: 1px solid var(--hairline);
-  box-shadow: var(--shadow-soft);
-}
 
 /* ==========================================================================
    09. ABOUT
@@ -2368,10 +1595,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
 /* ==========================================================================
    11. PROCESS  (dark band)
    ========================================================================== */
-/* .book-next on the booking page is the same band with three steps instead of
-   four, so it is named here rather than restated in section 15b. */
-.process,
-.book-next {
+.process {
   position: relative;
   overflow: hidden;
   background: var(--navy);
@@ -2381,8 +1605,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
    the page where the brand colour behaves like light rather than ink, and it
    is what stops 900px of flat navy reading as a black hole between two cream
    sections. Kept under 10% so it never becomes a background of its own. */
-.process::before,
-.book-next::before {
+.process::before {
   content: "";
   position: absolute;
   inset: -35% -10% auto;
@@ -2391,8 +1614,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
     rgb(var(--gold-rgb) / 0.09), rgb(var(--gold-rgb) / 0) 70%);
   pointer-events: none;
 }
-.process > *,
-.book-next > * { position: relative; }
+.process > * { position: relative; }
 .process__list {
   display: grid;
   gap: clamp(2.25rem, 5vw, 3rem);
@@ -3048,556 +2270,6 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
   color: var(--slate);
 }
 .form.is-hidden { display: none; }
-
-
-/* ==========================================================================
-   15b. BOOKING PAGE  (book.html)
-
-   Everything here is scoped to the reservation page. It reuses the form
-   primitives above — .field, .field__input, .field__error, .check, .btn — and
-   only adds the components a checkout needs and the site did not have: a tier
-   chooser, a seat stepper, a payment panel, and a running summary.
-
-   Ratios cited below are measured on --surface (#FFFFFF), which is what the
-   cards sit on, or on --navy for the two dark panels.
-   ========================================================================== */
-
-/* --- Header back link ---------------------------------------------------- */
-/* On a checkout page the only navigation is the way out. The label stays at
-   every width — it is about 90px at eyebrow size, which the header has room
-   for even at 320px, and an arrow on its own reads as a stray dash. */
-.book-back { color: var(--navy); }
-.book-back__icon { transition: transform var(--dur) var(--ease); }
-.book-back:hover .book-back__icon { transform: translateX(-6px); }
-
-/* --- The head of the page ------------------------------------------------ */
-/* Dark, because the countdown was designed for a dark ground: --gold-bright
-   measures 11.48:1 on --navy and only 2.4:1 on cream. */
-.book-head {
-  position: relative;
-  overflow: hidden;
-  background: var(--navy);
-  color: rgb(var(--paper-rgb) / 0.78);       /* 11.18:1 on --navy */
-  padding-block: calc(var(--header-h) + clamp(2.5rem, 6vw, 4.5rem))
-                 clamp(2.75rem, 6vw, 4.5rem);
-  text-align: center;
-}
-.book-head::before {
-  content: "";
-  position: absolute;
-  inset: -40% -10% auto;
-  height: 100%;
-  background: radial-gradient(50% 62% at 50% 0%,
-    rgb(var(--gold-rgb) / 0.12), rgb(var(--gold-rgb) / 0) 72%);
-  pointer-events: none;
-}
-.book-head__inner { position: relative; z-index: 1; }
-.book-head__eyebrow { color: var(--gold-bright); }   /* 11.48:1 */
-.book-head__title { color: var(--paper); }
-.book-head__lede {
-  margin: clamp(1rem, 2vw, 1.5rem) auto 0;
-  max-width: 56ch;
-  font-size: var(--fs-lede);
-  font-weight: 300;
-  line-height: 1.65;
-  color: rgb(var(--paper-rgb) / 0.8);
-}
-
-/* --- The two-column reservation layout ------------------------------------
-   The summary is a rail beside the form from 1024px and a plain block above it
-   below that. Source order puts the form first, so the small-screen order is
-   the right one and only the wide layout has to be told otherwise. */
-.book { padding-top: clamp(2.5rem, 5vw, 4rem); }
-.book__grid { display: grid; gap: var(--gap-lg); }
-@media (min-width: 1024px) {
-  .book__grid {
-    grid-template-columns: minmax(0, 1fr) 22.5rem;
-    align-items: start;
-  }
-  .book__rail { position: sticky; top: calc(var(--header-h) + 1.5rem); }
-}
-@media (max-width: 1023px) {
-  /* Above the form on a phone: what you are buying, then the buying. */
-  .book__rail { order: -1; }
-  .book__grid { display: flex; flex-direction: column; }
-}
-
-/* --- Numbered steps ------------------------------------------------------- */
-.book-step {
-  border: 0;
-  padding: 0;
-  margin: 0 0 clamp(2.75rem, 6vw, 4rem);
-}
-.book-step__legend {
-  display: flex;
-  align-items: baseline;
-  gap: 0.85rem;
-  width: 100%;
-  margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
-  padding-bottom: 0.9rem;
-  border-bottom: 1px solid var(--hairline);
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  font-weight: 300;
-  color: var(--heading);
-}
-/* --gold-deep, not --accent: this numeral sits on cream, where the champagne
-   gold is 2.0:1. Deep gold measures 5.5:1 there. */
-.book-step__num {
-  font-size: 0.75em;
-  color: var(--gold-deep);
-  letter-spacing: 0.02em;
-}
-
-/* --- Tier chooser ---------------------------------------------------------
-   Radio cards. The real <input> stays in the layout and is only visually
-   replaced — the same technique .check uses — so it keeps its keyboard focus
-   and its place in the accessibility tree. */
-.tier-choice { display: grid; gap: var(--gap-sm); }
-@media (min-width: 560px) { .tier-choice { grid-template-columns: repeat(2, 1fr); } }
-
-.tier-opt { position: relative; display: flex; }
-.tier-opt__input {
-  position: absolute;
-  opacity: 0;
-  width: 1px;
-  height: 1px;
-  margin: 0;
-}
-.tier-opt__card {
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  padding: clamp(1.4rem, 3vw, 1.9rem);
-  padding-right: 3.25rem;              /* room for the tick */
-  border: 1px solid var(--hairline);
-  background: var(--surface);
-  cursor: pointer;
-  transition: border-color var(--dur) var(--ease),
-              box-shadow var(--dur) var(--ease);
-}
-.tier-opt__card:hover { border-color: var(--gold-deep); }
-/* Selection is carried by three signals at once — the border, the inner ring
-   and the filled tick — never by colour alone. The ring is a box-shadow rather
-   than a thicker border so selecting a card does not shift its contents by a
-   pixel. */
-.tier-opt__input:checked + .tier-opt__card {
-  border-color: var(--navy);
-  box-shadow: inset 0 0 0 1px var(--navy), var(--shadow-soft);
-}
-.tier-opt__input:focus-visible + .tier-opt__card {
-  outline: 2px solid var(--navy);
-  outline-offset: 3px;
-}
-
-.tier-opt__flag {
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--muted);                 /* 6.29:1 on --surface */
-}
-.tier-opt__input:checked + .tier-opt__card .tier-opt__flag { color: var(--navy); }
-
-.tier-opt__price {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 1.5rem + 1.9vw, 2.75rem);
-  font-weight: 300;
-  line-height: 1;
-  color: var(--heading);               /* 18.69:1 on --surface */
-}
-.tier-opt__meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.55rem;
-  font-size: var(--fs-small);
-  color: var(--muted);
-}
-.tier-opt__strike { text-decoration: line-through; }
-/* Navy on the solid brand gold is 8.89:1 — the one place gold is a fill on a
-   light ground rather than a hairline. */
-.tier-opt__save {
-  padding: 0.25rem 0.6rem;
-  background: var(--gold);
-  color: var(--navy);
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-}
-.tier-opt__note {
-  font-size: var(--fs-small);
-  line-height: 1.6;
-  color: var(--text);                  /* 8.80:1 on --surface */
-}
-
-/* The tick: an empty ring until selected, a filled navy disc with a drawn
-   check after. The check is two borders on a rotated box — no icon font, no
-   extra request. */
-.tier-opt__tick {
-  position: absolute;
-  top: clamp(1.4rem, 3vw, 1.9rem);
-  right: clamp(1.4rem, 3vw, 1.9rem);
-  width: 1.4rem;
-  height: 1.4rem;
-  border: 1px solid var(--gold-deep);
-  border-radius: 50%;
-  transition: background-color var(--dur) var(--ease),
-              border-color var(--dur) var(--ease);
-}
-.tier-opt__input:checked + .tier-opt__card .tier-opt__tick {
-  background: var(--navy);
-  border-color: var(--navy);
-}
-.tier-opt__input:checked + .tier-opt__card .tier-opt__tick::after {
-  content: "";
-  position: absolute;
-  left: 0.42rem;
-  top: 0.2rem;
-  width: 0.35rem;
-  height: 0.6rem;
-  border: solid var(--paper);
-  border-width: 0 1.5px 1.5px 0;
-  transform: rotate(45deg);
-}
-
-/* --- Seat stepper ---------------------------------------------------------
-   Buttons either side of a real number input. The native spinners are removed
-   because they sit on top of the right-hand button on desktop Chrome. */
-.field--qty { max-width: 22rem; }
-.qty { display: flex; align-items: stretch; gap: 0.75rem; }
-.qty__btn {
-  flex: none;
-  width: 3rem;
-  border: 1px solid var(--gold-deep);   /* a UI boundary: 5.5:1 on paper */
-  background: transparent;
-  color: var(--navy);
-  font-size: 1.25rem;
-  line-height: 1;
-  cursor: pointer;
-  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
-}
-.qty__btn:hover { background: var(--navy); color: var(--paper); border-color: var(--navy); }
-.qty__input {
-  flex: none;
-  width: 6rem;
-  text-align: center;
-  font-size: var(--fs-h3);
-  font-family: var(--font-display);
-}
-.qty__input::-webkit-outer-spin-button,
-.qty__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-.qty__input { -moz-appearance: textfield; }
-
-/* --- Payment panel -------------------------------------------------------- */
-.pay {
-  border: 1px solid var(--hairline);
-  background: var(--surface);
-}
-/* The amount, in the same navy-and-gold as the countdown, so the figure the
-   visitor must type into their UPI app is the loudest thing on the page.
-   --gold-bright on --navy is 11.48:1. */
-.pay__amount {
-  padding: clamp(1.5rem, 3.5vw, 2.25rem);
-  background: var(--navy);
-  text-align: center;
-}
-.pay__amount-label {
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: rgb(var(--paper-rgb) / 0.72);
-}
-.pay__amount-value {
-  margin-top: 0.5rem;
-  font-family: var(--font-display);
-  font-size: clamp(2.75rem, 1.9rem + 3.2vw, 4rem);
-  font-weight: 300;
-  line-height: 1;
-  color: var(--gold-bright);
-}
-.pay__amount-note {
-  margin-top: 0.75rem;
-  font-size: var(--fs-small);
-  color: rgb(var(--paper-rgb) / 0.7);
-}
-
-.pay__body {
-  display: grid;
-  gap: clamp(1.5rem, 4vw, 2.5rem);
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-}
-@media (min-width: 760px) {
-  /* Must stay in step with the QR's own max-width below: the column IS the
-     code's size. Widened from 14rem when the live code arrived — it is a
-     49-module symbol where the static image was 37, so at 14rem it fell to
-     3.8 screen pixels per module. The 2rem comes out of the details column
-     beside it, which costs the payee name a second line. A code scanned off
-     a laptop screen is worth more than that line. */
-  .pay__body { grid-template-columns: 16rem minmax(0, 1fr); align-items: start; }
-}
-
-.pay__qr { text-align: center; }
-/* The white plate is not decoration: a QR scanner needs the quiet zone around
-   the code to stay white, and the page ground is cream. */
-.pay__qr img,
-.pay__qr-canvas {
-  display: block;
-  width: 100%;
-  max-width: 16rem;
-  margin: 0 auto;
-  padding: 0.75rem;
-  background: #FFFFFF;
-  border: 1px solid var(--hairline);
-}
-/* display:block above beats the [hidden] attribute's own display:none, and
-   booking.js hides the static image with `hidden` once it has drawn the live
-   code — without this the visitor sees two QR codes stacked. */
-.pay__qr img[hidden] { display: none; }
-/* The canvas is drawn at a whole number of pixels per module and then scaled
-   down by the width above. Smoothing that would soften every module edge, and
-   a scanner reads edges — so keep the nearest-neighbour hint. */
-.pay__qr-canvas {
-  height: auto;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-}
-.pay__qr-cap {
-  margin-top: 0.85rem;
-  font-size: var(--fs-eyebrow);
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.pay__list {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.5rem 1.25rem;
-  margin-bottom: clamp(1.5rem, 3vw, 2rem);
-  font-size: var(--fs-small);
-}
-.pay__list dt {
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-  color: var(--muted);
-  padding-top: 0.15em;
-}
-.pay__list dd { margin: 0; color: var(--heading); line-height: 1.5; }
-
-.pay__upi {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.6rem;
-  /* The UPI ID is a string somebody may have to retype by hand, so it is set
-     in a face where 0 and O, 1 and l cannot be confused. */
-  font-family: ui-monospace, "SFMono-Regular", "Consolas", "Liberation Mono", monospace;
-  word-break: break-all;
-}
-.pay__copy {
-  flex: none;
-  padding: 0.3rem 0.65rem;
-  border: 1px solid var(--gold-deep);
-  background: transparent;
-  color: var(--navy);
-  font-family: var(--font-body);
-  font-size: var(--fs-eyebrow);
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
-}
-.pay__copy:hover { background: var(--navy); color: var(--paper); border-color: var(--navy); }
-.pay__copy.is-done { background: var(--navy); color: var(--paper); border-color: var(--navy); }
-.pay__copy[hidden] { display: none; }
-
-.pay__app-note,
-.pay__warn {
-  margin-top: 0.9rem;
-  font-size: var(--fs-small);
-  line-height: 1.65;
-  color: var(--text);
-}
-/* The one caution on the page. --gold-deep carries the rule and the type at
-   5.72:1 on --surface; the champagne gold would be 2.1:1 and could not. */
-.pay__warn {
-  margin-top: 1.5rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--gold-deep);
-  color: var(--gold-deep);
-}
-
-/* --- Card / netbanking, when a Razorpay link is configured ---------------- */
-/* Everything here ships hidden and is revealed by js/booking.js only when a
-   public payment link is configured AND its one fixed amount still matches the
-   basket on screen — see section 04b there. [hidden] is spelled out because
-   these carry a display of their own, which would otherwise win. */
-.pay__alt[hidden],
-[data-rzp][hidden] { display: none; }
-
-.pay__alt {
-  /* Sits inside .pay, below .pay__body, so it repeats that block's horizontal
-     padding and its bottom but not its top — the rule below supplies the gap. */
-  padding: 0 clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2.5rem);
-}
-
-/* A rule with the word set into it, so the two routes read as alternatives
-   rather than as a second step to be completed after the first. */
-.pay__alt-or {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  margin: 0 0 1.25rem;
-  font-size: var(--fs-small);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.pay__alt-or::before,
-.pay__alt-or::after {
-  content: "";
-  flex: 1 1 auto;
-  height: 1px;
-  background: var(--hairline);
-}
-
-/* --- Confirmation tick and terms ----------------------------------------- */
-.field--check { margin-top: clamp(1.75rem, 3.5vw, 2.25rem); }
-/* The wide variant of .check: a full-width row rather than a chip, because
-   this one is a sentence and not a one-word tag. */
-.check--wide {
-  display: flex;
-  align-items: flex-start;
-  width: 100%;
-  padding: 0.9rem 1.1rem;
-}
-.check--wide .check__box { margin-top: 0.2em; }
-
-.book-form__terms {
-  margin-top: clamp(1.5rem, 3vw, 2rem);
-  padding: clamp(1rem, 2.5vw, 1.35rem);
-  background: var(--bg-alt);
-  font-size: var(--fs-small);
-  line-height: 1.75;
-  color: var(--text);
-}
-.book-form__terms strong { color: var(--heading); font-weight: 500; }
-
-.form__actions { margin-top: clamp(2rem, 4vw, 2.75rem); }
-.form__actions .form__note { margin-bottom: 0; }
-.form__actions .form__note a {
-  color: var(--navy);
-  border-bottom: 1px solid var(--gold-deep);
-}
-
-/* --- The running summary -------------------------------------------------- */
-.summary {
-  padding: clamp(1.5rem, 3.5vw, 2rem);
-  border: 1px solid var(--hairline);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
-}
-.summary__title {
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.9rem;
-  border-bottom: 1px solid var(--hairline);
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  font-weight: 300;
-  color: var(--heading);
-}
-.summary__list { display: grid; gap: 0.7rem; font-size: var(--fs-small); }
-.summary__row {
-  display: grid;
-  grid-template-columns: 5.75rem minmax(0, 1fr);
-  gap: 0.9rem;
-  align-items: baseline;
-}
-.summary__row dt {
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
-  letter-spacing: var(--tracking-mid);
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.summary__row dd { margin: 0; color: var(--heading); line-height: 1.5; }
-
-.summary__total {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 1.35rem;
-  padding-top: 1.35rem;
-  border-top: 1px solid var(--gold-deep);
-}
-.summary__total-label {
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--heading);
-}
-.summary__total-value {
-  font-family: var(--font-display);
-  font-size: clamp(1.875rem, 1.4rem + 1.6vw, 2.5rem);
-  font-weight: 300;
-  line-height: 1;
-  color: var(--heading);
-}
-/* 5.72:1 on --surface. The saving is the only line here allowed a colour, and
-   booking.js hides it outright when there is nothing to save. */
-.summary__save {
-  margin-top: 0.65rem;
-  font-size: var(--fs-small);
-  font-weight: 500;
-  color: var(--gold-deep);
-}
-.summary__save[hidden] { display: none; }
-
-.summary__cta { margin-top: 1.5rem; }
-.summary__note {
-  margin-top: 1rem;
-  font-size: 0.75rem;
-  line-height: 1.65;
-  color: var(--muted);
-}
-/* The rail's own button is a shortcut down the page. Once the page is short
-   enough that the rail is not a rail, it is pointing at something a thumb
-   scroll reaches anyway. */
-@media (max-width: 1023px) { .summary__cta { display: none; } }
-
-/* --- What happens next ----------------------------------------------------
-   Reuses the process band wholesale — see section 11, where .book-next is
-   named alongside .process on every rule that carries the dark ground. Only
-   the column count differs: three steps, not four. */
-@media (min-width: 1024px) {
-  .book-next__list { grid-template-columns: repeat(3, 1fr); }
-}
-
-/* --- Slim footer ---------------------------------------------------------- */
-.site-footer__slim {
-  display: grid;
-  gap: var(--gap);
-  padding-block: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 3vw, 2rem);
-}
-@media (min-width: 760px) {
-  .site-footer__slim {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: start;
-    gap: var(--gap-lg);
-  }
-}
-.site-footer__slim-contact { font-size: var(--fs-small); line-height: 1.9; }
-.site-footer__slim-contact a { border-bottom: 1px solid rgb(var(--gold-rgb) / 0.5); }
-.site-footer__slim-contact a:hover { border-bottom-color: var(--gold); }
 
 
 /* ==========================================================================

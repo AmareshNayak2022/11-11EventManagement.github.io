@@ -82,8 +82,8 @@ an **absolute** URL on the site's own domain:
 
 Absolute because a share preview is fetched by WhatsApp's or LinkedIn's servers,
 not by the visitor's browser — a relative path means nothing there. The same URL
-appears four times in total: `og:image` and `twitter:image` in **both**
-`index.html` and `book.html`, plus `image` in the JSON-LD. Move them together.
+appears three times in total: `og:image` and `twitter:image` in
+`index.html`, plus `image` in the JSON-LD. Move them together.
 
 Worth doing eventually: a purpose-made 1200 × 630 landscape composition. The
 crest is 1600 × 770, close enough that platforms crop it tidily, but a share
@@ -91,89 +91,38 @@ image can carry the name and the line as well as the mark.
 
 ---
 
-## 1b. The UPI payment QR
+## 1b. The past-event film and its poster frame
 
-`upi-qr.png` (610×610) is the code shown in step 04 of `book.html`. It is a crop
-of the payment slip the client supplied on 1 September 2026 — the QR square
-plus its white quiet zone, with the slip's own wording cut away because that
-wording is re-set as real HTML text beside it (legible at any size, and the UPI
-ID can be selected and copied, which a picture of it cannot).
+`videos/vivanta-night.mp4` is the client's own film of a night 11:11 produced
+at Vivanta Bhubaneswar, DN Square (supplied 25 October 2026 as `vivanta V5.mp4`,
+48 MB, 1080x1920, 31.6 s). It is re-encoded for the web:
 
-**This file and the `UPI_ID` constant at the top of `js/booking.js` are the same
-account** — `elevennelevenne-26@idfcbank`, IDFC FIRST Bank, Elevenn Elevenn
-Archive Private Limited. If the account ever changes, change both in the same
-commit, or the page will show a code and an ID that disagree and money will go
-to the wrong place.
+```
+ffmpeg -i "vivanta V5.mp4" -vf scale=720:1280:flags=lanczos   -c:v libx264 -profile:v high -preset slow -crf 30 -pix_fmt yuv420p   -c:a aac -b:a 112k -movflags +faststart videos/vivanta-night.mp4
+```
 
-Two things to preserve if you ever re-crop it: the white margin around the code
-(a scanner needs that quiet zone, and the page ground is cream, which is why the
-CSS puts the image on a white plate), and all three corner squares.
+— about 6.4 MB. `+faststart` moves the index to the front so it starts playing
+before it has finished arriving. Keep the master out of the repo; GitHub Pages
+serves every byte of it to anyone who reaches the band.
 
-**It is now the fallback, not the code most visitors see.** Decoded, this image
-reads `upi://pay?pa=…&pn=…&cu=INR` — payee, no amount — so a visitor scanning it
-has to key the figure in themselves. `js/qr.js` draws a code that does carry the
-amount, from the same `upi://` string as the "Open UPI App" button, and
-`js/booking.js` hides this image only once that has succeeded. With no canvas,
-or no `qr.js`, the visitor still gets this working code.
+`images/vivanta-film-poster.jpg` (720x1280) is the still shown before the film
+plays and the `<img>` fallback inside the `<video>`. It was decoded from the
+film itself at 20.5 s — a DJ at the decks in gold light — rather than frame one,
+which is a white flash. If the film is ever replaced, regenerate it; a poster
+from the *old* film is worse than none.
 
-On 2 September 2026 the client sent two hand-made QR images to plug the same
-gap — `am=3998&tn=Vogue` and `am=2499&tn=Elite`. **They are deliberately not in
-this folder.** Both are the right account, but each is fixed to one basket at
-one price, and both go stale on 7 September when standard pricing starts. A
-picture cannot follow a running total.
+How it is embedded, all deliberate:
 
----
-
-## 1c. The NOXUS campaign posters
-
-Four files, two designs, supplied by the client on 1 September 2026 and resized
-here from their 1024x1536 originals:
-
-| File | Where it appears |
-|------|------------------|
-| `noxus-teaser-640.jpg` / `-1024.jpg` | Fallback inside the `<video>` on `index.html`, for anything that cannot play MP4 |
-| `noxus-passes-640.jpg` / `-1024.jpg` | Under the three passes on `book.html` |
-| `noxus-video-poster.jpg` | The still behind the film before it plays — **not hand-picked**, it is frame one of the film itself, so it matches to the pixel |
-
-### The campaign film
-
-`videos/noxus-teaser.mp4` — the client's 20-second vertical reel (478x850,
-H.264 + AAC, 3.7 MB), supplied 1 September 2026. It is the moving version of the
-teaser poster, which is why the poster now sits *inside* the `<video>` as its
-fallback rather than beside it.
-
-`noxus-video-poster.jpg` was extracted from the file itself by decoding frame
-one in a browser canvas, so it needs no separate art direction and can never
-drift from the film. If the film is ever replaced, regenerate it — a poster
-frame from the *old* film is worse than none.
-
-Three things about how it is embedded, all deliberate:
-
-- **It does not autoplay on page load.** It starts only when it scrolls into
-  view, and pauses again when it leaves. Someone who never reaches the band
-  never downloads 3.7 MB.
+- **It does not load or autoplay on page load** (`preload="none"`). It starts
+  only when it scrolls into view and pauses when it leaves, so someone who never
+  reaches the band never downloads it.
 - **`controls` is in the markup and removed by JavaScript**, not added by it. If
-  the script fails, a visitor still gets native controls instead of a still they
-  cannot start.
-- **It is muted, and it stays muted** until someone presses the sound button.
+  the script fails, a visitor still gets native controls.
+- **It is muted, and it stays muted** until someone presses *Sound on*. The film
+  has a soundtrack.
 
----
-
-Both are **portrait, 2:3**. That is why neither is used as the `og:image`: a
-share preview is cropped to landscape and a tall poster loses its own headline
-in the crop. The 11:11 crest stays the share image on both pages.
-
-Every word on both posters is also set as **real text** in the page around them,
-so the images are reinforcement rather than the only carrier of the information
-— which is why their `alt` text is unusually long. If you swap in a new poster,
-rewrite the `alt` to describe what the new one actually says; a stale
-description of an image nobody can see is worse than none.
-
-One thing to know before editing them: both posters carry **"It Is Time"** under
-the 11:11 crest. That is the retired tagline, deliberately cropped out of the
-hero artwork (see the note in `index.html`). It stays on the posters because
-they are the client's own current creative — do not retouch their artwork, but
-do not reintroduce the line into the site's own copy either.
+The NOXUS campaign posters, the UPI payment QR and the NOXUS teaser film were
+removed with the booking page once the event had passed. Git history has them.
 
 ---
 
@@ -268,7 +217,7 @@ keep the single `src`.
    misleading to screen reader users — if left in place.
 6. If you replace the hero image, also update the `<link rel="preload">` in
    `<head>` (including its `imagesrcset`) and the `og:image` / `twitter:image`
-   meta tags — in `book.html` as well as `index.html`. Those are **absolute**
+   meta tags in `index.html`. Those are **absolute**
    URLs on `https://elevennelevenn.in`, because a share preview is fetched by
    someone else's server and a relative path means nothing there.
 

@@ -357,9 +357,8 @@ Content and credibility:
 Technical:
 
 - [x] **`telephone`, `email`, `url` added to the JSON-LD block**
-- [x] **`og:image` / `twitter:image` absolute on `elevennelevenn.in`** — in
-      `book.html` as well as `index.html`
-- [x] **`canonical` and `og:url` on both pages** — matters here because the
+- [x] **`og:image` / `twitter:image` absolute on `elevennelevenn.in`**
+- [x] **`canonical` and `og:url`** — matters here because the
       pages also answer on the old `github.io` host
 - [ ] Decide which inbox enquiries route to (three domains are in play)
 - [x] **Contact form connected** — WhatsApp mode
